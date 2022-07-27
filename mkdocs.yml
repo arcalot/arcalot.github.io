@@ -1,0 +1,50 @@
+site_name: Arcalot
+repo_url: https://github.com/arcalot/arcalog.github.io
+repo_name: arcalot/arcalog.github.io
+nav:
+  - Home: index.md
+  - Arcalog: arcalog/index.md
+  - Arcaflow:
+      - 'arcaflow/index.md'
+      - Creating plugins:
+          - arcaflow/creating-plugins/index.md
+          - Python: arcaflow/creating-plugins/python.md
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/arcalot
+plugins:
+  - search
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - search.share
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - markdown.extensions.smarty:
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.keys
+  - pymdownx.smartsymbols
+  - pymdownx.tabbed:
+      alternate_style: true
