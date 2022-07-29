@@ -6,8 +6,9 @@ nav:
   - Arcalog: arcalog/index.md
   - Arcaflow:
       - 'arcaflow/index.md'
+      - Concepts:
+          - The typing system: arcaflow/concepts/typing.md
       - Creating plugins:
-          - arcaflow/creating-plugins/index.md
           - Python: arcaflow/creating-plugins/python.md
 extra:
   social:
@@ -17,6 +18,24 @@ plugins:
   - search
 theme:
   name: material
+  logo: arcalot.svg
+  favicon: arcalot.svg
+  font: false
+  palette:
+    - scheme: default
+      media: "(prefers-color-scheme: light)"
+      primary: indigo
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+
+    - scheme: slate
+      media: "(prefers-color-scheme: dark)"
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
   features:
     - navigation.instant
     - navigation.tracking
@@ -28,6 +47,8 @@ theme:
     - search.suggest
     - search.highlight
     - search.share
+extra_css:
+  - extra.css
 markdown_extensions:
   - abbr
   - admonition
@@ -35,6 +56,7 @@ markdown_extensions:
   - def_list
   - footnotes
   - meta
+  - md_in_html
   - markdown.extensions.smarty:
   - pymdownx.tasklist:
       custom_checkbox: true

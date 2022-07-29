@@ -1,0 +1,23 @@
+[dir="ltr"] .md-header__title {
+    margin-left: 0;
+}
+
+.md-header__button.md-logo :is(img, svg) {
+    height:2rem;
+}
+
+.media {
+    overflow: auto;
+}
+
+.media>img, .media>figure, .media>p>img, .media>p>figure {
+    float:left;
+    margin-right:0.75rem;
+    width:25%;
+    max-width:10rem;
+}
+
+.media.media--right>img, .media.media--right>figure, .media.media--right>p>img, .media.media--right>p>figure {
+    float:right;
+    margin-left:0.75rem;
+}
