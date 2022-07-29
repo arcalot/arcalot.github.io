@@ -1,6 +1,6 @@
 site_name: Arcalot
 repo_url: https://github.com/arcalot/arcalot.github.io
-repo_name: arcalot/arcalog.github.io
+repo_name: arcalot/arcalot.github.io
 nav:
   - Home: index.md
   - Arcalog: arcalog/index.md
