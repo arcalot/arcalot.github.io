@@ -35,8 +35,6 @@ An important rule is that one step must always end in exactly one output. No ste
 
 Plugins must also explicitly declare what parameters they expect as input for the step, and the data types of these and what parameters they will produce as output. For more detaisl about this see the [Type system page](typing.md).
 
-However, plugins can designate outputs with 
-
 ## Interconnecting steps
 
 When two steps are connected, they will be executed after each other:
