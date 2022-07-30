@@ -7,6 +7,7 @@ nav:
   - Arcaflow:
       - 'arcaflow/index.md'
       - Concepts:
+          - Workflows: arcaflow/concepts/workflows.md
           - The typing system: arcaflow/concepts/typing.md
       - Creating plugins:
           - Python: arcaflow/creating-plugins/python.md
@@ -62,7 +63,11 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.details
   - pymdownx.highlight
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.caret
   - pymdownx.mark
   - pymdownx.tilde
