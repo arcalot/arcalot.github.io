@@ -2,7 +2,7 @@
 
 ## Steps
 
-Workflows are a way to describe a sequence or parallel execution of individual steps. The steps are provided exclusively by plugins. The simplest workflow looks like this
+Workflows are a way to describe a sequence or parallel execution of individual steps. The steps are provided exclusively by plugins. The simplest workflow looks like this:
 
 ```mermaid
 stateDiagram-v2
