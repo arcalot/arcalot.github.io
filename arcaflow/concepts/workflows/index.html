@@ -762,7 +762,6 @@
 <p>These three output names (<code>success</code>, <code>warning</code>, and <code>error</code>) will be colored accordingly in the user interfaces. Other names may be used, but will not be colored.</p>
 <p>An important rule is that one step must always end in exactly one output. No step must end without an output, and no step can end in more than one output. This provides a mechanism to direct the flow of the workflow execution.</p>
 <p>Plugins must also explicitly declare what parameters they expect as input for the step, and the data types of these and what parameters they will produce as output. For more detaisl about this see the <a href="../typing/">Type system page</a>.</p>
-<p>However, plugins can designate outputs with </p>
 <h2 id="interconnecting-steps">Interconnecting steps</h2>
 <p>When two steps are connected, they will be executed after each other:</p>
 <pre class="mermaid"><code>stateDiagram-v2
