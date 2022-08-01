@@ -275,6 +275,26 @@ class MyClass:
 
 Note that adding `typing.Optional` is not enough, you *must* specify the default value.
 
+#### Union types
+
+Union types are supported as long as all members are dataclasses. For example:
+
+```python
+@dataclasses.dataclass
+class A:
+    a: str
+
+@dataclasses.dataclass
+class B:
+    b: str
+
+@dataclasses.dataclass
+class MyParams:
+    items: typing.List[typing.Union[A, B]]
+```
+
+In the underlying transport a field name `_type` will be added to act as a serialization discriminator.
+
 #### Validation
 
 You can also validate the values by using [`typing.Annotated`](https://docs.python.org/3/library/typing.html#typing.Annotated), such as this:
@@ -373,6 +393,62 @@ The fields support the following parameters:
 - `required_if`: a list of other fields that, if filled, will also cause the current field to be required
 - `required_if_not`: a list of other fields that, if not set, will cause the current field to be required
 - `conflicts`: a list of other fields that cannot be set together with the current field
+
+### AnyOfType
+
+The AnyOfType allows you to create a type that is a combination of other ObjectTypes. When a value is deserialized, a special discriminator field is consulted to figure out which type is actually being sent.
+
+This discriminator field may be present in the underlying type. If it is, the type must match the declaration in the AnyOfType.
+
+For example:
+
+```python
+@dataclasses.dataclass
+class OneOfData1:
+    type: str
+    a: str
+
+@dataclasses.dataclass
+class OneOfData2:
+    b: int
+
+s = schema.OneOfType(
+    # Discriminator field
+    "type",
+    # Discriminator field type
+    schema.StringType(),
+    {
+        # Option 1
+        "a": schema.ObjectType(
+            OneOfData1,
+            {
+                # Here the discriminator field is also present in the underlying type
+                "type": schema.Field(
+                    schema.StringType(),
+                ),
+                "a": schema.Field(
+                    schema.StringType()
+                )
+            }
+        ),
+        # Option 2
+        "b": schema.ObjectType(
+            OneOfData2,
+            {
+                "b": schema.Field(
+                    schema.IntType()
+                )
+            }
+        )
+    }
+)
+
+serialized_data = s.serialize(OneOfData1(
+    "a",
+    "Hello world!"
+))
+pprint.pprint(serialized_data)
+```
 
 ### StringType
 
