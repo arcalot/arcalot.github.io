@@ -485,6 +485,19 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#booleans" class="md-nav__link">
+    Booleans
+  </a>
+  
+    <nav class="md-nav" aria-label="Booleans">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#lists-maps" class="md-nav__link">
     Lists, maps
@@ -661,6 +674,19 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#booleans" class="md-nav__link">
+    Booleans
+  </a>
+  
+    <nav class="md-nav" aria-label="Booleans">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#lists-maps" class="md-nav__link">
     Lists, maps
@@ -727,10 +753,10 @@
 <li><strong>Patterns</strong> are regular expressions.</li>
 <li><strong>Integers</strong> are 64-bit numbers that can take both positive and negative values.</li>
 <li><strong>Floats</strong> are 64-bit floating point numbers that can take both positive and negative values.</li>
+<li><strong>Booleans</strong> are values of <code>true</code> or <code>false</code> and cannot take any other values.</li>
 </ul>
 <h3 id="planned-future-types">Planned future types</h3>
 <ul>
-<li><strong>Booleans</strong> are value of <code>true</code> or <code>false</code> and cannot take any other values.</li>
 <li><strong>Timestamps</strong> are nanosecond-scale timestamp values for a fixed time in UTC. They are stored and transported as integers, but may be unserialized from strings too.</li>
 <li><strong>Dates</strong> are calendar dates without timezone information.</li>
 <li><strong>Times</strong> are the time of a day denominated as hours, minutes, seconds, etc. on a nanosecond scale.</li>
@@ -745,8 +771,10 @@
 <p>Strings can have a minimum or maximum length, as well as validation against a regular expression.</p>
 <h3 id="ints-floats">Ints, floats</h3>
 <p>Number types can have a minimum and maximum value (inclusive).</p>
+<h2 id="booleans">Booleans</h2>
+<p>Boolean types can take a value of either <code>true</code> or <code>false</code>, but when unserializing from YAML or JSON formats, strings or int values of <code>true</code>, <code>yes</code>, <code>on</code>, <code>enable</code>, <code>enabled</code>, <code>1</code>, <code>false</code>, <code>no</code>, <code>off</code>, <code>disable</code>, <code>disabled</code> or <code>0</code> are also accepted.</p>
 <h3 id="lists-maps">Lists, maps</h3>
-<p>Lists and maps can have constraints on the minimum or maximum number of items in these (inclusive).</p>
+<p>Lists and maps can have constraints on the minimum or maximum number of items in them (inclusive).</p>
 <h3 id="objects">Objects</h3>
 <p>Object fields can have several constraints:</p>
 <ul>
@@ -765,7 +793,7 @@
 <p>For display purposes, the type system is designed so that it can infer the intent of the data. We wish to communicate the following intents:</p>
 <ul>
 <li>Graphs are x-y values of timestamps mapped to one or more values.</li>
-<li>Log lines are timestamps associated with text</li>
+<li>Log lines are timestamps associated with text.</li>
 <li>Events are timestamps associated with other structured data.</li>
 </ul>
 <p>We explicitly document the following inference rules, which will probably change in the future.</p>

@@ -622,6 +622,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#booltype" class="md-nav__link">
+    BoolType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#enumtype" class="md-nav__link">
     EnumType
   </a>
@@ -891,6 +898,13 @@
           <li class="md-nav__item">
   <a href="#floattype" class="md-nav__link">
     FloatType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#booltype" class="md-nav__link">
+    BoolType
   </a>
   
 </li>
@@ -1217,6 +1231,7 @@ which python
 <li><code>str</code></li>
 <li><code>int</code></li>
 <li><code>float</code></li>
+<li><code>bool</code></li>
 <li>Enums</li>
 <li><code>re.Pattern</code></li>
 <li><code>typing.List[othertype]</code> (you must specify the type for the contents of the list)</li>
@@ -1332,7 +1347,7 @@ which python
 <li><code>max</code>: minimum value for the number (inclusive).</li>
 </ul>
 <h3 id="floattype">FloatType</h3>
-<p>The int type indicates that the underlying type is an integer.</p>
+<p>The float type indicates that the underlying type is a floating point number.</p>
 <div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">FloatType</span><span class="p">()</span>
 </code></pre></div>
 <p>The float type supports the following parameters:</p>
@@ -1340,6 +1355,8 @@ which python
 <li><code>min</code>: minimum value for the number (inclusive).</li>
 <li><code>max</code>: minimum value for the number (inclusive).</li>
 </ul>
+<h3 id="booltype">BoolType</h3>
+<p>The bool type indicates that the underlying value is a boolean. When unserializing, this type also supports string and integer values of <code>true</code>, <code>yes</code>, <code>on</code>, <code>enable</code>, <code>enabled</code>, <code>1</code>, <code>false</code>, <code>no</code>, <code>off</code>, <code>disable</code>, <code>disabled</code> or <code>0</code>.</p>
 <h3 id="enumtype">EnumType</h3>
 <p>The enum type creates a type from an existing enum:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyEnum</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
