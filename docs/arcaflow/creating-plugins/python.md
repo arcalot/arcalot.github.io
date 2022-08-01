@@ -413,7 +413,7 @@ The int type supports the following parameters:
 
 ### FloatType
 
-The int type indicates that the underlying type is an integer.
+The float type indicates that the underlying type is an floating point number.
 
 ```python
 t = schema.FloatType()
