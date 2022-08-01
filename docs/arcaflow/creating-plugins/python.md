@@ -256,6 +256,7 @@ The SDK supports a wide range of types. Let's start with the basics:
 - `str`
 - `int`
 - `float`
+- `bool`
 - Enums
 - `re.Pattern`
 - `typing.List[othertype]` (you must specify the type for the contents of the list)
@@ -422,6 +423,10 @@ The float type supports the following parameters:
 
 - `min`: minimum value for the number (inclusive).
 - `max`: minimum value for the number (inclusive).
+
+### BoolType
+
+The bool type indicates that the underlying value is a boolean. When unserializing, this type also supports string and integer values of `true`, `yes`, `on`, `enable`, `enabled`, `1`, `false`, `no`, `off`, `disable`, `disabled` or `0`.
 
 ### EnumType
 
