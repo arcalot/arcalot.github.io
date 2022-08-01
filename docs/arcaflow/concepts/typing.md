@@ -11,6 +11,7 @@ The typesystem is inspired by [JSON schema](https://json-schema.org/) and [OpenA
 The typing system supports the following data types.
 
 - **Objects** are key-value pairs where the keys are always a fixed set of strings and values are of various types declared for each key. They are similar to classes in most programming languages. Fields in objects can be *optional*, which means they will have no value (commonly known as `null`, `nil`, or `None`), or a default value.
+- **OneOf** are a special type that is a union of multiple objects, distinguished by a special field called the discriminator. 
 - **Lists** are a sequence of values of the same type. The value type can be any of the other types described in this section. List items must always have a value and cannot be empty (`null`, `nil`, or `None`).
 - **Maps** are key-value pairs that always have fixed types for both keys and values. Maps with mixed keys or values are not supported. Map keys can only be strings, integers, or enums. Map keys and values must always have a value and cannot be empty (`null`, `nil`, or `None`).
 - **Enums** are either strings or integers that can take only a fixed set of values. Enums with mixed value types are not supported.
@@ -57,6 +58,17 @@ Object fields can have several constraints:
 - `required_if` has a list of other fields that, if set, make the current field required.
 - `required_if_not` has a list of other fields that, if none are set, make the current field required.
 - `conflicts` has a list of other fields that cannot be set together with the current field.
+
+### OneOf
+
+When you need to create a list of multiple object types, or simply have an either-or choice between two object types, you can use the OneOf type. This field uses an already existing field of the underlying objects, or adds an extra field to the schema to distinguish between the different types. Translated to JSON, you might see something like this:
+
+```json
+{
+  "_type": "Greeter",
+  "message": "Hello world!"
+}
+```
 
 ## Metadata
 
