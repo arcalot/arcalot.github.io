@@ -18,7 +18,7 @@ The typing system supports the following data types.
 - **Patterns** are regular expressions.
 - **Integers** are 64-bit numbers that can take both positive and negative values.
 - **Floats** are 64-bit floating point numbers that can take both positive and negative values.
-- **Booleans** are value of `true` or `false` and cannot take any other values.
+- **Booleans** are values of `true` or `false` and cannot take any other values.
 
 ### Planned future types
 
@@ -48,7 +48,7 @@ Boolean types can take a value of either `true` or `false`, but when unserializi
 
 ### Lists, maps
 
-Lists and maps can have constraints on the minimum or maximum number of items in these (inclusive).
+Lists and maps can have constraints on the minimum or maximum number of items in them (inclusive).
 
 ### Objects
 
@@ -71,7 +71,7 @@ Object fields can also declare metadata that will help with creating user interf
 For display purposes, the type system is designed so that it can infer the intent of the data. We wish to communicate the following intents:
 
 - Graphs are x-y values of timestamps mapped to one or more values.
-- Log lines are timestamps associated with text
+- Log lines are timestamps associated with text.
 - Events are timestamps associated with other structured data.
 
 We explicitly document the following inference rules, which will probably change in the future.
