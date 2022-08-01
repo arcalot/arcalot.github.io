@@ -18,10 +18,10 @@ The typing system supports the following data types.
 - **Patterns** are regular expressions.
 - **Integers** are 64-bit numbers that can take both positive and negative values.
 - **Floats** are 64-bit floating point numbers that can take both positive and negative values.
+- **Booleans** are value of `true` or `false` and cannot take any other values.
 
 ### Planned future types
 
-- **Booleans** are value of `true` or `false` and cannot take any other values.
 - **Timestamps** are nanosecond-scale timestamp values for a fixed time in UTC. They are stored and transported as integers, but may be unserialized from strings too.
 - **Dates** are calendar dates without timezone information.
 - **Times** are the time of a day denominated as hours, minutes, seconds, etc. on a nanosecond scale.
@@ -41,6 +41,10 @@ Strings can have a minimum or maximum length, as well as validation against a re
 ### Ints, floats
 
 Number types can have a minimum and maximum value (inclusive).
+
+## Booleans
+
+Boolean types can take a value of either `true` or `false`, but when unserializing from YAML or JSON formats, strings or int values of `true`, `yes`, `on`, `enable`, `enabled`, `1`, `false`, `no`, `off`, `disable`, `disabled` or `0` are also accepted.
 
 ### Lists, maps
 
