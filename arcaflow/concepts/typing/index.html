@@ -512,6 +512,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#oneof" class="md-nav__link">
+    OneOf
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -701,6 +708,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#oneof" class="md-nav__link">
+    OneOf
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -746,6 +760,7 @@
 <p>The typing system supports the following data types.</p>
 <ul>
 <li><strong>Objects</strong> are key-value pairs where the keys are always a fixed set of strings and values are of various types declared for each key. They are similar to classes in most programming languages. Fields in objects can be <em>optional</em>, which means they will have no value (commonly known as <code>null</code>, <code>nil</code>, or <code>None</code>), or a default value.</li>
+<li><strong>OneOf</strong> are a special type that is a union of multiple objects, distinguished by a special field called the discriminator. </li>
 <li><strong>Lists</strong> are a sequence of values of the same type. The value type can be any of the other types described in this section. List items must always have a value and cannot be empty (<code>null</code>, <code>nil</code>, or <code>None</code>).</li>
 <li><strong>Maps</strong> are key-value pairs that always have fixed types for both keys and values. Maps with mixed keys or values are not supported. Map keys can only be strings, integers, or enums. Map keys and values must always have a value and cannot be empty (<code>null</code>, <code>nil</code>, or <code>None</code>).</li>
 <li><strong>Enums</strong> are either strings or integers that can take only a fixed set of values. Enums with mixed value types are not supported.</li>
@@ -782,6 +797,13 @@
 <li><code>required_if_not</code> has a list of other fields that, if none are set, make the current field required.</li>
 <li><code>conflicts</code> has a list of other fields that cannot be set together with the current field.</li>
 </ul>
+<h3 id="oneof">OneOf</h3>
+<p>When you need to create a list of multiple object types, or simply have an either-or choice between two object types, you can use the OneOf type. This field uses an already existing field of the underlying objects, or adds an extra field to the schema to distinguish between the different types. Translated to JSON, you might see something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Greeter&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello world!&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
 <h2 id="metadata">Metadata</h2>
 <p>Object fields can also declare metadata that will help with creating user interfaces for the object. These fields are:</p>
 <ul>

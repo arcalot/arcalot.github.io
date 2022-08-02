@@ -555,6 +555,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#union-types" class="md-nav__link">
+    Union types
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#validation" class="md-nav__link">
     Validation
   </a>
@@ -589,6 +596,13 @@
           <li class="md-nav__item">
   <a href="#objecttype" class="md-nav__link">
     ObjectType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anyoftype" class="md-nav__link">
+    AnyOfType
   </a>
   
 </li>
@@ -836,6 +850,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#union-types" class="md-nav__link">
+    Union types
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#validation" class="md-nav__link">
     Validation
   </a>
@@ -870,6 +891,13 @@
           <li class="md-nav__item">
   <a href="#objecttype" class="md-nav__link">
     ObjectType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anyoftype" class="md-nav__link">
+    AnyOfType
   </a>
   
 </li>
@@ -1245,6 +1273,21 @@ which python
     <span class="n">param</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div>
 <p>Note that adding <code>typing.Optional</code> is not enough, you <em>must</em> specify the default value.</p>
+<h4 id="union-types">Union types</h4>
+<p>Union types are supported as long as all members are dataclasses. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="n">a</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">B</span><span class="p">:</span>
+    <span class="n">b</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">MyParams</span><span class="p">:</span>
+    <span class="n">items</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">]]</span>
+</code></pre></div>
+<p>In the underlying transport a field name <code>_type</code> will be added to act as a serialization discriminator.</p>
 <h4 id="validation">Validation</h4>
 <p>You can also validate the values by using <a href="https://docs.python.org/3/library/typing.html#typing.Annotated"><code>typing.Annotated</code></a>, such as this:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
@@ -1322,6 +1365,56 @@ which python
 <li><code>required_if_not</code>: a list of other fields that, if not set, will cause the current field to be required</li>
 <li><code>conflicts</code>: a list of other fields that cannot be set together with the current field</li>
 </ul>
+<h3 id="anyoftype">AnyOfType</h3>
+<p>The AnyOfType allows you to create a type that is a combination of other ObjectTypes. When a value is deserialized, a special discriminator field is consulted to figure out which type is actually being sent.</p>
+<p>This discriminator field may be present in the underlying type. If it is, the type must match the declaration in the AnyOfType.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">OneOfData1</span><span class="p">:</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">a</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">OneOfData2</span><span class="p">:</span>
+    <span class="n">b</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">OneOfType</span><span class="p">(</span>
+    <span class="c1"># Discriminator field</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">,</span>
+    <span class="c1"># Discriminator field type</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">(),</span>
+    <span class="p">{</span>
+        <span class="c1"># Option 1</span>
+        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">(</span>
+            <span class="n">OneOfData1</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="c1"># Here the discriminator field is also present in the underlying type</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+                    <span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">(),</span>
+                <span class="p">),</span>
+                <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+                    <span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">()</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">),</span>
+        <span class="c1"># Option 2</span>
+        <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">(</span>
+            <span class="n">OneOfData2</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+                    <span class="n">schema</span><span class="o">.</span><span class="n">IntType</span><span class="p">()</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">serialized_data</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">OneOfData1</span><span class="p">(</span>
+    <span class="s2">&quot;a&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Hello world!&quot;</span>
+<span class="p">))</span>
+<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">serialized_data</span><span class="p">)</span>
+</code></pre></div>
 <h3 id="stringtype">StringType</h3>
 <p>String types indicate that the underlying type is a string. </p>
 <div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">()</span>
