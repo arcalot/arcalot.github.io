@@ -293,7 +293,46 @@ class MyParams:
     items: typing.List[typing.Union[A, B]]
 ```
 
-In the underlying transport a field name `_type` will be added to act as a serialization discriminator.
+In the underlying transport a field name `_type` will be added to act as a serialization discriminator. You can also customize the discriminator field:
+
+```python
+@dataclasses.dataclass
+class A:
+    a: str
+
+@dataclasses.dataclass
+class B:
+    b: str
+
+@dataclasses.dataclass
+class MyParams:
+    items: typing.List[
+        typing.Annotated[
+            typing.Union[A, B],
+            annotations.discriminator("foo")
+        ]
+    ]
+```
+
+If you intend to use a non-string descriminator field, or you want to manually specify the discriminator value, you can
+do so by adding a `discriminator_value` annotation:
+
+```python
+@dataclasses.dataclass
+class MyParams:
+    items: typing.List[
+        typing.Annotated[
+            typing.Union[
+                typing.Annotated[A, annotations.discriminator_value("first")],
+                typing.Annotated[B, annotations.discriminator_value("second")]
+            ],
+            annotations.discriminator("foo")
+        ]
+    ]
+```
+
+!!! tip
+    You can add the discriminator field to your underlying dataclasses, but when present, their schema must match *exactly*.
 
 #### Validation
 
