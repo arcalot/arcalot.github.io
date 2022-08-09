@@ -50,7 +50,7 @@ Arcalog can assist you with or automate your **root cause analysis** in CI or ot
 
 It also provides additional tooling to download jobs from various log systems or add your own log files for analysis.
 
-[Read more](arcaflow/){ .md-button }
+[Read more](arcalog/){ .md-button }
 
 </div>
 
