@@ -35,6 +35,10 @@ An important rule is that one step must always end in exactly one output. No ste
 
 Plugins must also explicitly declare what parameters they expect as input for the step, and the data types of these and what parameters they will produce as output. For more detaisl about this see the [Type system page](typing.md).
 
+## Background processes
+
+Each plugin will only be invoked once, allowing plugins to run background processes, such as server applications. The plugins must handle SIGINT and SIGTERM events properly.
+
 ## Interconnecting steps
 
 When two steps are connected, they will be executed after each other:
@@ -73,6 +77,10 @@ stateDiagram-v2
   Step2 --> [*]
   Step3 --> [*]
 ```
+
+## Unconnected steps
+
+If you leave outputs unconnected, the workflow will be a failure and the engine will exit with a non-zero exit code. However, the engine will still attempt to finish whatever steps it can.
 
 ## Passing data between steps 
 
@@ -143,6 +151,8 @@ stateDiagram-v2
   Step2 --> [*]
 ```
 
+However, this is only required if you want to abort the workflow immediately. If you want an error case to result in the workflow failing, but whatever steps can be finished being finished, you can leave error outputs unconnected.
+
 ### Do-while
 
 A do-while block will execute the steps in it as long as a certain condition is met. The condition is derived from the output of the step or steps executed inside the loop:
@@ -183,11 +193,6 @@ stateDiagram-v2
   }
   DoWhile --> [*]: Output 1
 ```
-
-If you leave one of the outputs disconnected, that loop will automatically lead to the loop being repeated.
-
-!!! warning
-    Do not leave a failure condition unconnected as this may result in an endless loop! Use the [Abort](#abort) flow control operation instead!
 
 ### Condition
 
