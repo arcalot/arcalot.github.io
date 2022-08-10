@@ -1287,7 +1287,42 @@ which python
 <span class="k">class</span> <span class="nc">MyParams</span><span class="p">:</span>
     <span class="n">items</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">]]</span>
 </code></pre></div>
-<p>In the underlying transport a field name <code>_type</code> will be added to act as a serialization discriminator.</p>
+<p>In the underlying transport a field name <code>_type</code> will be added to act as a serialization discriminator. You can also customize the discriminator field:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="n">a</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">B</span><span class="p">:</span>
+    <span class="n">b</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">MyParams</span><span class="p">:</span>
+    <span class="n">items</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span>
+        <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span>
+            <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">],</span>
+            <span class="n">annotations</span><span class="o">.</span><span class="n">discriminator</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">]</span>
+</code></pre></div>
+<p>If you intend to use a non-string descriminator field, or you want to manually specify the discriminator value, you can
+do so by adding a <code>discriminator_value</code> annotation:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">MyParams</span><span class="p">:</span>
+    <span class="n">items</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span>
+        <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span>
+            <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span>
+                <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">annotations</span><span class="o">.</span><span class="n">discriminator_value</span><span class="p">(</span><span class="s2">&quot;first&quot;</span><span class="p">)],</span>
+                <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span><span class="n">B</span><span class="p">,</span> <span class="n">annotations</span><span class="o">.</span><span class="n">discriminator_value</span><span class="p">(</span><span class="s2">&quot;second&quot;</span><span class="p">)]</span>
+            <span class="p">],</span>
+            <span class="n">annotations</span><span class="o">.</span><span class="n">discriminator</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">]</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can add the discriminator field to your underlying dataclasses, but when present, their schema must match <em>exactly</em>.</p>
+</div>
 <h4 id="validation">Validation</h4>
 <p>You can also validate the values by using <a href="https://docs.python.org/3/library/typing.html#typing.Annotated"><code>typing.Annotated</code></a>, such as this:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
