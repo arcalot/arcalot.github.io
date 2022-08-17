@@ -249,6 +249,9 @@ You can now call your plugin using `./yourscript.py -f path-to-parameters.yaml`.
 
 **Keep in mind, you should always test your plugin.** See [Testing your plugin](#testing-your-plugin) below for details.
 
+!!! tip
+    To prevent output from breaking the functionality when attached to the Arcaflow Engine, the SDK hides any output your step function writes to the standard output or standard error. You can use the `--debug` flag to show any output on the standard error in standalone mode.
+
 ### Types
 
 The SDK supports a wide range of types. Let's start with the basics:
