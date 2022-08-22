@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.0">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.1">
     
     
       
@@ -437,8 +437,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#background-processes" class="md-nav__link">
+    Background processes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#interconnecting-steps" class="md-nav__link">
     Interconnecting steps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unconnected-steps" class="md-nav__link">
+    Unconnected steps
   </a>
   
 </li>
@@ -642,8 +656,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#background-processes" class="md-nav__link">
+    Background processes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#interconnecting-steps" class="md-nav__link">
     Interconnecting steps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unconnected-steps" class="md-nav__link">
+    Unconnected steps
   </a>
   
 </li>
@@ -762,6 +790,8 @@
 <p>These three output names (<code>success</code>, <code>warning</code>, and <code>error</code>) will be colored accordingly in the user interfaces. Other names may be used, but will not be colored.</p>
 <p>An important rule is that one step must always end in exactly one output. No step must end without an output, and no step can end in more than one output. This provides a mechanism to direct the flow of the workflow execution.</p>
 <p>Plugins must also explicitly declare what parameters they expect as input for the step, and the data types of these and what parameters they will produce as output. For more detaisl about this see the <a href="../typing/">Type system page</a>.</p>
+<h2 id="background-processes">Background processes</h2>
+<p>Each plugin will only be invoked once, allowing plugins to run background processes, such as server applications. The plugins must handle SIGINT and SIGTERM events properly.</p>
 <h2 id="interconnecting-steps">Interconnecting steps</h2>
 <p>When two steps are connected, they will be executed after each other:</p>
 <pre class="mermaid"><code>stateDiagram-v2
@@ -788,6 +818,8 @@
   Step1 --&gt; Step3: error
   Step2 --&gt; [*]
   Step3 --&gt; [*]</code></pre>
+<h2 id="unconnected-steps">Unconnected steps</h2>
+<p>If you leave outputs unconnected, the workflow will be a failure and the engine will exit with a non-zero exit code. However, the engine will still attempt to finish whatever steps it can.</p>
 <h2 id="passing-data-between-steps">Passing data between steps</h2>
 <p>When two steps are connected, you have the ability to pass data between them. Emblematically described:</p>
 <pre class="mermaid"><code>stateDiagram-v2
@@ -827,6 +859,7 @@
   Step1 --&gt; Abort: Output 1
   Step1 --&gt; Step2: Output 2
   Step2 --&gt; [*]</code></pre>
+<p>However, this is only required if you want to abort the workflow immediately. If you want an error case to result in the workflow failing, but whatever steps can be finished being finished, you can leave error outputs unconnected.</p>
 <h3 id="do-while">Do-while</h3>
 <p>A do-while block will execute the steps in it as long as a certain condition is met. The condition is derived from the output of the step or steps executed inside the loop:</p>
 <pre class="mermaid"><code>stateDiagram-v2
@@ -855,11 +888,6 @@
     Step1 --&gt; [*]: Output 2
   }
   DoWhile --&gt; [*]: Output 1</code></pre>
-<p>If you leave one of the outputs disconnected, that loop will automatically lead to the loop being repeated.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Do not leave a failure condition unconnected as this may result in an endless loop! Use the <a href="#abort">Abort</a> flow control operation instead!</p>
-</div>
 <h3 id="condition">Condition</h3>
 <p>A condition is a flow control operation that redirects the flow one way or another based on an expression. You can also create multiple branches to create a switch-case effect.</p>
 <pre class="mermaid"><code>stateDiagram-v2
