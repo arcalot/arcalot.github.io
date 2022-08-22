@@ -1,5 +1,8 @@
 # Plugin protocol specification
 
+!!! warning "Work in Progress"
+    This document is work in progress and may change until the final release!
+
 Arcaflow runs plugins locally in a container using Docker or Podman, or remotely in Kubernetes. Each plugin must be
 containerized and communicates with the engine over standard input/output. This document outlines the protocol the
 engine and the plugins use to communicate.
