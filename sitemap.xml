@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>None</loc>
-         <lastmod>2022-08-22</lastmod>
+         <loc>https://arcalot.io/</loc>
+         <lastmod>2022-09-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-08-22</lastmod>
+         <loc>https://arcalot.io/arcaflow/</loc>
+         <lastmod>2022-09-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-08-22</lastmod>
+         <loc>https://arcalot.io/arcaflow/concepts/plugin-protocol/</loc>
+         <lastmod>2022-09-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-08-22</lastmod>
+         <loc>https://arcalot.io/arcaflow/concepts/typing/</loc>
+         <lastmod>2022-09-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-08-22</lastmod>
+         <loc>https://arcalot.io/arcaflow/concepts/workflows/</loc>
+         <lastmod>2022-09-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-08-22</lastmod>
+         <loc>https://arcalot.io/arcaflow/creating-plugins/python/</loc>
+         <lastmod>2022-09-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-08-22</lastmod>
+         <loc>https://arcalot.io/arcalog/</loc>
+         <lastmod>2022-09-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
