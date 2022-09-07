@@ -11,6 +11,7 @@ nav:
       - Concepts:
           - Workflows: arcaflow/concepts/workflows.md
           - The typing system: arcaflow/concepts/typing.md
+          - The plugin protocol: arcaflow/concepts/plugin-protocol.md
       - Creating plugins:
           - Python: arcaflow/creating-plugins/python.md
 extra:
