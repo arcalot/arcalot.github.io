@@ -362,7 +362,7 @@ You can add metadata to your schema by using the `field()` parameter for datacla
 ```python
 @dataclasses.dataclass
 class MyClass:
-    param: str = field(metadata={"id": "my-param", "name":"Parameter 1", "description": "This is a parameter"})
+    param: str = dataclasses.field(metadata={"id": "my-param", "name":"Parameter 1", "description": "This is a parameter"})
 ```
 
 ## Creating your plugin the hard way
