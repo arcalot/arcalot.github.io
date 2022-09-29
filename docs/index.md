@@ -62,3 +62,4 @@ You can find our general community health files like our code of conduct and con
 
 If you would like to contribute, check out the issues in the individual repositories and our [project boards](https://github.com/orgs/arcalot/projects) where we organize our work.
 
+If you want to participate in our bi-weekly meeting you can add our recurring meeting to your calendar: [Arcalot Project Community meeting (iCal)](meetings/arcalot-community-biweekly.ics)
