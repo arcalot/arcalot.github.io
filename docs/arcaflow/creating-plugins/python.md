@@ -343,32 +343,123 @@ You can also validate the values by using [`typing.Annotated`](https://docs.pyth
 
 ```python
 class MyClass:
-    param: typing.Annotated[int, validation.min(5)]
+    param: typing.Annotated[int, schema.min(5)]
 ```
 
 This will create a minimum-value validation for the parameter of 5. The following annotations are supported for validation:
 
-- `validation.min()` for strings, ints, floats, lists, and maps
-- `validation.max()` for strings, ints, floats, lists, and maps
-- `validation.pattern()` for strings
-- `validation.required_if()` for any field on an object
-- `validation.required_if_not()` for any field on an object
-- `validation.conflicts()` for any field on an object
+- `schema.min()` for strings, ints, floats, lists, and maps
+- `schema.max()` for strings, ints, floats, lists, and maps
+- `schema.pattern()` for strings
+- `schema.required_if()` for any field on an object
+- `schema.required_if_not()` for any field on an object
+- `schema.conflicts()` for any field on an object
 
 #### Metadata
 
-You can add metadata to your schema by using the `field()` parameter for dataclasses, for example:
+You can add metadata to your schema by using annotations
 
 ```python
 @dataclasses.dataclass
 class MyClass:
-    param: str = dataclasses.field(metadata={"id": "my-param", "name":"Parameter 1", "description": "This is a parameter"})
+    param: typing.Annotated[
+           str,
+           schema.id("my-param"),
+           schema.name("Parameter 1"),
+           schema.description("This is a parameter"),
+           schema.icon("<svg...>Add a 64x64 SVG here</svg>")
+    ]
 ```
 
-## Creating your plugin the hard way
+### Default values
 
+You can add default values for your dataclass members like this:
+
+```python
+@dataclasses.dataclass
+class MyClass:
+    param: str = "this is the default value"
+```
+
+### Units
+
+You can also include unit information in your schema. This will allow a user interface to treat your values accordingly:
+
+```python
+@dataclasses.dataclass
+class MyClass:
+    param: typing.Annotated[
+        int,
+        schema.units(schema.UNIT_BYTE),
+    ]
+```
+
+You can also define your own unit. For that, you have to define your base unit (e.g. "bytes") and then the multipliers:
+
+```python
+UNIT_BYTE = schema.Units(
+    schema.Unit(
+        # Short, singular form:
+        "B",
+        # Short, plural form:
+        "B",
+        # Long, singular form:
+        "byte",
+        # Long, plural form:
+        "bytes"
+    ),
+    {
+        1024: schema.Unit(
+            "kB",
+            "kB",
+            "kilobyte",
+            "kilobytes"
+        ),
+        1048576: schema.Unit(
+            "MB",
+            "MB",
+            "megabyte",
+            "megabytes"
+        ),
+    }
+)
+```
+
+This also allows you to parse strings like `5MB 4kB`:
+
+```python
+parsed_unit: int = UNIT_BYTE.parse("5MB 4 kB")
+```
+
+Conversely, you can also render the units:
+
+```python
+print(UNIT_BYTE.format_short(5246976))
+```
+
+Check the code completion for your units for more options.
+
+### Examples
+
+You can also provide example values for your fields to help people providing the data:
+
+```python
+@dataclasses.dataclass
+class MyClass:
+    param: typing.Annotated[
+        int,
+        schema.example(1024),
+    ]
+```
+
+You can, of course, provide multiple examples too. Note, the example must be provided in its raw form (as dicts,
+lists, and scalars), not as dataclasses!
+
+## Creating your plugin the hard way (not recommended)
 
 For performance reasons, or for the purposes of separation of concerns, you may want to create a schema by hand. This section walks you through declaring a schema by hand and then using it to call a function. Keep in mind, the SDK still primarily operates with dataclasses to transport structured data.
+
+However, we do not recommend this approach because it results in a lot of boilerplate code, and the real-world benefits are marginal at best. Also keep in mind, that your plugin will need more frequent updates if Arcaflow is extending the schema system and you want to switch to new versions.
 
 We start by defining a schema:
 
@@ -436,9 +527,53 @@ The fields support the following parameters:
 - `required_if_not`: a list of other fields that, if not set, will cause the current field to be required
 - `conflicts`: a list of other fields that cannot be set together with the current field
 
-### AnyOfType
+### ScopeType and RefType
 
-The AnyOfType allows you to create a type that is a combination of other ObjectTypes. When a value is deserialized, a special discriminator field is consulted to figure out which type is actually being sent.
+Sometimes it is necessary to create circular references. This is where the `ScopeType` and the `RefType` comes into play. Scopes contain a list of objects that can be referenced by their ID, but one object is special: the root object of the scope. The RefType, on the other hand, is there to reference objects in a scope.
+
+Currently, the Python implementation passes the scope to the ref type directly, but the important rule is that ref types **always** reference their nearest scope up the tree. Do not create references that aim at scopes not directly above the ref!
+
+For example:
+
+```python
+@dataclasses.dataclass
+class OneOfData1:
+    a: str
+
+@dataclasses.dataclass
+class OneOfData2:
+    b: OneOfData1
+
+scope = schema.ScopeType(
+    {
+        "OneOfData1": schema.ObjectType(
+            OneOfData1,
+            {
+                "a": schema.Field(
+                    schema.StringType()
+                )
+            }
+        ),
+    },
+    # Root object of scopes
+    "OneOfData2",
+)
+
+scope.objects["OneOfData2"] = schema.ObjectType(
+    OneOfData2,
+    {
+        "b": schema.Field(
+            schema.RefType("OneOfData1", scope)
+        )
+    }
+)
+```
+
+As you can see, this API is not easy to use and is likely to change in the future.
+
+### OneOfType
+
+The OneOfType allows you to create a type that is a combination of other ObjectTypes. When a value is deserialized, a special discriminator field is consulted to figure out which type is actually being sent.
 
 This discriminator field may be present in the underlying type. If it is, the type must match the declaration in the AnyOfType.
 
@@ -454,14 +589,9 @@ class OneOfData1:
 class OneOfData2:
     b: int
 
-s = schema.OneOfType(
-    # Discriminator field
-    "type",
-    # Discriminator field type
-    schema.StringType(),
+scope = schema.ScopeType(
     {
-        # Option 1
-        "a": schema.ObjectType(
+        "OneOfData1": schema.ObjectType(
             OneOfData1,
             {
                 # Here the discriminator field is also present in the underlying type
@@ -473,8 +603,7 @@ s = schema.OneOfType(
                 )
             }
         ),
-        # Option 2
-        "b": schema.ObjectType(
+        "OneOfData2": schema.ObjectType(
             OneOfData2,
             {
                 "b": schema.Field(
@@ -482,7 +611,29 @@ s = schema.OneOfType(
                 )
             }
         )
-    }
+    },
+    # Root object of scopes
+    "OneOfData1",
+)
+    
+s = schema.OneOfStringType(
+    {
+        # Option 1
+        "a": schema.RefType(
+            # The RefType resolves against the scope.
+            "OneOfData1",
+            scope
+        ),
+        # Option 2
+        "b": schema.RefType(
+            "OneOfData2",
+            scope
+        ),
+    },
+    # Pass the scope this type belongs do
+    scope,
+    # Discriminator field
+    "type",
 )
 
 serialized_data = s.serialize(OneOfData1(
@@ -491,6 +642,8 @@ serialized_data = s.serialize(OneOfData1(
 ))
 pprint.pprint(serialized_data)
 ```
+
+Note, that the OneOfTypes take all object-like elements, such as refs, objects, or scopes.
 
 ### StringType
 
@@ -727,12 +880,15 @@ However, the example above requires you to provide the data as a `dict`, not a `
 
 ### How can I add a field with dashes, such as `my-field`?
 
-Dataclasses don't support dashes in parameters. You can work around this by defining the `id` metadata field:
+Dataclasses don't support dashes in parameters. You can work around this by defining the `id` annotation:
 
 ```python
 @dataclasses.dataclass
 class MyData:
-    my_field: str = dataclasses.field(metadata={"id": "my-field"})
+    my_field: typing.Annotated[
+        str,
+        schema.id("my-field"),
+    ]
 ```
 
 ### How can I write a dataclass from a schema to a YAML or JSON file?
