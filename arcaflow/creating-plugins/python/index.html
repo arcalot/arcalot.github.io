@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://arcalot.io/arcaflow/creating-plugins/python/">
       
       <link rel="icon" href="../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.3">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
@@ -19,10 +19,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.7a952b86.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.472b142f.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.08040f6c.min.css">
         
       
       
@@ -109,6 +109,7 @@
         
           
           
+          
           <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
@@ -116,6 +117,7 @@
             </label>
           
         
+          
           
           
           <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
@@ -600,17 +602,38 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#default-values" class="md-nav__link">
+    Default values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#units" class="md-nav__link">
+    Units
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#creating-your-plugin-the-hard-way" class="md-nav__link">
-    Creating your plugin the hard way
+  <a href="#creating-your-plugin-the-hard-way-not-recommended" class="md-nav__link">
+    Creating your plugin the hard way (not recommended)
   </a>
   
-    <nav class="md-nav" aria-label="Creating your plugin the hard way">
+    <nav class="md-nav" aria-label="Creating your plugin the hard way (not recommended)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -621,8 +644,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#anyoftype" class="md-nav__link">
-    AnyOfType
+  <a href="#scopetype-and-reftype" class="md-nav__link">
+    ScopeType and RefType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oneoftype" class="md-nav__link">
+    OneOfType
   </a>
   
 </li>
@@ -895,17 +925,38 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#default-values" class="md-nav__link">
+    Default values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#units" class="md-nav__link">
+    Units
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#creating-your-plugin-the-hard-way" class="md-nav__link">
-    Creating your plugin the hard way
+  <a href="#creating-your-plugin-the-hard-way-not-recommended" class="md-nav__link">
+    Creating your plugin the hard way (not recommended)
   </a>
   
-    <nav class="md-nav" aria-label="Creating your plugin the hard way">
+    <nav class="md-nav" aria-label="Creating your plugin the hard way (not recommended)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -916,8 +967,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#anyoftype" class="md-nav__link">
-    AnyOfType
+  <a href="#scopetype-and-reftype" class="md-nav__link">
+    ScopeType and RefType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oneoftype" class="md-nav__link">
+    OneOfType
   </a>
   
 </li>
@@ -1352,25 +1410,93 @@ do so by adding a <code>discriminator_value</code> annotation:</p>
 <h4 id="validation">Validation</h4>
 <p>You can also validate the values by using <a href="https://docs.python.org/3/library/typing.html#typing.Annotated"><code>typing.Annotated</code></a>, such as this:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
-    <span class="n">param</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">validation</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+    <span class="n">param</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">schema</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
 </code></pre></div>
 <p>This will create a minimum-value validation for the parameter of 5. The following annotations are supported for validation:</p>
 <ul>
-<li><code>validation.min()</code> for strings, ints, floats, lists, and maps</li>
-<li><code>validation.max()</code> for strings, ints, floats, lists, and maps</li>
-<li><code>validation.pattern()</code> for strings</li>
-<li><code>validation.required_if()</code> for any field on an object</li>
-<li><code>validation.required_if_not()</code> for any field on an object</li>
-<li><code>validation.conflicts()</code> for any field on an object</li>
+<li><code>schema.min()</code> for strings, ints, floats, lists, and maps</li>
+<li><code>schema.max()</code> for strings, ints, floats, lists, and maps</li>
+<li><code>schema.pattern()</code> for strings</li>
+<li><code>schema.required_if()</code> for any field on an object</li>
+<li><code>schema.required_if_not()</code> for any field on an object</li>
+<li><code>schema.conflicts()</code> for any field on an object</li>
 </ul>
 <h4 id="metadata">Metadata</h4>
-<p>You can add metadata to your schema by using the <code>field()</code> parameter for dataclasses, for example:</p>
+<p>You can add metadata to your schema by using annotations</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
-    <span class="n">param</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;my-param&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Parameter 1&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;This is a parameter&quot;</span><span class="p">})</span>
+    <span class="n">param</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span>
+           <span class="nb">str</span><span class="p">,</span>
+           <span class="n">schema</span><span class="o">.</span><span class="n">id</span><span class="p">(</span><span class="s2">&quot;my-param&quot;</span><span class="p">),</span>
+           <span class="n">schema</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s2">&quot;Parameter 1&quot;</span><span class="p">),</span>
+           <span class="n">schema</span><span class="o">.</span><span class="n">description</span><span class="p">(</span><span class="s2">&quot;This is a parameter&quot;</span><span class="p">),</span>
+           <span class="n">schema</span><span class="o">.</span><span class="n">icon</span><span class="p">(</span><span class="s2">&quot;&lt;svg...&gt;Add a 64x64 SVG here&lt;/svg&gt;&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
 </code></pre></div>
-<h2 id="creating-your-plugin-the-hard-way">Creating your plugin the hard way</h2>
+<h3 id="default-values">Default values</h3>
+<p>You can add default values for your dataclass members like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
+    <span class="n">param</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;this is the default value&quot;</span>
+</code></pre></div>
+<h3 id="units">Units</h3>
+<p>You can also include unit information in your schema. This will allow a user interface to treat your values accordingly:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
+    <span class="n">param</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span>
+        <span class="nb">int</span><span class="p">,</span>
+        <span class="n">schema</span><span class="o">.</span><span class="n">units</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">UNIT_BYTE</span><span class="p">),</span>
+    <span class="p">]</span>
+</code></pre></div>
+<p>You can also define your own unit. For that, you have to define your base unit (e.g. &ldquo;bytes&rdquo;) and then the multipliers:</p>
+<div class="highlight"><pre><span></span><code><span class="n">UNIT_BYTE</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">Units</span><span class="p">(</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span>
+        <span class="c1"># Short, singular form:</span>
+        <span class="s2">&quot;B&quot;</span><span class="p">,</span>
+        <span class="c1"># Short, plural form:</span>
+        <span class="s2">&quot;B&quot;</span><span class="p">,</span>
+        <span class="c1"># Long, singular form:</span>
+        <span class="s2">&quot;byte&quot;</span><span class="p">,</span>
+        <span class="c1"># Long, plural form:</span>
+        <span class="s2">&quot;bytes&quot;</span>
+    <span class="p">),</span>
+    <span class="p">{</span>
+        <span class="mi">1024</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span>
+            <span class="s2">&quot;kB&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;kB&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;kilobyte&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;kilobytes&quot;</span>
+        <span class="p">),</span>
+        <span class="mi">1048576</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span>
+            <span class="s2">&quot;MB&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;MB&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;megabyte&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;megabytes&quot;</span>
+        <span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>This also allows you to parse strings like <code>5MB 4kB</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">parsed_unit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">UNIT_BYTE</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;5MB 4 kB&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Conversely, you can also render the units:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">UNIT_BYTE</span><span class="o">.</span><span class="n">format_short</span><span class="p">(</span><span class="mi">5246976</span><span class="p">))</span>
+</code></pre></div>
+<p>Check the code completion for your units for more options.</p>
+<h3 id="examples">Examples</h3>
+<p>You can also provide example values for your fields to help people providing the data:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
+    <span class="n">param</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span>
+        <span class="nb">int</span><span class="p">,</span>
+        <span class="n">schema</span><span class="o">.</span><span class="n">example</span><span class="p">(</span><span class="mi">1024</span><span class="p">),</span>
+    <span class="p">]</span>
+</code></pre></div>
+<p>You can, of course, provide multiple examples too. Note, the example must be provided in its raw form (as dicts,
+lists, and scalars), not as dataclasses!</p>
+<h2 id="creating-your-plugin-the-hard-way-not-recommended">Creating your plugin the hard way (not recommended)</h2>
 <p>For performance reasons, or for the purposes of separation of concerns, you may want to create a schema by hand. This section walks you through declaring a schema by hand and then using it to call a function. Keep in mind, the SDK still primarily operates with dataclasses to transport structured data.</p>
+<p>However, we do not recommend this approach because it results in a lot of boilerplate code, and the real-world benefits are marginal at best. Also keep in mind, that your plugin will need more frequent updates if Arcaflow is extending the schema system and you want to switch to new versions.</p>
 <p>We start by defining a schema:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">arcaflow_plugin_sdk</span> <span class="kn">import</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
@@ -1426,8 +1552,45 @@ do so by adding a <code>discriminator_value</code> annotation:</p>
 <li><code>required_if_not</code>: a list of other fields that, if not set, will cause the current field to be required</li>
 <li><code>conflicts</code>: a list of other fields that cannot be set together with the current field</li>
 </ul>
-<h3 id="anyoftype">AnyOfType</h3>
-<p>The AnyOfType allows you to create a type that is a combination of other ObjectTypes. When a value is deserialized, a special discriminator field is consulted to figure out which type is actually being sent.</p>
+<h3 id="scopetype-and-reftype">ScopeType and RefType</h3>
+<p>Sometimes it is necessary to create circular references. This is where the <code>ScopeType</code> and the <code>RefType</code> comes into play. Scopes contain a list of objects that can be referenced by their ID, but one object is special: the root object of the scope. The RefType, on the other hand, is there to reference objects in a scope.</p>
+<p>Currently, the Python implementation passes the scope to the ref type directly, but the important rule is that ref types <strong>always</strong> reference their nearest scope up the tree. Do not create references that aim at scopes not directly above the ref!</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">OneOfData1</span><span class="p">:</span>
+    <span class="n">a</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">OneOfData2</span><span class="p">:</span>
+    <span class="n">b</span><span class="p">:</span> <span class="n">OneOfData1</span>
+
+<span class="n">scope</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">ScopeType</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;OneOfData1&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">(</span>
+            <span class="n">OneOfData1</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+                    <span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">()</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">),</span>
+    <span class="p">},</span>
+    <span class="c1"># Root object of scopes</span>
+    <span class="s2">&quot;OneOfData2&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">scope</span><span class="o">.</span><span class="n">objects</span><span class="p">[</span><span class="s2">&quot;OneOfData2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">(</span>
+    <span class="n">OneOfData2</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+            <span class="n">schema</span><span class="o">.</span><span class="n">RefType</span><span class="p">(</span><span class="s2">&quot;OneOfData1&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>As you can see, this API is not easy to use and is likely to change in the future.</p>
+<h3 id="oneoftype">OneOfType</h3>
+<p>The OneOfType allows you to create a type that is a combination of other ObjectTypes. When a value is deserialized, a special discriminator field is consulted to figure out which type is actually being sent.</p>
 <p>This discriminator field may be present in the underlying type. If it is, the type must match the declaration in the AnyOfType.</p>
 <p>For example:</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
@@ -1439,14 +1602,9 @@ do so by adding a <code>discriminator_value</code> annotation:</p>
 <span class="k">class</span> <span class="nc">OneOfData2</span><span class="p">:</span>
     <span class="n">b</span><span class="p">:</span> <span class="nb">int</span>
 
-<span class="n">s</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">OneOfType</span><span class="p">(</span>
-    <span class="c1"># Discriminator field</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">,</span>
-    <span class="c1"># Discriminator field type</span>
-    <span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">(),</span>
+<span class="n">scope</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">ScopeType</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="c1"># Option 1</span>
-        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">(</span>
+        <span class="s2">&quot;OneOfData1&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">(</span>
             <span class="n">OneOfData1</span><span class="p">,</span>
             <span class="p">{</span>
                 <span class="c1"># Here the discriminator field is also present in the underlying type</span>
@@ -1458,8 +1616,7 @@ do so by adding a <code>discriminator_value</code> annotation:</p>
                 <span class="p">)</span>
             <span class="p">}</span>
         <span class="p">),</span>
-        <span class="c1"># Option 2</span>
-        <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">(</span>
+        <span class="s2">&quot;OneOfData2&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">(</span>
             <span class="n">OneOfData2</span><span class="p">,</span>
             <span class="p">{</span>
                 <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
@@ -1467,7 +1624,29 @@ do so by adding a <code>discriminator_value</code> annotation:</p>
                 <span class="p">)</span>
             <span class="p">}</span>
         <span class="p">)</span>
-    <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="c1"># Root object of scopes</span>
+    <span class="s2">&quot;OneOfData1&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">OneOfStringType</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="c1"># Option 1</span>
+        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">RefType</span><span class="p">(</span>
+            <span class="c1"># The RefType resolves against the scope.</span>
+            <span class="s2">&quot;OneOfData1&quot;</span><span class="p">,</span>
+            <span class="n">scope</span>
+        <span class="p">),</span>
+        <span class="c1"># Option 2</span>
+        <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">RefType</span><span class="p">(</span>
+            <span class="s2">&quot;OneOfData2&quot;</span><span class="p">,</span>
+            <span class="n">scope</span>
+        <span class="p">),</span>
+    <span class="p">},</span>
+    <span class="c1"># Pass the scope this type belongs do</span>
+    <span class="n">scope</span><span class="p">,</span>
+    <span class="c1"># Discriminator field</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">serialized_data</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">OneOfData1</span><span class="p">(</span>
@@ -1476,6 +1655,7 @@ do so by adding a <code>discriminator_value</code> annotation:</p>
 <span class="p">))</span>
 <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">serialized_data</span><span class="p">)</span>
 </code></pre></div>
+<p>Note, that the OneOfTypes take all object-like elements, such as refs, objects, or scopes.</p>
 <h3 id="stringtype">StringType</h3>
 <p>String types indicate that the underlying type is a string. </p>
 <div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">()</span>
@@ -1650,10 +1830,13 @@ do so by adding a <code>discriminator_value</code> annotation:</p>
 </ul>
 <h2 id="faq">FAQ</h2>
 <h3 id="how-can-i-add-a-field-with-dashes-such-as-my-field">How can I add a field with dashes, such as <code>my-field</code>?</h3>
-<p>Dataclasses don&rsquo;t support dashes in parameters. You can work around this by defining the <code>id</code> metadata field:</p>
+<p>Dataclasses don&rsquo;t support dashes in parameters. You can work around this by defining the <code>id</code> annotation:</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">MyData</span><span class="p">:</span>
-    <span class="n">my_field</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;my-field&quot;</span><span class="p">})</span>
+    <span class="n">my_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span>
+        <span class="nb">str</span><span class="p">,</span>
+        <span class="n">schema</span><span class="o">.</span><span class="n">id</span><span class="p">(</span><span class="s2">&quot;my-field&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
 </code></pre></div>
 <h3 id="how-can-i-write-a-dataclass-from-a-schema-to-a-yaml-or-json-file">How can I write a dataclass from a schema to a YAML or JSON file?</h3>
 <p>You can <a href="https://stackoverflow.com/questions/51286748/make-the-python-json-encoder-support-pythons-new-dataclasses">extend Pythons JSON encoder</a> to support dataclasses. If that doesn&rsquo;t suit your needs, you can use this SDK to convert the dataclasses to their basic representations and then write that to your JSON or YAML file. First, add this outside of your step:</p>
@@ -1744,10 +1927,10 @@ do so by adding a <code>discriminator_value</code> annotation:</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d6c3db9e.min.js"></script>
       
     
   </body>
