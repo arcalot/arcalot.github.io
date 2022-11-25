@@ -480,6 +480,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#step-0-the-start-output-message" class="md-nav__link">
+    Step 0: The "start output" message
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#step-1-hello-message" class="md-nav__link">
     Step 1: Hello message
   </a>
@@ -623,6 +630,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#step-0-the-start-output-message" class="md-nav__link">
+    Step 0: The "start output" message
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#step-1-hello-message" class="md-nav__link">
     Step 1: Hello message
   </a>
@@ -709,6 +723,8 @@ plugin with minimal resource consumption locally on the engine host to fetch the
 <p>As a data transport protocol, we
 use <a href="https://cbor.io/">CBOR messages</a> <a href="https://www.rfc-editor.org/rfc/rfc8949.html">RFC 8949</a> back to back due to their
 self-delimiting nature. This section provides the entire protocol as <a href="https://json-schema.org/">JSON schema</a> below.</p>
+<h2 id="step-0-the-start-output-message">Step 0: The &ldquo;start output&rdquo; message</h2>
+<p>Because Kubernetes has no clean way of capturing an output right at the start, the initial step of the plugin execution involves the engine sending an empty CBOR message (<code>None</code> or <code>Nil</code>) to the plugin. This indicates, that the plugin may start its output now.</p>
 <h2 id="step-1-hello-message">Step 1: Hello message</h2>
 <p>The &ldquo;Hello&rdquo; message is a way for the plugin to introduce itself and present its steps and schema. Transcribed to JSON, a
 message of this kind would look as follows:</p>
