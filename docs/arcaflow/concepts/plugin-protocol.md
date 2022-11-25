@@ -43,6 +43,10 @@ As a data transport protocol, we
 use [CBOR messages](https://cbor.io/) [RFC 8949](https://www.rfc-editor.org/rfc/rfc8949.html) back to back due to their
 self-delimiting nature. This section provides the entire protocol as [JSON schema](https://json-schema.org/) below.
 
+## Step 0: The "start output" message
+
+Because Kubernetes has no clean way of capturing an output right at the start, the initial step of the plugin execution involves the engine sending an empty CBOR message (`None` or `Nil`) to the plugin. This indicates, that the plugin may start its output now.
+
 ## Step 1: Hello message
 
 The "Hello" message is a way for the plugin to introduce itself and present its steps and schema. Transcribed to JSON, a
