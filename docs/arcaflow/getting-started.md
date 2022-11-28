@@ -2,9 +2,9 @@
 
 ## Introduction
 
-[Arcaflow](https://arcalot.io/arcaflow/) is a modular system that enables engineers to easily build complex parallelized workflows for test automation without requiring any pre-installation or deployment of prerequisite software stacks. It uses an **engine** and **plugin** architecture, together with which **workflows** are constructed. Workflows are composable and highly portable, capable of orchestrating complex interrelated actions between plugins. This effectively allows for engineering workflow expertise to be packaged up, version controlled, and shared for repeatability across environments and platforms.
+[Arcaflow](https://arcalot.io/arcaflow/) is a modular system that enables engineers to easily build complex parallelized workflows without requiring any pre-installation or deployment of prerequisite software stacks. It uses an **engine** and **plugin** architecture, together with which **workflows** are constructed. Workflows are composable and highly portable, capable of orchestrating complex interrelated actions between plugins. This effectively allows for engineering workflow expertise to be packaged up, version controlled, and shared for repeatability across environments and platforms.
  
-The engine component is intended to run from your laptop, jump host, or wherever you have network connectivity to the System Under Test (SUT). No installation is required of any Arcaflow components, either on your system or the SUT. The engine processes the workflow definition and passes the required data to the plugins.
+The engine component is intended to run from your laptop, jump host, or wherever you have network connectivity to the target environment. No installation is required of any Arcaflow components, either on your system or the target environment. The engine processes the workflow definition, invokes the plugins in the target environment, and passes the required data to the plugins as directed by the workflow.
  
 The plugins are containers that can speak the engine's [CBOR](https://cbor.io/) protocol and that have explicitly defined input and output schemas. Plugins can be run locally via Docker or Podman, or in a remote Kubernetes cluster (and in the future on a remote system via SSH and Docker/Podman). Plugins can also be run alone from the command line, independent of the engine.
 
