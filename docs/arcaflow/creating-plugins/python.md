@@ -65,53 +65,53 @@ First, you will have to set up your environment.
 
 ### Create the Plugin Package
 
-=== "Using Poetry"
+=== "From the [template repository](https://github.com/arcalot/arcaflow-plugin-template-python)"
 
-    1. Fulfill requirements
+    1. Fulfill requirements.
           1. Python 3.9
           2. Poetry 1.2
 
-    2. Fork, then clone the [template repository](https://github.com/arcalot/arcaflow-plugin-template-python)
+    2. Fork, then clone the [template repository](https://github.com/arcalot/arcaflow-plugin-template-python).
 
-    3. Change into the template repository directory
+    3. Change into the template repository directory.
 
-    4. Set this package's Python virtual environment to use your Python 3.9:
+    4. Set this package's Python virtual environment to use your Python 3.9.
 
         ```
         poetry env use $(which python3)
         ```
 
-    5. Install the software dependencies from `poetry.lock`:
+    5. Install the software dependencies from `poetry.lock`.
 
         ```
-        poetry update
+        poetry install
         ```
 
-    6. Activate the Python virtual environment
+    6. Activate the Python virtual environment.
 
         ```
         poetry shell
         ```
 
-    7. Run the test plugin:
+    7. Run the test plugin.
 
         ```
         python example_plugin.py -f example.yaml
         ```
 
-    8. Run the unit tests:
+    8. Run the unit tests.
 
         ```
         python3 test_example_plugin.py
         ```
 
-    9. Generate a JSON schema:
+    9. Generate a JSON schema.
 
         ```
         python3 example_plugin.py --json-schema input >example.schema.json
         ```
 
-        If you are using the [YAML plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), add the following line to the top of your config file for code completion:
+        If you are using the [YAML plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), add the following line to the top of your config file for code completion.
 
         ```
         # yaml-language-server: $schema=example.schema.json
@@ -890,6 +890,11 @@ However, the example above requires you to provide the data as a `dict`, not a `
 - `yourschema.unserialize_input()` to turn a `dict` into a `dataclass` needed for your steps
 - `yourschema.call_step()` to run a step with the unserialized `dataclass`
 - `yourschema.serialize_output()` to turn the output `dataclass` into a `dict`
+
+
+## Publishing your Plugin
+
+
 
 
 ## FAQ
