@@ -1,10 +1,11 @@
 # Creating plugins with Python
 
-If you want to create an Arcaflow plugin in Python, you will need three things:
+If you want to create an Arcaflow plugin in Python, you will need four things:
 
 1. A container engine that can build images
 2. Python 3.9+ ([PyPy](https://www.pypy.org/) is supported)
 3. The [Python SDK for Arcaflow plugins](https://github.com/arcalot/arcaflow-plugin-sdk-python)
+4. [Poetry 1.2+](https://github.com/python-poetry/poetry)
 
 The easiest way is to start from the [template repository for Python plugins](https://github.com/arcalot/arcaflow-plugin-template-python), but starting from scratch is also fully supported.
 
@@ -14,46 +15,111 @@ Before you start please familiarize yourself with the [Arcaflow type system](../
 
 First, you will have to set up your environment.
 
+### Install Poetry
 
-=== "From the template repository"
+1. Ensure your `python3` executable is at least version 3.9.
 
-    1. Fork, then clone the [template repository](https://github.com/arcalot/arcaflow-plugin-template-python)
-    2. Figure out what the right command to call your Python version is:
-           ```
-           python3.10 --version
-           python3.9 --version
-           python3 --version
-           python --version
-           ```
-       Make sure you have at least Python 3.9.
-    3. Create a [virtualenv](https://virtualenv.pypa.io/en/latest/) in your project directory using the following command, replacing your Python call:
-           ```
-           python -m venv venv
-           ```
-    4. Activate the venv:
-           ```
-           source venv/bin/activate
-           ```
-    5. Install the dependencies:
-           ```
-           pip install -r requirements.txt
-           ```
-    6. Run the test plugin:
-           ```
-           ./example_plugin.py -f example.yaml
-           ```
-    7. Run the unit tests:
-           ```
-           ./test_example_plugin.py
-           ```
-    8. Generate a JSON schema:
-           ```
-           ./example_plugin.py --json-schema input >example.schema.json
-           ```
-      If you are using the [YAML plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), add the following line to the top of your config file for code completion:
-           ```
-           # yaml-language-server: $schema=example.schema.json
-           ```
+    ```
+    python --version
+    # Python 3.9.15
+    ```
+
+2. If it is not, install Python 3.9.
+
+    === RHEL, CentOS, Fedora
+
+        ```
+            dnf -y install python3.9
+        ```
+
+    === Ubuntu
+
+        ```
+            apt-get -y install python3.9
+        ```
+
+3. Alias the Python 3.9 executable to `python3`.
+
+    ```
+    alias python3="python3.9"
+    ```
+
+4. Install Poetry using one of their [supported methods](https://python-poetry.org/docs/#installation) for your environment.
+
+    For example, on a Linux distribution
+    ```
+    curl -sSL https://install.python-poetry.org | python3 -
+    ```
+
+    Make sure to install Poetry into __exactly one Python executable__ on your
+    system. If something goes wrong with your package's Python virtual environment,
+    you do not want to also spend time figuring out which Poetry executable is
+    responsible for it.
+
+5. Verify your Poetry version
+
+    ```shell
+    poetry --version
+    # Poetry (version 1.2.2)
+    ```
+
+### Create the Plugin Package
+
+=== "Using Poetry"
+
+    1. Fulfill requirements
+          1. Python 3.9
+          2. Poetry 1.2
+
+    2. Fork, then clone the [template repository](https://github.com/arcalot/arcaflow-plugin-template-python)
+
+    3. Change into the template repository directory
+
+    4. Set this package's Python virtual environment to use your Python 3.9:
+
+        ```
+        poetry env use $(which python3)
+        ```
+
+    5. Install the software dependencies from `poetry.lock`:
+
+        ```
+        poetry update
+        ```
+
+    6. Activate the Python virtual environment
+
+        ```
+        poetry shell
+        ```
+
+    7. Run the test plugin:
+
+        ```
+        python example_plugin.py -f example.yaml
+        ```
+
+    8. Run the unit tests:
+
+        ```
+        python3 test_example_plugin.py
+        ```
+
+    9. Generate a JSON schema:
+
+        ```
+        python3 example_plugin.py --json-schema input >example.schema.json
+        ```
+
+        If you are using the [YAML plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), add the following line to the top of your config file for code completion:
+
+        ```
+        # yaml-language-server: $schema=example.schema.json
+        ```
+
+    10. Copy and customize the [Dockerfile](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/Dockerfile) from the example repository.
+
+    11.  Set up your CI/CD system as you see fit.
 
 === "Using pip"
 
@@ -62,7 +128,7 @@ First, you will have to set up your environment.
            ```
            arcaflow-plugin-sdk
            ```
-    3. Figure out what the right command to call your Python version is:
+    3. Figure out the right command to call your Python version:
            ```
            python3.10 --version
            python3.9 --version
@@ -98,61 +164,11 @@ First, you will have to set up your environment.
       If you are using the [YAML plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), add the following line to the top of your config file for code completion:
            ```
            # yaml-language-server: $schema=example.schema.json
-           ```    
+           ```
     11. Copy and customize the [Dockerfile](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/Dockerfile) from the example repository.
     12. Set up your CI/CD system as you see fit.
 
-=== "Using Poetry"
 
-    1. Assuming you have [Poetry](https://python-poetry.org) installed, run the following command:
-           ```
-           poetry new your-plugin
-           ```
-       Then change the current directory to `your-plugin`.
-    2. Figure out what the right command to call your Python version is:
-           ```
-           which python3.10
-           which python3.9
-           which python3
-           which python
-           ```
-       Make sure you have at least Python 3.9.
-    3. Set Poetry to Python 3.9:
-           ```
-           poetry env use /path/to/your/python3.9
-           ```
-    4. Check that your `pyproject.toml` file has the following lines:
-           ```toml
-           [tool.poetry.dependencies]
-           python = "^3.9"
-           ```
-    4. Add the SDK as a dependency:
-           ```
-           poetry add arcaflow-plugin-sdk
-           ```
-    5. Copy the [example plugin](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/arcaflow_plugin_template_python/example_plugin.py), [example config](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/example.yaml) and the [tests]https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/tests/test_example_plugin.py) to your directory.
-    6. Activate the venv:
-           ```
-           poetry shell
-           ```
-    7. Run the test plugin:
-           ```
-           ./example_plugin.py -f example.yaml
-           ```
-    8. Run the unit tests:
-           ```
-           ./test_example_plugin.py
-           ```
-    9. Generate a JSON schema:
-           ```
-           ./example_plugin.py --json-schema input >example.schema.json
-           ```
-      If you are using the [YAML plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), add the following line to the top of your config file for code completion:
-           ```
-           # yaml-language-server: $schema=example.schema.json
-           ```
-    10. Copy and customize the [Dockerfile](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/Dockerfile) from the example repository.
-    11. Set up your CI/CD system as you see fit.
 
 Now you are ready to start hacking away at your plugin!
 
@@ -615,7 +631,7 @@ scope = schema.ScopeType(
     # Root object of scopes
     "OneOfData1",
 )
-    
+
 s = schema.OneOfStringType(
     {
         # Option 1
@@ -647,7 +663,7 @@ Note, that the OneOfTypes take all object-like elements, such as refs, objects, 
 
 ### StringType
 
-String types indicate that the underlying type is a string. 
+String types indicate that the underlying type is a string.
 
 ```python
 t = schema.StringType()
@@ -746,7 +762,7 @@ The map type supports the following extra parameters:
 
 ### Running the plugin
 
-If you create the schema by hand, you can add the following code to your plugin: 
+If you create the schema by hand, you can add the following code to your plugin:
 
 ```python
 if __name__ == "__main__":
