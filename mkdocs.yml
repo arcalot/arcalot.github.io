@@ -8,6 +8,7 @@ nav:
   - Arcalog: arcalog/index.md
   - Arcaflow:
       - 'arcaflow/index.md'
+      - Getting Started: arcaflow/getting-started.md
       - Concepts:
           - Workflows: arcaflow/concepts/workflows.md
           - The typing system: arcaflow/concepts/typing.md
