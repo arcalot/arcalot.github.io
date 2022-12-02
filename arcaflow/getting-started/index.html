@@ -1,0 +1,1089 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://arcalot.io/arcaflow/getting-started/">
+      
+      <link rel="icon" href="../../arcalot.svg">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>Getting Started - Arcalot</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#arcaflow-getting-started-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Arcalot" class="md-header__button md-logo" aria-label="Arcalot" data-md-component="logo">
+      
+  <img src="../../arcalot.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Arcalot
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Getting Started
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/arcalot/arcalot.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    arcalot/arcalot.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../arcalog/" class="md-tabs__link">
+      Arcalog
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        Arcaflow
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Arcalot" class="md-nav__button md-logo" aria-label="Arcalot" data-md-component="logo">
+      
+  <img src="../../arcalot.svg" alt="logo">
+
+    </a>
+    Arcalot
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/arcalot/arcalot.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    arcalot/arcalot.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arcalog/" class="md-nav__link">
+        Arcalog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Arcaflow</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Arcaflow" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Arcaflow
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Getting Started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Getting Started
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-basics" class="md-nav__link">
+    Workflow Basics
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow Basics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logical-flow" class="md-nav__link">
+    Logical Flow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functional-flow" class="md-nav__link">
+    Functional Flow
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-workflow" class="md-nav__link">
+    Example Workflow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-and-contributing" class="md-nav__link">
+    Using and Contributing
+  </a>
+  
+    <nav class="md-nav" aria-label="Using and Contributing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#level-0" class="md-nav__link">
+    Level 0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-1" class="md-nav__link">
+    Level 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-2" class="md-nav__link">
+    Level 2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-3" class="md-nav__link">
+    Level 3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-4" class="md-nav__link">
+    Level 4
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#community" class="md-nav__link">
+    Community
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" checked>
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          Concepts
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Concepts" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Concepts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/workflows/" class="md-nav__link">
+        Workflows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/typing/" class="md-nav__link">
+        The typing system
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/plugin-protocol/" class="md-nav__link">
+        The plugin protocol
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" checked>
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_4">
+          Creating plugins
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Creating plugins" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Creating plugins
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../creating-plugins/python/" class="md-nav__link">
+        Python
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-basics" class="md-nav__link">
+    Workflow Basics
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow Basics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logical-flow" class="md-nav__link">
+    Logical Flow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functional-flow" class="md-nav__link">
+    Functional Flow
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-workflow" class="md-nav__link">
+    Example Workflow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-and-contributing" class="md-nav__link">
+    Using and Contributing
+  </a>
+  
+    <nav class="md-nav" aria-label="Using and Contributing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#level-0" class="md-nav__link">
+    Level 0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-1" class="md-nav__link">
+    Level 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-2" class="md-nav__link">
+    Level 2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-3" class="md-nav__link">
+    Level 3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-4" class="md-nav__link">
+    Level 4
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#community" class="md-nav__link">
+    Community
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/arcalot/arcalot.github.io/edit/main/docs/arcaflow/getting-started.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<h1 id="arcaflow-getting-started-guide">Arcaflow Getting Started Guide</h1>
+<h2 id="introduction">Introduction</h2>
+<p><a href="https://arcalot.io/arcaflow/">Arcaflow</a> is a modular system that enables engineers to easily build complex parallelized workflows without requiring any pre-installation or deployment of prerequisite software stacks. It has a <strong>plugin</strong> architecture that is used to build <strong>workflows</strong>, and execution of the workflows is coordinated by an <strong>engine</strong>. Workflows are composable and highly portable, capable of orchestrating complex interrelated actions between plugins. This effectively allows for engineering workflow expertise to be packaged up, version controlled, and shared for repeatability across environments and platforms.</p>
+<p>The engine component is intended to run from your laptop, jump host, or wherever you have network connectivity to the target environment. No installation is required of any Arcaflow components, either on your system or the target environment. The engine processes the workflow definition, invokes the plugins in the target environment, and passes the required data to the plugins as directed by the workflow.</p>
+<p>The plugins are containers that can speak the engine&rsquo;s <a href="https://cbor.io/">CBOR</a> protocol and that have explicitly defined input and output schemas. Plugins can be run locally via Docker or Podman, or in a remote Kubernetes cluster (and in the future on a remote system via SSH and Docker/Podman). Plugins can also be run alone from the command line, independent of the engine.</p>
+<h2 id="workflow-basics">Workflow Basics</h2>
+<p>Logically, a workflow looks like a path being followed from one plugin to another. Functionally, it works in a star pattern with the engine at the center. So the output of a plugin is passed back to the engine, which then hands off data to the next plugin(s).</p>
+<h3 id="logical-flow">Logical Flow</h3>
+<pre class="mermaid"><code>flowchart TD
+input(input)--&gt;plugin1[plugin]
+input--&gt;plugin2[plugin]
+input--&gt;plugin3[plugin]
+plugin1--&gt;plugin4[plugin]
+plugin2--&gt;plugin4
+plugin3---&gt;output(output)
+plugin4--&gt;output</code></pre>
+<h3 id="functional-flow">Functional Flow</h3>
+<pre class="mermaid"><code>flowchart TD
+input(input)--&gt;engine((engine))
+engine--&gt;plugin1[plugin]--&gt;engine
+engine--&gt;plugin2[plugin]--&gt;engine
+engine--&gt;plugin3[plugin]--&gt;engine
+engine--&gt;output(output)</code></pre>
+<h2 id="example-workflow">Example Workflow</h2>
+<p>Consider below a sample workflow that runs a <a href="https://github.com/akopytov/sysbench">sysbench</a> CPU load, a <a href="https://pcp.io/">PCP</a> metrics collector, an Ansible <a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/gather_facts_module.html">gather facts</a> metadata collector, and sends the output to an <a href="https://www.elastic.co/">Elasticsearch</a> index. A bonus feature we get from the engine is that it will output the workflow in <a href="https://mermaid-js.github.io/mermaid/#/">mermaid</a> format for rendering, so we can see that it looks like this visually (error nodes are removed below for simplicity):</p>
+<pre class="mermaid"><code>flowchart LR
+subgraph input
+input.sysbench_threads
+input.sysbench_events
+input.elastic_password
+input.sysbench_runtime
+input.elastic_index
+input.pmlogger_interval
+input.sysbench_cpumaxprime
+input.elastic_username
+input.elastic_host
+end
+input.sysbench_threads--&gt;steps.sysbench
+steps.sysbench--&gt;steps.sysbench.outputs.success
+steps.metadata--&gt;steps.metadata.outputs.success
+steps.sysbench.outputs.success--&gt;output
+steps.sysbench.outputs.success--&gt;steps.elasticsearch
+input.sysbench_events--&gt;steps.sysbench
+input.elastic_password--&gt;steps.elasticsearch
+input.sysbench_runtime--&gt;steps.pcp
+input.sysbench_runtime--&gt;steps.sysbench
+input.elastic_index--&gt;steps.elasticsearch
+input.pmlogger_interval--&gt;steps.pcp
+steps.pcp.outputs.success--&gt;steps.elasticsearch
+steps.pcp.outputs.success--&gt;output
+steps.pcp--&gt;steps.pcp.outputs.success
+steps.metadata.outputs.success--&gt;steps.elasticsearch
+steps.metadata.outputs.success--&gt;output
+input.sysbench_cpumaxprime--&gt;steps.sysbench
+input.elastic_username--&gt;steps.elasticsearch
+input.elastic_host--&gt;steps.elasticsearch
+steps.elasticsearch--&gt;steps.elasticsearch.outputs.success</code></pre>
+<p>This example workflow expects <strong>input</strong> parameters that are passed down to the plugins, in this case to the <strong>PCP</strong>, <strong>sysbench</strong>, and <strong>elasticsearch</strong> plugins. These parameters determine the details of the actions that those plugins will perform. The <strong>metadata</strong> plugin used here requires no inputs, as evidenced in the workflow diagram. The <strong>success</strong> outputs of the PCP, sysbench, and metadata plugins are then directed both to the elasticsearch plugin and to the <strong>output</strong> of the workflow.</p>
+<p><em>Note: The complete example workflow definition is below in the <a href="#level-2">Using and Contributing Level 2</a> section.</em></p>
+<h2 id="using-and-contributing">Using and Contributing</h2>
+<p>The entry point for working with Arcaflow as a new user is intended to be very low. Pre-composed workflows are things you should be able to download and use with very little in terms of prerequisites, allowing you with little experience to run workflows in the same ways as domain experts.</p>
+<p>Moving up through layers of sophistication as a user and contributor should be equally straightforward. As you become familiar with <a href="#level-0">running workflows</a>, you may be drawn into <a href="#level-1">tweaking</a> and <a href="#level-2">modifying</a> those workflows to suit your needs, or further into <a href="#level-3">authoring new plugins</a> to expand functionality or even into <a href="#level-4">contributing to our core components</a>. The sections below should give you an idea of how to get started at each level of sophistication.</p>
+<h3 id="level-0">Level 0</h3>
+<p><strong><em>Yeoman - Workflow User</em></strong></p>
+<p>Welcome to the community! We are more than happy to help you get started. You should get a feel for things by running a workflow or two. Below is an example you can try out. You will need a Golang runtime and Docker to run the containers (Podman can be used with the <a href="https://docs.podman.io/en/latest/markdown/podman-system-service.1.html">system service</a> enabled for socket connections, which are required by the engine to communicate with the plugins). The example used here is the same one from the <a href="#example-workflow">Example Workflow</a> section above.</p>
+<p>Clone the <a href="https://github.com/arcalot/arcaflow-engine">engine</a>:
+<div class="highlight"><pre><span></span><code>$ git clone https://github.com/arcalot/arcaflow-engine.git
+</code></pre></div></p>
+<p>Clone the <a href="https://github.com/arcalot/arcaflow-workflows">workflows</a> and set your workflow directory path:
+<div class="highlight"><pre><span></span><code>$ git clone https://github.com/arcalot/arcaflow-workflows.git
+$ export WFPATH=$(pwd)/arcaflow-workflows/example-workflow
+</code></pre></div></p>
+<p>Run the workflow (the containers will run on your local machine via Docker):
+<div class="highlight"><pre><span></span><code>$ cd arcaflow-engine
+$ go run cmd/arcaflow/main.go -input ${WFPATH}/input.yaml -config ${WFPATH}/config.yaml -context ${WFPATH}
+</code></pre></div></p>
+<p>The <code>config.yaml</code> file is set for debug output, so you&rsquo;ll get a lot returned to the terminal (including the mermaid code mentioned above). This workflow is set to simply return the output of the various plugins, so in the end you&rsquo;ll get that formatted content dumped to the terminal.</p>
+<h3 id="level-1">Level 1</h3>
+<p><strong><em>Page - Advanced Workflow User</em></strong></p>
+<p>The next layer of sophistication is modifying the test parameters, which are in the input.yaml file referenced in the above command. For our simple workflow here, you have parameters to adjust how the CPU stress test is performed and to adjust the resolution of PCP&rsquo;s data collection. You can freely adjust these parameters to your needs without needing to change anything about the workflow itself. This requires some understanding of what the underlying sysbench and PCP tools do, and of course caution should be taken since this test will apply load to the system where it is run.</p>
+<p>The example <code>input.yaml</code> file looks like this:
+<div class="highlight"><pre><span></span><code><span class="nt">pmlogger_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="nt">sysbench_threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w"></span>
+<span class="nt">sysbench_events</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="nt">sysbench_cpumaxprime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12000</span><span class="w"></span>
+<span class="nt">sysbench_runtime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w"></span>
+<span class="nt">elastic_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span><span class="w"></span>
+<span class="nt">elastic_username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span><span class="w"></span>
+<span class="nt">elastic_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span><span class="w"></span>
+<span class="nt">elastic_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span><span class="w"></span>
+</code></pre></div></p>
+<h3 id="level-2">Level 2</h3>
+<p><strong><em>Squire - Workflow Creator</em></strong></p>
+<p>So you&rsquo;re more adventurous and want to change/author workflows? This is the layer at which we think most of our technical users will spend a majority of their effort. Our goals of packaging, version controlling, and shipping domain expertise are primarily facilitated here. A workflow author dreams up a series of tests with various loops and parallelizations they want to run, determines how to collect and transport data and metadata, and then bundles this all into a workflow that can be shared as easily as the one presented in the examples above. A workflow user just needs the engine and your workflow file. That&rsquo;s it.</p>
+<p>The workflow file has an <strong>input</strong> section where it defines the workflow schema. The workflow author can get creative here in how they want to represent the available parameters to the user, and there are mechanics for self-documentation when good practices are followed with schema metadata. Then there is a <strong>steps</strong> section, which defines the plugins and their relationships. In the reference examples here, we show some data passing both from the input section to the plugins and between plugins where outputs are passed to the elasticsearch plugin (we have another <a href="https://github.com/arcalot/arcaflow-workflows/tree/main/network-streaming-performance-k8s/">example with uperf</a> that gets more complicated with kubernetes and data passing, once you&rsquo;re ready to dig in more). Then finally the <strong>output</strong> section defines what the workflow will return to the user.</p>
+<p>The complete workflow definition for the example above looks like this:
+<div class="highlight"><pre><span></span><code><span class="nt">input</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span><span class="w"></span>
+<span class="w">  </span><span class="nt">objects</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">RootObject</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span><span class="w"></span>
+<span class="w">      </span><span class="nt">properties</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">pmlogger_interval</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The logger collection interval for PCP pmlogger</span><span class="w"></span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCP pmlogger collection interval</span><span class="w"></span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span><span class="w"></span>
+<span class="w">        </span><span class="nt">sysbench_threads</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The number of threads sysbench will run</span><span class="w"></span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench threads</span><span class="w"></span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span><span class="w"></span>
+<span class="w">        </span><span class="nt">sysbench_events</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The number of events sysbench will run</span><span class="w"></span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench events</span><span class="w"></span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span><span class="w"></span>
+<span class="w">        </span><span class="nt">sysbench_cpumaxprime</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The upper limit of the number of prime numbers generated</span><span class="w"></span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench cpu max primes</span><span class="w"></span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span><span class="w"></span>
+<span class="w">        </span><span class="nt">sysbench_runtime</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The total runtime in seconds for the sysbench tests</span><span class="w"></span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench runtime seconds</span><span class="w"></span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span><span class="w"></span>
+<span class="w">        </span><span class="nt">elastic_host</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The host URL for the ElasticSearch service</span><span class="w"></span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch host url</span><span class="w"></span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">        </span><span class="nt">elastic_username</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The username for the ElasticSearch service</span><span class="w"></span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch username</span><span class="w"></span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">        </span><span class="nt">elastic_password</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The password for the ElasticSearch service</span><span class="w"></span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch password</span><span class="w"></span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">        </span><span class="nt">elastic_index</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The index for the ElasticSearch service</span><span class="w"></span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch index</span><span class="w"></span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="nt">steps</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">pcp</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/dustinblack/arcaflow-plugin-pcp-test:latest</span><span class="w"></span>
+<span class="w">    </span><span class="nt">step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">start-pcp</span><span class="w"></span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">pmlogger_interval</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.pmlogger_interval</span><span class="w"></span>
+<span class="w">      </span><span class="nt">run_duration</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_runtime</span><span class="w"></span>
+<span class="w">  </span><span class="nt">sysbench</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/arcalot/arcaflow-plugin-sysbench:latest</span><span class="w"></span>
+<span class="w">    </span><span class="nt">step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbenchcpu</span><span class="w"></span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">operation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cpu</span><span class="w"></span>
+<span class="w">      </span><span class="nt">threads</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_threads</span><span class="w"></span>
+<span class="w">      </span><span class="nt">events</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_events</span><span class="w"></span>
+<span class="w">      </span><span class="nt">cpumaxprime</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_cpumaxprime</span><span class="w"></span>
+<span class="w">      </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_runtime</span><span class="w"></span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/arcalot/arcaflow-plugin-metadata:latest</span><span class="w"></span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
+<span class="w">  </span><span class="nt">elasticsearch</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/arcalot/arcaflow-plugin-elasticsearch:latest</span><span class="w"></span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_host</span><span class="w"></span>
+<span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_username</span><span class="w"></span>
+<span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_password</span><span class="w"></span>
+<span class="w">      </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_index</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">pcp</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.pcp.outputs.success</span><span class="w"></span>
+<span class="w">        </span><span class="nt">sysbench</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.sysbench.outputs.success</span><span class="w"></span>
+<span class="w">        </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.metadata.outputs.success</span><span class="w"></span>
+<span class="nt">output</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">pcp</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.pcp.outputs.success</span><span class="w"></span>
+<span class="w">  </span><span class="nt">sysbench</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.sysbench.outputs.success</span><span class="w"></span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.metadata.outputs.success</span><span class="w"></span>
+</code></pre></div></p>
+<h3 id="level-3">Level 3</h3>
+<p><strong><em>Knight - Plugin Author</em></strong></p>
+<p>So now you want to build plugins or add features to existing plugins? Great! Welcome to the <a href="https://github.com/arcalot/arcalot-round-table">Arcalot Round Table</a>! We provide Software Development Kits (SDKs) for <a href="https://github.com/arcalot/arcaflow-plugin-sdk-python">Python</a> and <a href="https://github.com/arcalot/arcaflow-plugin-sdk-go">Golang</a> to get you started. The main thing you need to understand is that a plugin is expected to define and adhere to its schemas, so the SDK enforces strict typing, which can be a little strange at first for a Python developer. Optimally, a plugin follows the <a href="https://en.wikipedia.org/wiki/Unix_philosophy#:~:text=The%20Unix%20philosophy%20is%20documented,%2C%20as%20yet%20unknown%2C%20program.">Unix philosophy</a> of <em>do one thing and do it well</em>, and a plugin should not be created in an opinionated way.</p>
+<p>When creating a plugin, you should consider how you will expose all parameters and configuration values via a single schema, and collect all output similarly in a single schema. The plugins provide the API endpoints for functions or actions, and workflows glue together those endpoints to make use of the data in an opinionated way. Sometimes creating a schema for an existing tool is relatively <a href="https://github.com/arcalot/arcaflow-plugin-smallfile">easy</a>, sometimes it is pretty <a href="https://github.com/arcalot/arcaflow-plugin-uperf">involved</a>. You can start digging into the technical details more in the <a href="https://arcalot.io/arcaflow/concepts/workflows/">Concepts</a> and <a href="https://arcalot.io/arcaflow/creating-plugins/python/">Plugins</a> sections of the documentation.</p>
+<h3 id="level-4">Level 4</h3>
+<p><strong><em>Liege - Core Components Contributor</em></strong></p>
+<p>If you have a grasp on everything above and still want to dig in deeper, then welcome to core components development! Here you can participate in the development of the workflow engine and its related libraries, the SDKs, the <a href="https://github.com/arcalot/arcaflow-plugin-image-builder">build system</a>, and more.</p>
+<h2 id="community">Community</h2>
+<p>If you&rsquo;re looking for a place to jump in and help, have a look at our <a href="https://github.com/orgs/arcalot/projects">Project</a> boards and our <a href="https://github.com/orgs/arcalot/discussions">Discussions</a> page. We also manage our charter, code of conduct, and licensing, as well as significant project decisions, via our <a href="https://github.com/arcalot/arcalot-round-table">Arcalot Round Table</a> project. We can also always use help with our <a href="https://github.com/arcalot/arcalot.github.io">documentation</a> efforts.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Arcaflow: The noble workflow engine" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Arcaflow: The noble workflow engine
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../concepts/workflows/" class="md-footer__link md-footer__link--next" aria-label="Next: Workflows" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Workflows
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/arcalot" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+    
+    
+  </body>
+</html>
