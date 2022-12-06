@@ -169,8 +169,59 @@ First, you will have to set up your environment.
     12. Set up your CI/CD system as you see fit.
 
 
-
 Now you are ready to start hacking away at your plugin!
+
+
+## Publishing your Plugin Package to PyPi
+
+Create an [API token with your PyPi user account](https://pypi.org/help/#apitoken), and save it in your favorite secrets manager.
+
+Add your PyPi token to the Poetry configuration file.
+
+```shell
+poetry config pypi-token.<any name> <PYPI API TOKEN>
+```
+
+Alternatively, you can use environment variables to provide your PyPi credentials.
+
+```shell
+export POETRY_PYPI_TOKEN_PYPI=my-token
+export POETRY_HTTP_BASIC_PYPI_USERNAME=<username>
+export POETRY_HTTP_BASIC_PYPI_PASSWORD=<password>
+```
+
+Build the package ([at the moment, only pure python wheels are supported](https://python-poetry.org/docs/cli/#build)).
+
+```shell
+poetry build
+```
+
+Check the results of a publish dry run are successful.
+
+```shell
+poetry publish --dry-run
+
+# Publishing arcaflow-plugin-template-python (0.1.0) to PyPI
+# - Uploading arcaflow_plugin_template_python-0.1.0-py3-none-any.whl 100%
+# - Uploading arcaflow_plugin_template_python-0.1.0.tar.gz 100%
+```
+
+Publish!
+
+```shell
+poetry publish
+
+# Publishing arcaflow-plugin-template-python (0.1.0) to PyPI
+# - Uploading arcaflow_plugin_template_python-0.1.0-py3-none-any.whl 100%
+# - Uploading arcaflow_plugin_template_python-0.1.0.tar.gz 100%
+```
+
+Alternatively, build and publish in one command.
+
+```shell
+poetry publish --build
+```
+
 
 ## Creating your plugin the easy way
 
@@ -890,11 +941,6 @@ However, the example above requires you to provide the data as a `dict`, not a `
 - `yourschema.unserialize_input()` to turn a `dict` into a `dataclass` needed for your steps
 - `yourschema.call_step()` to run a step with the unserialized `dataclass`
 - `yourschema.serialize_output()` to turn the output `dataclass` into a `dict`
-
-
-## Publishing your Plugin
-
-
 
 
 ## FAQ
