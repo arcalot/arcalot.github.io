@@ -26,19 +26,18 @@ First, you will have to set up your environment.
 
 2. If it is not, install Python 3.9.
 
-    === RHEL, CentOS, Fedora
-
+    === "RHEL, CentOS, Fedora"
         ```
-            dnf -y install python3.9
-        ```
-
-    === Ubuntu
-
-        ```
-            apt-get -y install python3.9
+        dnf -y install python3.9
         ```
 
-3. Alias the Python 3.9 executable to `python3`.
+    === "Ubuntu"
+
+        ```
+        apt-get -y install python3.9
+        ```
+
+3. Alias the Python 3.9 executable to `python3` installed by your system package manager.
 
     ```
     alias python3="python3.9"
@@ -75,37 +74,105 @@ First, you will have to set up your environment.
 
     3. Change into the template repository directory.
 
-    4. Set this package's Python virtual environment to use your Python 3.9.
+    4. Name day!
+        1. Plugin starting directory structure
+
+            ```
+            .
+            └── arcaflow-plugin-template-python        <- GitHub repo
+                ├── arcaflow_plugin_template_python    <- Python module
+                │   └── example_plugin.py
+                ├── docker-compose.yaml
+                ├── Dockerfile
+                ├── example.yaml
+                ├── LICENSE
+                ├── poetry.lock
+                ├── pyproject.toml
+                ├── README.md
+                ├── requirements.txt
+                └── tests
+                    └── test_example_plugin.py
+            ```
+
+        2. Rename with your desired package name
+            1. GitHub repo
+            2. README title
+            3. Python module
+            4. Python package in `pyproject.toml`
+
+            ```toml
+            [tool.poetry]
+            name = "arcaflow-plugin-template-python"        <-
+            version = "0.1.0"
+            description = ""
+            authors = ["Arcalot"]
+            license = "Apache-2.0+GPL-2.0-only"
+            ...
+            ```
+            The directory name of your Python module _must_ match the name in your pyproject.toml, allowing for `-` substituting for `_` (i.e `arcaflow-plugin-template-python` ~= `arcaflow_plugin_template_python`), so that the directory name transforms into a module name that is a valid Python identifier.
+
+            5. `package` variable in `Dockerfile`
+            ```Dockerfile
+            ENV package arcaflow_plugin_template_python
+            ```
+
+            6. Image source label in `Dockerfile` with your repository's URL
+            ```Dockerfile
+            LABEL org.opencontainers.image.source="https://github.com/arcalot/arcaflow-plugin-template-python"
+            ```
+
+            7. Image name in `docker-compose.yaml`
+            ```yaml
+            version: '3.2'
+            services:
+              plugin:
+                image: ghcr.io/arcalot/arcaflow-plugin-template    <-
+                build: .
+                volumes:
+                  - source: ./example.yaml
+                    target: /config/example.yaml
+                    type: bind
+            ```
+
+            8.  Plugin module import in your `tests`
+            ```python
+            #!/usr/bin/env python3
+            import unittest
+            from arcaflow_plugin_template_python import example_plugin
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ```
+
+    5. Set this package's Python virtual environment to use your Python 3.9.
 
         ```
         poetry env use $(which python3)
         ```
 
-    5. Install the software dependencies from `poetry.lock`.
+    6. Install the software dependencies from `poetry.lock`.
 
         ```
         poetry install
         ```
 
-    6. Activate the Python virtual environment.
+    7. Activate the Python virtual environment.
 
         ```
         poetry shell
         ```
 
-    7. Run the test plugin.
+    8. Run the test plugin.
 
         ```
         python example_plugin.py -f example.yaml
         ```
 
-    8. Run the unit tests.
+    9.  Run the unit tests.
 
         ```
         python3 test_example_plugin.py
         ```
 
-    9. Generate a JSON schema.
+    10. Generate a JSON schema.
 
         ```
         python3 example_plugin.py --json-schema input >example.schema.json
@@ -117,9 +184,9 @@ First, you will have to set up your environment.
         # yaml-language-server: $schema=example.schema.json
         ```
 
-    10. Copy and customize the [Dockerfile](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/Dockerfile) from the example repository.
+    11. Copy and customize the [Dockerfile](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/Dockerfile) from the example repository.
 
-    11.  Set up your CI/CD system as you see fit.
+    12.  Set up your CI/CD system as you see fit.
 
 === "Using pip"
 
