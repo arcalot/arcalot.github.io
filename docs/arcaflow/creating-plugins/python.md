@@ -55,7 +55,7 @@ First, you will have to set up your environment.
     you do not want to also spend time figuring out which Poetry executable is
     responsible for it.
 
-5. Verify your Poetry version
+5. Verify your Poetry version.
 
     ```shell
     poetry --version
@@ -64,129 +64,194 @@ First, you will have to set up your environment.
 
 ### Create the Plugin Package
 
-=== "From the [template repository](https://github.com/arcalot/arcaflow-plugin-template-python)"
+#### Get Template Code
+
+1. Fulfill requirements.
+      1. Python 3.9
+2. Fork, then clone the [template repository](https://github.com/arcalot/arcaflow-plugin-template-python).
+3. Change into the template repository directory.
+4. Plugin starting directory structure.
+
+    ```
+    tree .
+    .
+    └── arcaflow-plugin-template-python        <- GitHub repo
+    ├── arcaflow_plugin_template_python    <- Python module
+    │   └── example_plugin.py
+    ├── docker-compose.yaml
+    ├── Dockerfile
+    ├── example.yaml
+    ├── LICENSE
+    ├── poetry.lock
+    ├── pyproject.toml
+    ├── README.md
+    ├── requirements.txt
+    └── tests
+        └── test_example_plugin.py
+    ```
+5. Rename the following with your desired package name.
+
+      1. GitHub repo
+      2. README title
+      3. Python module
+
+      4. `package` variable in `Dockerfile`
+      ```Dockerfile
+      ENV package arcaflow_plugin_template_python
+      ```
+
+      5. Image source label in `Dockerfile` with your repository's URL.
+      ```Dockerfile
+      LABEL org.opencontainers.image.source="https://github.com/arcalot/arcaflow-plugin-template-python"
+      ```
+
+      6. Image name in `docker-compose.yaml`
+      ```yaml
+      version: '3.2'
+      services:
+      plugin:
+      image: ghcr.io/arcalot/arcaflow-plugin-template    <-
+      build: .
+      volumes:
+      - source: ./example.yaml
+        target: /config/example.yaml
+        type: bind
+      ```
+
+      7.  Plugin module import in your `tests`.
+      ```python
+      #!/usr/bin/env python3
+      import unittest
+      from arcaflow_plugin_template_python import example_plugin
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      ```
+
+#### Create Virtual Environment
+
+=== "Poetry"
 
     1. Fulfill requirements.
-          1. Python 3.9
-          2. Poetry 1.2
+        1. Poetry 1.2
 
-    2. Fork, then clone the [template repository](https://github.com/arcalot/arcaflow-plugin-template-python).
+    2. Rename the following with your desired package name.
+        1. Python package in `pyproject.toml`
 
-    3. Change into the template repository directory.
+        ```toml
+        [tool.poetry]
+        name = "arcaflow-plugin-template-python"        <-
+        version = "0.1.0"
+        description = ""
+        authors = ["Arcalot"]
+        license = "Apache-2.0+GPL-2.0-only"
+        ...
+        ```
+        The directory name of your Python module _must_ match the name in your pyproject.toml, allowing for `-` substituting for `_` (i.e `arcaflow-plugin-template-python` ~= `arcaflow_plugin_template_python`), so that the directory name transforms into module name that is a valid Python identifier.
 
-    4. Name day!
-        1. Plugin starting directory structure
-
-            ```
-            .
-            └── arcaflow-plugin-template-python        <- GitHub repo
-                ├── arcaflow_plugin_template_python    <- Python module
-                │   └── example_plugin.py
-                ├── docker-compose.yaml
-                ├── Dockerfile
-                ├── example.yaml
-                ├── LICENSE
-                ├── poetry.lock
-                ├── pyproject.toml
-                ├── README.md
-                ├── requirements.txt
-                └── tests
-                    └── test_example_plugin.py
-            ```
-
-        2. Rename with your desired package name
-            1. GitHub repo
-            2. README title
-            3. Python module
-            4. Python package in `pyproject.toml`
-
-            ```toml
-            [tool.poetry]
-            name = "arcaflow-plugin-template-python"        <-
-            version = "0.1.0"
-            description = ""
-            authors = ["Arcalot"]
-            license = "Apache-2.0+GPL-2.0-only"
-            ...
-            ```
-            The directory name of your Python module _must_ match the name in your pyproject.toml, allowing for `-` substituting for `_` (i.e `arcaflow-plugin-template-python` ~= `arcaflow_plugin_template_python`), so that the directory name transforms into a module name that is a valid Python identifier.
-
-            5. `package` variable in `Dockerfile`
-            ```Dockerfile
-            ENV package arcaflow_plugin_template_python
-            ```
-
-            6. Image source label in `Dockerfile` with your repository's URL
-            ```Dockerfile
-            LABEL org.opencontainers.image.source="https://github.com/arcalot/arcaflow-plugin-template-python"
-            ```
-
-            7. Image name in `docker-compose.yaml`
-            ```yaml
-            version: '3.2'
-            services:
-              plugin:
-                image: ghcr.io/arcalot/arcaflow-plugin-template    <-
-                build: .
-                volumes:
-                  - source: ./example.yaml
-                    target: /config/example.yaml
-                    type: bind
-            ```
-
-            8.  Plugin module import in your `tests`
-            ```python
-            #!/usr/bin/env python3
-            import unittest
-            from arcaflow_plugin_template_python import example_plugin
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            ```
-
-    5. Set this package's Python virtual environment to use your Python 3.9.
+    3. Set this package's Python virtual environment to use your Python 3.9.
 
         ```
         poetry env use $(which python3)
         ```
 
-    6. Install the software dependencies from `poetry.lock`.
+    4. Install the software dependencies from `poetry.lock`.
 
         ```
         poetry install
         ```
 
-    7. Activate the Python virtual environment.
+    5. Activate the Python virtual environment.
 
         ```
         poetry shell
         ```
 
-    8. Run the test plugin.
+=== "Setuptools"
 
+    1. Create [pyproject.toml](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html).
+
+    2. Configure `pyproject.toml` metadata
+
+        ```toml
+        [build-system]
+        requires = ["setuptools>=61.0", "setuptools-scm", "wheel"]
+        build-backend = "setuptools.build_meta"
+
+        [project]
+        name = "arcaflow-plugin-template-python"              <-
+        description = "My plugin description"
+        readme = "README.md"
+        requires-python = ">=3.9"
+        keywords = ["one", "two"]
+        license = {text = "Apache-2.0+GPL-2.0-only"}
+        classifiers = [
+            "Programming Language :: Python :: 3",
+        ]
+        dependencies = [
+            "arcaflow-plugin-sdk"
+            'importlib-metadata; python_version<"3.8"',
+        ]
+        dynamic = ["version", "readme"]
+
+        [tool.setuptools.dynamic]
+        version = { attr = "arcaflow-plugin-template-python.0.1.0}
+        readme = {file = ["REAMDE.md"]}
         ```
-        python example_plugin.py -f example.yaml
+
+    3. Rename the Python project by changing the value of `pyproject.project.name`
+
+        For example,
+            ```toml
+            [project]
+            name = "moonshot-plugin-project"
+            ```
+
+    4. Create a [virtualenv](https://virtualenv.pypa.io/en/latest/) in your project directory using the following command, replacing your Python call.
+
+        ```shell
+        python -m venv .venv
         ```
 
-    9.  Run the unit tests.
+    5. Activate the Python virtual environment.
 
-        ```
-        python3 test_example_plugin.py
-        ```
-
-    10. Generate a JSON schema.
-
-        ```
-        python3 example_plugin.py --json-schema input >example.schema.json
+        ```shell
+        source .venv/bin/activate
         ```
 
-        If you are using the [YAML plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), add the following line to the top of your config file for code completion.
+    6. Install Python project dependencies
 
+        ```shell
+        pip install -r requirements.txt
         ```
-        # yaml-language-server: $schema=example.schema.json
-        ```
 
-    11. Copy and customize the [Dockerfile](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/Dockerfile) from the example repository.
+#### Validate Working Environment
 
-    12.  Set up your CI/CD system as you see fit.
+1. Run the test plugin.
+
+    ```
+    python3 example_plugin.py -f example.yaml
+    ```
+
+2.  Run the unit tests.
+
+    ```
+    python3 test_example_plugin.py
+    ```
+
+3.  Generate a JSON schema.
+
+    ```
+    python3 example_plugin.py --json-schema input >example.schema.json
+    ```
+
+    If you are using the [YAML plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), add the following line to the top of your config file for code completion.
+
+    ```
+    # yaml-language-server: $schema=example.schema.json
+    ```
+
+4.  Copy and customize the [Dockerfile](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/Dockerfile) from the example repository.
+
+5.   Set up your CI/CD system as you see fit.
 
 === "Using pip"
 
@@ -239,56 +304,106 @@ First, you will have to set up your environment.
 Now you are ready to start hacking away at your plugin!
 
 
-## Publishing your Plugin Package to PyPi
+## Publishing your Plugin Package
 
 Create an [API token with your PyPi user account](https://pypi.org/help/#apitoken), and save it in your favorite secrets manager.
 
-Add your PyPi token to the Poetry configuration file.
+[Test PyPi](https://test.pypi.org/) is intended for trying out process of publishing your package. Register an account, and save your username and password to the following environment variables.
 
 ```shell
-poetry config pypi-token.<any name> <PYPI API TOKEN>
+export TESTPYPI_USERNAME=<test pypi username>
+export TESTPYPI_PASSWORD=<test pypi password>
 ```
 
-Alternatively, you can use environment variables to provide your PyPi credentials.
+=== "Poetry"
+
+     Add your PyPi token to the Poetry configuration file.
+
+     ```shell
+     poetry config pypi-token.<any name> <PYPI API TOKEN>
+     ```
+
+     Alternatively, you can use environment variables to provide your PyPi credentials.
+
+     ```shell
+     export POETRY_PYPI_TOKEN_PYPI=my-token
+     export POETRY_HTTP_BASIC_PYPI_USERNAME=<username>
+     export POETRY_HTTP_BASIC_PYPI_PASSWORD=<password>
+     ```
+
+     Generate distribution archives (build) ([at the moment, only pure python wheels are supported](https://python-poetry.org/docs/cli/#build)).
+
+     ```shell
+     poetry build
+     ```
+
+     Check the results of a publish dry run are successful.
+
+     ```shell
+     poetry publish --dry-run
+
+     # Publishing arcaflow-plugin-template-python (0.1.0) to PyPI
+     # - Uploading arcaflow_plugin_template_python-0.1.0-py3-none-any.whl 100%
+     # - Uploading arcaflow_plugin_template_python-0.1.0.tar.gz 100%
+     ```
+
+     Upload the distribution archives (publish)!
+
+     ```shell
+     poetry publish
+
+     # Publishing arcaflow-plugin-template-python (0.1.0) to PyPI
+     # - Uploading arcaflow_plugin_template_python-0.1.0-py3-none-any.whl 100%
+     # - Uploading arcaflow_plugin_template_python-0.1.0.tar.gz 100%
+     ```
+
+     Alternatively, build and publish in one command.
+
+     ```shell
+     poetry publish --build
+     ```
+
+=== "Without Poetry"
+
+Change into the project's root directory.
+
+Install [build](https://github.com/pypa/build) and [twine](https://github.com/pypa/build).
 
 ```shell
-export POETRY_PYPI_TOKEN_PYPI=my-token
-export POETRY_HTTP_BASIC_PYPI_USERNAME=<username>
-export POETRY_HTTP_BASIC_PYPI_PASSWORD=<password>
+python3 -m pip install --upgrade build twine
 ```
 
-Build the package ([at the moment, only pure python wheels are supported](https://python-poetry.org/docs/cli/#build)).
+Generate distribution archives.
 
 ```shell
-poetry build
+python -m build
 ```
 
-Check the results of a publish dry run are successful.
+You should see the `dist` directory at your project's root, with archive files.
 
 ```shell
-poetry publish --dry-run
-
-# Publishing arcaflow-plugin-template-python (0.1.0) to PyPI
-# - Uploading arcaflow_plugin_template_python-0.1.0-py3-none-any.whl 100%
-# - Uploading arcaflow_plugin_template_python-0.1.0.tar.gz 100%
+dist/
+├── example_package_YOUR_USERNAME_HERE-0.0.1-py3-none-any.whl
+└── example_package_YOUR_USERNAME_HERE-0.0.1.tar.gz
 ```
 
-Publish!
+Upload distribution archives.
 
-```shell
-poetry publish
-
-# Publishing arcaflow-plugin-template-python (0.1.0) to PyPI
-# - Uploading arcaflow_plugin_template_python-0.1.0-py3-none-any.whl 100%
-# - Uploading arcaflow_plugin_template_python-0.1.0.tar.gz 100%
 ```
+python -m twine upload --repository testpypi --username=$TESTPYPI_USERNAME --password=$TESTPYPI_PASSWORD dist/*
 
-Alternatively, build and publish in one command.
+# Uploading distributions to
+# https://test.pypi.org/legacy/
+# Uploading
+# arcaflow_plugin_template_python-0.1.0-py3-none-any.whl
+# 100% ━━━━━━━━━━━━ 9.1/9.1 kB • 00:00 • 3.7 MB/s
+# Uploading
+# arcaflow_plugin_template_python-0.1.0.tar.gz
+# 100% ━━━━━━━━━━━━ 8.5/8.5 kB • 00:00 • 1.5 MB/s
 
-```shell
-poetry publish --build
+# View at:
+# https://test.pypi.org/project/arcaflow-plugin-template-python/0.1.0/
 ```
-
 
 ## Creating your plugin the easy way
 
