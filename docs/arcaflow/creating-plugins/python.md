@@ -1,11 +1,10 @@
 # Creating plugins with Python
 
-If you want to create an Arcaflow plugin in Python, you will need four things:
+If you want to create an Arcaflow plugin in Python, you will need tree things:
 
 1. A container engine that can build images
 2. Python 3.9+ ([PyPy](https://www.pypy.org/) is supported)
 3. The [Python SDK for Arcaflow plugins](https://github.com/arcalot/arcaflow-plugin-sdk-python)
-4. [Poetry 1.2+](https://github.com/python-poetry/poetry)
 
 The easiest way is to start from the [template repository for Python plugins](https://github.com/arcalot/arcaflow-plugin-template-python), but starting from scratch is also fully supported.
 
@@ -20,7 +19,7 @@ First, you will have to set up your environment.
 1. Ensure your `python3` executable is at least version 3.9.
 
     ```
-    python --version
+    python3 --version
     # Python 3.9.15
     ```
 
@@ -110,7 +109,7 @@ First, you will have to set up your environment.
       version: '3.2'
       services:
       plugin:
-      image: ghcr.io/arcalot/arcaflow-plugin-template    <-
+      image: arcaflow-plugin-template    <-
       build: .
       volumes:
       - source: ./example.yaml
@@ -165,7 +164,7 @@ First, you will have to set up your environment.
         poetry shell
         ```
 
-=== "Setuptools"
+=== "Without Poetry"
 
     1. Create [pyproject.toml](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html).
 
@@ -217,7 +216,7 @@ First, you will have to set up your environment.
         source .venv/bin/activate
         ```
 
-    6. Install Python project dependencies
+    6. Install Python project dependencies.
 
         ```shell
         pip install -r requirements.txt
