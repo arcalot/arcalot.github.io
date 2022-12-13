@@ -10,43 +10,41 @@ The easiest way is to start from the [template repository for Python plugins](ht
 
 Before you start please familiarize yourself with the [Arcaflow type system](../concepts/typing.md).
 
-## Setting up your environment
+## Poetry Quickstart
 
-First, you will have to set up your environment.
-
-### Install Poetry
+### Installation
 
 1. Ensure your `python3` executable is at least version 3.9.
 
     ```
-    python3 --version
-    # Python 3.9.15
+    $ python3 --version
+    Python 3.9.15
     ```
 
 2. If it is not, install Python 3.9.
 
     === "RHEL, CentOS, Fedora"
         ```
-        dnf -y install python3.9
+        $ dnf -y install python3.9
         ```
 
     === "Ubuntu"
 
         ```
-        apt-get -y install python3.9
+        $ apt-get -y install python3.9
         ```
 
 3. Alias the Python 3.9 executable to `python3` installed by your system package manager.
 
     ```
-    alias python3="python3.9"
+    $ alias python3="python3.9"
     ```
 
 4. Install Poetry using one of their [supported methods](https://python-poetry.org/docs/#installation) for your environment.
 
     For example, on a Linux distribution
     ```
-    curl -sSL https://install.python-poetry.org | python3 -
+    $ curl -sSL https://install.python-poetry.org | python3 -
     ```
 
     Make sure to install Poetry into __exactly one Python executable__ on your
@@ -57,9 +55,119 @@ First, you will have to set up your environment.
 5. Verify your Poetry version.
 
     ```shell
-    poetry --version
-    # Poetry (version 1.2.2)
+    $ poetry --version
+    Poetry (version 1.2.2)
     ```
+
+### Python Project Setup
+
+#### [New Project](https://python-poetry.org/docs/master/basic-usage/)
+
+Create your Python Project, `plugin-project`, and change directory into the project root. You should see a directory structure similar to this with the following files.
+
+```
+$ poetry new plugin-project
+Created package plugin_project in plugin-project
+
+$ tree plugin-project
+plugin-project
+├── plugin_project
+│   └── __init__.py
+├── pyproject.toml
+├── README.md
+└── tests
+    └── __init__.py
+
+2 directories, 4 files
+
+$ cd plugin-project
+```
+
+Ensure `python3` is at least 3.9.
+
+```
+$ python3 --version
+Python 3.9.15
+```
+
+If `python3` is at least version 3.9, then determine its path.
+
+```
+$ which python3
+/usr/bin/python3
+```
+
+Set Poetry to use your Python that is at least 3.9.
+
+```
+poetry env use /usr/bin/python3
+```
+
+Alternativley,
+
+```
+poetry env use $(which python3)
+```
+
+Check that your `pyproject.toml` is using at least Python 3.9 by looking for the following line.
+
+```toml
+[tool.poetry.dependencies]
+python = "^3.9"
+```
+
+Add the [arcaflow plugin sdk for python](https://github.com/arcalot/arcaflow-plugin-sdk-python) as a software dependency for your Python project.
+
+```
+poetry add arcaflow-plugin-sdk-python
+```
+
+You should now have a `poetry.lock` file in your project root. Poetry maintains the state of your `pyproject.toml`, and its exact software dependencies as hashes in the `poetry.lock` file.
+
+
+
+#### Initializing a pre-existing project
+
+Assuming your source repository is named `plugin-project`, clone your repository onto your local file system.
+
+Change directory into your project, and create the plugin module directory, `plugin_project`, and the `tests` directory.
+
+```
+$ cd plugin-project
+$ mkdir {plugin_project,tests}
+```
+
+Follow Poetry's command line interface wizard's prompts to create your `pyproject.toml` by adding configuration metadata, build system requirements, module dependencies, and development dependencies. Don't forget to add the Arcaflow Python Plugin SDK as a software dependency, `arcaflow-plugin-sdk`.
+
+```
+$ poetry init
+```
+
+#### Validate your Poetry environment
+
+Change into the root directory of your plugin project.
+
+Start your project's Python virtual environment with Poetry.
+
+```
+$ poetry shell
+Spawning shell within ~/.cache/pypoetry/virtualenvs/plugin-project-8vZa8fhA-py3.9
+```
+
+Start an interactive Python session, and import `arcaflow_plugin_sdk`.
+
+```
+$ python3
+Python 3.9.15 (main, Aug  9 2022, 13:32:42) [GCC 12.1.1 20220507 (Red Hat 12.1.1-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import arcaflow_plugin_sdk
+```
+
+If there are no errors, then the plugin sdk has been successfully imported.
+
+## Setting up your environment
+
+First, you will have to set up your environment.
 
 ### Create the Plugin Package
 
@@ -72,7 +180,7 @@ First, you will have to set up your environment.
 4. Plugin starting directory structure.
 
     ```
-    tree .
+    $ tree .
     .
     └── arcaflow-plugin-template-python        <- GitHub repo
     ├── arcaflow_plugin_template_python    <- Python module
@@ -149,19 +257,19 @@ First, you will have to set up your environment.
     3. Set this package's Python virtual environment to use your Python 3.9.
 
         ```
-        poetry env use $(which python3)
+        $ poetry env use $(which python3)
         ```
 
     4. Install the software dependencies from `poetry.lock`.
 
         ```
-        poetry install
+        $ poetry install
         ```
 
     5. Activate the Python virtual environment.
 
         ```
-        poetry shell
+        $ poetry shell
         ```
 
 === "Without Poetry"
@@ -207,19 +315,19 @@ First, you will have to set up your environment.
     4. Create a [virtualenv](https://virtualenv.pypa.io/en/latest/) in your project directory using the following command, replacing your Python call.
 
         ```shell
-        python -m venv .venv
+        $ python -m venv .venv
         ```
 
     5. Activate the Python virtual environment.
 
         ```shell
-        source .venv/bin/activate
+        $ source .venv/bin/activate
         ```
 
     6. Install Python project dependencies.
 
         ```shell
-        pip install -r requirements.txt
+        $ pip install -r requirements.txt
         ```
 
 #### Validate Working Environment
@@ -227,19 +335,19 @@ First, you will have to set up your environment.
 1. Run the test plugin.
 
     ```
-    python3 example_plugin.py -f example.yaml
+    $ python3 example_plugin.py -f example.yaml
     ```
 
 2.  Run the unit tests.
 
     ```
-    python3 test_example_plugin.py
+    $ python3 test_example_plugin.py
     ```
 
 3.  Generate a JSON schema.
 
     ```
-    python3 example_plugin.py --json-schema input >example.schema.json
+    $ python3 example_plugin.py --json-schema input >example.schema.json
     ```
 
     If you are using the [YAML plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), add the following line to the top of your config file for code completion.
@@ -319,90 +427,90 @@ export TESTPYPI_PASSWORD=<test pypi password>
      Add your PyPi token to the Poetry configuration file.
 
      ```shell
-     poetry config pypi-token.<any name> <PYPI API TOKEN>
+     $ poetry config pypi-token.<any name> <PYPI API TOKEN>
      ```
 
      Alternatively, you can use environment variables to provide your PyPi credentials.
 
      ```shell
-     export POETRY_PYPI_TOKEN_PYPI=my-token
-     export POETRY_HTTP_BASIC_PYPI_USERNAME=<username>
-     export POETRY_HTTP_BASIC_PYPI_PASSWORD=<password>
+     $ export POETRY_PYPI_TOKEN_PYPI=my-token
+     $ export POETRY_HTTP_BASIC_PYPI_USERNAME=<username>
+     $ export POETRY_HTTP_BASIC_PYPI_PASSWORD=<password>
      ```
 
      Generate distribution archives (build) ([at the moment, only pure python wheels are supported](https://python-poetry.org/docs/cli/#build)).
 
      ```shell
-     poetry build
+     $ poetry build
      ```
 
      Check the results of a publish dry run are successful.
 
      ```shell
-     poetry publish --dry-run
+     $ poetry publish --dry-run
 
-     # Publishing arcaflow-plugin-template-python (0.1.0) to PyPI
-     # - Uploading arcaflow_plugin_template_python-0.1.0-py3-none-any.whl 100%
-     # - Uploading arcaflow_plugin_template_python-0.1.0.tar.gz 100%
+     Publishing arcaflow-plugin-template-python (0.1.0) to PyPI
+     - Uploading arcaflow_plugin_template_python-0.1.0-py3-none-any.whl 100%
+     - Uploading arcaflow_plugin_template_python-0.1.0.tar.gz 100%
      ```
 
      Upload the distribution archives (publish)!
 
      ```shell
-     poetry publish
+     $ poetry publish
 
-     # Publishing arcaflow-plugin-template-python (0.1.0) to PyPI
-     # - Uploading arcaflow_plugin_template_python-0.1.0-py3-none-any.whl 100%
-     # - Uploading arcaflow_plugin_template_python-0.1.0.tar.gz 100%
+     Publishing arcaflow-plugin-template-python (0.1.0) to PyPI
+     - Uploading arcaflow_plugin_template_python-0.1.0-py3-none-any.whl 100%
+     - Uploading arcaflow_plugin_template_python-0.1.0.tar.gz 100%
      ```
 
      Alternatively, build and publish in one command.
 
      ```shell
-     poetry publish --build
+     $ poetry publish --build
      ```
 
 === "Without Poetry"
 
-Change into the project's root directory.
+     Change into the project's root directory.
 
-Install [build](https://github.com/pypa/build) and [twine](https://github.com/pypa/build).
+     Install [build](https://github.com/pypa/build) and [twine](https://github.com/pypa/build).
 
-```shell
-python3 -m pip install --upgrade build twine
-```
+     ```shell
+     $ python3 -m pip install --upgrade build twine
+     ```
 
-Generate distribution archives.
+     Generate distribution archives.
 
-```shell
-python -m build
-```
+     ```shell
+     $ python3 -m build
+     ```
 
-You should see the `dist` directory at your project's root, with archive files.
+     You should see the `dist` directory at your project's root, with archive files.
 
-```shell
-dist/
-├── example_package_YOUR_USERNAME_HERE-0.0.1-py3-none-any.whl
-└── example_package_YOUR_USERNAME_HERE-0.0.1.tar.gz
-```
+     ```shell
+     dist/
+     ├── example_package_YOUR_USERNAME_HERE-0.0.1-py3-none-any.whl
+     └── example_package_YOUR_USERNAME_HERE-0.0.1.tar.gz
+     ```
 
-Upload distribution archives.
+     Upload distribution archives.
 
-```
-python -m twine upload --repository testpypi --username=$TESTPYPI_USERNAME --password=$TESTPYPI_PASSWORD dist/*
+     ```
+     $ python3 -m twine upload --repository testpypi --username=$TESTPYPI_USERNAME --password=$TESTPYPI_PASSWORD dist/*
 
-# Uploading distributions to
-# https://test.pypi.org/legacy/
-# Uploading
-# arcaflow_plugin_template_python-0.1.0-py3-none-any.whl
-# 100% ━━━━━━━━━━━━ 9.1/9.1 kB • 00:00 • 3.7 MB/s
-# Uploading
-# arcaflow_plugin_template_python-0.1.0.tar.gz
-# 100% ━━━━━━━━━━━━ 8.5/8.5 kB • 00:00 • 1.5 MB/s
+     Uploading distributions to
+     https://test.pypi.org/legacy/
+     Uploading
+     arcaflow_plugin_template_python-0.1.0-py3-none-any.whl
+     100% ━━━━━━━━━━━━ 9.1/9.1 kB • 00:00 • 3.7 MB/s
+     Uploading
+     arcaflow_plugin_template_python-0.1.0.tar.gz
+     100% ━━━━━━━━━━━━ 8.5/8.5 kB • 00:00 • 1.5 MB/s
 
-# View at:
-# https://test.pypi.org/project/arcaflow-plugin-template-python/0.1.0/
-```
+     View at:
+     https://test.pypi.org/project/arcaflow-plugin-template-python/0.1.0/
+     ```
 
 ## Creating your plugin the easy way
 
