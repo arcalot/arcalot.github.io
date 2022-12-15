@@ -15,6 +15,7 @@ nav:
           - The plugin protocol: arcaflow/concepts/plugin-protocol.md
       - Creating plugins:
           - Python: arcaflow/creating-plugins/python.md
+          - Release: arcaflow/creating-plugins/release.md
 extra:
   social:
     - icon: fontawesome/brands/github
