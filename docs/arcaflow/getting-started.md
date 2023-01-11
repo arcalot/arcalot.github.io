@@ -52,29 +52,34 @@ input.sysbench_cpumaxprime
 input.elastic_username
 input.elastic_host
 end
-input.sysbench_threads-->steps.sysbench
-steps.sysbench-->steps.sysbench.outputs.success
 steps.metadata-->steps.metadata.outputs.success
+steps.metadata-->steps.metadata.outputs.error
+input.elastic_password-->steps.opensearch
+steps.opensearch.outputs.success-->output
+steps.pcp.outputs.success-->steps.opensearch
+steps.pcp.outputs.success-->output
+input.pmlogger_interval-->steps.pcp
+steps.sysbench.outputs.success-->steps.opensearch
 steps.sysbench.outputs.success-->output
-steps.sysbench.outputs.success-->steps.elasticsearch
-input.sysbench_events-->steps.sysbench
-input.elastic_password-->steps.elasticsearch
+steps.metadata.outputs.success-->steps.opensearch
+steps.metadata.outputs.success-->output
+input.elastic_index-->steps.opensearch
 input.sysbench_runtime-->steps.pcp
 input.sysbench_runtime-->steps.sysbench
-input.elastic_index-->steps.elasticsearch
-input.pmlogger_interval-->steps.pcp
-steps.pcp.outputs.success-->steps.elasticsearch
-steps.pcp.outputs.success-->output
-steps.pcp-->steps.pcp.outputs.success
-steps.metadata.outputs.success-->steps.elasticsearch
-steps.metadata.outputs.success-->output
+input.elastic_host-->steps.opensearch
+input.elastic_username-->steps.opensearch
+input.sysbench_events-->steps.sysbench
 input.sysbench_cpumaxprime-->steps.sysbench
-input.elastic_username-->steps.elasticsearch
-input.elastic_host-->steps.elasticsearch
-steps.elasticsearch-->steps.elasticsearch.outputs.success
+steps.opensearch-->steps.opensearch.outputs.success
+steps.opensearch-->steps.opensearch.outputs.error
+input.sysbench_threads-->steps.sysbench
+steps.pcp-->steps.pcp.outputs.error
+steps.pcp-->steps.pcp.outputs.success
+steps.sysbench-->steps.sysbench.outputs.error
+steps.sysbench-->steps.sysbench.outputs.success
 ```
 
-This example workflow expects **input** parameters that are passed down to the plugins, in this case to the **PCP**, **sysbench**, and **elasticsearch** plugins. These parameters determine the details of the actions that those plugins will perform. The **metadata** plugin used here requires no inputs, as evidenced in the workflow diagram. The **success** outputs of the PCP, sysbench, and metadata plugins are then directed both to the elasticsearch plugin and to the **output** of the workflow.
+This example workflow expects **input** parameters that are passed down to the plugins, in this case to the **PCP**, **sysbench**, and **opensearch** plugins. These parameters determine the details of the actions that those plugins will perform. The **metadata** plugin used here requires no inputs, as evidenced in the workflow diagram. The **success** outputs of the PCP, sysbench, and metadata plugins are then directed to the elasticsearch plugin, and and all success outputs are directed to the **output** of the workflow.
  
 *Note: The complete example workflow definition is below in the [Using and Contributing Level 2](#level-2) section.*
 
@@ -106,12 +111,12 @@ $ cd arcaflow-engine
 $ go run cmd/arcaflow/main.go -input ${WFPATH}/input.yaml -config ${WFPATH}/config.yaml -context ${WFPATH}
 ```
 
-The `config.yaml` file is set for debug output, so you'll get a lot returned to the terminal (including the mermaid code mentioned above). This workflow is set to simply return the output of the various plugins, so in the end you'll get that formatted content dumped to the terminal.
+The [`config.yaml`](https://raw.githubusercontent.com/arcalot/arcaflow-workflows/main/example-workflow/config.yaml) file is set for debug output, so you'll get a lot returned to the terminal (including the mermaid code mentioned above). This workflow is set to simply return the output of the various plugins, so in the end you'll get that formatted content dumped to the terminal.
 
 ### Level 1
 ***Page - Advanced Workflow User***
 
-The next layer of sophistication is modifying the test parameters, which are in the input.yaml file referenced in the above command. For our simple workflow here, you have parameters to adjust how the CPU stress test is performed and to adjust the resolution of PCP's data collection. You can freely adjust these parameters to your needs without needing to change anything about the workflow itself. This requires some understanding of what the underlying sysbench and PCP tools do, and of course caution should be taken since this test will apply load to the system where it is run.
+The next layer of sophistication is modifying the test parameters, which are in the [`input.yaml`](https://raw.githubusercontent.com/arcalot/arcaflow-workflows/main/example-workflow/input-example.yaml) file referenced in the above command. For our simple workflow here, there are parameters to adjust how the CPU stress test is performed and to adjust the resolution of PCP's data collection. You can freely adjust these parameters to your needs without needing to change anything about the workflow itself. This requires some understanding of what the underlying sysbench and PCP tools do, and of course caution should be taken since this test will apply load to the system where it is run.
  
 The example `input.yaml` file looks like this:
 ```yaml
@@ -129,9 +134,9 @@ elastic_index: foo
 ### Level 2
 ***Squire - Workflow Creator***
 
-So you're more adventurous and want to change/author workflows? This is the layer at which we think most of our technical users will spend a majority of their effort. Our goals of packaging, version controlling, and shipping domain expertise are primarily facilitated here. A workflow author dreams up a series of tests with various loops and parallelizations they want to run, determines how to collect and transport data and metadata, and then bundles this all into a workflow that can be shared as easily as the one presented in the examples above. A workflow user just needs the engine and your workflow file. That's it.
+So you're more adventurous and want to change or author workflows? This is the layer at which we think most of our technical users will spend a majority of their effort. Our goals of packaging, version controlling, and shipping domain expertise are primarily facilitated here. A workflow author dreams up a series of tests with various loops and parallelizations they want to run, determines how to collect and transport data and metadata, and then bundles this all into a workflow that can be shared as easily as the one presented in the examples above. A workflow user just needs the engine and your [`workflow.yaml`](https://raw.githubusercontent.com/arcalot/arcaflow-workflows/main/example-workflow/workflow.yaml) file. That's it.
 
-The workflow file has an **input** section where it defines the workflow schema. The workflow author can get creative here in how they want to represent the available parameters to the user, and there are mechanics for self-documentation when good practices are followed with schema metadata. Then there is a **steps** section, which defines the plugins and their relationships. In the reference examples here, we show some data passing both from the input section to the plugins and between plugins where outputs are passed to the elasticsearch plugin (we have another [example with uperf](https://github.com/arcalot/arcaflow-workflows/tree/main/network-streaming-performance-k8s/) that gets more complicated with kubernetes and data passing, once you're ready to dig in more). Then finally the **output** section defines what the workflow will return to the user.
+The workflow file has an **input** section where it defines the workflow schema. The workflow author can get creative here in how they want to represent the available parameters to the user or set defaults, and there are mechanics for self-documentation when good practices are followed with schema metadata. Then there is a **steps** section, which defines the plugins and their relationships. In the reference examples here, we show some data passing both from the input section to the plugins and between plugins where outputs are passed to the elasticsearch plugin (we have another [example with uperf](https://github.com/arcalot/arcaflow-workflows/tree/main/network-streaming-performance-k8s/) that gets more complicated with kubernetes and data passing, once you're ready to dig in more). Then finally the **output** section defines what the workflow will return to the user.
 
 The complete workflow definition for the example above looks like this:
 ```yaml
@@ -197,25 +202,24 @@ input:
             type_id: string
 steps:
   pcp:
-    plugin: quay.io/dustinblack/arcaflow-plugin-pcp-test:latest
+    plugin: quay.io/arcalot/arcaflow-plugin-pcp:0.2.0
     step: start-pcp
     input:
       pmlogger_interval: !expr $.input.pmlogger_interval
       run_duration: !expr $.input.sysbench_runtime
   sysbench:
-    plugin: quay.io/arcalot/arcaflow-plugin-sysbench:latest
+    plugin: quay.io/arcalot/arcaflow-plugin-sysbench:0.1.0
     step: sysbenchcpu
     input:
-      operation: cpu
       threads: !expr $.input.sysbench_threads
       events: !expr $.input.sysbench_events
-      cpumaxprime: !expr $.input.sysbench_cpumaxprime
+      cpu-max-prime: !expr $.input.sysbench_cpumaxprime
       time: !expr $.input.sysbench_runtime
   metadata:
-    plugin: quay.io/arcalot/arcaflow-plugin-metadata:latest
+    plugin: quay.io/arcalot/arcaflow-plugin-metadata:0.1.0
     input: {}
-  elasticsearch:
-    plugin: quay.io/arcalot/arcaflow-plugin-elasticsearch:latest
+  opensearch:
+    plugin: quay.io/arcalot/arcaflow-plugin-opensearch:0.1.0
     input:
       url: !expr $.input.elastic_host
       username: !expr $.input.elastic_username
@@ -229,14 +233,15 @@ output:
   pcp: !expr $.steps.pcp.outputs.success
   sysbench: !expr $.steps.sysbench.outputs.success
   metadata: !expr $.steps.metadata.outputs.success
+  opensearch: !expr $.steps.opensearch.outputs.success
 ```
 
 ### Level 3
 ***Knight - Plugin Author***
 
-So now you want to build plugins or add features to existing plugins? Great! Welcome to the [Arcalot Round Table](https://github.com/arcalot/arcalot-round-table)! We provide Software Development Kits (SDKs) for [Python](https://github.com/arcalot/arcaflow-plugin-sdk-python) and [Golang](https://github.com/arcalot/arcaflow-plugin-sdk-go) to get you started. The main thing you need to understand is that a plugin is expected to define and adhere to its schemas, so the SDK enforces strict typing, which can be a little strange at first for a Python developer. Optimally, a plugin follows the [Unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy#:~:text=The%20Unix%20philosophy%20is%20documented,%2C%20as%20yet%20unknown%2C%20program.) of *do one thing and do it well*, and a plugin should not be created in an opinionated way.
+So now you want to build plugins or add features to existing plugins? Great! Welcome to the [Arcalot Round Table](https://github.com/arcalot/arcalot-round-table)! We provide Software Development Kits (SDKs) for [Python](https://github.com/arcalot/arcaflow-plugin-sdk-python) and [Golang](https://github.com/arcalot/arcaflow-plugin-sdk-go) to get you started. The main thing you need to understand is that a plugin is expected to define and adhere to its schemas, so the SDK enforces strict typing, which can be a little strange at first for a Python developer. Optimally, a plugin follows the [Unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy#:~:text=The%20Unix%20philosophy%20is%20documented,%2C%20as%20yet%20unknown%2C%20program.) of *do one thing and do it well*, and a plugin should not be created in an opinionated way -- Leave the opinions for *how* a plugin's actions will run to the workflow definition as much as possible.
 
-When creating a plugin, you should consider how you will expose all parameters and configuration values via a single schema, and collect all output similarly in a single schema. The plugins provide the API endpoints for functions or actions, and workflows glue together those endpoints to make use of the data in an opinionated way. Sometimes creating a schema for an existing tool is relatively [easy](https://github.com/arcalot/arcaflow-plugin-smallfile), sometimes it is pretty [involved](https://github.com/arcalot/arcaflow-plugin-uperf). You can start digging into the technical details more in the [Concepts](https://arcalot.io/arcaflow/concepts/workflows/) and [Plugins](https://arcalot.io/arcaflow/creating-plugins/python/) sections of the documentation.
+When creating a plugin, you should consider how you will expose all parameters and configuration values via a single schema, and collect all output similarly in a single schema. The plugins provide the API endpoints for functions or actions, and workflows glue together those endpoints to make use of the data in an opinionated way. Sometimes creating a schema for a plugin wrapping an existing tool is relatively [simple](https://github.com/arcalot/arcaflow-plugin-smallfile), sometimes it is pretty [involved](https://github.com/arcalot/arcaflow-plugin-uperf). You can start digging into the technical details more in the [Concepts](https://arcalot.io/arcaflow/concepts/workflows/) and [Plugins](https://arcalot.io/arcaflow/creating-plugins/python/) sections of the documentation.
 
 
 ### Level 4
