@@ -2,42 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://arcalot.io/</loc>
-         <lastmod>2022-12-02</lastmod>
+         <lastmod>2023-01-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/</loc>
-         <lastmod>2022-12-02</lastmod>
+         <lastmod>2023-01-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/getting-started/</loc>
-         <lastmod>2022-12-02</lastmod>
+         <lastmod>2023-01-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/concepts/plugin-protocol/</loc>
-         <lastmod>2022-12-02</lastmod>
+         <lastmod>2023-01-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/concepts/typing/</loc>
-         <lastmod>2022-12-02</lastmod>
+         <lastmod>2023-01-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/concepts/workflows/</loc>
-         <lastmod>2022-12-02</lastmod>
+         <lastmod>2023-01-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/creating-plugins/python/</loc>
-         <lastmod>2022-12-02</lastmod>
+         <lastmod>2023-01-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://arcalot.io/arcalog/</loc>
-         <lastmod>2022-12-02</lastmod>
+         <lastmod>2023-01-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

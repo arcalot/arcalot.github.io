@@ -10,8 +10,14 @@
       
         <link rel="canonical" href="https://arcalot.io/arcaflow/getting-started/">
       
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../concepts/workflows/">
+      
       <link rel="icon" href="../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
     
     
       
@@ -19,11 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.975780f9.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
-        
       
       
 
@@ -108,8 +113,6 @@
       <form class="md-header__option" data-md-component="palette">
         
           
-          
-          
           <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
@@ -117,8 +120,6 @@
             </label>
           
         
-          
-          
           
           <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
           
@@ -163,7 +164,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -325,8 +326,9 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
       
         
@@ -517,8 +519,11 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" checked>
       
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
       
       
         
@@ -530,7 +535,7 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_3">
+        <label class="md-nav__link" for="__nav_3_3" tabindex="0" aria-expanded="false">
           Concepts
           <span class="md-nav__icon md-icon"></span>
         </label>
@@ -602,8 +607,11 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" checked>
       
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
       
       
         
@@ -611,7 +619,7 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_4">
+        <label class="md-nav__link" for="__nav_3_4" tabindex="0" aria-expanded="false">
           Creating plugins
           <span class="md-nav__icon md-icon"></span>
         </label>
@@ -786,10 +794,9 @@
                 
                   
 
-  <a href="https://github.com/arcalot/arcalot.github.io/edit/main/docs/arcaflow/getting-started.md" title="Edit this page" class="md-content__button md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+  
+  
+
 
 
 <h1 id="arcaflow-getting-started-guide">Arcaflow Getting Started Guide</h1>
@@ -829,27 +836,32 @@ input.sysbench_cpumaxprime
 input.elastic_username
 input.elastic_host
 end
-input.sysbench_threads--&gt;steps.sysbench
-steps.sysbench--&gt;steps.sysbench.outputs.success
 steps.metadata--&gt;steps.metadata.outputs.success
+steps.metadata--&gt;steps.metadata.outputs.error
+input.elastic_password--&gt;steps.opensearch
+steps.opensearch.outputs.success--&gt;output
+steps.pcp.outputs.success--&gt;steps.opensearch
+steps.pcp.outputs.success--&gt;output
+input.pmlogger_interval--&gt;steps.pcp
+steps.sysbench.outputs.success--&gt;steps.opensearch
 steps.sysbench.outputs.success--&gt;output
-steps.sysbench.outputs.success--&gt;steps.elasticsearch
-input.sysbench_events--&gt;steps.sysbench
-input.elastic_password--&gt;steps.elasticsearch
+steps.metadata.outputs.success--&gt;steps.opensearch
+steps.metadata.outputs.success--&gt;output
+input.elastic_index--&gt;steps.opensearch
 input.sysbench_runtime--&gt;steps.pcp
 input.sysbench_runtime--&gt;steps.sysbench
-input.elastic_index--&gt;steps.elasticsearch
-input.pmlogger_interval--&gt;steps.pcp
-steps.pcp.outputs.success--&gt;steps.elasticsearch
-steps.pcp.outputs.success--&gt;output
-steps.pcp--&gt;steps.pcp.outputs.success
-steps.metadata.outputs.success--&gt;steps.elasticsearch
-steps.metadata.outputs.success--&gt;output
+input.elastic_host--&gt;steps.opensearch
+input.elastic_username--&gt;steps.opensearch
+input.sysbench_events--&gt;steps.sysbench
 input.sysbench_cpumaxprime--&gt;steps.sysbench
-input.elastic_username--&gt;steps.elasticsearch
-input.elastic_host--&gt;steps.elasticsearch
-steps.elasticsearch--&gt;steps.elasticsearch.outputs.success</code></pre>
-<p>This example workflow expects <strong>input</strong> parameters that are passed down to the plugins, in this case to the <strong>PCP</strong>, <strong>sysbench</strong>, and <strong>elasticsearch</strong> plugins. These parameters determine the details of the actions that those plugins will perform. The <strong>metadata</strong> plugin used here requires no inputs, as evidenced in the workflow diagram. The <strong>success</strong> outputs of the PCP, sysbench, and metadata plugins are then directed both to the elasticsearch plugin and to the <strong>output</strong> of the workflow.</p>
+steps.opensearch--&gt;steps.opensearch.outputs.success
+steps.opensearch--&gt;steps.opensearch.outputs.error
+input.sysbench_threads--&gt;steps.sysbench
+steps.pcp--&gt;steps.pcp.outputs.error
+steps.pcp--&gt;steps.pcp.outputs.success
+steps.sysbench--&gt;steps.sysbench.outputs.error
+steps.sysbench--&gt;steps.sysbench.outputs.success</code></pre>
+<p>This example workflow expects <strong>input</strong> parameters that are passed down to the plugins, in this case to the <strong>PCP</strong>, <strong>sysbench</strong>, and <strong>opensearch</strong> plugins. These parameters determine the details of the actions that those plugins will perform. The <strong>metadata</strong> plugin used here requires no inputs, as evidenced in the workflow diagram. The <strong>success</strong> outputs of the PCP, sysbench, and metadata plugins are then directed to the elasticsearch plugin, and and all success outputs are directed to the <strong>output</strong> of the workflow.</p>
 <p><em>Note: The complete example workflow definition is below in the <a href="#level-2">Using and Contributing Level 2</a> section.</em></p>
 <h2 id="using-and-contributing">Using and Contributing</h2>
 <p>The entry point for working with Arcaflow as a new user is intended to be very low. Pre-composed workflows are things you should be able to download and use with very little in terms of prerequisites, allowing you with little experience to run workflows in the same ways as domain experts.</p>
@@ -868,125 +880,125 @@ $ export WFPATH=$(pwd)/arcaflow-workflows/example-workflow
 <div class="highlight"><pre><span></span><code>$ cd arcaflow-engine
 $ go run cmd/arcaflow/main.go -input ${WFPATH}/input.yaml -config ${WFPATH}/config.yaml -context ${WFPATH}
 </code></pre></div></p>
-<p>The <code>config.yaml</code> file is set for debug output, so you&rsquo;ll get a lot returned to the terminal (including the mermaid code mentioned above). This workflow is set to simply return the output of the various plugins, so in the end you&rsquo;ll get that formatted content dumped to the terminal.</p>
+<p>The <a href="https://raw.githubusercontent.com/arcalot/arcaflow-workflows/main/example-workflow/config.yaml"><code>config.yaml</code></a> file is set for debug output, so you&rsquo;ll get a lot returned to the terminal (including the mermaid code mentioned above). This workflow is set to simply return the output of the various plugins, so in the end you&rsquo;ll get that formatted content dumped to the terminal.</p>
 <h3 id="level-1">Level 1</h3>
 <p><strong><em>Page - Advanced Workflow User</em></strong></p>
-<p>The next layer of sophistication is modifying the test parameters, which are in the input.yaml file referenced in the above command. For our simple workflow here, you have parameters to adjust how the CPU stress test is performed and to adjust the resolution of PCP&rsquo;s data collection. You can freely adjust these parameters to your needs without needing to change anything about the workflow itself. This requires some understanding of what the underlying sysbench and PCP tools do, and of course caution should be taken since this test will apply load to the system where it is run.</p>
+<p>The next layer of sophistication is modifying the test parameters, which are in the <a href="https://raw.githubusercontent.com/arcalot/arcaflow-workflows/main/example-workflow/input-example.yaml"><code>input.yaml</code></a> file referenced in the above command. For our simple workflow here, there are parameters to adjust how the CPU stress test is performed and to adjust the resolution of PCP&rsquo;s data collection. You can freely adjust these parameters to your needs without needing to change anything about the workflow itself. This requires some understanding of what the underlying sysbench and PCP tools do, and of course caution should be taken since this test will apply load to the system where it is run.</p>
 <p>The example <code>input.yaml</code> file looks like this:
-<div class="highlight"><pre><span></span><code><span class="nt">pmlogger_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
-<span class="nt">sysbench_threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w"></span>
-<span class="nt">sysbench_events</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
-<span class="nt">sysbench_cpumaxprime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12000</span><span class="w"></span>
-<span class="nt">sysbench_runtime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w"></span>
-<span class="nt">elastic_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span><span class="w"></span>
-<span class="nt">elastic_username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span><span class="w"></span>
-<span class="nt">elastic_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span><span class="w"></span>
-<span class="nt">elastic_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nt">pmlogger_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">sysbench_threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<span class="nt">sysbench_events</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="nt">sysbench_cpumaxprime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12000</span>
+<span class="nt">sysbench_runtime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<span class="nt">elastic_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
+<span class="nt">elastic_username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
+<span class="nt">elastic_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
+<span class="nt">elastic_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
 </code></pre></div></p>
 <h3 id="level-2">Level 2</h3>
 <p><strong><em>Squire - Workflow Creator</em></strong></p>
-<p>So you&rsquo;re more adventurous and want to change/author workflows? This is the layer at which we think most of our technical users will spend a majority of their effort. Our goals of packaging, version controlling, and shipping domain expertise are primarily facilitated here. A workflow author dreams up a series of tests with various loops and parallelizations they want to run, determines how to collect and transport data and metadata, and then bundles this all into a workflow that can be shared as easily as the one presented in the examples above. A workflow user just needs the engine and your workflow file. That&rsquo;s it.</p>
-<p>The workflow file has an <strong>input</strong> section where it defines the workflow schema. The workflow author can get creative here in how they want to represent the available parameters to the user, and there are mechanics for self-documentation when good practices are followed with schema metadata. Then there is a <strong>steps</strong> section, which defines the plugins and their relationships. In the reference examples here, we show some data passing both from the input section to the plugins and between plugins where outputs are passed to the elasticsearch plugin (we have another <a href="https://github.com/arcalot/arcaflow-workflows/tree/main/network-streaming-performance-k8s/">example with uperf</a> that gets more complicated with kubernetes and data passing, once you&rsquo;re ready to dig in more). Then finally the <strong>output</strong> section defines what the workflow will return to the user.</p>
+<p>So you&rsquo;re more adventurous and want to change or author workflows? This is the layer at which we think most of our technical users will spend a majority of their effort. Our goals of packaging, version controlling, and shipping domain expertise are primarily facilitated here. A workflow author dreams up a series of tests with various loops and parallelizations they want to run, determines how to collect and transport data and metadata, and then bundles this all into a workflow that can be shared as easily as the one presented in the examples above. A workflow user just needs the engine and your <a href="https://raw.githubusercontent.com/arcalot/arcaflow-workflows/main/example-workflow/workflow.yaml"><code>workflow.yaml</code></a> file. That&rsquo;s it.</p>
+<p>The workflow file has an <strong>input</strong> section where it defines the workflow schema. The workflow author can get creative here in how they want to represent the available parameters to the user or set defaults, and there are mechanics for self-documentation when good practices are followed with schema metadata. Then there is a <strong>steps</strong> section, which defines the plugins and their relationships. In the reference examples here, we show some data passing both from the input section to the plugins and between plugins where outputs are passed to the elasticsearch plugin (we have another <a href="https://github.com/arcalot/arcaflow-workflows/tree/main/network-streaming-performance-k8s/">example with uperf</a> that gets more complicated with kubernetes and data passing, once you&rsquo;re ready to dig in more). Then finally the <strong>output</strong> section defines what the workflow will return to the user.</p>
 <p>The complete workflow definition for the example above looks like this:
-<div class="highlight"><pre><span></span><code><span class="nt">input</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span><span class="w"></span>
-<span class="w">  </span><span class="nt">objects</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">RootObject</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span><span class="w"></span>
-<span class="w">      </span><span class="nt">properties</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">pmlogger_interval</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The logger collection interval for PCP pmlogger</span><span class="w"></span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCP pmlogger collection interval</span><span class="w"></span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span><span class="w"></span>
-<span class="w">        </span><span class="nt">sysbench_threads</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The number of threads sysbench will run</span><span class="w"></span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench threads</span><span class="w"></span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span><span class="w"></span>
-<span class="w">        </span><span class="nt">sysbench_events</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The number of events sysbench will run</span><span class="w"></span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench events</span><span class="w"></span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span><span class="w"></span>
-<span class="w">        </span><span class="nt">sysbench_cpumaxprime</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The upper limit of the number of prime numbers generated</span><span class="w"></span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench cpu max primes</span><span class="w"></span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span><span class="w"></span>
-<span class="w">        </span><span class="nt">sysbench_runtime</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The total runtime in seconds for the sysbench tests</span><span class="w"></span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench runtime seconds</span><span class="w"></span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span><span class="w"></span>
-<span class="w">        </span><span class="nt">elastic_host</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The host URL for the ElasticSearch service</span><span class="w"></span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch host url</span><span class="w"></span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
-<span class="w">        </span><span class="nt">elastic_username</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The username for the ElasticSearch service</span><span class="w"></span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch username</span><span class="w"></span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
-<span class="w">        </span><span class="nt">elastic_password</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The password for the ElasticSearch service</span><span class="w"></span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch password</span><span class="w"></span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
-<span class="w">        </span><span class="nt">elastic_index</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The index for the ElasticSearch service</span><span class="w"></span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch index</span><span class="w"></span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
-<span class="nt">steps</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">pcp</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/dustinblack/arcaflow-plugin-pcp-test:latest</span><span class="w"></span>
-<span class="w">    </span><span class="nt">step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">start-pcp</span><span class="w"></span>
-<span class="w">    </span><span class="nt">input</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">pmlogger_interval</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.pmlogger_interval</span><span class="w"></span>
-<span class="w">      </span><span class="nt">run_duration</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_runtime</span><span class="w"></span>
-<span class="w">  </span><span class="nt">sysbench</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/arcalot/arcaflow-plugin-sysbench:latest</span><span class="w"></span>
-<span class="w">    </span><span class="nt">step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbenchcpu</span><span class="w"></span>
-<span class="w">    </span><span class="nt">input</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">operation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cpu</span><span class="w"></span>
-<span class="w">      </span><span class="nt">threads</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_threads</span><span class="w"></span>
-<span class="w">      </span><span class="nt">events</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_events</span><span class="w"></span>
-<span class="w">      </span><span class="nt">cpumaxprime</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_cpumaxprime</span><span class="w"></span>
-<span class="w">      </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_runtime</span><span class="w"></span>
-<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/arcalot/arcaflow-plugin-metadata:latest</span><span class="w"></span>
-<span class="w">    </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
-<span class="w">  </span><span class="nt">elasticsearch</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/arcalot/arcaflow-plugin-elasticsearch:latest</span><span class="w"></span>
-<span class="w">    </span><span class="nt">input</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_host</span><span class="w"></span>
-<span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_username</span><span class="w"></span>
-<span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_password</span><span class="w"></span>
-<span class="w">      </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_index</span><span class="w"></span>
-<span class="w">      </span><span class="nt">data</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">pcp</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.pcp.outputs.success</span><span class="w"></span>
-<span class="w">        </span><span class="nt">sysbench</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.sysbench.outputs.success</span><span class="w"></span>
-<span class="w">        </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.metadata.outputs.success</span><span class="w"></span>
-<span class="nt">output</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">pcp</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.pcp.outputs.success</span><span class="w"></span>
-<span class="w">  </span><span class="nt">sysbench</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.sysbench.outputs.success</span><span class="w"></span>
-<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.metadata.outputs.success</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nt">input</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
+<span class="w">  </span><span class="nt">objects</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">RootObject</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
+<span class="w">      </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">pmlogger_interval</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The logger collection interval for PCP pmlogger</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCP pmlogger collection interval</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="w">        </span><span class="nt">sysbench_threads</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The number of threads sysbench will run</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench threads</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="w">        </span><span class="nt">sysbench_events</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The number of events sysbench will run</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench events</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="w">        </span><span class="nt">sysbench_cpumaxprime</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The upper limit of the number of prime numbers generated</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench cpu max primes</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="w">        </span><span class="nt">sysbench_runtime</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The total runtime in seconds for the sysbench tests</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench runtime seconds</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="w">        </span><span class="nt">elastic_host</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The host URL for the ElasticSearch service</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch host url</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">elastic_username</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The username for the ElasticSearch service</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch username</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">elastic_password</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The password for the ElasticSearch service</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch password</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">elastic_index</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The index for the ElasticSearch service</span>
+<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch index</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="nt">steps</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pcp</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/arcalot/arcaflow-plugin-pcp:0.2.0</span>
+<span class="w">    </span><span class="nt">step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">start-pcp</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">pmlogger_interval</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.pmlogger_interval</span>
+<span class="w">      </span><span class="nt">run_duration</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_runtime</span>
+<span class="w">  </span><span class="nt">sysbench</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/arcalot/arcaflow-plugin-sysbench:0.1.0</span>
+<span class="w">    </span><span class="nt">step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbenchcpu</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">threads</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_threads</span>
+<span class="w">      </span><span class="nt">events</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_events</span>
+<span class="w">      </span><span class="nt">cpu-max-prime</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_cpumaxprime</span>
+<span class="w">      </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_runtime</span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/arcalot/arcaflow-plugin-metadata:0.1.0</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="nt">opensearch</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/arcalot/arcaflow-plugin-opensearch:0.1.0</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_host</span>
+<span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_username</span>
+<span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_password</span>
+<span class="w">      </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_index</span>
+<span class="w">      </span><span class="nt">data</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">pcp</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.pcp.outputs.success</span>
+<span class="w">        </span><span class="nt">sysbench</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.sysbench.outputs.success</span>
+<span class="w">        </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.metadata.outputs.success</span>
+<span class="nt">output</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pcp</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.pcp.outputs.success</span>
+<span class="w">  </span><span class="nt">sysbench</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.sysbench.outputs.success</span>
+<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.metadata.outputs.success</span>
+<span class="w">  </span><span class="nt">opensearch</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.opensearch.outputs.success</span>
 </code></pre></div></p>
 <h3 id="level-3">Level 3</h3>
 <p><strong><em>Knight - Plugin Author</em></strong></p>
-<p>So now you want to build plugins or add features to existing plugins? Great! Welcome to the <a href="https://github.com/arcalot/arcalot-round-table">Arcalot Round Table</a>! We provide Software Development Kits (SDKs) for <a href="https://github.com/arcalot/arcaflow-plugin-sdk-python">Python</a> and <a href="https://github.com/arcalot/arcaflow-plugin-sdk-go">Golang</a> to get you started. The main thing you need to understand is that a plugin is expected to define and adhere to its schemas, so the SDK enforces strict typing, which can be a little strange at first for a Python developer. Optimally, a plugin follows the <a href="https://en.wikipedia.org/wiki/Unix_philosophy#:~:text=The%20Unix%20philosophy%20is%20documented,%2C%20as%20yet%20unknown%2C%20program.">Unix philosophy</a> of <em>do one thing and do it well</em>, and a plugin should not be created in an opinionated way.</p>
-<p>When creating a plugin, you should consider how you will expose all parameters and configuration values via a single schema, and collect all output similarly in a single schema. The plugins provide the API endpoints for functions or actions, and workflows glue together those endpoints to make use of the data in an opinionated way. Sometimes creating a schema for an existing tool is relatively <a href="https://github.com/arcalot/arcaflow-plugin-smallfile">easy</a>, sometimes it is pretty <a href="https://github.com/arcalot/arcaflow-plugin-uperf">involved</a>. You can start digging into the technical details more in the <a href="https://arcalot.io/arcaflow/concepts/workflows/">Concepts</a> and <a href="https://arcalot.io/arcaflow/creating-plugins/python/">Plugins</a> sections of the documentation.</p>
+<p>So now you want to build plugins or add features to existing plugins? Great! Welcome to the <a href="https://github.com/arcalot/arcalot-round-table">Arcalot Round Table</a>! We provide Software Development Kits (SDKs) for <a href="https://github.com/arcalot/arcaflow-plugin-sdk-python">Python</a> and <a href="https://github.com/arcalot/arcaflow-plugin-sdk-go">Golang</a> to get you started. The main thing you need to understand is that a plugin is expected to define and adhere to its schemas, so the SDK enforces strict typing, which can be a little strange at first for a Python developer. Optimally, a plugin follows the <a href="https://en.wikipedia.org/wiki/Unix_philosophy#:~:text=The%20Unix%20philosophy%20is%20documented,%2C%20as%20yet%20unknown%2C%20program.">Unix philosophy</a> of <em>do one thing and do it well</em>, and a plugin should not be created in an opinionated way &ndash; Leave the opinions for <em>how</em> a plugin&rsquo;s actions will run to the workflow definition as much as possible.</p>
+<p>When creating a plugin, you should consider how you will expose all parameters and configuration values via a single schema, and collect all output similarly in a single schema. The plugins provide the API endpoints for functions or actions, and workflows glue together those endpoints to make use of the data in an opinionated way. Sometimes creating a schema for a plugin wrapping an existing tool is relatively <a href="https://github.com/arcalot/arcaflow-plugin-smallfile">simple</a>, sometimes it is pretty <a href="https://github.com/arcalot/arcaflow-plugin-uperf">involved</a>. You can start digging into the technical details more in the <a href="https://arcalot.io/arcaflow/concepts/workflows/">Concepts</a> and <a href="https://arcalot.io/arcaflow/creating-plugins/python/">Plugins</a> sections of the documentation.</p>
 <h3 id="level-4">Level 4</h3>
 <p><strong><em>Liege - Core Components Contributor</em></strong></p>
 <p>If you have a grasp on everything above and still want to dig in deeper, then welcome to core components development! Here you can participate in the development of the workflow engine and its related libraries, the SDKs, the <a href="https://github.com/arcalot/arcaflow-plugin-image-builder">build system</a>, and more.</p>
@@ -1007,42 +1019,6 @@ $ go run cmd/arcaflow/main.go -input ${WFPATH}/input.yaml -config ${WFPATH}/conf
       </main>
       
         <footer class="md-footer">
-  
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Arcaflow: The noble workflow engine" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Arcaflow: The noble workflow engine
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../concepts/workflows/" class="md-footer__link md-footer__link--next" aria-label="Next: Workflows" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Workflows
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -1078,12 +1054,11 @@ $ go run cmd/arcaflow/main.go -input ${WFPATH}/input.yaml -config ${WFPATH}/conf
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
       
-    
     
   </body>
 </html>
