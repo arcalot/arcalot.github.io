@@ -23,6 +23,7 @@ The typing system supports the following data types.
 - **Integers** are 64-bit numbers that can take both positive and negative values.
 - **Floats** are 64-bit floating point numbers that can take both positive and negative values.
 - **Booleans** are values of `true` or `false` and cannot take any other values.
+- **Scopes** and **Refs** are object-like types that allow you to create circular references (see below).
 
 ### Planned future types
 
@@ -72,6 +73,23 @@ When you need to create a list of multiple object types, or simply have an eithe
   "message": "Hello world!"
 }
 ```
+
+## Scopes and refs
+
+Objects, on their own, cannot create circular references. It is not possible to create two objects that refer to each other. That's where scopes and refs come into play. Scopes hold a list of objects, identified by an ID. Refs inside the scope (for example, in an object property) can refer to these IDs. Every scope has a *root* object, which will be used to provide its "object-like" features, such as a list of fields.
+
+For example:
+
+```yaml
+objects:
+  my_root_object:
+    id: my_root_object
+    properties:
+      ...
+root: my_root_object
+```
+
+Multiple scopes can be nested into each other. The ref always refers to the closest scope up the tree. Multiple scopes can be used when combining objects from several sources (e.g. several plugins) into one schema to avoid conflicting ID assignments.
 
 ## Metadata
 
