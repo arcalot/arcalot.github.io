@@ -219,7 +219,7 @@ steps:
     plugin: quay.io/arcalot/arcaflow-plugin-metadata:0.1.0
     input: {}
   opensearch:
-    plugin: quay.io/arcalot/arcaflow-plugin-opensearch:0.1.0
+    plugin: quay.io/arcalot/arcaflow-plugin-opensearch:0.1.1
     input:
       url: !expr $.input.elastic_host
       username: !expr $.input.elastic_username
