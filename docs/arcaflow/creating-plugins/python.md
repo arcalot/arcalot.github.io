@@ -82,7 +82,7 @@ First, you will have to set up your environment.
            ```
            pip install -r requirements.txt
            ```
-    7. Copy the [example plugin](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/example_plugin.py), [example config](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/example.yaml) and the [tests](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/test_example_plugin.py) to your directory.
+    7. Copy the [example plugin](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/arcaflow_plugin_template_python/example_plugin.py), [example config](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/example.yaml) and the [tests]https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/tests/test_example_plugin.py) to your directory.
     8. Run the test plugin:
            ```
            ./example_plugin.py -f example.yaml
@@ -130,7 +130,7 @@ First, you will have to set up your environment.
            ```
            poetry add arcaflow-plugin-sdk
            ```
-    5. Copy the [example plugin](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/example_plugin.py), [example config](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/example.yaml) and the [tests](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/test_example_plugin.py) to your directory.
+    5. Copy the [example plugin](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/arcaflow_plugin_template_python/example_plugin.py), [example config](https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/example.yaml) and the [tests]https://github.com/arcalot/arcaflow-plugin-template-python/blob/main/tests/test_example_plugin.py) to your directory.
     6. Activate the venv:
            ```
            poetry shell
