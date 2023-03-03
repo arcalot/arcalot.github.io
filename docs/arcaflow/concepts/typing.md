@@ -1,7 +1,7 @@
 # The Arcaflow type system
 
 !!! warning "Work in Progress"
-This document is work in progress and may change until the final release!
+    This document is work in progress and may change until the final release!
 
 Arcaflow takes a departure from the classic run-and-pray approach of running workloads and validates workflows for validity before executing them. To do this, Arcaflow starts the plugins as needed before the workflow is run and queries them for their **schema**. This schema will contain information about what kind of input a plugin requests and what kind of outputs it can produce.
 
@@ -69,8 +69,8 @@ When you need to create a list of multiple object types, or simply have an eithe
 
 ```json
 {
-"_type": "Greeter",
-"message": "Hello world!"
+  "_type": "Greeter",
+  "message": "Hello world!"
 }
 ```
 
@@ -82,11 +82,11 @@ For example:
 
 ```yaml
 objects:
-my_root_object:
-id: my_root_object
-properties:
-...
-root: my_root_object
+  my_root_object:
+    id: my_root_object
+    properties:
+      ...
+  root: my_root_object
 ```
 
 Multiple scopes can be nested into each other. The ref always refers to the closest scope up the tree. Multiple scopes can be used when combining objects from several sources (e.g. several plugins) into one schema to avoid conflicting ID assignments.
