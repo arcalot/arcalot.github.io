@@ -1,14 +1,14 @@
 # Plugin protocol specification
 
 !!! warning "Work in Progress"
-This document is work in progress and may change until the final release!
+    This document is work in progress and may change until the final release!
 
 Arcaflow runs plugins locally in a container using Docker or Podman, or remotely in Kubernetes. Each plugin must be
 containerized and communicates with the engine over standard input/output. This document outlines the protocol the
 engine and the plugins use to communicate.
 
 !!! hint
-You do not need this page if you only intend to implement a plugin with the SDK!
+    You do not need this page if you only intend to implement a plugin with the SDK!
 
 ## Execution model
 
@@ -54,27 +54,27 @@ message of this kind would look as follows:
 
 ```json
 {
-"version": 1,
-"steps": {
-"step-id-1": {
-"name": "Step 1",
-"description": "This is the first step",
-"input": {
-"schema": {
-// Input schema
-}
-},
-"outputs": {
-"output-id-1": {
-"name": "Name for this output kind",
-"description": "Description for this output",
-"schema": {
-// Output schema
-}
-}
-}
-}
-}
+  "version": 1,
+  "steps": {
+    "step-id-1": {
+      "name": "Step 1",
+      "description": "This is the first step",
+      "input": {
+        "schema": {
+          // Input schema
+        }
+      },
+      "outputs": {
+        "output-id-1": {
+          "name": "Name for this output kind",
+          "description": "Description for this output",
+          "schema": {
+            // Output schema
+          }
+        }
+      }
+    }
+  }
 }
 ```
 
@@ -82,12 +82,12 @@ The schemas must describe the data structure the plugin expects. For a simple he
 
 ```json
 {
-"type": "object",
-"properties": {
-"name": {
-"type": "string"
-}
-}
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    }
+  }
 }
 ```
 
@@ -99,10 +99,10 @@ The "start work" message has the following parameters in CBOR:
 
 ```json
 {
-"id": "id-of-the-step-to-execute",
-"config": {
-// Input parameters according to schema here
-}
+  "id": "id-of-the-step-to-execute",
+  "config": {
+    // Input parameters according to schema here
+  }
 }
 ```
 
@@ -110,7 +110,7 @@ The plugin must respond with a CBOR message of the following format:
 
 ```json
 {
-"status": "started"
+  "status": "started"
 }
 ```
 
@@ -124,11 +124,11 @@ When the plugin has executed successfully, it must emit a CBOR message to the st
 
 ```json
 {
-"output_id": "id-of-the-declared-output",
-"output_data": {
-// Result data of the plugin
-},
-"debug_logs": "Unstructured logs here for debugging as a string."
+  "output_id": "id-of-the-declared-output",
+  "output_data": {
+    // Result data of the plugin
+  },
+  "debug_logs": "Unstructured logs here for debugging as a string."
 }
 ```
 
