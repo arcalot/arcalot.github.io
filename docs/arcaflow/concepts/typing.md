@@ -86,7 +86,7 @@ objects:
     id: my_root_object
     properties:
       ...
-  root: my_root_object
+root: my_root_object
 ```
 
 Multiple scopes can be nested into each other. The ref always refers to the closest scope up the tree. Multiple scopes can be used when combining objects from several sources (e.g. several plugins) into one schema to avoid conflicting ID assignments.
