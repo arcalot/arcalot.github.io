@@ -1,5 +1,52 @@
 # Configuring the Arcaflow Engine
 
+All of these changes require specifying the config when you run the arcaflow-engine. To do so, create a config YAML file, and run the engine with the `-config your-arcaflow-config.yaml` flag.
+
+## Logging
+
+Logging is useful when you need more information about what is happening while you run a workload.
+
+### Basic logging
+
+Here is the syntax for setting the log level:
+```yaml
+log:
+  level: info
+```
+
+Options are:
+- Debug: Info useful to the developers
+- Info: General info
+- Warning: Something went wrong, and you should know about it
+- Error: Something failed. This info should help you figure out why
+
+This sets which types of log output are shown or hidden. `debug` shows everything, while `error` shows the least, only showing `error` output. Each output shows more, rather than just its type, so `debug`, `info`, and `warning` still show `error` output.
+
+### Step logging
+
+Step logging is useful for getting output from failed steps, or general debugging.
+It is not recommended that you rely on this long term, as there may be better methods of debugging failed workflows.
+
+To make it output just error logs when a step fails, set it as shown:
+```yaml
+logged_outputs:
+  error:
+    level: error
+```
+
+You can specify multiple types of output and their log levels. For example, if you also want to output success steps as debug, set it as shown:
+```yaml
+logged_outputs:
+  error:
+    level: error
+  success:
+    level: debug
+```
+
+**Note**: If you set the level lower than the general log level shown above, it will not show up in the output.
+
+## Deployers
+
 If you want to change the default deployer from Docker to Podman or Kubernetes, you will need to set up a configuration YAML file and pass it to the engine with the `-config your-arcaflow-config.yaml` flag.
 
 You can then change the deployer type like this:
@@ -10,7 +57,7 @@ deployer:
   # Deployer-specific options 
 ```
 
-## Docker deployer
+### Docker deployer
 
 The docker deployer is the default. You can configure it like this:
 
@@ -43,7 +90,7 @@ deployer:
     http: 5s
 ```
 
-## Podman deployer
+### Podman deployer
 
 If you want to use Podman as your local deployer instead of Docker, you can do so like this:
 
@@ -67,7 +114,7 @@ deployer:
     http: 5s
 ```
 
-## Kubernetes deployer
+### Kubernetes deployer
 
 The Kubernetes deployer deploys on top of Kubernetes. You can set up the deployer like this:
 
@@ -86,11 +133,11 @@ deployer:
 
 For the full list of options please check the reference manual below. If you need to use a kubeconfig, please use the [kubeconfig plugin](https://github.com/arcalot/arcaflow-plugin-kubeconfig) in your workflow to convert it to this data structure.
 
-## Deployer reference manual
+### Deployer reference manual
 
 This section holds all supported properties of each deployer.
 
-### Docker deployer
+#### Docker deployer
 
 <ul><li><strong>Type:</strong> Scope <span title="Scopes hold one or more objects that can be referenced inside the properties of those objects by ref types. Ref types always reference the closest scope.">💡</span></li><li><strong>Root object:</strong> Config</li>
 <li><strong>Properties</strong><ul><li><details><summary>connection (Object reference to &ldquo;Connection&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span>)</summary>
@@ -314,7 +361,7 @@ This section holds all supported properties of each deployer.
         </details></details></li>
 </ul>
 
-### Kubernetes deployer
+#### Kubernetes deployer
 
 <ul><li><strong>Type:</strong> Scope <span title="Scopes hold one or more objects that can be referenced inside the properties of those objects by ref types. Ref types always reference the closest scope.">💡</span></li><li><strong>Root object:</strong> Config</li>
 <li><strong>Properties</strong><ul><li><details><summary>connection (Object reference to &ldquo;Connection&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span>)</summary>
@@ -979,7 +1026,7 @@ This section holds all supported properties of each deployer.
         </details></details></li>
 </ul>
 
-### Podman deployer
+#### Podman deployer
 
 <ul><li><strong>Type:</strong> Scope <span title="Scopes hold one or more objects that can be referenced inside the properties of those objects by ref types. Ref types always reference the closest scope.">💡</span></li><li><strong>Root object:</strong> Config</li>
 <li><strong>Properties</strong><ul><li><details><summary>deployment (Object reference to &ldquo;Deployment&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span>)</summary>
