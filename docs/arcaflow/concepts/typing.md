@@ -53,7 +53,7 @@ Boolean types can take a value of either `true` or `false`, but when unserializi
 
 ### Lists, maps
 
-Lists and maps can have constraints on the minimum or maximum number of items in them (inclusive).
+Lists a7nd maps can have constraints on the minimum or maximum number of items in them (inclusive).
 
 ### Objects
 
@@ -124,483 +124,858 @@ We explicitly document the following inference rules, which will probably change
 
 This section explains how a scope object looks like. The [plugin protocol](plugin-protocol.md) contains a few more types that are used when communicating a schema.
 
-<ul><li><strong>Type:</strong> Scope <span title="Scopes hold one or more objects that can be referenced inside the properties of those objects by ref types. Ref types always reference the closest scope.">💡</span></li><li><strong>Root object:</strong> Scope</li>
-<li><strong>Properties</strong><ul><li><details><summary>objects (Map <span title="Maps hold a set of keys associated with values.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span> &rarr; String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-                <ul><li><strong>Name: </strong> Objects</li><li><strong>Description: </strong> A set of referencable objects. These objects may contain references themselves.</li><li><strong>Required</strong></li><li><strong>Type:</strong> Map <span title="Maps hold a set of keys associated with values.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span> &rarr; String <span title="Strings hold a list of printable characters.">💡</span></li><li>
-    <details>
-        <summary>Key type</summary>
-        <ul><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li><li><strong>Minimum length:</strong> 1</li><li><strong>Maximum length:</strong> 255</li><li><strong>Must match pattern:</strong> <code>^[$@a-zA-Z0-9-_]&#43;$</code></li></ul>
-    </details>
-</li>
-<li>
-    <details>
-        <summary>Value type</summary>
-        <ul><li><strong>Type:</strong> Object reference to &ldquo;Object&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span></li><li><strong>Referenced object:</strong> Object</li></ul>
-    </details>
-</li>
-</ul>
-            </details></li><li><details><summary>root (String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-                <ul><li><strong>Name: </strong> Root object</li><li><strong>Description: </strong> ID of the root object of the scope.</li><li><strong>Required</strong></li><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li><li><strong>Minimum length:</strong> 1</li><li><strong>Maximum length:</strong> 255</li><li><strong>Must match pattern:</strong> <code>^[$@a-zA-Z0-9-_]&#43;$</code></li></ul>
-            </details></li></ul></li>
-<li><details><summary><strong>Objects</strong></summary><details><summary>AnySchema (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul></ul>
-</li>
-</ul>
-        </details><details><summary>BoolSchema (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul></ul>
-</li>
-</ul>
-        </details><details><summary>Display (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>description (String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Description</li><li><strong>Description: </strong> Description for this item if needed.</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>&#34;Please select the fruit you would like.&#34;</code></li>
-    </ul>
-</li><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li><li><strong>Minimum length:</strong> 1</li></ul>
-            </details></li><li><details><summary>icon (String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Icon</li><li><strong>Description: </strong> SVG icon for this item. Must have the declared size of 64x64, must not include additional namespaces, and must not reference external resources.</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>&#34;&lt;svg ...&gt;&lt;/svg&gt;&#34;</code></li>
-    </ul>
-</li><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li><li><strong>Minimum length:</strong> 1</li></ul>
-            </details></li><li><details><summary>name (String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Name</li><li><strong>Description: </strong> Short text serving as a name or title for this item.</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>&#34;Fruit&#34;</code></li>
-    </ul>
-</li><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li><li><strong>Minimum length:</strong> 1</li></ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>Float (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>max (Floating point number (64 bits, signed) <span title="Floats hold fractional numbers. They are imprecise due to their internal representation.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Maximum</li><li><strong>Description: </strong> Maximum value for this float (inclusive).</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>16.0</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Floating point number (64 bits, signed) <span title="Floats hold fractional numbers. They are imprecise due to their internal representation.">💡</span></li>
-</ul>
-            </details></li><li><details><summary>min (Floating point number (64 bits, signed) <span title="Floats hold fractional numbers. They are imprecise due to their internal representation.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Minimum</li><li><strong>Description: </strong> Minimum value for this float (inclusive).</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>5.0</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Floating point number (64 bits, signed) <span title="Floats hold fractional numbers. They are imprecise due to their internal representation.">💡</span></li>
-</ul>
-            </details></li><li><details><summary>units (Object reference to &ldquo;Units&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Units</li><li><strong>Description: </strong> Units this number represents.</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>{   &#34;base_unit&#34;: {       &#34;name_short_singular&#34;: &#34;%&#34;,       &#34;name_short_plural&#34;: &#34;%&#34;,       &#34;name_long_singular&#34;: &#34;percent&#34;,       &#34;name_long_plural&#34;: &#34;percent&#34;   }}</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Object reference to &ldquo;Units&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span></li><li><strong>Referenced object:</strong> Units</li></ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>Int (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>max (Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Maximum</li><li><strong>Description: </strong> Maximum value for this int (inclusive).</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>16</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span></li><li><strong>Minimum:</strong> 0</li>
-</ul>
-            </details></li><li><details><summary>min (Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Minimum</li><li><strong>Description: </strong> Minimum value for this int (inclusive).</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>5</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span></li><li><strong>Minimum:</strong> 0</li>
-</ul>
-            </details></li><li><details><summary>units (Object reference to &ldquo;Units&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Units</li><li><strong>Description: </strong> Units this number represents.</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>{   &#34;base_unit&#34;: {       &#34;name_short_singular&#34;: &#34;%&#34;,       &#34;name_short_plural&#34;: &#34;%&#34;,       &#34;name_long_singular&#34;: &#34;percent&#34;,       &#34;name_long_plural&#34;: &#34;percent&#34;   }}</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Object reference to &ldquo;Units&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span></li><li><strong>Referenced object:</strong> Units</li></ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>IntEnum (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>units (Object reference to &ldquo;Units&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Units</li><li><strong>Description: </strong> Units this number represents.</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>{   &#34;base_unit&#34;: {       &#34;name_short_singular&#34;: &#34;%&#34;,       &#34;name_short_plural&#34;: &#34;%&#34;,       &#34;name_long_singular&#34;: &#34;percent&#34;,       &#34;name_long_plural&#34;: &#34;percent&#34;   }}</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Object reference to &ldquo;Units&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span></li><li><strong>Referenced object:</strong> Units</li></ul>
-            </details></li><li><details><summary>values (Map <span title="Maps hold a set of keys associated with values.">💡</span> of Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span> &rarr; Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Values</li><li><strong>Description: </strong> Possible values for this field.</li><li><strong>Required</strong></li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>{&#34;1024&#34;: {&#34;name&#34;: &#34;kB&#34;}, &#34;1048576&#34;: {&#34;name&#34;: &#34;MB&#34;}}</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Map <span title="Maps hold a set of keys associated with values.">💡</span> of Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span> &rarr; Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span></li><li><strong>Minimum items:</strong> 1</li><li>
-    <details>
-        <summary>Key type</summary>
-        <ul><li><strong>Type:</strong> Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span></li>
-</ul>
-    </details>
-</li>
-<li>
-    <details>
-        <summary>Value type</summary>
-        <ul><li><strong>Type:</strong> Object reference to &ldquo;Display&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span></li><li><strong>Referenced object:</strong> Display</li></ul>
-    </details>
-</li>
-</ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>List (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>items (One of (string discriminator) <span title="One of types can be one of a specified list of objects (polymorphism). The discriminator field holds the information which object it actually is.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Items</li><li><strong>Description: </strong> ReflectedType definition for items in this list.</li><li><strong>Type:</strong> One of (string discriminator) <span title="One of types can be one of a specified list of objects (polymorphism). The discriminator field holds the information which object it actually is.">💡</span></li></ul>
-            </details></li><li><details><summary>max (Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Maximum</li><li><strong>Description: </strong> Maximum value for this int (inclusive).</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>16</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span></li><li><strong>Minimum:</strong> 0</li>
-</ul>
-            </details></li><li><details><summary>min (Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Minimum</li><li><strong>Description: </strong> Minimum number of items in this list..</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>5</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span></li><li><strong>Minimum:</strong> 0</li>
-</ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>Map (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>keys (One of (string discriminator) <span title="One of types can be one of a specified list of objects (polymorphism). The discriminator field holds the information which object it actually is.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Keys</li><li><strong>Description: </strong> ReflectedType definition for keys in this map.</li><li><strong>Type:</strong> One of (string discriminator) <span title="One of types can be one of a specified list of objects (polymorphism). The discriminator field holds the information which object it actually is.">💡</span></li></ul>
-            </details></li><li><details><summary>max (Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Maximum</li><li><strong>Description: </strong> Maximum value for this int (inclusive).</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>16</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span></li><li><strong>Minimum:</strong> 0</li>
-</ul>
-            </details></li><li><details><summary>min (Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Minimum</li><li><strong>Description: </strong> Minimum number of items in this list..</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>5</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span></li><li><strong>Minimum:</strong> 0</li>
-</ul>
-            </details></li><li><details><summary>values (One of (string discriminator) <span title="One of types can be one of a specified list of objects (polymorphism). The discriminator field holds the information which object it actually is.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Values</li><li><strong>Description: </strong> ReflectedType definition for values in this map.</li><li><strong>Type:</strong> One of (string discriminator) <span title="One of types can be one of a specified list of objects (polymorphism). The discriminator field holds the information which object it actually is.">💡</span></li></ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>Object (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>id (String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> ID</li><li><strong>Description: </strong> Unique identifier for this object within the current scope.</li><li><strong>Required</strong></li><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li><li><strong>Minimum length:</strong> 1</li><li><strong>Maximum length:</strong> 255</li><li><strong>Must match pattern:</strong> <code>^[$@a-zA-Z0-9-_]&#43;$</code></li></ul>
-            </details></li><li><details><summary>properties (Map <span title="Maps hold a set of keys associated with values.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span> &rarr; String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Properties</li><li><strong>Description: </strong> Properties of this object.</li><li><strong>Required</strong></li><li><strong>Type:</strong> Map <span title="Maps hold a set of keys associated with values.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span> &rarr; String <span title="Strings hold a list of printable characters.">💡</span></li><li>
-    <details>
-        <summary>Key type</summary>
-        <ul><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li><li><strong>Minimum length:</strong> 1</li></ul>
-    </details>
-</li>
-<li>
-    <details>
-        <summary>Value type</summary>
-        <ul><li><strong>Type:</strong> Object reference to &ldquo;Property&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span></li><li><strong>Referenced object:</strong> Property</li></ul>
-    </details>
-</li>
-</ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>OneOfIntSchema (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>discriminator_field_name (String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Discriminator field name</li><li><strong>Description: </strong> Name of the field used to discriminate between possible values. If this field is present on any of the component objects it must also be an int.</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>&#34;_type&#34;</code></li>
-    </ul>
-</li><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li></ul>
-            </details></li><li><details><summary>types (Map <span title="Maps hold a set of keys associated with values.">💡</span> of Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span> &rarr; Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Types</li><li><strong>Type:</strong> Map <span title="Maps hold a set of keys associated with values.">💡</span> of Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span> &rarr; Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span></li><li>
-    <details>
-        <summary>Key type</summary>
-        <ul><li><strong>Type:</strong> Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span></li>
-</ul>
-    </details>
-</li>
-<li>
-    <details>
-        <summary>Value type</summary>
-        <ul><li><strong>Type:</strong> One of (string discriminator) <span title="One of types can be one of a specified list of objects (polymorphism). The discriminator field holds the information which object it actually is.">💡</span></li></ul>
-    </details>
-</li>
-</ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>OneOfStringSchema (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>discriminator_field_name (String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Discriminator field name</li><li><strong>Description: </strong> Name of the field used to discriminate between possible values. If this field is present on any of the component objects it must also be an int.</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>&#34;_type&#34;</code></li>
-    </ul>
-</li><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li></ul>
-            </details></li><li><details><summary>types (Map <span title="Maps hold a set of keys associated with values.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span> &rarr; String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Types</li><li><strong>Type:</strong> Map <span title="Maps hold a set of keys associated with values.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span> &rarr; String <span title="Strings hold a list of printable characters.">💡</span></li><li>
-    <details>
-        <summary>Key type</summary>
-        <ul><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li></ul>
-    </details>
-</li>
-<li>
-    <details>
-        <summary>Value type</summary>
-        <ul><li><strong>Type:</strong> One of (string discriminator) <span title="One of types can be one of a specified list of objects (polymorphism). The discriminator field holds the information which object it actually is.">💡</span></li></ul>
-    </details>
-</li>
-</ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>Pattern (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul></ul>
-</li>
-</ul>
-        </details><details><summary>Property (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>conflicts (List <span title="Lists hold zero or more items of the specified type.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Conflicts</li><li><strong>Description: </strong> The current property cannot be set if any of the listed properties are set.</li><li><strong>Type:</strong> List <span title="Lists hold zero or more items of the specified type.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span></li><li>
-    <details>
-        <summary>List items</summary>
-        <ul><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li></ul>
-    </details>
-</li>
-</ul>
-            </details></li><li><details><summary>default (String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Default</li><li><strong>Description: </strong> Default value for this property in JSON encoding. The value must be unserializable by the type specified in the type field.</li><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li></ul>
-            </details></li><li><details><summary>display (Object reference to &ldquo;Display&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Display</li><li><strong>Description: </strong> Name, description and icon.</li><li><strong>Type:</strong> Object reference to &ldquo;Display&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span></li><li><strong>Referenced object:</strong> Display</li></ul>
-            </details></li><li><details><summary>examples (List <span title="Lists hold zero or more items of the specified type.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Examples</li><li><strong>Description: </strong> Example values for this property, encoded as JSON.</li><li><strong>Type:</strong> List <span title="Lists hold zero or more items of the specified type.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span></li><li>
-    <details>
-        <summary>List items</summary>
-        <ul><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li></ul>
-    </details>
-</li>
-</ul>
-            </details></li><li><details><summary>required (Boolean <span title="Booleans hold true or false values.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Required</li><li><strong>Description: </strong> When set to true, the value for this field must be provided under all circumstances.</li><li><strong>Default (JSON encoded)</strong>: true</li><li><strong>Type:</strong> Boolean <span title="Booleans hold true or false values.">💡</span></li></ul>
-            </details></li><li><details><summary>required_if (List <span title="Lists hold zero or more items of the specified type.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Required if</li><li><strong>Description: </strong> Sets the current property to required if any of the properties in this list are set.</li><li><strong>Type:</strong> List <span title="Lists hold zero or more items of the specified type.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span></li><li>
-    <details>
-        <summary>List items</summary>
-        <ul><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li></ul>
-    </details>
-</li>
-</ul>
-            </details></li><li><details><summary>required_if_not (List <span title="Lists hold zero or more items of the specified type.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Required if not</li><li><strong>Description: </strong> Sets the current property to be required if none of the properties in this list are set.</li><li><strong>Type:</strong> List <span title="Lists hold zero or more items of the specified type.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span></li><li>
-    <details>
-        <summary>List items</summary>
-        <ul><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li></ul>
-    </details>
-</li>
-</ul>
-            </details></li><li><details><summary>type (One of (string discriminator) <span title="One of types can be one of a specified list of objects (polymorphism). The discriminator field holds the information which object it actually is.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Type</li><li><strong>Description: </strong> Type definition for this field.</li><li><strong>Required</strong></li><li><strong>Type:</strong> One of (string discriminator) <span title="One of types can be one of a specified list of objects (polymorphism). The discriminator field holds the information which object it actually is.">💡</span></li></ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>Ref (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>display (Object reference to &ldquo;Display&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Display</li><li><strong>Description: </strong> Name, description and icon.</li><li><strong>Type:</strong> Object reference to &ldquo;Display&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span></li><li><strong>Referenced object:</strong> Display</li></ul>
-            </details></li><li><details><summary>id (String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> ID</li><li><strong>Description: </strong> Referenced object ID.</li><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li><li><strong>Minimum length:</strong> 1</li><li><strong>Maximum length:</strong> 255</li><li><strong>Must match pattern:</strong> <code>^[$@a-zA-Z0-9-_]&#43;$</code></li></ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>Scope (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>objects (Map <span title="Maps hold a set of keys associated with values.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span> &rarr; String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Objects</li><li><strong>Description: </strong> A set of referencable objects. These objects may contain references themselves.</li><li><strong>Required</strong></li><li><strong>Type:</strong> Map <span title="Maps hold a set of keys associated with values.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span> &rarr; String <span title="Strings hold a list of printable characters.">💡</span></li><li>
-    <details>
-        <summary>Key type</summary>
-        <ul><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li><li><strong>Minimum length:</strong> 1</li><li><strong>Maximum length:</strong> 255</li><li><strong>Must match pattern:</strong> <code>^[$@a-zA-Z0-9-_]&#43;$</code></li></ul>
-    </details>
-</li>
-<li>
-    <details>
-        <summary>Value type</summary>
-        <ul><li><strong>Type:</strong> Object reference to &ldquo;Object&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span></li><li><strong>Referenced object:</strong> Object</li></ul>
-    </details>
-</li>
-</ul>
-            </details></li><li><details><summary>root (String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Root object</li><li><strong>Description: </strong> ID of the root object of the scope.</li><li><strong>Required</strong></li><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li><li><strong>Minimum length:</strong> 1</li><li><strong>Maximum length:</strong> 255</li><li><strong>Must match pattern:</strong> <code>^[$@a-zA-Z0-9-_]&#43;$</code></li></ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>String (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>max (Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Maximum</li><li><strong>Description: </strong> Maximum length for this string (inclusive).</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>16</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span></li><li><strong>Minimum:</strong> 0</li><li><strong>Units:</strong> characters</li>
-</ul>
-            </details></li><li><details><summary>min (Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Minimum</li><li><strong>Description: </strong> Minimum length for this string (inclusive).</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>5</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span></li><li><strong>Minimum:</strong> 0</li><li><strong>Units:</strong> characters</li>
-</ul>
-            </details></li><li><details><summary>pattern (Pattern <span title="Patterns hold regular expressions.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Pattern</li><li><strong>Description: </strong> Regular expression this string must match.</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>&#34;^[a-zA-Z]&#43;$&#34;</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Pattern <span title="Patterns hold regular expressions.">💡</span></li></ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>StringEnum (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>values (Map <span title="Maps hold a set of keys associated with values.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span> &rarr; String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Values</li><li><strong>Description: </strong> Mapping where the left side of the map holds the possible value and the right side holds the display value for forms, etc.</li><li><strong>Required</strong></li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>{
-  &#34;apple&#34;: {
-    &#34;name&#34;: &#34;Apple&#34;
-  },
-  &#34;orange&#34;: {
-    &#34;name&#34;: &#34;Orange&#34;
-  }
-}</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Map <span title="Maps hold a set of keys associated with values.">💡</span> of String <span title="Strings hold a list of printable characters.">💡</span> &rarr; String <span title="Strings hold a list of printable characters.">💡</span></li><li><strong>Minimum items:</strong> 1</li><li>
-    <details>
-        <summary>Key type</summary>
-        <ul><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li></ul>
-    </details>
-</li>
-<li>
-    <details>
-        <summary>Value type</summary>
-        <ul><li><strong>Type:</strong> Object reference to &ldquo;Display&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span></li><li><strong>Referenced object:</strong> Display</li></ul>
-    </details>
-</li>
-</ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>Unit (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>name_long_plural (String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Name long (plural)</li><li><strong>Description: </strong> Longer name for this UnitDefinition in plural form.</li><li><strong>Required</strong></li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>&#34;bytes&#34;,&#34;characters&#34;</code></li>
-    </ul>
-</li><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li></ul>
-            </details></li><li><details><summary>name_long_singular (String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Name long (singular)</li><li><strong>Description: </strong> Longer name for this UnitDefinition in singular form.</li><li><strong>Required</strong></li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>&#34;byte&#34;,&#34;character&#34;</code></li>
-    </ul>
-</li><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li></ul>
-            </details></li><li><details><summary>name_short_plural (String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Name short (plural)</li><li><strong>Description: </strong> Shorter name for this UnitDefinition in plural form.</li><li><strong>Required</strong></li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>&#34;B&#34;,&#34;chars&#34;</code></li>
-    </ul>
-</li><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li></ul>
-            </details></li><li><details><summary>name_short_singular (String <span title="Strings hold a list of printable characters.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Name short (singular)</li><li><strong>Description: </strong> Shorter name for this UnitDefinition in singular form.</li><li><strong>Required</strong></li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>&#34;B&#34;,&#34;char&#34;</code></li>
-    </ul>
-</li><li><strong>Type:</strong> String <span title="Strings hold a list of printable characters.">💡</span></li></ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details><details><summary>Units (Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span>)</summary>
-            <ul><li><strong>Type:</strong> Object <span title="Objects have a fixed set of fields. Each field has a specified type and can have extra validation applied to them, e.g. making the field required or conflicting another field.">💡</span></li><li>
-    <strong>Properties</strong>
-    <ul><li><details><summary>base_unit (Object reference to &ldquo;Unit&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Base UnitDefinition</li><li><strong>Description: </strong> The base UnitDefinition is the smallest UnitDefinition of scale for this set of UnitsDefinition.</li><li><strong>Required</strong></li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>{
-  &#34;name_short_singular&#34;: &#34;B&#34;,
-  &#34;name_short_plural&#34;: &#34;B&#34;,
-  &#34;name_long_singular&#34;: &#34;byte&#34;,
-  &#34;name_long_plural&#34;: &#34;bytes&#34;
-}</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Object reference to &ldquo;Unit&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span></li><li><strong>Referenced object:</strong> Unit</li></ul>
-            </details></li><li><details><summary>multipliers (Map <span title="Maps hold a set of keys associated with values.">💡</span> of Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span> &rarr; Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span>)</summary>
-            <ul><li><strong>Name: </strong> Base UnitDefinition</li><li><strong>Description: </strong> The base UnitDefinition is the smallest UnitDefinition of scale for this set of UnitsDefinition.</li><li><strong>Examples (JSON encoded):</strong>
-    <ul>
-        <li><code>{
-  &#34;1024&#34;: {
-    &#34;name_short_singular&#34;: &#34;kB&#34;,
-    &#34;name_short_plural&#34;: &#34;kB&#34;,
-    &#34;name_long_singular&#34;: &#34;kilobyte&#34;,
-    &#34;name_long_plural&#34;: &#34;kilobytes&#34;
-  },
-  &#34;1048576&#34;: {
-    &#34;name_short_singular&#34;: &#34;MB&#34;,
-    &#34;name_short_plural&#34;: &#34;MB&#34;,
-    &#34;name_long_singular&#34;: &#34;megabyte&#34;,
-    &#34;name_long_plural&#34;: &#34;megabytes&#34;
-  }
-}</code></li>
-    </ul>
-</li><li><strong>Type:</strong> Map <span title="Maps hold a set of keys associated with values.">💡</span> of Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span> &rarr; Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span></li><li>
-    <details>
-        <summary>Key type</summary>
-        <ul><li><strong>Type:</strong> Integer (64-bit, signed) <span title="Integers hold whole numbers.">💡</span></li>
-</ul>
-    </details>
-</li>
-<li>
-    <details>
-        <summary>Value type</summary>
-        <ul><li><strong>Type:</strong> Object reference to &ldquo;Unit&rdquo; <span title="Object references (refs) reference an object in their closest scope up the typing tree.">💡</span></li><li><strong>Referenced object:</strong> Unit</li></ul>
-    </details>
-</li>
-</ul>
-            </details></li></ul>
-</li>
-</ul>
-        </details></details></li>
-</ul>
+|    |    |
+|----|----|
+| Type: | `scope` |
+| Root object: | Scope |
+???+ note "Properties"
+    ??? info "objects (`map[string, reference[Object]]`)"
+        |    |    |
+        |----|----|
+        | Name: | Objects |
+        | Description: | A set of referencable objects. These objects may contain references themselves. |
+        | Required: | Yes || Type: | `map[string, reference[Object]]` |
+        
+        ??? info "Key type"
+            |    |    |
+            |----|----|
+            | Type: | `string` |
+            | Minimum: | 1 |
+            | Maximum: | 255 |
+            | Must match pattern: | `^[$@a-zA-Z0-9-_]&#43;$` |
+            
+        ??? info "Value type"
+            |    |    |
+            |----|----|
+            | Type: | `reference[Object]` |
+            | Referenced object: | Object |
+            
+        
+        
+    ??? info "root (`string`)"
+        |    |    |
+        |----|----|
+        | Name: | Root object |
+        | Description: | ID of the root object of the scope. |
+        | Required: | Yes || Type: | `string` |
+        | Minimum: | 1 |
+        | Maximum: | 255 |
+        | Must match pattern: | `^[$@a-zA-Z0-9-_]&#43;$` |
+        
+        
+???+ note "Objects"
+    ??? info "**AnySchema** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            *None*
+        
+    ??? info "**BoolSchema** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            *None*
+        
+    ??? info "**Display** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "description (`string`)"
+                |    |    |
+                |----|----|
+                | Name: | Description |
+                | Description: | Description for this item if needed. |
+                | Required: | No || Type: | `string` |
+                | Minimum: | 1 |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    "Please select the fruit you would like."
+                    ```
+                
+                
+            ??? info "icon (`string`)"
+                |    |    |
+                |----|----|
+                | Name: | Icon |
+                | Description: | SVG icon for this item. Must have the declared size of 64x64, must not include additional namespaces, and must not reference external resources. |
+                | Required: | No || Type: | `string` |
+                | Minimum: | 1 |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    "<svg ...></svg>"
+                    ```
+                
+                
+            ??? info "name (`string`)"
+                |    |    |
+                |----|----|
+                | Name: | Name |
+                | Description: | Short text serving as a name or title for this item. |
+                | Required: | No || Type: | `string` |
+                | Minimum: | 1 |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    "Fruit"
+                    ```
+                
+                
+    ??? info "**Float** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "max (`float`)"
+                |    |    |
+                |----|----|
+                | Name: | Maximum |
+                | Description: | Maximum value for this float (inclusive). |
+                | Required: | No || Type: | `float` |
+                
+                
+                
+                ??? example "Examples"
+                    ```json
+                    16.0
+                    ```
+                
+                
+            ??? info "min (`float`)"
+                |    |    |
+                |----|----|
+                | Name: | Minimum |
+                | Description: | Minimum value for this float (inclusive). |
+                | Required: | No || Type: | `float` |
+                
+                
+                
+                ??? example "Examples"
+                    ```json
+                    5.0
+                    ```
+                
+                
+            ??? info "units (`reference[Units]`)"
+                |    |    |
+                |----|----|
+                | Name: | Units |
+                | Description: | Units this number represents. |
+                | Required: | No || Type: | `reference[Units]` |
+                | Referenced object: | Units |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    {   "base_unit": {       "name_short_singular": "%",       "name_short_plural": "%",       "name_long_singular": "percent",       "name_long_plural": "percent"   }}
+                    ```
+                
+                
+    ??? info "**Int** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "max (`int`)"
+                |    |    |
+                |----|----|
+                | Name: | Maximum |
+                | Description: | Maximum value for this int (inclusive). |
+                | Required: | No || Type: | `int` |
+                | Minimum: | 0 |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    16
+                    ```
+                
+                
+            ??? info "min (`int`)"
+                |    |    |
+                |----|----|
+                | Name: | Minimum |
+                | Description: | Minimum value for this int (inclusive). |
+                | Required: | No || Type: | `int` |
+                | Minimum: | 0 |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    5
+                    ```
+                
+                
+            ??? info "units (`reference[Units]`)"
+                |    |    |
+                |----|----|
+                | Name: | Units |
+                | Description: | Units this number represents. |
+                | Required: | No || Type: | `reference[Units]` |
+                | Referenced object: | Units |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    {   "base_unit": {       "name_short_singular": "%",       "name_short_plural": "%",       "name_long_singular": "percent",       "name_long_plural": "percent"   }}
+                    ```
+                
+                
+    ??? info "**IntEnum** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "units (`reference[Units]`)"
+                |    |    |
+                |----|----|
+                | Name: | Units |
+                | Description: | Units this number represents. |
+                | Required: | No || Type: | `reference[Units]` |
+                | Referenced object: | Units |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    {   "base_unit": {       "name_short_singular": "%",       "name_short_plural": "%",       "name_long_singular": "percent",       "name_long_plural": "percent"   }}
+                    ```
+                
+                
+            ??? info "values (`map[int, reference[Display]]`)"
+                |    |    |
+                |----|----|
+                | Name: | Values |
+                | Description: | Possible values for this field. |
+                | Required: | Yes || Type: | `map[int, reference[Display]]` |
+                
+                    | Minimum items: | 1 |
+                ??? info "Key type"
+                    |    |    |
+                    |----|----|
+                    | Type: | `int` |
+                    
+                ??? info "Value type"
+                    |    |    |
+                    |----|----|
+                    | Type: | `reference[Display]` |
+                    | Referenced object: | Display |
+                    
+                
+                
+                ??? example "Examples"
+                    ```json
+                    {"1024": {"name": "kB"}, "1048576": {"name": "MB"}}
+                    ```
+                
+                
+    ??? info "**List** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "items (`one of[string]`)"
+                |    |    |
+                |----|----|
+                | Name: | Items |
+                | Description: | ReflectedType definition for items in this list. |
+                | Required: | No || Type: | `one of[string]` |
+                
+                
+            ??? info "max (`int`)"
+                |    |    |
+                |----|----|
+                | Name: | Maximum |
+                | Description: | Maximum value for this int (inclusive). |
+                | Required: | No || Type: | `int` |
+                | Minimum: | 0 |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    16
+                    ```
+                
+                
+            ??? info "min (`int`)"
+                |    |    |
+                |----|----|
+                | Name: | Minimum |
+                | Description: | Minimum number of items in this list.. |
+                | Required: | No || Type: | `int` |
+                | Minimum: | 0 |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    5
+                    ```
+                
+                
+    ??? info "**Map** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "keys (`one of[string]`)"
+                |    |    |
+                |----|----|
+                | Name: | Keys |
+                | Description: | ReflectedType definition for keys in this map. |
+                | Required: | No || Type: | `one of[string]` |
+                
+                
+            ??? info "max (`int`)"
+                |    |    |
+                |----|----|
+                | Name: | Maximum |
+                | Description: | Maximum value for this int (inclusive). |
+                | Required: | No || Type: | `int` |
+                | Minimum: | 0 |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    16
+                    ```
+                
+                
+            ??? info "min (`int`)"
+                |    |    |
+                |----|----|
+                | Name: | Minimum |
+                | Description: | Minimum number of items in this list.. |
+                | Required: | No || Type: | `int` |
+                | Minimum: | 0 |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    5
+                    ```
+                
+                
+            ??? info "values (`one of[string]`)"
+                |    |    |
+                |----|----|
+                | Name: | Values |
+                | Description: | ReflectedType definition for values in this map. |
+                | Required: | No || Type: | `one of[string]` |
+                
+                
+    ??? info "**Object** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "id (`string`)"
+                |    |    |
+                |----|----|
+                | Name: | ID |
+                | Description: | Unique identifier for this object within the current scope. |
+                | Required: | Yes || Type: | `string` |
+                | Minimum: | 1 |
+                | Maximum: | 255 |
+                | Must match pattern: | `^[$@a-zA-Z0-9-_]&#43;$` |
+                
+                
+            ??? info "properties (`map[string, reference[Property]]`)"
+                |    |    |
+                |----|----|
+                | Name: | Properties |
+                | Description: | Properties of this object. |
+                | Required: | Yes || Type: | `map[string, reference[Property]]` |
+                
+                ??? info "Key type"
+                    |    |    |
+                    |----|----|
+                    | Type: | `string` |
+                    | Minimum: | 1 |
+                    
+                ??? info "Value type"
+                    |    |    |
+                    |----|----|
+                    | Type: | `reference[Property]` |
+                    | Referenced object: | Property |
+                    
+                
+                
+    ??? info "**OneOfIntSchema** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "discriminator_field_name (`string`)"
+                |    |    |
+                |----|----|
+                | Name: | Discriminator field name |
+                | Description: | Name of the field used to discriminate between possible values. If this field is present on any of the component objects it must also be an int. |
+                | Required: | No || Type: | `string` |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    "_type"
+                    ```
+                
+                
+            ??? info "types (`map[int, one of[string]]`)"
+                |    |    |
+                |----|----|
+                | Name: | Types |
+                | Required: | No || Type: | `map[int, one of[string]]` |
+                
+                ??? info "Key type"
+                    |    |    |
+                    |----|----|
+                    | Type: | `int` |
+                    
+                ??? info "Value type"
+                    |    |    |
+                    |----|----|
+                    | Type: | `one of[string]` |
+                    
+                
+                
+    ??? info "**OneOfStringSchema** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "discriminator_field_name (`string`)"
+                |    |    |
+                |----|----|
+                | Name: | Discriminator field name |
+                | Description: | Name of the field used to discriminate between possible values. If this field is present on any of the component objects it must also be an int. |
+                | Required: | No || Type: | `string` |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    "_type"
+                    ```
+                
+                
+            ??? info "types (`map[string, one of[string]]`)"
+                |    |    |
+                |----|----|
+                | Name: | Types |
+                | Required: | No || Type: | `map[string, one of[string]]` |
+                
+                ??? info "Key type"
+                    |    |    |
+                    |----|----|
+                    | Type: | `string` |
+                    
+                ??? info "Value type"
+                    |    |    |
+                    |----|----|
+                    | Type: | `one of[string]` |
+                    
+                
+                
+    ??? info "**Pattern** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            *None*
+        
+    ??? info "**Property** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "conflicts (`list[string]`)"
+                |    |    |
+                |----|----|
+                | Name: | Conflicts |
+                | Description: | The current property cannot be set if any of the listed properties are set. |
+                | Required: | No || Type: | `list[string]` |
+                
+                ??? info "List Items"
+                    |    |    |
+                    |----|----|
+                    | Type: | `string` |
+                    
+                
+            ??? info "default (`string`)"
+                |    |    |
+                |----|----|
+                | Name: | Default |
+                | Description: | Default value for this property in JSON encoding. The value must be unserializable by the type specified in the type field. |
+                | Required: | No || Type: | `string` |
+                
+                
+            ??? info "display (`reference[Display]`)"
+                |    |    |
+                |----|----|
+                | Name: | Display |
+                | Description: | Name, description and icon. |
+                | Required: | No || Type: | `reference[Display]` |
+                | Referenced object: | Display |
+                
+                
+            ??? info "examples (`list[string]`)"
+                |    |    |
+                |----|----|
+                | Name: | Examples |
+                | Description: | Example values for this property, encoded as JSON. |
+                | Required: | No || Type: | `list[string]` |
+                
+                ??? info "List Items"
+                    |    |    |
+                    |----|----|
+                    | Type: | `string` |
+                    
+                
+            ??? info "required (`bool`)"
+                |    |    |
+                |----|----|
+                | Name: | Required |
+                | Description: | When set to true, the value for this field must be provided under all circumstances. |
+                | Required: | No || Type: | `bool` |
+                
+                 ```json title="Default"
+                 true
+                 ```
+                
+                
+            ??? info "required_if (`list[string]`)"
+                |    |    |
+                |----|----|
+                | Name: | Required if |
+                | Description: | Sets the current property to required if any of the properties in this list are set. |
+                | Required: | No || Type: | `list[string]` |
+                
+                ??? info "List Items"
+                    |    |    |
+                    |----|----|
+                    | Type: | `string` |
+                    
+                
+            ??? info "required_if_not (`list[string]`)"
+                |    |    |
+                |----|----|
+                | Name: | Required if not |
+                | Description: | Sets the current property to be required if none of the properties in this list are set. |
+                | Required: | No || Type: | `list[string]` |
+                
+                ??? info "List Items"
+                    |    |    |
+                    |----|----|
+                    | Type: | `string` |
+                    
+                
+            ??? info "type (`one of[string]`)"
+                |    |    |
+                |----|----|
+                | Name: | Type |
+                | Description: | Type definition for this field. |
+                | Required: | Yes || Type: | `one of[string]` |
+                
+                
+    ??? info "**Ref** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "display (`reference[Display]`)"
+                |    |    |
+                |----|----|
+                | Name: | Display |
+                | Description: | Name, description and icon. |
+                | Required: | No || Type: | `reference[Display]` |
+                | Referenced object: | Display |
+                
+                
+            ??? info "id (`string`)"
+                |    |    |
+                |----|----|
+                | Name: | ID |
+                | Description: | Referenced object ID. |
+                | Required: | No || Type: | `string` |
+                | Minimum: | 1 |
+                | Maximum: | 255 |
+                | Must match pattern: | `^[$@a-zA-Z0-9-_]&#43;$` |
+                
+                
+    ??? info "**Scope** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "objects (`map[string, reference[Object]]`)"
+                |    |    |
+                |----|----|
+                | Name: | Objects |
+                | Description: | A set of referencable objects. These objects may contain references themselves. |
+                | Required: | Yes || Type: | `map[string, reference[Object]]` |
+                
+                ??? info "Key type"
+                    |    |    |
+                    |----|----|
+                    | Type: | `string` |
+                    | Minimum: | 1 |
+                    | Maximum: | 255 |
+                    | Must match pattern: | `^[$@a-zA-Z0-9-_]&#43;$` |
+                    
+                ??? info "Value type"
+                    |    |    |
+                    |----|----|
+                    | Type: | `reference[Object]` |
+                    | Referenced object: | Object |
+                    
+                
+                
+            ??? info "root (`string`)"
+                |    |    |
+                |----|----|
+                | Name: | Root object |
+                | Description: | ID of the root object of the scope. |
+                | Required: | Yes || Type: | `string` |
+                | Minimum: | 1 |
+                | Maximum: | 255 |
+                | Must match pattern: | `^[$@a-zA-Z0-9-_]&#43;$` |
+                
+                
+    ??? info "**String** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "max (`int`)"
+                |    |    |
+                |----|----|
+                | Name: | Maximum |
+                | Description: | Maximum length for this string (inclusive). |
+                | Required: | No || Type: | `int` |
+                | Minimum: | 0 |
+                | Units: | characters |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    16
+                    ```
+                
+                
+            ??? info "min (`int`)"
+                |    |    |
+                |----|----|
+                | Name: | Minimum |
+                | Description: | Minimum length for this string (inclusive). |
+                | Required: | No || Type: | `int` |
+                | Minimum: | 0 |
+                | Units: | characters |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    5
+                    ```
+                
+                
+            ??? info "pattern (`pattern`)"
+                |    |    |
+                |----|----|
+                | Name: | Pattern |
+                | Description: | Regular expression this string must match. |
+                | Required: | No || Type: | `pattern` |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    "^[a-zA-Z]+$"
+                    ```
+                
+                
+    ??? info "**StringEnum** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "values (`map[string, reference[Display]]`)"
+                |    |    |
+                |----|----|
+                | Name: | Values |
+                | Description: | Mapping where the left side of the map holds the possible value and the right side holds the display value for forms, etc. |
+                | Required: | Yes || Type: | `map[string, reference[Display]]` |
+                
+                    | Minimum items: | 1 |
+                ??? info "Key type"
+                    |    |    |
+                    |----|----|
+                    | Type: | `string` |
+                    
+                ??? info "Value type"
+                    |    |    |
+                    |----|----|
+                    | Type: | `reference[Display]` |
+                    | Referenced object: | Display |
+                    
+                
+                
+                ??? example "Examples"
+                    ```json
+                    {
+                      "apple": {
+                        "name": "Apple"
+                      },
+                      "orange": {
+                        "name": "Orange"
+                      }
+                    }
+                    ```
+                
+                
+    ??? info "**Unit** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "name_long_plural (`string`)"
+                |    |    |
+                |----|----|
+                | Name: | Name long (plural) |
+                | Description: | Longer name for this UnitDefinition in plural form. |
+                | Required: | Yes || Type: | `string` |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    "bytes","characters"
+                    ```
+                
+                
+            ??? info "name_long_singular (`string`)"
+                |    |    |
+                |----|----|
+                | Name: | Name long (singular) |
+                | Description: | Longer name for this UnitDefinition in singular form. |
+                | Required: | Yes || Type: | `string` |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    "byte","character"
+                    ```
+                
+                
+            ??? info "name_short_plural (`string`)"
+                |    |    |
+                |----|----|
+                | Name: | Name short (plural) |
+                | Description: | Shorter name for this UnitDefinition in plural form. |
+                | Required: | Yes || Type: | `string` |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    "B","chars"
+                    ```
+                
+                
+            ??? info "name_short_singular (`string`)"
+                |    |    |
+                |----|----|
+                | Name: | Name short (singular) |
+                | Description: | Shorter name for this UnitDefinition in singular form. |
+                | Required: | Yes || Type: | `string` |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    "B","char"
+                    ```
+                
+                
+    ??? info "**Units** (`object`)"
+        |    |    |
+        |----|----|
+        | Type: | `object` |
+        
+        ???+ note "Properties"
+            ??? info "base_unit (`reference[Unit]`)"
+                |    |    |
+                |----|----|
+                | Name: | Base UnitDefinition |
+                | Description: | The base UnitDefinition is the smallest UnitDefinition of scale for this set of UnitsDefinition. |
+                | Required: | Yes || Type: | `reference[Unit]` |
+                | Referenced object: | Unit |
+                
+                
+                ??? example "Examples"
+                    ```json
+                    {
+                      "name_short_singular": "B",
+                      "name_short_plural": "B",
+                      "name_long_singular": "byte",
+                      "name_long_plural": "bytes"
+                    }
+                    ```
+                
+                
+            ??? info "multipliers (`map[int, reference[Unit]]`)"
+                |    |    |
+                |----|----|
+                | Name: | Base UnitDefinition |
+                | Description: | The base UnitDefinition is the smallest UnitDefinition of scale for this set of UnitsDefinition. |
+                | Required: | No || Type: | `map[int, reference[Unit]]` |
+                
+                ??? info "Key type"
+                    |    |    |
+                    |----|----|
+                    | Type: | `int` |
+                    
+                ??? info "Value type"
+                    |    |    |
+                    |----|----|
+                    | Type: | `reference[Unit]` |
+                    | Referenced object: | Unit |
+                    
+                
+                
+                ??? example "Examples"
+                    ```json
+                    {
+                      "1024": {
+                        "name_short_singular": "kB",
+                        "name_short_plural": "kB",
+                        "name_long_singular": "kilobyte",
+                        "name_long_plural": "kilobytes"
+                      },
+                      "1048576": {
+                        "name_short_singular": "MB",
+                        "name_short_plural": "MB",
+                        "name_long_singular": "megabyte",
+                        "name_long_plural": "megabytes"
+                      }
+                    }
+                    ```
+                
+                

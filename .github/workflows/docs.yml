@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -20,7 +22,15 @@ jobs:
           architecture: x64
       - name: Install requirements.txt
         run: pip install -r requirements.txt
-      - name: Build
+      - name: Docsgen
+        run: |
+          cd docsgen
+          go build -o ../arcaflow-docsgen .
+          chmod +x ../arcaflow-docsgen
+          cd ..
+          cd docs/arcaflow
+          ../../arcaflow-docsgen
+      - name: Build site
         run: mkdocs build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
