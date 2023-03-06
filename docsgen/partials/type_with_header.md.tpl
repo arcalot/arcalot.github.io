@@ -1,0 +1,2 @@
+{{- partial "header" . -}}
+{{- partial "type" . -}}
