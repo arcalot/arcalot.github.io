@@ -122,11 +122,45 @@ Assuming your pre-existing project is named `plugin-project`, and contains the s
 
 === "Poetry"
 
-    Follow Poetry's command line interface wizard's prompts to create your `pyproject.toml`. Don't forget to add the Arcaflow Python Plugin SDK as a software dependency, `arcaflow-plugin-sdk`.
+    Follow Poetry's command line interface wizard's prompts to create your `pyproject.toml`. Don't forget to add the Arcaflow Python Plugin SDK as a software dependency, `arcaflow-plugin-sdk`. At the time of writing, the progressing through the wizard should look approximately like this.
 
     ```
     $ poetry init
+
+    This command will guide you through creating your pyproject.toml config.
+
+    Package name [my-first-plugin]:
+    Version [0.1.0]:
+    Description []:
+    Author:  A. Robot Programmer
+    License []:
+    Compatible Python versions [^3.9]:
+
+    Would you like to define your main dependencies interactively? (yes/no) [yes] yes
+    ...
+
+    Package to add or search for (leave blank to skip): arcaflow-plugin-sdk
+    Found 20 packages matching arcaflow-plugin-sdk
+    Showing the first 10 matches
+
+    Enter package # to add, or the complete package name if it is not listed []:
+    [ 0] arcaflow-plugin-sdk
+    [ 1] arcaflow
+    [ 2] arcaflow-lib-kubernetes
+    [ 3] plugin-sdk-automation
+    [ 4] tracardi-plugin-sdk
+    [ 5] laniakea-plugin-sdk
+    [ 6] dce-plugin-sdk
+    [ 7] python-plugin-sdk
+    [ 8] ayx-plugin-sdk
+    [ 9] PlugSy
+    [10]
+    > 0
+    Enter the version constraint to require (or leave blank to use the latest version):
+    Using version ^0.10.1 for arcaflow-plugin-sdk
+
     ```
+
 
 === "Without Poetry"
 
@@ -136,7 +170,7 @@ Assuming your pre-existing project is named `plugin-project`, and contains the s
     touch pyproject.toml
     ```
 
-    Manually fill out your [pyproject.toml](release#create-package-virtual-environment) according to the steps in `Without Poetry`.
+    Manually fill out your `pyproject.toml`. Use [PyPa's guide to configuring pyproject.toml for setuptools](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html).
 
 ### Validate Dependencies in Virtual Environment
 
