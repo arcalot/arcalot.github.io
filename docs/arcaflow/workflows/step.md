@@ -1,95 +1,79 @@
-# Configuring the Arcaflow Engine
+# Writing workflow steps
 
-All of these changes require specifying the config when you run the arcaflow-engine. To do so, create a config YAML file, and run the engine with the `-config your-arcaflow-config.yaml` flag.
+If your [input](input.md) is complete, you can now turn to writing your workflow steps. You can connect workflow steps by using [expressions](expressions.md). For example, if step `A` has an input that needs data from step `B`, Arcaflow will automatically run step `B` first.
 
-## Logging
-
-Logging is useful when you need more information about what is happening while you run a workload.
-
-### Basic logging
-
-Here is the syntax for setting the log level:
-```yaml
-log:
-  level: info
-```
-
-Options are:
-- Debug: Info useful to the developers
-- Info: General info
-- Warning: Something went wrong, and you should know about it
-- Error: Something failed. This info should help you figure out why
-
-This sets which types of log output are shown or hidden. `debug` shows everything, while `error` shows the least, only showing `error` output. Each output shows more, rather than just its type, so `debug`, `info`, and `warning` still show `error` output.
-
-### Step logging
-
-Step logging is useful for getting output from failed steps, or general debugging.
-It is not recommended that you rely on this long term, as there may be better methods of debugging failed workflows.
-
-To make it output just error logs when a step fails, set it as shown:
-```yaml
-logged_outputs:
-  error:
-    level: error
-```
-
-You can specify multiple types of output and their log levels. For example, if you also want to output success steps as debug, set it as shown:
-```yaml
-logged_outputs:
-  error:
-    level: error
-  success:
-    level: debug
-```
-
-**Note**: If you set the level lower than the general log level shown above, it will not show up in the output.
-
-## Deployers
-
-If you want to change the default deployer from Docker to Podman or Kubernetes, you will need to set up a configuration YAML file and pass it to the engine with the `-config your-arcaflow-config.yaml` flag.
-
-You can then change the deployer type like this:
+To define a step type, you can do the following:
 
 ```yaml
-deployer:
-  type: podman
-  # Deployer-specific options 
+steps:
+  step_a: # Specify any ID here you want to reference the step by
+    plugin: quay.io/some/container/image # This must be an Arcaflow-compatible image
+    input: # specify input values as a data structure, mixing in expressions as needed
+      some:
+        key: !expr $.steps.step_b.outputs.success.some_value 
+  step_b:
+    plugin: quay.io/some/container/image
+    input:
+      some:
+        key: !expr $.input.some_value # Reference an input value
 ```
+
+## Plugin steps
+
+Plugin steps run Arcaflow plugins in containers. They can use Docker, Podman, or Kubernetes as deployers. If no deployer is specified in the workflow, the plugin will use the [local deployer](../running/setup.md).
+
+Plugin steps have the following properties:
+
+| Property | Description                                                                                                                      |
+|----------|----------------------------------------------------------------------------------------------------------------------------------|
+| `plugin` | Full name of the container image to run. This must be an Arcaflow-compatible container image.                                    |
+| `step`   | If a plugin provides more than one possible step, you can specify the step ID here.                                              |
+| `deploy` | Configuration for the deployer. (See below.) This can contain expressions, so you can dynamically specify deployment parameters. |
+| `input`  | Input data for the plugin. This can contain expressions, so you can dynamically define inputs.                                   |
+
+You can reference plugin outputs in the format of <code>$.steps.<em>your_step_id</em>.outputs.<em>your_plugin_output_id</em>.<em>some_variable</em></code>.
+
+### Deployers
+
+The `deploy` key for plugins lets you control how the plugin container is deployed. You can use expressions to use other plugins (e.g. the [kubeconfig plugin](https://github.com/arcalot/arcaflow-plugin-kubeconfig/)) to generate the deployment configuration and feed it into other steps.
 
 === "Docker"
 
-    The docker deployer is the default. You can configure it like this:
-    
+    You can configure the Docker deployer like this:
+
     ```yaml
-    deployer:
-      type: docker
-      connection:
-        # Change this to point to a TCP-based Docker socket
-        host: host-to-docker 
-        # Add a certificates here. This is usually needed in TCP mode.
-        cacert: |
-          Add your CA cert PEM here
-        cert: |
-          Add your client cert PEM here.
-        key: |
-          Add your client key PEM here.
-      deployment:
-        # For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate
-        container:
-          # Add your container config here.
-        host:
-          # Add your host config here.
-        network:
-          # Add your network config here
-        platform:
-          # Add your platform config here
-        imagePullPolicy: Always|IfNotPresent|Never
-      timeouts:
-        # HTTP timeout
-        http: 5s
+    step:
+      your_step_id:
+        plugin: ...
+        input: ...
+        deploy: # You can use expressions here
+          type: docker
+          connection:
+            # Change this to point to a TCP-based Docker socket
+            host: host-to-docker
+            # Add a certificates here. This is usually needed in TCP mode.
+            cacert: |
+              Add your CA cert PEM here
+            cert: |
+              Add your client cert PEM here.
+            key: |
+              Add your client key PEM here.
+          deployment:
+            # For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate
+            container:
+              # Add your container config here.
+            host:
+              # Add your host config here.
+            network:
+              # Add your network config here
+            platform:
+              # Add your platform config here
+            imagePullPolicy: Always|IfNotPresent|Never
+          timeouts:
+            # HTTP timeout
+            http: 5s
     ```
-    
+
     ??? "All options for the Docker deployer"
         |    |    |
         |----|----|
@@ -102,7 +86,7 @@ deployer:
                 | Name: | Connection |
                 | Description: | Docker connection information. |
                 | Required: | No || Type: | `reference[Connection]` |
-                | Referenced object: | Connection |
+                | Referenced object: | Connection *(see in the Objects section below)* |
                 
                 
             ??? info "deployment (`reference[Deployment]`)"
@@ -111,7 +95,7 @@ deployer:
                 | Name: | Deployment |
                 | Description: | Deployment configuration for the plugin. |
                 | Required: | No || Type: | `reference[Deployment]` |
-                | Referenced object: | Deployment |
+                | Referenced object: | Deployment *(see in the Objects section below)* |
                 
                 
             ??? info "timeouts (`reference[Timeouts]`)"
@@ -120,7 +104,7 @@ deployer:
                 | Name: | Timeouts |
                 | Description: | Timeouts for the Docker connection. |
                 | Required: | No || Type: | `reference[Timeouts]` |
-                | Referenced object: | Timeouts |
+                | Referenced object: | Timeouts *(see in the Objects section below)* |
                 
                 
         ???+ note "Objects"
@@ -136,7 +120,7 @@ deployer:
                         | Name: | Connection |
                         | Description: | Docker connection information. |
                         | Required: | No || Type: | `reference[Connection]` |
-                        | Referenced object: | Connection |
+                        | Referenced object: | Connection *(see in the Objects section below)* |
                         
                         
                     ??? info "deployment (`reference[Deployment]`)"
@@ -145,7 +129,7 @@ deployer:
                         | Name: | Deployment |
                         | Description: | Deployment configuration for the plugin. |
                         | Required: | No || Type: | `reference[Deployment]` |
-                        | Referenced object: | Deployment |
+                        | Referenced object: | Deployment *(see in the Objects section below)* |
                         
                         
                     ??? info "timeouts (`reference[Timeouts]`)"
@@ -154,7 +138,7 @@ deployer:
                         | Name: | Timeouts |
                         | Description: | Timeouts for the Docker connection. |
                         | Required: | No || Type: | `reference[Timeouts]` |
-                        | Referenced object: | Timeouts |
+                        | Referenced object: | Timeouts *(see in the Objects section below)* |
                         
                         
             ??? info "**Connection** (`object`)"
@@ -206,7 +190,7 @@ deployer:
                         | Must match pattern: | `^[a-z0-9./:_-]&#43;$` |
                         
                          ```json title="Default"
-                         "unix:///var/run/docker.sock"
+                         "npipe:////./pipe/docker_engine"
                          ```
                         
                         
@@ -327,7 +311,7 @@ deployer:
                         | Name: | Container configuration |
                         | Description: | Provides information about the container for the plugin. |
                         | Required: | No || Type: | `reference[ContainerConfig]` |
-                        | Referenced object: | ContainerConfig |
+                        | Referenced object: | ContainerConfig *(see in the Objects section below)* |
                         
                         
                     ??? info "host (`reference[HostConfig]`)"
@@ -336,7 +320,7 @@ deployer:
                         | Name: | Host configuration |
                         | Description: | Provides information about the container host for the plugin. |
                         | Required: | No || Type: | `reference[HostConfig]` |
-                        | Referenced object: | HostConfig |
+                        | Referenced object: | HostConfig *(see in the Objects section below)* |
                         
                         
                     ??? info "imagePullPolicy (`enum[string]`)"
@@ -360,7 +344,7 @@ deployer:
                         | Name: | Network configuration |
                         | Description: | Provides information about the container networking for the plugin. |
                         | Required: | No || Type: | `reference[NetworkConfig]` |
-                        | Referenced object: | NetworkConfig |
+                        | Referenced object: | NetworkConfig *(see in the Objects section below)* |
                         
                         
                     ??? info "platform (`reference[PlatformConfig]`)"
@@ -369,7 +353,7 @@ deployer:
                         | Name: | Platform configuration |
                         | Description: | Provides information about the container host platform for the plugin. |
                         | Required: | No || Type: | `reference[PlatformConfig]` |
-                        | Referenced object: | PlatformConfig |
+                        | Referenced object: | PlatformConfig *(see in the Objects section below)* |
                         
                         
             ??? info "**HostConfig** (`object`)"
@@ -520,7 +504,7 @@ deployer:
                                 |    |    |
                                 |----|----|
                                 | Type: | `reference[PortBinding]` |
-                                | Referenced object: | PortBinding |
+                                | Referenced object: | PortBinding *(see in the Objects section below)* |
                                 
                         
                         
@@ -583,22 +567,26 @@ deployer:
                         
 
 === "Kubernetes"
-    
+
     The Kubernetes deployer deploys on top of Kubernetes. You can set up the deployer like this:
-    
+
     ```yaml
-    deployer:
-      type: kubernetes
-      connection:
-        host: localhost:6443
-        cert: |
-          Add your client cert in PEM format here.
-        key: |
-          Add your client key in PEM format here.
-        cacert: |
-          Add the server CA cert in PEM format here.
+    step:
+      your_step_id:
+        plugin: ...
+        input: ...
+        deploy: # You can use expressions here
+          type: kubernetes
+          connection:
+            host: localhost:6443
+            cert: |
+              Add your client cert in PEM format here.
+            key: |
+              Add your client key in PEM format here.
+            cacert: |
+              Add the server CA cert in PEM format here.
     ```
-    
+
     ??? "All options for the Kubernetes deployer"
         |    |    |
         |----|----|
@@ -611,7 +599,7 @@ deployer:
                 | Name: | Connection |
                 | Description: | Docker connection information. |
                 | Required: | No || Type: | `reference[Connection]` |
-                | Referenced object: | Connection |
+                | Referenced object: | Connection *(see in the Objects section below)* |
                 
                 
             ??? info "pod (`reference[Pod]`)"
@@ -620,7 +608,7 @@ deployer:
                 | Name: | Pod |
                 | Description: | Pod configuration for the plugin. |
                 | Required: | No || Type: | `reference[Pod]` |
-                | Referenced object: | Pod |
+                | Referenced object: | Pod *(see in the Objects section below)* |
                 
                 
             ??? info "timeouts (`reference[Timeouts]`)"
@@ -629,7 +617,7 @@ deployer:
                 | Name: | Timeouts |
                 | Description: | Timeouts for the Docker connection. |
                 | Required: | No || Type: | `reference[Timeouts]` |
-                | Referenced object: | Timeouts |
+                | Referenced object: | Timeouts *(see in the Objects section below)* |
                 
                 
         ???+ note "Objects"
@@ -693,7 +681,7 @@ deployer:
                         | Name: | Connection |
                         | Description: | Docker connection information. |
                         | Required: | No || Type: | `reference[Connection]` |
-                        | Referenced object: | Connection |
+                        | Referenced object: | Connection *(see in the Objects section below)* |
                         
                         
                     ??? info "pod (`reference[Pod]`)"
@@ -702,7 +690,7 @@ deployer:
                         | Name: | Pod |
                         | Description: | Pod configuration for the plugin. |
                         | Required: | No || Type: | `reference[Pod]` |
-                        | Referenced object: | Pod |
+                        | Referenced object: | Pod *(see in the Objects section below)* |
                         
                         
                     ??? info "timeouts (`reference[Timeouts]`)"
@@ -711,7 +699,7 @@ deployer:
                         | Name: | Timeouts |
                         | Description: | Timeouts for the Docker connection. |
                         | Required: | No || Type: | `reference[Timeouts]` |
-                        | Referenced object: | Timeouts |
+                        | Referenced object: | Timeouts *(see in the Objects section below)* |
                         
                         
             ??? info "**ConfigMapVolumeSource** (`object`)"
@@ -930,7 +918,7 @@ deployer:
                                     | Name: | Value source |
                                     | Description: | Load the environment variable from a secret or config map. |
                                     | Required: | No || Required if the following fields are not set: |value || Conflicts the following fields: |value || Type: | `reference[EnvFromSource]` |
-                                    | Referenced object: | EnvFromSource |
+                                    | Referenced object: | EnvFromSource *(see in the Objects section below)* |
                                     
                                     
                         
@@ -945,7 +933,7 @@ deployer:
                             |    |    |
                             |----|----|
                             | Type: | `reference[EnvFromSource]` |
-                            | Referenced object: | EnvFromSource |
+                            | Referenced object: | EnvFromSource *(see in the Objects section below)* |
                             
                         
                     ??? info "image (`string`)"
@@ -1433,7 +1421,7 @@ deployer:
                         | Name: | Metadata |
                         | Description: | Pod metadata. |
                         | Required: | No || Type: | `reference[ObjectMeta]` |
-                        | Referenced object: | ObjectMeta |
+                        | Referenced object: | ObjectMeta *(see in the Objects section below)* |
                         
                         
                     ??? info "spec (`reference[PodSpec]`)"
@@ -1442,7 +1430,7 @@ deployer:
                         | Name: | Specification |
                         | Description: | Pod specification. |
                         | Required: | No || Type: | `reference[PodSpec]` |
-                        | Referenced object: | PodSpec |
+                        | Referenced object: | PodSpec *(see in the Objects section below)* |
                         
                         
             ??? info "**PodSpec** (`object`)"
@@ -1661,7 +1649,7 @@ deployer:
                             |    |    |
                             |----|----|
                             | Type: | `reference[Container]` |
-                            | Referenced object: | Container |
+                            | Referenced object: | Container *(see in the Objects section below)* |
                             
                         
                     ??? info "initContainers (`list[reference[Container]]`)"
@@ -1675,7 +1663,7 @@ deployer:
                             |    |    |
                             |----|----|
                             | Type: | `reference[Container]` |
-                            | Referenced object: | Container |
+                            | Referenced object: | Container *(see in the Objects section below)* |
                             
                         
                     ??? info "nodeSelector (`map[string, string]`)"
@@ -1745,7 +1733,7 @@ deployer:
                                             | Name: | Value source |
                                             | Description: | Load the environment variable from a secret or config map. |
                                             | Required: | No || Required if the following fields are not set: |value || Conflicts the following fields: |value || Type: | `reference[EnvFromSource]` |
-                                            | Referenced object: | EnvFromSource |
+                                            | Referenced object: | EnvFromSource *(see in the Objects section below)* |
                                             
                                             
                                 
@@ -1760,7 +1748,7 @@ deployer:
                                     |    |    |
                                     |----|----|
                                     | Type: | `reference[EnvFromSource]` |
-                                    | Referenced object: | EnvFromSource |
+                                    | Referenced object: | EnvFromSource *(see in the Objects section below)* |
                                     
                                 
                             ??? info "imagePullPolicy (`enum[string]`)"
@@ -1945,7 +1933,7 @@ deployer:
                             |    |    |
                             |----|----|
                             | Type: | `reference[Volume]` |
-                            | Referenced object: | Volume |
+                            | Referenced object: | Volume *(see in the Objects section below)* |
                             
                         
             ??? info "**PortworxVolumeSource** (`object`)"
@@ -2036,7 +2024,7 @@ deployer:
                         | Name: | AWS EBS |
                         | Description: | AWS Elastic Block Storage. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[AWSElasticBlockStoreVolumeSource]` |
-                        | Referenced object: | AWSElasticBlockStoreVolumeSource |
+                        | Referenced object: | AWSElasticBlockStoreVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "azureDisk (`reference[AzureDiskVolumeSource]`)"
@@ -2045,7 +2033,7 @@ deployer:
                         | Name: | Azure Data Disk |
                         | Description: | Mount an Azure Data Disk as a volume. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[AzureDiskVolumeSource]` |
-                        | Referenced object: | AzureDiskVolumeSource |
+                        | Referenced object: | AzureDiskVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "azureFile (`reference[AzureFileVolumeSource]`)"
@@ -2054,7 +2042,7 @@ deployer:
                         | Name: | Azure File |
                         | Description: | Mount an Azure File Service mount. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[AzureFileVolumeSource]` |
-                        | Referenced object: | AzureFileVolumeSource |
+                        | Referenced object: | AzureFileVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "cephfs (`reference[CephFSVolumeSource]`)"
@@ -2063,7 +2051,7 @@ deployer:
                         | Name: | CephFS |
                         | Description: | Mount a CephFS volume. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[CephFSVolumeSource]` |
-                        | Referenced object: | CephFSVolumeSource |
+                        | Referenced object: | CephFSVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "cinder (`reference[CinderVolumeSource]`)"
@@ -2072,7 +2060,7 @@ deployer:
                         | Name: | Cinder |
                         | Description: | Mount a cinder volume attached and mounted on the host machine. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[CinderVolumeSource]` |
-                        | Referenced object: | CinderVolumeSource |
+                        | Referenced object: | CinderVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "configMap (`reference[ConfigMapVolumeSource]`)"
@@ -2081,7 +2069,7 @@ deployer:
                         | Name: | ConfigMap |
                         | Description: | Mount a ConfigMap as a volume. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[ConfigMapVolumeSource]` |
-                        | Referenced object: | ConfigMapVolumeSource |
+                        | Referenced object: | ConfigMapVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "csi (`reference[CSIVolumeSource]`)"
@@ -2090,7 +2078,7 @@ deployer:
                         | Name: | CSI Volume |
                         | Description: | Mount a volume using a CSI driver. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, ephemeral || Type: | `reference[CSIVolumeSource]` |
-                        | Referenced object: | CSIVolumeSource |
+                        | Referenced object: | CSIVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "downwardAPI (`reference[DownwardAPIVolumeSource]`)"
@@ -2099,7 +2087,7 @@ deployer:
                         | Name: | Downward API |
                         | Description: | Specify a volume that the pod should mount itself. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[DownwardAPIVolumeSource]` |
-                        | Referenced object: | DownwardAPIVolumeSource |
+                        | Referenced object: | DownwardAPIVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "emptyDir (`reference[EmptyDirVolumeSource]`)"
@@ -2108,7 +2096,7 @@ deployer:
                         | Name: | Empty directory |
                         | Description: | Temporary empty directory. |
                         | Required: | No || Required if the following fields are not set: |hostPath, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[EmptyDirVolumeSource]` |
-                        | Referenced object: | EmptyDirVolumeSource |
+                        | Referenced object: | EmptyDirVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "ephemeral (`reference[EphemeralVolumeSource]`)"
@@ -2117,7 +2105,7 @@ deployer:
                         | Name: | Ephemeral |
                         | Description: | Mount a volume that is handled by a cluster storage driver. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi || Type: | `reference[EphemeralVolumeSource]` |
-                        | Referenced object: | EphemeralVolumeSource |
+                        | Referenced object: | EphemeralVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "fc (`reference[FCVolumeSource]`)"
@@ -2126,7 +2114,7 @@ deployer:
                         | Name: | Fibre Channel |
                         | Description: | Mount a Fibre Channel volume that&#39;s attached to the host machine. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[FCVolumeSource]` |
-                        | Referenced object: | FCVolumeSource |
+                        | Referenced object: | FCVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "flexVolume (`reference[FlexVolumeSource]`)"
@@ -2135,7 +2123,7 @@ deployer:
                         | Name: | Flex |
                         | Description: | Mount a generic volume provisioned/attached using an exec based plugin. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[FlexVolumeSource]` |
-                        | Referenced object: | FlexVolumeSource |
+                        | Referenced object: | FlexVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "flocker (`reference[FlockerVolumeSource]`)"
@@ -2144,7 +2132,7 @@ deployer:
                         | Name: | Flocker |
                         | Description: | Mount a Flocker volume. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[FlockerVolumeSource]` |
-                        | Referenced object: | FlockerVolumeSource |
+                        | Referenced object: | FlockerVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "gcePersistentDisk (`reference[GCEPersistentDiskVolumeSource]`)"
@@ -2153,7 +2141,7 @@ deployer:
                         | Name: | GCE disk |
                         | Description: | Google Cloud disk. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[GCEPersistentDiskVolumeSource]` |
-                        | Referenced object: | GCEPersistentDiskVolumeSource |
+                        | Referenced object: | GCEPersistentDiskVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "glusterfs (`reference[GlusterfsVolumeSource]`)"
@@ -2162,7 +2150,7 @@ deployer:
                         | Name: | GlusterFS |
                         | Description: | Mount a Gluster volume. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[GlusterfsVolumeSource]` |
-                        | Referenced object: | GlusterfsVolumeSource |
+                        | Referenced object: | GlusterfsVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "hostPath (`reference[HostPathVolumeSource]`)"
@@ -2171,7 +2159,7 @@ deployer:
                         | Name: | Host path |
                         | Description: | Mount volume from the host. |
                         | Required: | No || Required if the following fields are not set: |emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[HostPathVolumeSource]` |
-                        | Referenced object: | HostPathVolumeSource |
+                        | Referenced object: | HostPathVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "iscsi (`reference[ISCSIVolumeSource]`)"
@@ -2180,7 +2168,7 @@ deployer:
                         | Name: | iSCSI |
                         | Description: | Mount an iSCSI volume. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[ISCSIVolumeSource]` |
-                        | Referenced object: | ISCSIVolumeSource |
+                        | Referenced object: | ISCSIVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "name (`string`)"
@@ -2199,7 +2187,7 @@ deployer:
                         | Name: | NFS |
                         | Description: | Mount an NFS share. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[NFSVolumeSource]` |
-                        | Referenced object: | NFSVolumeSource |
+                        | Referenced object: | NFSVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "persistentVolumeClaim (`reference[PersistentVolumeClaimVolumeSource]`)"
@@ -2208,7 +2196,7 @@ deployer:
                         | Name: | Persistent Volume Claim |
                         | Description: | Mount a Persistent Volume Claim. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[PersistentVolumeClaimVolumeSource]` |
-                        | Referenced object: | PersistentVolumeClaimVolumeSource |
+                        | Referenced object: | PersistentVolumeClaimVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "photonPersistentDisk (`reference[PhotonPersistentDiskVolumeSource]`)"
@@ -2217,7 +2205,7 @@ deployer:
                         | Name: | PhotonController persistent disk |
                         | Description: | Mount a PhotonController persistent disk as a volume. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[PhotonPersistentDiskVolumeSource]` |
-                        | Referenced object: | PhotonPersistentDiskVolumeSource |
+                        | Referenced object: | PhotonPersistentDiskVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "portworxVolume (`reference[PortworxVolumeSource]`)"
@@ -2226,7 +2214,7 @@ deployer:
                         | Name: | Portworx Volume |
                         | Description: | Mount a Portworx volume. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, scaleIO, storageos, csi, ephemeral || Type: | `reference[PortworxVolumeSource]` |
-                        | Referenced object: | PortworxVolumeSource |
+                        | Referenced object: | PortworxVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "projected (`reference[ProjectedVolumeSource]`)"
@@ -2235,7 +2223,7 @@ deployer:
                         | Name: | Projected |
                         | Description: | Projected items for all in one resources secrets, configmaps, and downward API. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[ProjectedVolumeSource]` |
-                        | Referenced object: | ProjectedVolumeSource |
+                        | Referenced object: | ProjectedVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "quobyte (`reference[QuobyteVolumeSource]`)"
@@ -2244,7 +2232,7 @@ deployer:
                         | Name: | quobyte |
                         | Description: | Mount Quobyte volume from the host. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[QuobyteVolumeSource]` |
-                        | Referenced object: | QuobyteVolumeSource |
+                        | Referenced object: | QuobyteVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "rbd (`reference[RBDVolumeSource]`)"
@@ -2253,7 +2241,7 @@ deployer:
                         | Name: | Rados Block Device |
                         | Description: | Mount a Rados Block Device. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[RBDVolumeSource]` |
-                        | Referenced object: | RBDVolumeSource |
+                        | Referenced object: | RBDVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "scaleIO (`reference[ScaleIOVolumeSource]`)"
@@ -2262,7 +2250,7 @@ deployer:
                         | Name: | ScaleIO Persistent Volume |
                         | Description: | Mount a ScaleIO persistent volume. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, storageos, csi, ephemeral || Type: | `reference[ScaleIOVolumeSource]` |
-                        | Referenced object: | ScaleIOVolumeSource |
+                        | Referenced object: | ScaleIOVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "secret (`reference[SecretVolumeSource]`)"
@@ -2271,7 +2259,7 @@ deployer:
                         | Name: | Secret |
                         | Description: | Mount a Kubernetes secret. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[SecretVolumeSource]` |
-                        | Referenced object: | SecretVolumeSource |
+                        | Referenced object: | SecretVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "storageos (`reference[StorageOSVolumeSource]`)"
@@ -2280,7 +2268,7 @@ deployer:
                         | Name: | StorageOS Volume |
                         | Description: | Mount a StorageOS volume. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, vsphereVolume, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, csi, ephemeral || Type: | `reference[StorageOSVolumeSource]` |
-                        | Referenced object: | StorageOSVolumeSource |
+                        | Referenced object: | StorageOSVolumeSource *(see in the Objects section below)* |
                         
                         
                     ??? info "vsphereVolume (`reference[VsphereVirtualDiskVolumeSource]`)"
@@ -2289,7 +2277,7 @@ deployer:
                         | Name: | vSphere Virtual Disk |
                         | Description: | Mount a vSphere Virtual Disk as a volume. |
                         | Required: | No || Required if the following fields are not set: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Conflicts the following fields: |hostPath, emptyDir, gcePersistentDisk, awsElasticBlockStore, secret, nfs, iscsi, glusterfs, persistentVolumeClaim, rbd, flexVolume, cinder, cephfs, flocker, downwardAPI, fc, azureFile, configMap, quobyte, azureDisk, photonPersistentDisk, projected, portworxVolume, scaleIO, storageos, csi, ephemeral || Type: | `reference[VsphereVirtualDiskVolumeSource]` |
-                        | Referenced object: | VsphereVirtualDiskVolumeSource |
+                        | Referenced object: | VsphereVirtualDiskVolumeSource *(see in the Objects section below)* |
                         
                         
             ??? info "**VsphereVirtualDiskVolumeSource** (`object`)"
@@ -2302,29 +2290,33 @@ deployer:
                 
 
 === "Podman"
-    
-    If you want to use Podman as your local deployer instead of Docker, you can do so like this:
-    
+
+    If you want to use Podman as your local deployer, you can do so like this:
+
     ```yaml
-    deployer:
-      type: podman
-      podman:
-        # Change where Podman is. (You can use this to point to a shell script
-        path: /path/to/your/podman
-        # Change the network mode
-        networkMode: host
-      deployment:
-        # For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate
-        container:
-          # Add your container config here.
-        host:
-          # Add your host config here.
-        imagePullPolicy: Always|IfNotPresent|Never
-      timeouts:
-        # HTTP timeout
-        http: 5s
+    step:
+      your_step_id:
+        plugin: ...
+        input: ...
+        deploy: # You can use expressions here
+          type: podman
+          podman:
+            # Change where Podman is. (You can use this to point to a shell script
+            path: /path/to/your/podman
+            # Change the network mode
+            networkMode: host
+          deployment:
+            # For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate
+            container:
+              # Add your container config here.
+            host:
+              # Add your host config here.
+            imagePullPolicy: Always|IfNotPresent|Never
+          timeouts:
+            # HTTP timeout
+            http: 5s
     ```
-    
+
     ??? "All options for the Podman deployer"
         |    |    |
         |----|----|
@@ -2337,7 +2329,7 @@ deployer:
                 | Name: | Deployment |
                 | Description: | Deployment configuration for the plugin. |
                 | Required: | No || Type: | `reference[Deployment]` |
-                | Referenced object: | Deployment |
+                | Referenced object: | Deployment *(see in the Objects section below)* |
                 
                 
             ??? info "podman (`reference[Podman]`)"
@@ -2346,7 +2338,7 @@ deployer:
                 | Name: | Podman |
                 | Description: | Podman CLI configuration |
                 | Required: | No || Type: | `reference[Podman]` |
-                | Referenced object: | Podman |
+                | Referenced object: | Podman *(see in the Objects section below)* |
                 
                 
         ???+ note "Objects"
@@ -2362,7 +2354,7 @@ deployer:
                         | Name: | Deployment |
                         | Description: | Deployment configuration for the plugin. |
                         | Required: | No || Type: | `reference[Deployment]` |
-                        | Referenced object: | Deployment |
+                        | Referenced object: | Deployment *(see in the Objects section below)* |
                         
                         
                     ??? info "podman (`reference[Podman]`)"
@@ -2371,7 +2363,7 @@ deployer:
                         | Name: | Podman |
                         | Description: | Podman CLI configuration |
                         | Required: | No || Type: | `reference[Podman]` |
-                        | Referenced object: | Podman |
+                        | Referenced object: | Podman *(see in the Objects section below)* |
                         
                         
             ??? info "**ContainerConfig** (`object`)"
@@ -2458,7 +2450,7 @@ deployer:
                         | Name: | Container configuration |
                         | Description: | Provides information about the container for the plugin. |
                         | Required: | No || Type: | `reference[ContainerConfig]` |
-                        | Referenced object: | ContainerConfig |
+                        | Referenced object: | ContainerConfig *(see in the Objects section below)* |
                         
                         
                     ??? info "host (`reference[HostConfig]`)"
@@ -2467,7 +2459,7 @@ deployer:
                         | Name: | Host configuration |
                         | Description: | Provides information about the container host for the plugin. |
                         | Required: | No || Type: | `reference[HostConfig]` |
-                        | Referenced object: | HostConfig |
+                        | Referenced object: | HostConfig *(see in the Objects section below)* |
                         
                         
                     ??? info "imagePullPolicy (`enum[string]`)"
@@ -2649,7 +2641,7 @@ deployer:
                                 |    |    |
                                 |----|----|
                                 | Type: | `reference[PortBinding]` |
-                                | Referenced object: | PortBinding |
+                                | Referenced object: | PortBinding *(see in the Objects section below)* |
                                 
                         
                         
@@ -2721,7 +2713,7 @@ deployer:
                         | Must match pattern: | `^.*$` |
                         
                          ```json title="Default"
-                         "/usr/bin/podman"
+                         "podman"
                          ```
                         
                         
