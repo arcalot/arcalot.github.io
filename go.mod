@@ -1,13 +1,16 @@
-module go.flow.arcalot.io/docsgen
+module docsgen
 
 go 1.18
 
 require (
-	go.flow.arcalot.io/engine v0.3.0
+	go.flow.arcalot.io/dockerdeployer v0.2.0
+	go.flow.arcalot.io/kubernetesdeployer v0.1.0
 	go.flow.arcalot.io/pluginsdk v0.1.1
+	go.flow.arcalot.io/podmandeployer v0.2.1
 )
 
 require (
+	github.com/Azure/go-ansiterm v0.0.0-20210617225240-d185dfc1b5a1 // indirect
 	github.com/Microsoft/go-winio v0.6.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/docker/distribution v2.8.1+incompatible // indirect
@@ -15,7 +18,6 @@ require (
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
 	github.com/emicklei/go-restful/v3 v3.10.1 // indirect
-	github.com/fxamacker/cbor/v2 v2.4.0 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-openapi/jsonpointer v0.19.6 // indirect
 	github.com/go-openapi/jsonreference v0.20.2 // indirect
@@ -35,16 +37,9 @@ require (
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.0.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/x448/float16 v0.8.4 // indirect
-	go.arcalot.io/dgraph v1.1.0 // indirect
 	go.arcalot.io/lang v1.0.0 // indirect
-	go.arcalot.io/log v1.2.0 // indirect
 	go.arcalot.io/log/v2 v2.0.0 // indirect
 	go.flow.arcalot.io/deployer v0.1.0 // indirect
-	go.flow.arcalot.io/dockerdeployer v0.2.0 // indirect
-	go.flow.arcalot.io/expressions v0.0.0-20221115232532-4d7fa005c94b // indirect
-	go.flow.arcalot.io/kubernetesdeployer v0.1.0 // indirect
-	go.flow.arcalot.io/podmandeployer v0.2.0 // indirect
 	golang.org/x/mod v0.9.0 // indirect
 	golang.org/x/net v0.8.0 // indirect
 	golang.org/x/oauth2 v0.6.0 // indirect

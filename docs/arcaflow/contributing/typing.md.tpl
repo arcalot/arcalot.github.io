@@ -1,8 +1,5 @@
 # The Arcaflow type system
 
-!!! warning "Work in Progress"
-    This document is work in progress and may change until the final release!
-
 Arcaflow takes a departure from the classic run-and-pray approach of running workloads and validates workflows for validity before executing them. To do this, Arcaflow starts the plugins as needed before the workflow is run and queries them for their **schema**. This schema will contain information about what kind of input a plugin requests and what kind of outputs it can produce.
 
 A plugin can support multiple **workflow steps** and must provide information about the data types in its **input and output** for each step. A step can have exactly one input format, but may declare more than one output.
@@ -24,16 +21,7 @@ The typing system supports the following data types.
 - **Floats** are 64-bit floating point numbers that can take both positive and negative values.
 - **Booleans** are values of `true` or `false` and cannot take any other values.
 - **Scopes** and **Refs** are object-like types that allow you to create circular references (see below).
-
-### Planned future types
-
-- **Timestamps** are nanosecond-scale timestamp values for a fixed time in UTC. They are stored and transported as integers, but may be unserialized from strings too.
-- **Dates** are calendar dates without timezone information.
-- **Times** are the time of a day denominated as hours, minutes, seconds, etc. on a nanosecond scale.
-- **Datetimes** are date and times together in one field.
-- **Durations** are nanosecond-scale timespan values.
-- **UUIDs** are UUID-formatted strings.
-- **Sets** are an unordered collection of items that can only contain unique items.
+- **Any** accepts any primitive type (string, int, float, bool, map, list) but no patterns, objects, etc.
 
 ## Validation
 
@@ -90,6 +78,10 @@ root: my_root_object
 ```
 
 Multiple scopes can be nested into each other. The ref always refers to the closest scope up the tree. Multiple scopes can be used when combining objects from several sources (e.g. several plugins) into one schema to avoid conflicting ID assignments.
+
+## Any
+
+Any accepts any primitive type (string, int, float, bool, map, list) but no patterns, objects, etc. This type is severely limited in its ability to validate data and should only be used in exceptional cases when there is no other way to describe a schema.
 
 ## Metadata
 

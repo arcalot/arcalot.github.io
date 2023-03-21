@@ -10,14 +10,52 @@ nav:
       - 'arcaflow/index.md'
       - Getting Started: arcaflow/getting-started.md
       - Concepts:
+          - arcaflow/concepts/index.md
+          - Overview: arcaflow/concepts/index.md
+          - Architecture: arcaflow/concepts/architecture.md
+          - Typing: arcaflow/concepts/typing.md
+          - Plugins: arcaflow/concepts/plugins.md
           - Workflows: arcaflow/concepts/workflows.md
-          - The typing system: arcaflow/concepts/typing.md
-          - The plugin protocol: arcaflow/concepts/plugin-protocol.md
-      - Engine:
-          - Configuring the engine: arcaflow/engine/index.md
+          - Flow control (WIP): arcaflow/concepts/flowcontrol.md
+      - Running Arcaflow:
+          - arcaflow/running/index.md
+          - Overview: arcaflow/running/index.md
+          - Setting up Arcaflow: arcaflow/running/setup.md
+          - Running a workflow: arcaflow/running/running.md
       - Creating plugins:
-          - Python: arcaflow/creating-plugins/python.md
-          - Release: arcaflow/creating-plugins/release.md
+          - arcaflow/plugins/index.md
+          - Overview: arcaflow/plugins/index.md
+          - Python:
+              - arcaflow/plugins/python/index.md
+              - Overview: arcaflow/plugins/python/index.md
+              - Your first plugin: arcaflow/plugins/python/first.md
+              - Creating a data model: arcaflow/plugins/python/data-model.md
+              - Embedding your plugin: arcaflow/plugins/python/embedding.md
+              - Testing your plugin: arcaflow/plugins/python/testing.md
+              - Frequently asked questions: arcaflow/plugins/python/faq.md
+              - Creating a schema by hand: arcaflow/plugins/python/schema.md
+              - Contributing official plugins: arcaflow/plugins/python/official.md
+          - Go:
+              - arcaflow/plugins/go/index.md
+              - Overview: arcaflow/plugins/go/index.md
+              - Your first plugin: arcaflow/plugins/go/first.md
+              - Creating a schema: arcaflow/plugins/go/schema.md
+          - Packaging plugins: arcaflow/plugins/packaging.md
+      - Writing workflows:
+          - arcaflow/workflows/index.md
+          - Overview: arcaflow/workflows/index.md
+          - Creating your input schema: arcaflow/workflows/input.md
+          - Setting up a step: arcaflow/workflows/step.md
+          - Expressions: arcaflow/workflows/expressions.md
+          - Outputs: arcaflow/workflows/output.md
+      - Contributing:
+          - arcaflow/contributing/index.md
+          - Overview: arcaflow/contributing/index.md
+          - Typing system: arcaflow/contributing/typing.md
+          - Arcaflow Transport Protocol: arcaflow/contributing/plugin-protocol.md
+          - Expression language: arcaflow/contributing/expressions.md
+          - Deployers: arcaflow/contributing/deployers.md
+          - Engine: arcaflow/contributing/engine.md
 extra:
   social:
     - icon: fontawesome/brands/github
@@ -49,12 +87,12 @@ theme:
     - navigation.tracking
     - navigation.tabs
     - navigation.tabs.sticky
-    - navigation.sections
-    - navigation.expand
     - navigation.indexes
+    - toc.integrate
     - search.suggest
     - search.highlight
     - search.share
+    - content.code.copy
 extra_css:
   - extra.css
 markdown_extensions:

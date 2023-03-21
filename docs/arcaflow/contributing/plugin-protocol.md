@@ -1,47 +1,27 @@
-# Plugin protocol specification
+# Arcaflow Plugin protocol specification (ATP)
 
-!!! warning "Work in Progress"
-    This document is work in progress and may change until the final release!
-
-Arcaflow runs plugins locally in a container using Docker or Podman, or remotely in Kubernetes. Each plugin must be
-containerized and communicates with the engine over standard input/output. This document outlines the protocol the
-engine and the plugins use to communicate.
+Arcaflow runs plugins locally in a container using Docker or Podman, or remotely in Kubernetes. Each plugin must be containerized and communicates with the engine over standard input/output. This document outlines the protocol the engine and the plugins use to communicate.
 
 !!! hint
     You do not need this page if you only intend to implement a plugin with the SDK!
 
 ## Execution model
 
-A single plugin execution is intended to run a single task and not more. This simplifies the code since there is no need
-to try and clean up after each task. Each plugin is executed in a container and must communicate with the engine over
-standard input/output. Furthermore, the plugin must add a handler for `SIGTERM` and properly clean up if there are
-services running in the background.
+A single plugin execution is intended to run a single task and not more. This simplifies the code since there is no need to try and clean up after each task. Each plugin is executed in a container and must communicate with the engine over standard input/output. Furthermore, the plugin must add a handler for `SIGTERM` and properly clean up if there are services running in the background.
 
-Each plugin is executed at the start of the workflow, or workflow block, and is terminated only at the end of the
-current workflow or workflow block. The plugin can safely rely on being able to start a service in the background and
-then keeping it running until the SIGTERM comes to shut down the container.
+Each plugin is executed at the start of the workflow, or workflow block, and is terminated only at the end of the current workflow or workflow block. The plugin can safely rely on being able to start a service in the background and then keeping it running until the SIGTERM comes to shut down the container.
 
-However, the plugin must, under no circumstances, start doing work until the engine sends the command to do so. This
-includes starting any services inside the container or outside. This restriction is necessary to be able to launch the
-plugin with minimal resource consumption locally on the engine host to fetch the schema.
+However, the plugin must, under no circumstances, start doing work until the engine sends the command to do so. This includes starting any services inside the container or outside. This restriction is necessary to be able to launch the plugin with minimal resource consumption locally on the engine host to fetch the schema.
 
 The plugin execution is divided into three major steps.
 
-1. When the plugin is started, it must output the current plugin protocol version and its schema to the standard output.
-The engine will read this output from the container logs.
-2. When it is time to start the work, the engine will send the desired step ID with its input parameters over the
-standard input. The plugin acknowledges this and starts to work. When the work is complete, the plugin must
-automatically output the results to the standard output.
-3. When a shutdown is desired, the engine will send a `SIGTERM` to the plugin. The plugin has up to 30 seconds to shut
-down. The SIGTERM may come at any time, even while the work is still running, and the plugin must appropriately shut
-down. If the work is not complete, the plugin may attempt to output an error output data to the standard out, but
-must not do so. If the plugin fails to stop by itself within 30 seconds, the plugin container is forcefully stopped.
+1. When the plugin is started, it must output the current plugin protocol version and its schema to the standard output. The engine will read this output from the container logs.
+2. When it is time to start the work, the engine will send the desired step ID with its input parameters over the standard input. The plugin acknowledges this and starts to work. When the work is complete, the plugin must automatically output the results to the standard output.
+3. When a shutdown is desired, the engine will send a `SIGTERM` to the plugin. The plugin has up to 30 seconds to shut down. The SIGTERM may come at any time, even while the work is still running, and the plugin must appropriately shut down. If the work is not complete, the plugin may attempt to output an error output data to the standard out, but must not do so. If the plugin fails to stop by itself within 30 seconds, the plugin container is forcefully stopped.
 
 ## Protocol
 
-As a data transport protocol, we
-use [CBOR messages](https://cbor.io/) [RFC 8949](https://www.rfc-editor.org/rfc/rfc8949.html) back to back due to their
-self-delimiting nature. This section provides the entire protocol as [JSON schema](https://json-schema.org/) below.
+As a data transport protocol, we use [CBOR messages](https://cbor.io/) [RFC 8949](https://www.rfc-editor.org/rfc/rfc8949.html) back to back due to their self-delimiting nature. This section provides the entire protocol as [JSON schema](https://json-schema.org/) below.
 
 ## Step 0: The "start output" message
 
@@ -49,8 +29,7 @@ Because Kubernetes has no clean way of capturing an output right at the start, t
 
 ## Step 1: Hello message
 
-The "Hello" message is a way for the plugin to introduce itself and present its steps and schema. Transcribed to JSON, a
-message of this kind would look as follows:
+The "Hello" message is a way for the plugin to introduce itself and present its steps and schema. Transcribed to JSON, a message of this kind would look as follows:
 
 ```json
 {
@@ -160,7 +139,7 @@ This section contains the exact schema that the plugin sends to the engine.
             |    |    |
             |----|----|
             | Type: | `reference[Step]` |
-            | Referenced object: | Step |
+            | Referenced object: | Step *(see in the Objects section below)* |
             
         
         
@@ -274,7 +253,7 @@ This section contains the exact schema that the plugin sends to the engine.
                 | Name: | Units |
                 | Description: | Units this number represents. |
                 | Required: | No || Type: | `reference[Units]` |
-                | Referenced object: | Units |
+                | Referenced object: | Units *(see in the Objects section below)* |
                 
                 
                 ??? example "Examples"
@@ -325,7 +304,7 @@ This section contains the exact schema that the plugin sends to the engine.
                 | Name: | Units |
                 | Description: | Units this number represents. |
                 | Required: | No || Type: | `reference[Units]` |
-                | Referenced object: | Units |
+                | Referenced object: | Units *(see in the Objects section below)* |
                 
                 
                 ??? example "Examples"
@@ -346,7 +325,7 @@ This section contains the exact schema that the plugin sends to the engine.
                 | Name: | Units |
                 | Description: | Units this number represents. |
                 | Required: | No || Type: | `reference[Units]` |
-                | Referenced object: | Units |
+                | Referenced object: | Units *(see in the Objects section below)* |
                 
                 
                 ??? example "Examples"
@@ -372,7 +351,7 @@ This section contains the exact schema that the plugin sends to the engine.
                     |    |    |
                     |----|----|
                     | Type: | `reference[Display]` |
-                    | Referenced object: | Display |
+                    | Referenced object: | Display *(see in the Objects section below)* |
                     
                 
                 
@@ -512,7 +491,7 @@ This section contains the exact schema that the plugin sends to the engine.
                     |    |    |
                     |----|----|
                     | Type: | `reference[Property]` |
-                    | Referenced object: | Property |
+                    | Referenced object: | Property *(see in the Objects section below)* |
                     
                 
                 
@@ -633,7 +612,7 @@ This section contains the exact schema that the plugin sends to the engine.
                 | Name: | Display |
                 | Description: | Name, description and icon. |
                 | Required: | No || Type: | `reference[Display]` |
-                | Referenced object: | Display |
+                | Referenced object: | Display *(see in the Objects section below)* |
                 
                 
             ??? info "examples (`list[string]`)"
@@ -707,7 +686,7 @@ This section contains the exact schema that the plugin sends to the engine.
                 | Name: | Display |
                 | Description: | Name, description and icon. |
                 | Required: | No || Type: | `reference[Display]` |
-                | Referenced object: | Display |
+                | Referenced object: | Display *(see in the Objects section below)* |
                 
                 
             ??? info "id (`string`)"
@@ -746,7 +725,7 @@ This section contains the exact schema that the plugin sends to the engine.
                     |    |    |
                     |----|----|
                     | Type: | `reference[Step]` |
-                    | Referenced object: | Step |
+                    | Referenced object: | Step *(see in the Objects section below)* |
                     
                 
                 
@@ -775,7 +754,7 @@ This section contains the exact schema that the plugin sends to the engine.
                     |    |    |
                     |----|----|
                     | Type: | `reference[Object]` |
-                    | Referenced object: | Object |
+                    | Referenced object: | Object *(see in the Objects section below)* |
                     
                 
                 
@@ -802,7 +781,7 @@ This section contains the exact schema that the plugin sends to the engine.
                 | Name: | Display |
                 | Description: | Name, description and icon. |
                 | Required: | No || Type: | `reference[Display]` |
-                | Referenced object: | Display |
+                | Referenced object: | Display *(see in the Objects section below)* |
                 
                 
             ??? info "id (`string`)"
@@ -822,7 +801,7 @@ This section contains the exact schema that the plugin sends to the engine.
                 | Name: | Input |
                 | Description: | Input data schema. |
                 | Required: | Yes || Type: | `reference[Scope]` |
-                | Referenced object: | Scope |
+                | Referenced object: | Scope *(see in the Objects section below)* |
                 
                 
             ??? info "outputs (`map[string, reference[StepOutput]]`)"
@@ -844,7 +823,7 @@ This section contains the exact schema that the plugin sends to the engine.
                     |    |    |
                     |----|----|
                     | Type: | `reference[StepOutput]` |
-                    | Referenced object: | StepOutput |
+                    | Referenced object: | StepOutput *(see in the Objects section below)* |
                     
                 
                 
@@ -860,7 +839,7 @@ This section contains the exact schema that the plugin sends to the engine.
                 | Name: | Display |
                 | Description: | Name, description and icon. |
                 | Required: | No || Type: | `reference[Display]` |
-                | Referenced object: | Display |
+                | Referenced object: | Display *(see in the Objects section below)* |
                 
                 
             ??? info "error (`bool`)"
@@ -881,7 +860,7 @@ This section contains the exact schema that the plugin sends to the engine.
                 | Name: | Schema |
                 | Description: | Data schema for this particular output. |
                 | Required: | Yes || Type: | `reference[Scope]` |
-                | Referenced object: | Scope |
+                | Referenced object: | Scope *(see in the Objects section below)* |
                 
                 
     ??? info "**String** (`object`)"
@@ -959,7 +938,7 @@ This section contains the exact schema that the plugin sends to the engine.
                     |    |    |
                     |----|----|
                     | Type: | `reference[Display]` |
-                    | Referenced object: | Display |
+                    | Referenced object: | Display *(see in the Objects section below)* |
                     
                 
                 
@@ -1050,7 +1029,7 @@ This section contains the exact schema that the plugin sends to the engine.
                 | Name: | Base UnitDefinition |
                 | Description: | The base UnitDefinition is the smallest UnitDefinition of scale for this set of UnitsDefinition. |
                 | Required: | Yes || Type: | `reference[Unit]` |
-                | Referenced object: | Unit |
+                | Referenced object: | Unit *(see in the Objects section below)* |
                 
                 
                 ??? example "Examples"
@@ -1080,7 +1059,7 @@ This section contains the exact schema that the plugin sends to the engine.
                     |    |    |
                     |----|----|
                     | Type: | `reference[Unit]` |
-                    | Referenced object: | Unit |
+                    | Referenced object: | Unit *(see in the Objects section below)* |
                     
                 
                 
