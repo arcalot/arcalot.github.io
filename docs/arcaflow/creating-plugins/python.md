@@ -230,7 +230,7 @@ First, you will have to set up your environment.
       #!/usr/bin/env python3
       import unittest
       from arcaflow_plugin_template_python import example_plugin
-      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       ```
 
 #### Create Virtual Environment
@@ -252,7 +252,6 @@ First, you will have to set up your environment.
         license = "Apache-2.0+GPL-2.0-only"
         ...
         ```
-        The directory name of your Python module _must_ match the name in your pyproject.toml, allowing for `-` substituting for `_` (i.e `arcaflow-plugin-template-python` ~= `arcaflow_plugin_template_python`), so that the directory name transforms into module name that is a valid Python identifier.
 
     3. Set this package's Python virtual environment to use your Python 3.9.
 

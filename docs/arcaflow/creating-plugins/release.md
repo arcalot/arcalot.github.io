@@ -209,7 +209,7 @@ Change into the root directory of your plugin project.
     └── tests
         └── test_example_plugin.py
     ```
-5. Rename the following with your desired package name.
+5. Rename the following with your desired package name[^1].
 
       1. GitHub repo
       2. README title
@@ -243,7 +243,7 @@ Change into the root directory of your plugin project.
       #!/usr/bin/env python3
       import unittest
       from arcaflow_plugin_template_python import example_plugin
-      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       ```
 
 ### Create Package Virtual Environment
@@ -253,8 +253,7 @@ Change into the root directory of your plugin project.
     1. Fulfill requirements.
         1. Poetry 1.2
 
-    2. Rename the following with your desired package name.
-        1. Python package in `pyproject.toml`
+    2. Rename the Python package in your `pyproject.toml` with your desired package name[^1].
 
         ```toml
         [tool.poetry]
@@ -265,7 +264,6 @@ Change into the root directory of your plugin project.
         license = "Apache-2.0+GPL-2.0-only"
         ...
         ```
-        The directory name of your Python module _must_ match the name in your pyproject.toml, allowing for `-` substituting for `_` (i.e `arcaflow-plugin-template-python` ~= `arcaflow_plugin_template_python`), so that the directory name transforms into module name that is a valid Python identifier.
 
     3. Set this package's Python virtual environment to use your Python 3.9.
 
@@ -503,6 +501,6 @@ export TESTPYPI_PASSWORD=<test pypi password>
     Poetry (version 1.2.2)
     ```
 
-[^1]: Naming your module directory the same as its encompassing project directory is a common convention for Python projects. Module directories must also be legal Python identifiers (i.e. variable names).
+[^1]: Naming your module directory the same as its encompassing project directory is a common convention for Python projects. Module directories must also be valid Python identifiers (i.e. variable names). The directory name of your Python module _must_ match the name in your pyproject.toml, allowing for `-` substituting for `_` (i.e `arcaflow-plugin-template-python` ~= `arcaflow_plugin_template_python`), so that the directory name transforms into a module name that is a valid Python identifier.
 
 [^2]: You want to ensure that Poetry is installed into __exactly one Python executable__ on your system. If something goes wrong with your package's Python virtual environment, you do not want to spend additional time figuring out which Poetry executable is responsible for managing that specific Python virtual environment.
