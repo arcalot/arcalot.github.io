@@ -10,7 +10,7 @@ Currently, we only support the manual method for non-Arcalot plugins. However, i
 
     With Python, the Dockerfile heavily depends on which build tool you are using. Here we are demonstrating the usage using pip.
     
-    ```
+    ```Dockerfile
     FROM python:alpine
 
     # Add the plugin contents
