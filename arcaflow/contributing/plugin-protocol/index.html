@@ -1,0 +1,4165 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://arcalot.io/arcaflow/contributing/plugin-protocol/">
+      
+      
+        <link rel="prev" href="../typing/">
+      
+      
+        <link rel="next" href="../expressions/">
+      
+      <link rel="icon" href="../../../arcalot.svg">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
+    
+    
+      
+        <title>Arcaflow Transport Protocol - Arcalot</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.c4a75a56.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#arcaflow-plugin-protocol-specification-atp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Arcalot" class="md-header__button md-logo" aria-label="Arcalot" data-md-component="logo">
+      
+  <img src="../../../arcalot.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Arcalot
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Arcaflow Transport Protocol
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/arcalot/arcalot.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    arcalot/arcalot.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../arcalog/" class="md-tabs__link">
+      Arcalog
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
+        Arcaflow
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Arcalot" class="md-nav__button md-logo" aria-label="Arcalot" data-md-component="logo">
+      
+  <img src="../../../arcalot.svg" alt="logo">
+
+    </a>
+    Arcalot
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/arcalot/arcalot.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    arcalot/arcalot.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../arcalog/" class="md-nav__link">
+        Arcalog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../">Arcaflow</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Arcaflow
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../concepts/">Concepts</a>
+          
+            <label for="__nav_3_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Concepts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        Architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/typing/" class="md-nav__link">
+        Typing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/plugins/" class="md-nav__link">
+        Plugins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/workflows/" class="md-nav__link">
+        Workflows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/flowcontrol/" class="md-nav__link">
+        Flow control (WIP)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../running/">Running Arcaflow</a>
+          
+            <label for="__nav_3_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Running Arcaflow
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../running/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../running/setup/" class="md-nav__link">
+        Setting up Arcaflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../running/running/" class="md-nav__link">
+        Running a workflow
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../plugins/">Creating plugins</a>
+          
+            <label for="__nav_3_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          Creating plugins
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../plugins/python/">Python</a>
+          
+            <label for="__nav_3_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/first/" class="md-nav__link">
+        Your first plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/data-model/" class="md-nav__link">
+        Creating a data model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/embedding/" class="md-nav__link">
+        Embedding your plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/testing/" class="md-nav__link">
+        Testing your plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/faq/" class="md-nav__link">
+        Frequently asked questions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/schema/" class="md-nav__link">
+        Creating a schema by hand
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/official/" class="md-nav__link">
+        Contributing official plugins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../plugins/go/">Go</a>
+          
+            <label for="__nav_3_5_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Go
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/go/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/go/first/" class="md-nav__link">
+        Your first plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/go/schema/" class="md-nav__link">
+        Creating a schema
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/packaging/" class="md-nav__link">
+        Packaging plugins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../workflows/">Writing workflows</a>
+          
+            <label for="__nav_3_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Writing workflows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/input/" class="md-nav__link">
+        Creating your input schema
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/step/" class="md-nav__link">
+        Setting up a step
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/expressions/" class="md-nav__link">
+        Expressions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/output/" class="md-nav__link">
+        Outputs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Contributing</a>
+          
+            <label for="__nav_3_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Contributing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../typing/" class="md-nav__link">
+        Typing system
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Arcaflow Transport Protocol
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Arcaflow Transport Protocol
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#execution-model" class="md-nav__link">
+    Execution model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protocol" class="md-nav__link">
+    Protocol
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-0-the-start-output-message" class="md-nav__link">
+    Step 0: The "start output" message
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-hello-message" class="md-nav__link">
+    Step 1: Hello message
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-start-work-message" class="md-nav__link">
+    Step 2: Start work message
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3a-crash" class="md-nav__link">
+    Step 3/a: Crash
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3b-output" class="md-nav__link">
+    Step 3/b: Output
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema" class="md-nav__link">
+    Schema
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../expressions/" class="md-nav__link">
+        Expression language
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deployers/" class="md-nav__link">
+        Deployers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../engine/" class="md-nav__link">
+        Engine
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="arcaflow-plugin-protocol-specification-atp">Arcaflow Plugin protocol specification (ATP)</h1>
+<p>Arcaflow runs plugins locally in a container using Docker or Podman, or remotely in Kubernetes. Each plugin must be containerized and communicates with the engine over standard input/output. This document outlines the protocol the engine and the plugins use to communicate.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You do not need this page if you only intend to implement a plugin with the SDK!</p>
+</div>
+<h2 id="execution-model">Execution model</h2>
+<p>A single plugin execution is intended to run a single task and not more. This simplifies the code since there is no need to try and clean up after each task. Each plugin is executed in a container and must communicate with the engine over standard input/output. Furthermore, the plugin must add a handler for <code>SIGTERM</code> and properly clean up if there are services running in the background.</p>
+<p>Each plugin is executed at the start of the workflow, or workflow block, and is terminated only at the end of the current workflow or workflow block. The plugin can safely rely on being able to start a service in the background and then keeping it running until the SIGTERM comes to shut down the container.</p>
+<p>However, the plugin must, under no circumstances, start doing work until the engine sends the command to do so. This includes starting any services inside the container or outside. This restriction is necessary to be able to launch the plugin with minimal resource consumption locally on the engine host to fetch the schema.</p>
+<p>The plugin execution is divided into three major steps.</p>
+<ol>
+<li>When the plugin is started, it must output the current plugin protocol version and its schema to the standard output. The engine will read this output from the container logs.</li>
+<li>When it is time to start the work, the engine will send the desired step ID with its input parameters over the standard input. The plugin acknowledges this and starts to work. When the work is complete, the plugin must automatically output the results to the standard output.</li>
+<li>When a shutdown is desired, the engine will send a <code>SIGTERM</code> to the plugin. The plugin has up to 30 seconds to shut down. The SIGTERM may come at any time, even while the work is still running, and the plugin must appropriately shut down. If the work is not complete, the plugin may attempt to output an error output data to the standard out, but must not do so. If the plugin fails to stop by itself within 30 seconds, the plugin container is forcefully stopped.</li>
+</ol>
+<h2 id="protocol">Protocol</h2>
+<p>As a data transport protocol, we use <a href="https://cbor.io/">CBOR messages</a> <a href="https://www.rfc-editor.org/rfc/rfc8949.html">RFC 8949</a> back to back due to their self-delimiting nature. This section provides the entire protocol as <a href="https://json-schema.org/">JSON schema</a> below.</p>
+<h2 id="step-0-the-start-output-message">Step 0: The &ldquo;start output&rdquo; message</h2>
+<p>Because Kubernetes has no clean way of capturing an output right at the start, the initial step of the plugin execution involves the engine sending an empty CBOR message (<code>None</code> or <code>Nil</code>) to the plugin. This indicates, that the plugin may start its output now.</p>
+<h2 id="step-1-hello-message">Step 1: Hello message</h2>
+<p>The &ldquo;Hello&rdquo; message is a way for the plugin to introduce itself and present its steps and schema. Transcribed to JSON, a message of this kind would look as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;steps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;step-id-1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Step 1&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This is the first step&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;input&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="c1">// Input schema</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;output-id-1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Name for this output kind&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Description for this output&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Output schema</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The schemas must describe the data structure the plugin expects. For a simple hello world input would look as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The full schema is described below in the <a href="#schema">Schema</a> section.</p>
+<h2 id="step-2-start-work-message">Step 2: Start work message</h2>
+<p>The &ldquo;start work&rdquo; message has the following parameters in CBOR:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id-of-the-step-to-execute&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Input parameters according to schema here</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The plugin must respond with a CBOR message of the following format:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;started&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="step-3a-crash">Step 3/a: Crash</h2>
+<p>If the plugin execution ended unexpectedly, the plugin should crash and output a reasonable error message to the standard error. The plugin must exit with a non-zero exit status to notify the engine that the execution failed.</p>
+<h2 id="step-3b-output">Step 3/b: Output</h2>
+<p>When the plugin has executed successfully, it must emit a CBOR message to the standard output:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;output_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id-of-the-declared-output&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;output_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Result data of the plugin</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;debug_logs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Unstructured logs here for debugging as a string.&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="schema">Schema</h2>
+<p>This section contains the exact schema that the plugin sends to the engine.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>scope</code></td>
+</tr>
+<tr>
+<td>Root object:</td>
+<td>Schema</td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>steps (<code>map[string, reference[Step]]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Steps</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Steps this schema supports.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>Key type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Maximum:</td>
+<td>255</td>
+</tr>
+<tr>
+<td>Must match pattern:</td>
+<td><code>^[$@a-zA-Z0-9-_]&amp;#43;$</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>Value type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>reference[Step]</code></td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Step <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+</details>
+<details class="note" open="open">
+<summary>Objects</summary>
+<details class="info">
+<summary><strong>AnySchema</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<p><em>None</em></p>
+</details>
+</details>
+<details class="info">
+<summary><strong>BoolSchema</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<p><em>None</em></p>
+</details>
+</details>
+<details class="info">
+<summary><strong>Display</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>description (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Description</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Description for this item if needed.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;Please select the fruit you would like.&quot;</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>icon (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Icon</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>SVG icon for this item. Must have the declared size of 64x64, must not include additional namespaces, and must not reference external resources.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;&lt;svg ...&gt;&lt;/svg&gt;&quot;</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>name (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Name</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Short text serving as a name or title for this item.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;Fruit&quot;</span>
+</code></pre></div>
+</details>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>Float</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>max (<code>float</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Maximum</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Maximum value for this float (inclusive).</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="mf">16.0</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>min (<code>float</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Minimum</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Minimum value for this float (inclusive).</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="mf">5.0</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>units (<code>reference[Units]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Units</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Units this number represents.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Units <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w">   </span><span class="nt">&quot;base_unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">       </span><span class="nt">&quot;name_short_singular&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%&quot;</span><span class="p">,</span><span class="w">       </span><span class="nt">&quot;name_short_plural&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%&quot;</span><span class="p">,</span><span class="w">       </span><span class="nt">&quot;name_long_singular&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;percent&quot;</span><span class="p">,</span><span class="w">       </span><span class="nt">&quot;name_long_plural&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;percent&quot;</span><span class="w">   </span><span class="p">}}</span>
+</code></pre></div>
+</details>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>Int</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>max (<code>int</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Maximum</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Maximum value for this int (inclusive).</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="mi">16</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>min (<code>int</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Minimum</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Minimum value for this int (inclusive).</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="mi">5</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>units (<code>reference[Units]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Units</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Units this number represents.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Units <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w">   </span><span class="nt">&quot;base_unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">       </span><span class="nt">&quot;name_short_singular&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%&quot;</span><span class="p">,</span><span class="w">       </span><span class="nt">&quot;name_short_plural&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%&quot;</span><span class="p">,</span><span class="w">       </span><span class="nt">&quot;name_long_singular&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;percent&quot;</span><span class="p">,</span><span class="w">       </span><span class="nt">&quot;name_long_plural&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;percent&quot;</span><span class="w">   </span><span class="p">}}</span>
+</code></pre></div>
+</details>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>IntEnum</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>units (<code>reference[Units]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Units</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Units this number represents.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Units <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w">   </span><span class="nt">&quot;base_unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">       </span><span class="nt">&quot;name_short_singular&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%&quot;</span><span class="p">,</span><span class="w">       </span><span class="nt">&quot;name_short_plural&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%&quot;</span><span class="p">,</span><span class="w">       </span><span class="nt">&quot;name_long_singular&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;percent&quot;</span><span class="p">,</span><span class="w">       </span><span class="nt">&quot;name_long_plural&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;percent&quot;</span><span class="w">   </span><span class="p">}}</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>values (<code>map[int, reference[Display]]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Values</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Possible values for this field.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code>| Minimum items: | 1 |
+</code></pre></div>
+<details class="info">
+<summary>Key type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>int</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>Value type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>reference[Display]</code></td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Display <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;1024&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;kB&quot;</span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;1048576&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MB&quot;</span><span class="p">}}</span>
+</code></pre></div>
+</details>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>List</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>items (<code>one of[string]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Items</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>ReflectedType definition for items in this list.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>max (<code>int</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Maximum</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Maximum value for this int (inclusive).</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="mi">16</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>min (<code>int</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Minimum</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Minimum number of items in this list..</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="mi">5</span>
+</code></pre></div>
+</details>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>Map</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>keys (<code>one of[string]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Keys</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>ReflectedType definition for keys in this map.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>max (<code>int</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Maximum</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Maximum value for this int (inclusive).</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="mi">16</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>min (<code>int</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Minimum</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Minimum number of items in this list..</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="mi">5</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>values (<code>one of[string]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Values</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>ReflectedType definition for values in this map.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>Object</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>id (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>ID</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Unique identifier for this object within the current scope.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Maximum:</td>
+<td>255</td>
+</tr>
+<tr>
+<td>Must match pattern:</td>
+<td><code>^[$@a-zA-Z0-9-_]&amp;#43;$</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>properties (<code>map[string, reference[Property]]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Properties</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Properties of this object.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>Key type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>Value type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>reference[Property]</code></td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Property <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>OneOfIntSchema</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>discriminator_field_name (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Discriminator field name</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Name of the field used to discriminate between possible values. If this field is present on any of the component objects it must also be an int.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;_type&quot;</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>types (<code>map[int, one of[string]]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Types</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>Key type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>int</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>Value type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>one of[string]</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>OneOfStringSchema</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>discriminator_field_name (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Discriminator field name</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Name of the field used to discriminate between possible values. If this field is present on any of the component objects it must also be an int.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;_type&quot;</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>types (<code>map[string, one of[string]]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Types</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>Key type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>string</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>Value type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>one of[string]</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>Pattern</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<p><em>None</em></p>
+</details>
+</details>
+<details class="info">
+<summary><strong>Property</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>conflicts (<code>list[string]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Conflicts</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>The current property cannot be set if any of the listed properties are set.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>List Items</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>string</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+<details class="info">
+<summary>default (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Default</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Default value for this property in JSON encoding. The value must be unserializable by the type specified in the type field.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>display (<code>reference[Display]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Display</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Name, description and icon.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Display <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>examples (<code>list[string]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Examples</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Example values for this property, encoded as JSON.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>List Items</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>string</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+<details class="info">
+<summary>required (<code>bool</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>When set to true, the value for this field must be provided under all circumstances.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><span class="filename">Default</span><pre><span></span><code><span class="kc">true</span>
+</code></pre></div>
+</details>
+<details class="info">
+<summary>required_if (<code>list[string]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Required if</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Sets the current property to required if any of the properties in this list are set.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>List Items</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>string</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+<details class="info">
+<summary>required_if_not (<code>list[string]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Required if not</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Sets the current property to be required if none of the properties in this list are set.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>List Items</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>string</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+<details class="info">
+<summary>type (<code>one of[string]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Type</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Type definition for this field.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>Ref</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>display (<code>reference[Display]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Display</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Name, description and icon.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Display <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>id (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>ID</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Referenced object ID.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Maximum:</td>
+<td>255</td>
+</tr>
+<tr>
+<td>Must match pattern:</td>
+<td><code>^[$@a-zA-Z0-9-_]&amp;#43;$</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>Schema</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>steps (<code>map[string, reference[Step]]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Steps</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Steps this schema supports.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>Key type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Maximum:</td>
+<td>255</td>
+</tr>
+<tr>
+<td>Must match pattern:</td>
+<td><code>^[$@a-zA-Z0-9-_]&amp;#43;$</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>Value type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>reference[Step]</code></td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Step <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>Scope</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>objects (<code>map[string, reference[Object]]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Objects</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>A set of referencable objects. These objects may contain references themselves.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>Key type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Maximum:</td>
+<td>255</td>
+</tr>
+<tr>
+<td>Must match pattern:</td>
+<td><code>^[$@a-zA-Z0-9-_]&amp;#43;$</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>Value type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>reference[Object]</code></td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Object <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+<details class="info">
+<summary>root (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Root object</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>ID of the root object of the scope.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Maximum:</td>
+<td>255</td>
+</tr>
+<tr>
+<td>Must match pattern:</td>
+<td><code>^[$@a-zA-Z0-9-_]&amp;#43;$</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>Step</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>display (<code>reference[Display]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Display</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Name, description and icon.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Display <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>id (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>ID</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Machine identifier for this step.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Maximum:</td>
+<td>255</td>
+</tr>
+<tr>
+<td>Must match pattern:</td>
+<td><code>^[$@a-zA-Z0-9-_]&amp;#43;$</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>input (<code>reference[Scope]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Input</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Input data schema.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Scope <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>outputs (<code>map[string, reference[StepOutput]]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Input</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Input data schema.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>Key type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Maximum:</td>
+<td>255</td>
+</tr>
+<tr>
+<td>Must match pattern:</td>
+<td><code>^[$@a-zA-Z0-9-_]&amp;#43;$</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>Value type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>reference[StepOutput]</code></td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>StepOutput <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>StepOutput</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>display (<code>reference[Display]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Display</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Name, description and icon.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Display <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>error (<code>bool</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Error</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>If set to true, this output will be treated as an error output.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><span class="filename">Default</span><pre><span></span><code><span class="kc">false</span>
+</code></pre></div>
+</details>
+<details class="info">
+<summary>schema (<code>reference[Scope]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Schema</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Data schema for this particular output.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Scope <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>String</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>max (<code>int</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Maximum</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Maximum length for this string (inclusive).</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Units:</td>
+<td>characters</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="mi">16</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>min (<code>int</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Minimum</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Minimum length for this string (inclusive).</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Units:</td>
+<td>characters</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="mi">5</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>pattern (<code>pattern</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Pattern</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Regular expression this string must match.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;^[a-zA-Z]+$&quot;</span>
+</code></pre></div>
+</details>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>StringEnum</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>values (<code>map[string, reference[Display]]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Values</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Mapping where the left side of the map holds the possible value and the right side holds the display value for forms, etc.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code>| Minimum items: | 1 |
+</code></pre></div>
+<details class="info">
+<summary>Key type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>string</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>Value type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>reference[Display]</code></td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Display <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;apple&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Apple&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;orange&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Orange&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>Unit</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>name_long_plural (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Name long (plural)</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Longer name for this UnitDefinition in plural form.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;bytes&quot;</span><span class="p">,</span><span class="s2">&quot;characters&quot;</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>name_long_singular (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Name long (singular)</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Longer name for this UnitDefinition in singular form.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;byte&quot;</span><span class="p">,</span><span class="s2">&quot;character&quot;</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>name_short_plural (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Name short (plural)</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Shorter name for this UnitDefinition in plural form.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;chars&quot;</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>name_short_singular (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Name short (singular)</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>Shorter name for this UnitDefinition in singular form.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;char&quot;</span>
+</code></pre></div>
+</details>
+</details>
+</details>
+</details>
+<details class="info">
+<summary><strong>Units</strong> (<code>object</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>object</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note" open="open">
+<summary>Properties</summary>
+<details class="info">
+<summary>base_unit (<code>reference[Unit]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Base UnitDefinition</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>The base UnitDefinition is the smallest UnitDefinition of scale for this set of UnitsDefinition.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Unit <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name_short_singular&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name_short_plural&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name_long_singular&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;byte&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name_long_plural&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bytes&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+</details>
+<details class="info">
+<summary>multipliers (<code>map[int, reference[Unit]]</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Base UnitDefinition</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>The base UnitDefinition is the smallest UnitDefinition of scale for this set of UnitsDefinition.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>Key type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>int</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>Value type</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type:</td>
+<td><code>reference[Unit]</code></td>
+</tr>
+<tr>
+<td>Referenced object:</td>
+<td>Unit <em>(see in the Objects section below)</em></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="example">
+<summary>Examples</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;1024&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name_short_singular&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;kB&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name_short_plural&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;kB&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name_long_singular&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;kilobyte&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name_long_plural&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;kilobytes&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;1048576&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name_short_singular&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MB&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name_short_plural&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MB&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name_long_singular&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;megabyte&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name_long_plural&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;megabytes&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+</details>
+</details>
+</details>
+</details>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/arcalot" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.efa0ade1.min.js"></script>
+      
+    
+  </body>
+</html>

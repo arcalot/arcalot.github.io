@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://arcalot.io/arcaflow/concepts/typing/">
+        <link rel="canonical" href="https://arcalot.io/arcaflow/contributing/deployers/">
       
       
-        <link rel="prev" href="../architecture/">
+        <link rel="prev" href="../expressions/">
       
       
-        <link rel="next" href="../plugins/">
+        <link rel="next" href="../engine/">
       
       <link rel="icon" href="../../../arcalot.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
-        <title>Typing - Arcalot</title>
+        <title>Deployers - Arcalot</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#typing-system" class="md-skip">
+        <a href="#arcaflow-deployers-development-guide" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Typing
+              Deployers
             
           </span>
         </div>
@@ -390,16 +390,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
       
       
         
@@ -426,7 +424,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../">Concepts</a>
+          <a href="../../concepts/">Concepts</a>
           
             <label for="__nav_3_3">
               <span class="md-nav__icon md-icon"></span>
@@ -434,7 +432,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_3">
           <span class="md-nav__icon md-icon"></span>
           Concepts
@@ -449,7 +447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../concepts/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -463,7 +461,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+      <a href="../../concepts/architecture/" class="md-nav__link">
         Architecture
       </a>
     </li>
@@ -475,21 +473,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../concepts/typing/" class="md-nav__link">
         Typing
       </a>
-      
     </li>
   
 
@@ -501,7 +489,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../plugins/" class="md-nav__link">
+      <a href="../../concepts/plugins/" class="md-nav__link">
         Plugins
       </a>
     </li>
@@ -515,7 +503,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../workflows/" class="md-nav__link">
+      <a href="../../concepts/workflows/" class="md-nav__link">
         Workflows
       </a>
     </li>
@@ -529,7 +517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../flowcontrol/" class="md-nav__link">
+      <a href="../../concepts/flowcontrol/" class="md-nav__link">
         Flow control (WIP)
       </a>
     </li>
@@ -1138,14 +1126,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" checked>
       
       
         
@@ -1172,7 +1162,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../contributing/">Contributing</a>
+          <a href="../">Contributing</a>
           
             <label for="__nav_3_7">
               <span class="md-nav__icon md-icon"></span>
@@ -1180,7 +1170,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3_7">
           <span class="md-nav__icon md-icon"></span>
           Contributing
@@ -1195,7 +1185,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -1209,7 +1199,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/typing/" class="md-nav__link">
+      <a href="../typing/" class="md-nav__link">
         Typing system
       </a>
     </li>
@@ -1223,7 +1213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/plugin-protocol/" class="md-nav__link">
+      <a href="../plugin-protocol/" class="md-nav__link">
         Arcaflow Transport Protocol
       </a>
     </li>
@@ -1237,7 +1227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/expressions/" class="md-nav__link">
+      <a href="../expressions/" class="md-nav__link">
         Expression language
       </a>
     </li>
@@ -1249,11 +1239,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../contributing/deployers/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Deployers
       </a>
+      
     </li>
   
 
@@ -1265,7 +1265,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/engine/" class="md-nav__link">
+      <a href="../engine/" class="md-nav__link">
         Engine
       </a>
     </li>
@@ -1304,31 +1304,10 @@
   
 
 
-<h1 id="typing-system">Typing system</h1>
-<p>Let&rsquo;s say you are creating a system that measures performance. But, uh-oh! A bug has struck! Instead of returning a number, a plugin returns an empty string. Would you want that converted to a numeric <code>0</code> for a metric? Or worse yet, would you want a negative number resulting from a bug to make it into your metrics? Would you want to collect metrics for years just to find out they are all wrong?</p>
-<p>If the answer is no, then the typing system is here to help. Each plugin or workflow in Arcaflow has to explicitly state what data types it accepts for certain fields, and what their boundaries are. When a plugin then violates its own rules, the engine makes sure that corrupt data isn&rsquo;t used any further.</p>
-<p>For example, let&rsquo;s look at the definition of an integer:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
-<span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<span class="nt">max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">128</span>
-</code></pre></div>
-<p>It&rsquo;s so simple, but it already prevents a lot of bugs: non-integers, numbers out of range.</p>
-<p>But wait! A typing system can do more for you. For example, we can automatically generate a nice documentation from it. Let&rsquo;s take this object as an example:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
-<span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
-<span class="nt">properties</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">      </span><span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="w">      </span><span class="nt">max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">256</span>
-<span class="w">    </span><span class="nt">display</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Name&quot;</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;The</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">user.&quot;</span>
-<span class="w">      </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">        </span><span class="no">&lt;svg ...&gt;&lt;/svg&gt;</span>
-</code></pre></div>
-<p>That&rsquo;s all it takes to render a nice form field or automatic documentation. You can read more about creating types in the <a href="../../plugins/">plugins section</a> or the <a href="../../workflows/">workflows section</a>.</p>
+<h1 id="arcaflow-deployers-development-guide">Arcaflow Deployers Development Guide</h1>
+<p>The Arcaflow Engine relies on deployers to execute containers. Deployers provide a binary-safe transparent tunnel of communication between a plugin and the engine. (Typically, this will be done via standard input/output, but other deployers are possible.)</p>
+<p>The Engine and the plugin communicate via the <a href="../plugin-protocol/">Arcaflow Transport Protocol</a> over this tunnel, but the deployer is unaware of the method of this communication.</p>
+<p>Deployers are written in Go and must implement the <a href="https://github.com/arcalot/arcaflow-engine-deployer">deployer interface</a>. Deployers are not dynamically pluggable, they must also be added to the <a href="https://github.com/arcalot/arcaflow-engine">engine code</a> to be usable.</p>
 
 
 

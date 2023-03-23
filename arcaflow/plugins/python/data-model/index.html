@@ -8,27 +8,27 @@
       
       
       
-        <link rel="canonical" href="https://arcalot.io/arcaflow/concepts/typing/">
+        <link rel="canonical" href="https://arcalot.io/arcaflow/plugins/python/data-model/">
       
       
-        <link rel="prev" href="../architecture/">
+        <link rel="prev" href="../first/">
       
       
-        <link rel="next" href="../plugins/">
+        <link rel="next" href="../embedding/">
       
-      <link rel="icon" href="../../../arcalot.svg">
+      <link rel="icon" href="../../../../arcalot.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
-        <title>Typing - Arcalot</title>
+        <title>Creating a data model - Arcalot</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.c4a75a56.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.c4a75a56.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -38,9 +38,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../extra.css">
+      <link rel="stylesheet" href="../../../../extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#typing-system" class="md-skip">
+        <a href="#creating-a-python-data-model" class="md-skip">
           Skip to content
         </a>
       
@@ -85,9 +85,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Arcalot" class="md-header__button md-logo" aria-label="Arcalot" data-md-component="logo">
+    <a href="../../../.." title="Arcalot" class="md-header__button md-logo" aria-label="Arcalot" data-md-component="logo">
       
-  <img src="../../../arcalot.svg" alt="logo">
+  <img src="../../../../arcalot.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Typing
+              Creating a data model
             
           </span>
         </div>
@@ -198,7 +198,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../.." class="md-tabs__link">
+    <a href="../../../.." class="md-tabs__link">
       Home
     </a>
   </li>
@@ -210,7 +210,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../../arcalog/" class="md-tabs__link">
+    <a href="../../../../arcalog/" class="md-tabs__link">
       Arcalog
     </a>
   </li>
@@ -227,7 +227,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../" class="md-tabs__link md-tabs__link--active">
+      <a href="../../../" class="md-tabs__link md-tabs__link--active">
         Arcaflow
       </a>
     </li>
@@ -263,9 +263,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Arcalot" class="md-nav__button md-logo" aria-label="Arcalot" data-md-component="logo">
+    <a href="../../../.." title="Arcalot" class="md-nav__button md-logo" aria-label="Arcalot" data-md-component="logo">
       
-  <img src="../../../arcalot.svg" alt="logo">
+  <img src="../../../../arcalot.svg" alt="logo">
 
     </a>
     Arcalot
@@ -293,7 +293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -308,7 +308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../arcalog/" class="md-nav__link">
+      <a href="../../../../arcalog/" class="md-nav__link">
         Arcalog
       </a>
     </li>
@@ -355,7 +355,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../">Arcaflow</a>
+          <a href="../../../">Arcaflow</a>
           
             <label for="__nav_3">
               <span class="md-nav__icon md-icon"></span>
@@ -378,7 +378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/" class="md-nav__link">
+      <a href="../../../getting-started/" class="md-nav__link">
         Getting Started
       </a>
     </li>
@@ -390,16 +390,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
       
       
         
@@ -426,7 +424,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../">Concepts</a>
+          <a href="../../../concepts/">Concepts</a>
           
             <label for="__nav_3_3">
               <span class="md-nav__icon md-icon"></span>
@@ -434,7 +432,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_3">
           <span class="md-nav__icon md-icon"></span>
           Concepts
@@ -449,7 +447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../../concepts/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -463,7 +461,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+      <a href="../../../concepts/architecture/" class="md-nav__link">
         Architecture
       </a>
     </li>
@@ -475,21 +473,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../concepts/typing/" class="md-nav__link">
         Typing
       </a>
-      
     </li>
   
 
@@ -501,7 +489,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../plugins/" class="md-nav__link">
+      <a href="../../../concepts/plugins/" class="md-nav__link">
         Plugins
       </a>
     </li>
@@ -515,7 +503,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../workflows/" class="md-nav__link">
+      <a href="../../../concepts/workflows/" class="md-nav__link">
         Workflows
       </a>
     </li>
@@ -529,7 +517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../flowcontrol/" class="md-nav__link">
+      <a href="../../../concepts/flowcontrol/" class="md-nav__link">
         Flow control (WIP)
       </a>
     </li>
@@ -576,7 +564,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../running/">Running Arcaflow</a>
+          <a href="../../../running/">Running Arcaflow</a>
           
             <label for="__nav_3_4">
               <span class="md-nav__icon md-icon"></span>
@@ -599,7 +587,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../running/" class="md-nav__link">
+      <a href="../../../running/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -613,7 +601,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../running/setup/" class="md-nav__link">
+      <a href="../../../running/setup/" class="md-nav__link">
         Setting up Arcaflow
       </a>
     </li>
@@ -627,7 +615,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../running/running/" class="md-nav__link">
+      <a href="../../../running/running/" class="md-nav__link">
         Running a workflow
       </a>
     </li>
@@ -646,14 +634,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
       
       
         
@@ -676,7 +666,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../plugins/">Creating plugins</a>
+          <a href="../../">Creating plugins</a>
           
             <label for="__nav_3_5">
               <span class="md-nav__icon md-icon"></span>
@@ -684,7 +674,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3_5">
           <span class="md-nav__icon md-icon"></span>
           Creating plugins
@@ -699,7 +689,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -711,14 +701,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_3" checked>
       
       
         
@@ -749,7 +741,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../plugins/python/">Python</a>
+          <a href="../">Python</a>
           
             <label for="__nav_3_5_3">
               <span class="md-nav__icon md-icon"></span>
@@ -757,7 +749,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3_5_3">
           <span class="md-nav__icon md-icon"></span>
           Python
@@ -772,7 +764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/python/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -786,7 +778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/python/first/" class="md-nav__link">
+      <a href="../first/" class="md-nav__link">
         Your first plugin
       </a>
     </li>
@@ -798,11 +790,149 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../plugins/python/data-model/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Creating a data model
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Creating a data model
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#optional-parameters" class="md-nav__link">
+    Optional parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#annotations-for-validation-and-metadata" class="md-nav__link">
+    Annotations for validation and metadata
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-types" class="md-nav__link">
+    Data types
+  </a>
+  
+    <nav class="md-nav" aria-label="Data types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strings" class="md-nav__link">
+    Strings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integers" class="md-nav__link">
+    Integers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#floating-point-numbers" class="md-nav__link">
+    Floating point numbers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#booleans" class="md-nav__link">
+    Booleans
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enums" class="md-nav__link">
+    Enums
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patterns" class="md-nav__link">
+    Patterns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lists" class="md-nav__link">
+    Lists
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dicts" class="md-nav__link">
+    Dicts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#union-types" class="md-nav__link">
+    Union types
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#any-types" class="md-nav__link">
+    Any types
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#units" class="md-nav__link">
+    Units
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -814,7 +944,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/python/embedding/" class="md-nav__link">
+      <a href="../embedding/" class="md-nav__link">
         Embedding your plugin
       </a>
     </li>
@@ -828,7 +958,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/python/testing/" class="md-nav__link">
+      <a href="../testing/" class="md-nav__link">
         Testing your plugin
       </a>
     </li>
@@ -842,7 +972,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/python/faq/" class="md-nav__link">
+      <a href="../faq/" class="md-nav__link">
         Frequently asked questions
       </a>
     </li>
@@ -856,7 +986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/python/schema/" class="md-nav__link">
+      <a href="../schema/" class="md-nav__link">
         Creating a schema by hand
       </a>
     </li>
@@ -870,7 +1000,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/python/official/" class="md-nav__link">
+      <a href="../official/" class="md-nav__link">
         Contributing official plugins
       </a>
     </li>
@@ -917,7 +1047,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../plugins/go/">Go</a>
+          <a href="../../go/">Go</a>
           
             <label for="__nav_3_5_4">
               <span class="md-nav__icon md-icon"></span>
@@ -940,7 +1070,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/go/" class="md-nav__link">
+      <a href="../../go/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -954,7 +1084,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/go/first/" class="md-nav__link">
+      <a href="../../go/first/" class="md-nav__link">
         Your first plugin
       </a>
     </li>
@@ -968,7 +1098,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/go/schema/" class="md-nav__link">
+      <a href="../../go/schema/" class="md-nav__link">
         Creating a schema
       </a>
     </li>
@@ -989,7 +1119,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/packaging/" class="md-nav__link">
+      <a href="../../packaging/" class="md-nav__link">
         Packaging plugins
       </a>
     </li>
@@ -1040,7 +1170,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../workflows/">Writing workflows</a>
+          <a href="../../../workflows/">Writing workflows</a>
           
             <label for="__nav_3_6">
               <span class="md-nav__icon md-icon"></span>
@@ -1063,7 +1193,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflows/" class="md-nav__link">
+      <a href="../../../workflows/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -1077,7 +1207,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflows/input/" class="md-nav__link">
+      <a href="../../../workflows/input/" class="md-nav__link">
         Creating your input schema
       </a>
     </li>
@@ -1091,7 +1221,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflows/step/" class="md-nav__link">
+      <a href="../../../workflows/step/" class="md-nav__link">
         Setting up a step
       </a>
     </li>
@@ -1105,7 +1235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflows/expressions/" class="md-nav__link">
+      <a href="../../../workflows/expressions/" class="md-nav__link">
         Expressions
       </a>
     </li>
@@ -1119,7 +1249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflows/output/" class="md-nav__link">
+      <a href="../../../workflows/output/" class="md-nav__link">
         Outputs
       </a>
     </li>
@@ -1172,7 +1302,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../contributing/">Contributing</a>
+          <a href="../../../contributing/">Contributing</a>
           
             <label for="__nav_3_7">
               <span class="md-nav__icon md-icon"></span>
@@ -1195,7 +1325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/" class="md-nav__link">
+      <a href="../../../contributing/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -1209,7 +1339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/typing/" class="md-nav__link">
+      <a href="../../../contributing/typing/" class="md-nav__link">
         Typing system
       </a>
     </li>
@@ -1223,7 +1353,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/plugin-protocol/" class="md-nav__link">
+      <a href="../../../contributing/plugin-protocol/" class="md-nav__link">
         Arcaflow Transport Protocol
       </a>
     </li>
@@ -1237,7 +1367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/expressions/" class="md-nav__link">
+      <a href="../../../contributing/expressions/" class="md-nav__link">
         Expression language
       </a>
     </li>
@@ -1251,7 +1381,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/deployers/" class="md-nav__link">
+      <a href="../../../contributing/deployers/" class="md-nav__link">
         Deployers
       </a>
     </li>
@@ -1265,7 +1395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/engine/" class="md-nav__link">
+      <a href="../../../contributing/engine/" class="md-nav__link">
         Engine
       </a>
     </li>
@@ -1304,31 +1434,211 @@
   
 
 
-<h1 id="typing-system">Typing system</h1>
-<p>Let&rsquo;s say you are creating a system that measures performance. But, uh-oh! A bug has struck! Instead of returning a number, a plugin returns an empty string. Would you want that converted to a numeric <code>0</code> for a metric? Or worse yet, would you want a negative number resulting from a bug to make it into your metrics? Would you want to collect metrics for years just to find out they are all wrong?</p>
-<p>If the answer is no, then the typing system is here to help. Each plugin or workflow in Arcaflow has to explicitly state what data types it accepts for certain fields, and what their boundaries are. When a plugin then violates its own rules, the engine makes sure that corrupt data isn&rsquo;t used any further.</p>
-<p>For example, let&rsquo;s look at the definition of an integer:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
-<span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<span class="nt">max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">128</span>
+<h1 id="creating-a-python-data-model">Creating a Python data model</h1>
+<p>When creating a data model for Arcaflow plugins in Python, everything starts with <a href="https://docs.python.org/3/library/dataclasses.html">dataclasses</a>. They allow Arcaflow to get information about the data types of individual fields in your class:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">dataclasses</span>
+
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">MyDataModel</span><span class="p">:</span>
+    <span class="n">some_field</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">other_field</span><span class="p">:</span> <span class="nb">int</span>
 </code></pre></div>
-<p>It&rsquo;s so simple, but it already prevents a lot of bugs: non-integers, numbers out of range.</p>
-<p>But wait! A typing system can do more for you. For example, we can automatically generate a nice documentation from it. Let&rsquo;s take this object as an example:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
-<span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
-<span class="nt">properties</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">      </span><span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="w">      </span><span class="nt">max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">256</span>
-<span class="w">    </span><span class="nt">display</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Name&quot;</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;The</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">user.&quot;</span>
-<span class="w">      </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">        </span><span class="no">&lt;svg ...&gt;&lt;/svg&gt;</span>
+<p>However, Arcaflow doesn&rsquo;t support all Python data types. You pick from the following list:</p>
+<ul>
+<li><a href="#strings"><code>str</code></a></li>
+<li><a href="#integers"><code>int</code></a></li>
+<li><a href="#floating-point-numbers"><code>float</code></a></li>
+<li><a href="#booleans"><code>bool</code></a></li>
+<li><a href="#enum">Enums</a></li>
+<li><a href="#patterns"><code>re.Pattern</code></a></li>
+<li><a href="#lists"><code>typing.List[othertype]</code></a></li>
+<li><a href="#dicts"><code>typing.Dict[keytype, valuetype]</code></a></li>
+<li><a href="#union-types"><code>typing.Union[onedataclass, anotherdataclass]</code></a></li>
+<li>Dataclasses</li>
+<li><a href="#any-types"><code>schema.ANY_TYPE</code></a></li>
+</ul>
+<p>You can read more about the individual types in the <a href="#data-types">data types</a> section</p>
+<h2 id="optional-parameters">Optional parameters</h2>
+<p>You can also declare any parameter as optional like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
+    <span class="n">param</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div>
-<p>That&rsquo;s all it takes to render a nice form field or automatic documentation. You can read more about creating types in the <a href="../../plugins/">plugins section</a> or the <a href="../../workflows/">workflows section</a>.</p>
+<p>Note that adding <code>typing.Optional</code> is not enough, you <em>must</em> specify the default value.</p>
+<h2 id="annotations-for-validation-and-metadata">Annotations for validation and metadata</h2>
+<p>You can specify desired validations for each field like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
+    <span class="n">param</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">schema</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s2">&quot;Param&quot;</span><span class="p">)]</span>
+</code></pre></div>
+<p>You can use the following annotations to add metadata to your fields:</p>
+<ul>
+<li><code>schema.id</code> adds a serialized field name for the current field (e.g. one containing dashes, which is not valid in Python)</li>
+<li><code>schema.name</code> adds a human-readable name to the parameter. This can be used to present a form field.</li>
+<li><code>schema.description</code> adds a long-form description to the field.</li>
+<li><code>schema.example</code> adds an example value to the field. You can repeat this annotation multiple times. The example must be provided as primitive types (no dataclasses).</li>
+</ul>
+<p>You can also add validations to the fields. The following annotations are valid for all data types:</p>
+<ul>
+<li><code>schema.required_if</code> specifies a list of fields that cause the current field to be required. If the other fields are empty, the current field is not required. (Make sure to use the optional annotation above.)</li>
+<li><code>schema.required_if_not</code> specifies a list of fields that, if not filled, cause the current field to be required. (Make sure to use the optional annotation above.)</li>
+<li><code>schema.conflicts</code> specifies a list of fields that cannot be used together with the current field.  (Make sure to use the optional annotation above.)</li>
+</ul>
+<p>Additionally, some data types have their own validations and metadata, such as <code>schema.min</code>, <code>schema.max</code>, <code>schema.pattern</code>, or <code>schema.units</code>.</p>
+<h2 id="data-types">Data types</h2>
+<h3 id="strings">Strings</h3>
+<p>Strings are, as the name suggests, strings of human-readable characters. You can specify them in your dataclass like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">some_field</span><span class="p">:</span> <span class="nb">str</span>
+</code></pre></div>
+<p>Additionally, you can apply the following validations:</p>
+<ul>
+<li><code>schema.min()</code> specifies the minimum length of the string if the field is set.</li>
+<li><code>schema.max()</code> specifies the maximum length of the string if the field is set.</li>
+<li><code>schema.pattern()</code> specifies the regular expression the string must match if the field is set.</li>
+</ul>
+<h3 id="integers">Integers</h3>
+<p>Integers are 64-bit signed whole numbers. You can specify them in your dataclass like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">some_field</span><span class="p">:</span> <span class="nb">int</span>
+</code></pre></div>
+<p>Additionally, you can apply the following validations and metadata:</p>
+<ul>
+<li><code>schema.min()</code> specifies the minimum number if the field is set.</li>
+<li><code>schema.max()</code> specifies the maximum number if the field is set.</li>
+<li><code>schema.units()</code> specifies the units for this field (e.g. bytes). See <a href="#units">Units</a>.</li>
+</ul>
+<h3 id="floating-point-numbers">Floating point numbers</h3>
+<p>Floating point numbers are 64-bit signed fractions. You can specify them in your dataclass like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">some_field</span><span class="p">:</span> <span class="nb">float</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Floating point numbers are inaccurate! Make sure to transmit numbers requiring accuracy as integers!</p>
+</div>
+<p>Additionally, you can apply the following validations and metadata:</p>
+<ul>
+<li><code>schema.min()</code> specifies the minimum number if the field is set.</li>
+<li><code>schema.max()</code> specifies the maximum number if the field is set.</li>
+<li><code>schema.units()</code> specifies the units for this field (e.g. bytes). See <a href="#units">Units</a>.</li>
+</ul>
+<h3 id="booleans">Booleans</h3>
+<p>Booleans are <code>True</code> or <code>False</code> values. You can specify them in your dataclass like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">some_field</span><span class="p">:</span> <span class="nb">bool</span>
+</code></pre></div>
+<p>Booleans have no additional validations or metadata.</p>
+<h3 id="enums">Enums</h3>
+<p>Sometimes, you need to specify a set of values that are valid for a field. In Arcaflow, this list of valid values can either be a list of strings, or a list of integers. You can specify an enum like this:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">enum</span>
+
+
+<span class="k">class</span> <span class="nc">MyEnum</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+  <span class="n">Value1</span> <span class="o">=</span> <span class="s2">&quot;value 1&quot;</span>
+  <span class="n">Value2</span> <span class="o">=</span> <span class="s2">&quot;value 2&quot;</span>
+
+<span class="n">my_field</span><span class="p">:</span> <span class="n">MyEnum</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Enums don&rsquo;t need to be dataclasses.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not mix integers and strings in the same enum!</p>
+</div>
+<h3 id="patterns">Patterns</h3>
+<p>When you need to hold regular expressions, you can use a pattern field. This is tied to the <a href="https://docs.python.org/3/library/re.html">Python regular expressions library</a>. You can specify a pattern field like this:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">my_field</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Pattern</span>
+</code></pre></div>
+<p>Pattern fields have no additional validations or metadata.</p>
+<h3 id="lists">Lists</h3>
+<p>When you want to make a list in Arcaflow, you always need to specify its contents. You can do that like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">my_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+<p>Lists can have the following validations:</p>
+<ul>
+<li><code>schema.min()</code> specifies the minimum number of items in the list.</li>
+<li><code>schema.max()</code> specifies the maximum number of items in the list.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Items in lists can also be annotated with validations.</p>
+</div>
+<h3 id="dicts">Dicts</h3>
+<p>Dicts (maps in Arcaflow) are key-value pairs. You need to specify both the key and the value type. You can do that as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="n">my_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+<p>Lists can have the following validations:</p>
+<ul>
+<li><code>schema.min()</code> specifies the minimum number of items in the list.</li>
+<li><code>schema.max()</code> specifies the maximum number of items in the list.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Items in dicts can also be annotated with validations.</p>
+</div>
+<h3 id="union-types">Union types</h3>
+<p>Union types (one-of in Arcaflow) allow you to specify two or more possible objects (dataclasses) that can be in a specific place. The only requirement is that there must be a common field (discriminator) and each dataclass must have a unique value for this field. If you do not add this field to your dataclasses, it will be added automatically for you.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">typing</span>
+<span class="kn">import</span> <span class="nn">dataclasses</span>
+
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">FullName</span><span class="p">:</span>
+    <span class="n">first_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">last_name</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Nickname</span><span class="p">:</span>
+    <span class="n">nickname</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="n">name</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span>
+    <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span>
+        <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span><span class="n">FullName</span><span class="p">,</span> <span class="n">schema</span><span class="o">.</span><span class="n">discriminator_value</span><span class="p">(</span><span class="s2">&quot;full&quot;</span><span class="p">)],</span>
+        <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span><span class="n">Nickname</span><span class="p">,</span> <span class="n">schema</span><span class="o">.</span><span class="n">discriminator_value</span><span class="p">(</span><span class="s2">&quot;nick&quot;</span><span class="p">)]</span>
+    <span class="p">],</span> <span class="n">schema</span><span class="o">.</span><span class="n">discriminator</span><span class="p">(</span><span class="s2">&quot;name_type&quot;</span><span class="p">)]</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The <code>schema.discriminator</code> and <code>schema.discriminator_value</code> annotations are optional. If you do not specify them, a discriminator will be generated for you.</p>
+</div>
+<h2 id="any-types">Any types</h2>
+<p>Any types allow you to pass through any primitive data (no dataclasses). However, this comes with severe limitations as far as validation and use in workflows is concerned, so this type should only be used in limited cases. For example, if you would like to create a plugin that inserts data into an ElasticSearch database the &ldquo;any&rdquo; type would be appropriate here.</p>
+<p>You can define an &ldquo;any&rdquo; type like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">my_data</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">ANY_TYPE</span>
+</code></pre></div>
+<h2 id="units">Units</h2>
+<p>Integers and floats can have unit metadata associated with them. For example, a field may contain a unit description like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">time</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">schema</span><span class="o">.</span><span class="n">units</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">UNIT_TIME</span><span class="p">)]</span>
+</code></pre></div>
+<p>In this case, a string like <code>5m30s</code> will automatically be parsed into nanoseconds. Integers will pass through without conversion. You can also define your own unit types. At minimum, you need to specify the base type (nanoseconds in this case), and you can specify multipliers:</p>
+<div class="highlight"><pre><span></span><code><span class="n">my_units</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">Units</span><span class="p">(</span>
+  <span class="n">schema</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span>
+    <span class="c1"># Short, singular</span>
+    <span class="s2">&quot;ns&quot;</span><span class="p">,</span>
+    <span class="c1"># Short, plural</span>
+    <span class="s2">&quot;ns&quot;</span><span class="p">,</span>
+    <span class="c1"># Long, singular</span>
+    <span class="s2">&quot;nanosecond&quot;</span><span class="p">,</span>
+    <span class="c1"># Long, plural</span>
+    <span class="s2">&quot;nanoseconds&quot;</span>
+  <span class="p">),</span>
+  <span class="p">{</span>
+    <span class="mi">1000</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span>
+      <span class="s2">&quot;ms&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;ms&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;microsecond&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;microseconds&quot;</span>
+    <span class="p">),</span>
+    <span class="c1"># ...</span>
+  <span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>You can then use this description in your <code>schema.units</code> annotations. Additionally, you can also use it to convert an integer or float into its string representation with the <code>my_units.format_short</code> or <code>my_units.format_long</code> functions. If you need to parse a string yourself, you can use <code>my_units.parse</code>.</p>
 
 
 
@@ -1381,10 +1691,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.efa0ade1.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.efa0ade1.min.js"></script>
       
     
   </body>

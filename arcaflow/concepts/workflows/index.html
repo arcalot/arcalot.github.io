@@ -11,10 +11,10 @@
         <link rel="canonical" href="https://arcalot.io/arcaflow/concepts/workflows/">
       
       
-        <link rel="prev" href="../../getting-started/">
+        <link rel="prev" href="../plugins/">
       
       
-        <link rel="next" href="../typing/">
+        <link rel="next" href="../flowcontrol/">
       
       <link rel="icon" href="../../../arcalot.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#arcaflow-workflows" class="md-skip">
+        <a href="#arcaflow-workflows-concept" class="md-skip">
           Skip to content
         </a>
       
@@ -259,7 +259,9 @@
   
 
 
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../../.." title="Arcalot" class="md-nav__button md-logo" aria-label="Arcalot" data-md-component="logo">
       
@@ -344,6 +346,10 @@
         
           
         
+          
+        
+          
+        
       
       
         
@@ -388,9 +394,7 @@
   
   
     
-      
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
@@ -400,6 +404,18 @@
       
         
           
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
         
           
         
@@ -407,10 +423,16 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
-          Concepts
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Concepts</a>
+          
+            <label for="__nav_3_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3_3">
@@ -418,6 +440,64 @@
           Concepts
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        Architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../typing/" class="md-nav__link">
+        Typing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/" class="md-nav__link">
+        Plugins
+      </a>
+    </li>
+  
+
+            
           
             
               
@@ -466,22 +546,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#background-processes" class="md-nav__link">
-    Background processes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#interconnecting-steps" class="md-nav__link">
     Interconnecting steps
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#unconnected-steps" class="md-nav__link">
-    Unconnected steps
   </a>
   
 </li>
@@ -507,61 +573,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#execution-environment" class="md-nav__link">
-    Execution environment
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#flow-control" class="md-nav__link">
-    Flow control
-  </a>
-  
-    <nav class="md-nav" aria-label="Flow control">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#abort" class="md-nav__link">
-    Abort
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#do-while" class="md-nav__link">
-    Do-while
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#condition" class="md-nav__link">
-    Condition
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multiply" class="md-nav__link">
-    Multiply
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#synchronize" class="md-nav__link">
-    Synchronize
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -577,8 +588,78 @@
   
   
     <li class="md-nav__item">
-      <a href="../typing/" class="md-nav__link">
-        The typing system
+      <a href="../flowcontrol/" class="md-nav__link">
+        Flow control (WIP)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../running/">Running Arcaflow</a>
+          
+            <label for="__nav_3_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Running Arcaflow
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../running/" class="md-nav__link">
+        Overview
       </a>
     </li>
   
@@ -591,8 +672,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../plugin-protocol/" class="md-nav__link">
-        The plugin protocol
+      <a href="../../running/setup/" class="md-nav__link">
+        Setting up Arcaflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../running/running/" class="md-nav__link">
+        Running a workflow
       </a>
     </li>
   
@@ -612,21 +707,27 @@
   
   
     
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
       
       
         
           
             
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
           
         
       
@@ -634,55 +735,13 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../engine/">Engine</a>
+          <a href="../../plugins/">Creating plugins</a>
+          
+            <label for="__nav_3_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
           
         </div>
-      
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_3_4">
-          <span class="md-nav__icon md-icon"></span>
-          Engine
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5" >
-      
-      
-        
-          
-        
-          
-        
-      
-      
-        <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
-          Creating plugins
-          <span class="md-nav__icon md-icon"></span>
-        </label>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_5">
@@ -692,13 +751,88 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+          
+            
               
   
   
   
     <li class="md-nav__item">
-      <a href="../../creating-plugins/python/" class="md-nav__link">
-        Python
+      <a href="../../plugins/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../plugins/python/">Python</a>
+          
+            <label for="__nav_3_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/" class="md-nav__link">
+        Overview
       </a>
     </li>
   
@@ -711,8 +845,487 @@
   
   
     <li class="md-nav__item">
-      <a href="../../creating-plugins/release/" class="md-nav__link">
-        Release
+      <a href="../../plugins/python/first/" class="md-nav__link">
+        Your first plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/data-model/" class="md-nav__link">
+        Creating a data model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/embedding/" class="md-nav__link">
+        Embedding your plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/testing/" class="md-nav__link">
+        Testing your plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/faq/" class="md-nav__link">
+        Frequently asked questions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/schema/" class="md-nav__link">
+        Creating a schema by hand
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/official/" class="md-nav__link">
+        Contributing official plugins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../plugins/go/">Go</a>
+          
+            <label for="__nav_3_5_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Go
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/go/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/go/first/" class="md-nav__link">
+        Your first plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/go/schema/" class="md-nav__link">
+        Creating a schema
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/packaging/" class="md-nav__link">
+        Packaging plugins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../workflows/">Writing workflows</a>
+          
+            <label for="__nav_3_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Writing workflows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/input/" class="md-nav__link">
+        Creating your input schema
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/step/" class="md-nav__link">
+        Setting up a step
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/expressions/" class="md-nav__link">
+        Expressions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/output/" class="md-nav__link">
+        Outputs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../contributing/">Contributing</a>
+          
+            <label for="__nav_3_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Contributing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/typing/" class="md-nav__link">
+        Typing system
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/plugin-protocol/" class="md-nav__link">
+        Arcaflow Transport Protocol
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/expressions/" class="md-nav__link">
+        Expression language
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/deployers/" class="md-nav__link">
+        Deployers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/engine/" class="md-nav__link">
+        Engine
       </a>
     </li>
   
@@ -739,136 +1352,6 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#steps" class="md-nav__link">
-    Steps
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#background-processes" class="md-nav__link">
-    Background processes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#interconnecting-steps" class="md-nav__link">
-    Interconnecting steps
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#unconnected-steps" class="md-nav__link">
-    Unconnected steps
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#passing-data-between-steps" class="md-nav__link">
-    Passing data between steps
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#undefined-inputs" class="md-nav__link">
-    Undefined inputs
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#outputs" class="md-nav__link">
-    Outputs
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#execution-environment" class="md-nav__link">
-    Execution environment
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#flow-control" class="md-nav__link">
-    Flow control
-  </a>
-  
-    <nav class="md-nav" aria-label="Flow control">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#abort" class="md-nav__link">
-    Abort
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#do-while" class="md-nav__link">
-    Do-while
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#condition" class="md-nav__link">
-    Condition
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multiply" class="md-nav__link">
-    Multiply
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#synchronize" class="md-nav__link">
-    Synchronize
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           
             <div class="md-content" data-md-component="content">
@@ -880,10 +1363,10 @@
   
 
 
-<h1 id="arcaflow-workflows">Arcaflow Workflows</h1>
-<div class="admonition warning">
-<p class="admonition-title">Work in Progress</p>
-<p>This document is work in progress and may change until the final release!</p>
+<h1 id="arcaflow-workflows-concept">Arcaflow Workflows (concept)</h1>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This document describes the <em>concept</em> of Arcaflow Workflows. We describe the process of writing a workflow <a href="../../workflows/">in this section</a></p>
 </div>
 <h2 id="steps">Steps</h2>
 <p>Workflows are a way to describe a sequence or parallel execution of individual steps. The steps are provided exclusively by plugins. The simplest workflow looks like this:</p>
@@ -895,17 +1378,9 @@
   [*] --&gt; Step
   Step --&gt; [*]: yes
   Step --&gt; [*]: no</code></pre>
-<p>Plugins can declare as many outputs as needed, with custom names. The workflow engine doesn&rsquo;t make a distinction based on the names, all outputs are treated equal for execution. However, a few names are treated special for display purposes only:</p>
-<pre class="mermaid"><code>stateDiagram-v2
-  [*] --&gt; Step
-  Step --&gt; [*]: success
-  Step --&gt; [*]: warning
-  Step --&gt; [*]: error</code></pre>
-<p>These three output names (<code>success</code>, <code>warning</code>, and <code>error</code>) will be colored accordingly in the user interfaces. Other names may be used, but will not be colored.</p>
+<p>Plugins can declare as many outputs as needed, with custom names. The workflow engine doesn&rsquo;t make a distinction based on the names, all outputs are treated equal for execution.</p>
 <p>An important rule is that one step must always end in exactly one output. No step must end without an output, and no step can end in more than one output. This provides a mechanism to direct the flow of the workflow execution.</p>
-<p>Plugins must also explicitly declare what parameters they expect as input for the step, and the data types of these and what parameters they will produce as output. For more detaisl about this see the <a href="../typing/">Type system page</a>.</p>
-<h2 id="background-processes">Background processes</h2>
-<p>Each plugin will only be invoked once, allowing plugins to run background processes, such as server applications. The plugins must handle SIGINT and SIGTERM events properly.</p>
+<p>Plugins must also explicitly declare what parameters they expect as input for the step, and the data types of these and what parameters they will produce as output.</p>
 <h2 id="interconnecting-steps">Interconnecting steps</h2>
 <p>When two steps are connected, they will be executed after each other:</p>
 <pre class="mermaid"><code>stateDiagram-v2
@@ -932,15 +1407,13 @@
   Step1 --&gt; Step3: error
   Step2 --&gt; [*]
   Step3 --&gt; [*]</code></pre>
-<h2 id="unconnected-steps">Unconnected steps</h2>
-<p>If you leave outputs unconnected, the workflow will be a failure and the engine will exit with a non-zero exit code. However, the engine will still attempt to finish whatever steps it can.</p>
 <h2 id="passing-data-between-steps">Passing data between steps</h2>
 <p>When two steps are connected, you have the ability to pass data between them. Emblematically described:</p>
 <pre class="mermaid"><code>stateDiagram-v2
   Step1: Step 1
   Step2: Step 2
   [*] --&gt; Step1
-  Step1 --&gt; Step2: input_1 = $.step1.output_1
+  Step1 --&gt; Step2: input_1 = $.steps.step1.outputs.success
   Step2 --&gt; [*]</code></pre>
 <p>The data type of the input on Step 2 in this case must match the result of the expression. If the data type does not match, the workflow will not be executed.</p>
 <h2 id="undefined-inputs">Undefined inputs</h2>
@@ -949,99 +1422,19 @@
   Step1: Step 1
   Step2: Step 2
   [*] --&gt; Step1
-  [*] --&gt; Step2: input_1 = $.start.option_1
-  Step1 --&gt; Step2: input_2 = $.step1.output_1
+  [*] --&gt; Step2: input_1 = $.input.option_1
+  Step1 --&gt; Step2: input_2 = $.steps.step1.outputs.success
   Step2 --&gt; [*]</code></pre>
 <p>This is typically the case when credentials, such as database access, etc. are required.</p>
 <h2 id="outputs">Outputs</h2>
 <p>The output for each step is preserved for later inspection. However, the workflow can explicitly declare outputs. These outputs are usable in scripted environments as a direct output of the workflow:</p>
 <pre class="mermaid"><code>stateDiagram-v2
   [*] --&gt; Step
-  Step --&gt; [*]: output_1 = $.step1.output_1</code></pre>
-<h2 id="execution-environment">Execution environment</h2>
-<p>Workflow plugins will always run in containers. You can configure these containers to run locally, or you can connect a remote execution environment. At this time the two environments that are supported are Docker (or Podman using the Docker compatibility API) and Kubernetes. Later on we plan to add container execution via SSH.</p>
-<p>A local Docker (or Docker-like) environment is always required. The workflow engine needs this to obtain schema information from the plugins, as well as for mirroring plugins to a network-disconnected environment.</p>
-<p>Plugins must also make sure that they can execute in an unprivileged container, even when they later on need to be executed in a privileged environment. This is needed to obtain the schema before executing it in the target environment.</p>
-<p>You can configure any step to run in a remote environment as long as the remote environment can pull the container image. The engine provides the facilities to mirror the required plugins into a disconnected environment. Plugins must not make network calls during startup, and they should come with everything they need to run built in, unless their specific purpose is to install something on step execution. The engine will execute the plugin container image in a network-disconnected environment at startup to obtain its schema. If it fails to execute without internet, the workflow will not run.</p>
-<p>The execution environment has further parameters. For Docker, these options are specific to Docker, for Kubernetes they are specific to Kubernetes. For Kubernetes, you can also specify constraints on where the step is executed.</p>
-<h2 id="flow-control">Flow control</h2>
-<p>The workflow contains several flow control operations. These flow control operations are not implemented by plugins, but are part of the workflow engine itself.</p>
-<h3 id="abort">Abort</h3>
-<p>The abort flow control is a quick way to exit out of a workflow. This is useful when entering a terminal error state and the workflow output data would be useless anyway.</p>
-<pre class="mermaid"><code>stateDiagram-v2
-  [*] --&gt; Step1
-  Step1 --&gt; Abort: Output 1
-  Step1 --&gt; Step2: Output 2
-  Step2 --&gt; [*]</code></pre>
-<p>However, this is only required if you want to abort the workflow immediately. If you want an error case to result in the workflow failing, but whatever steps can be finished being finished, you can leave error outputs unconnected.</p>
-<h3 id="do-while">Do-while</h3>
-<p>A do-while block will execute the steps in it as long as a certain condition is met. The condition is derived from the output of the step or steps executed inside the loop:</p>
-<pre class="mermaid"><code>stateDiagram-v2
-  [*] --&gt; DoWhile
-  state DoWhile {
-    [*] --&gt; Step1
-    Step1 --&gt; [*]: output_1_condition=$.step1.output_1.finished == false   
-  }
-  DoWhile --&gt; [*]</code></pre>
-<p>If the step declares multiple outputs, multiple conditions are possible. The do-while block will also have multiple outputs:</p>
-<pre class="mermaid"><code>stateDiagram-v2
-  [*] --&gt; DoWhile
-  state DoWhile {
-    [*] --&gt; Step1
-    Step1 --&gt; [*]: Output 1 condition
-    Step1 --&gt; [*]: Output 2 condition   
-  }
-  DoWhile --&gt; [*]: Output 1
-  DoWhile --&gt; [*]: Output 2</code></pre>
-<p>You may decide to only allow exit from a loop if one of the two outputs is satisfied:</p>
-<pre class="mermaid"><code>stateDiagram-v2
-  [*] --&gt; DoWhile
-  state DoWhile {
-    [*] --&gt; Step1
-    Step1 --&gt; Step1: Output 1
-    Step1 --&gt; [*]: Output 2
-  }
-  DoWhile --&gt; [*]: Output 1</code></pre>
-<h3 id="condition">Condition</h3>
-<p>A condition is a flow control operation that redirects the flow one way or another based on an expression. You can also create multiple branches to create a switch-case effect.</p>
-<pre class="mermaid"><code>stateDiagram-v2
-  state if_state &lt;&lt;choice&gt;&gt;
-  Step1: Step 1
-  [*] --&gt; Step1
-  Step1 --&gt; if_state
-  Step2: Step 2
-  Step3: Step 3
-  if_state --&gt; Step2: $.step1.output_1 == true
-  if_state --&gt; Step3: $.step1.output_1 == false</code></pre>
-<h3 id="multiply">Multiply</h3>
-<p>The multiply flow control operation is useful when you need to dynamically execute sub-workflows in parallel based on an input condition. You can, for example, use this to run a workflow step on multiple or all Kubernetes nodes.</p>
-<pre class="mermaid"><code>stateDiagram-v2
-  Lookup: Lookup Kubernetes hosts
-  [*] --&gt; Lookup
-  Lookup --&gt; Multiply
-  state Multiply {
-    [*] --&gt; Stresstest
-    Stresstest --&gt; [*]
-  }
-  Multiply --&gt; [*]</code></pre>
-<p>The output of a Multiply operation will be a map, keyed with a string that is configured from the input.</p>
+  Step --&gt; [*]: output_1 = $.steps.step1.outputs.success</code></pre>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>You can think of a Multiply step like a for-each loop, but the steps being executed in parallel.</p>
+<p class="admonition-title">Background processes</p>
+<p>Each plugin will only be invoked once, allowing plugins to run background processes, such as server applications. The plugins must handle SIGINT and SIGTERM events properly.</p>
 </div>
-<h3 id="synchronize">Synchronize</h3>
-<p>The synchronize step attempts to synchronize the execution of subsequent steps for a specified key. The key must be a constant and cannot be obtained from an input expression.</p>
-<pre class="mermaid"><code>stateDiagram-v2
-  [*] --&gt; Step1
-  [*] --&gt; Step2
-  Synchronize1: Synchronize (key=a)
-  Synchronize2: Synchronize (key=a)
-  Step1 --&gt; Synchronize1
-  Step2 --&gt; Synchronize2
-  Synchronize1 --&gt; Step3
-  Synchronize2 --&gt; Step4
-  Step3 --&gt; [*]
-  Step4 --&gt; [*]</code></pre>
 
 
 
@@ -1094,7 +1487,7 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../../assets/javascripts/bundle.efa0ade1.min.js"></script>

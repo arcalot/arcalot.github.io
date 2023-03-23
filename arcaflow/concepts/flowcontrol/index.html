@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://arcalot.io/arcaflow/concepts/typing/">
+        <link rel="canonical" href="https://arcalot.io/arcaflow/concepts/flowcontrol/">
       
       
-        <link rel="prev" href="../architecture/">
+        <link rel="prev" href="../workflows/">
       
       
-        <link rel="next" href="../plugins/">
+        <link rel="next" href="../../running/">
       
       <link rel="icon" href="../../../arcalot.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
-        <title>Typing - Arcalot</title>
+        <title>Flow control (WIP) - Arcalot</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#typing-system" class="md-skip">
+        <a href="#flow-control-in-development" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Typing
+              Flow control (WIP)
             
           </span>
         </div>
@@ -475,21 +475,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../typing/" class="md-nav__link">
         Typing
       </a>
-      
     </li>
   
 
@@ -527,11 +517,80 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../flowcontrol/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Flow control (WIP)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Flow control (WIP)
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abort" class="md-nav__link">
+    Abort
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#do-while" class="md-nav__link">
+    Do-while
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#condition" class="md-nav__link">
+    Condition
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiply" class="md-nav__link">
+    Multiply
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchronize" class="md-nav__link">
+    Synchronize
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1304,31 +1363,84 @@
   
 
 
-<h1 id="typing-system">Typing system</h1>
-<p>Let&rsquo;s say you are creating a system that measures performance. But, uh-oh! A bug has struck! Instead of returning a number, a plugin returns an empty string. Would you want that converted to a numeric <code>0</code> for a metric? Or worse yet, would you want a negative number resulting from a bug to make it into your metrics? Would you want to collect metrics for years just to find out they are all wrong?</p>
-<p>If the answer is no, then the typing system is here to help. Each plugin or workflow in Arcaflow has to explicitly state what data types it accepts for certain fields, and what their boundaries are. When a plugin then violates its own rules, the engine makes sure that corrupt data isn&rsquo;t used any further.</p>
-<p>For example, let&rsquo;s look at the definition of an integer:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
-<span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<span class="nt">max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">128</span>
-</code></pre></div>
-<p>It&rsquo;s so simple, but it already prevents a lot of bugs: non-integers, numbers out of range.</p>
-<p>But wait! A typing system can do more for you. For example, we can automatically generate a nice documentation from it. Let&rsquo;s take this object as an example:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
-<span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
-<span class="nt">properties</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">      </span><span class="nt">min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="w">      </span><span class="nt">max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">256</span>
-<span class="w">    </span><span class="nt">display</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Name&quot;</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;The</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">user.&quot;</span>
-<span class="w">      </span><span class="nt">icon</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">        </span><span class="no">&lt;svg ...&gt;&lt;/svg&gt;</span>
-</code></pre></div>
-<p>That&rsquo;s all it takes to render a nice form field or automatic documentation. You can read more about creating types in the <a href="../../plugins/">plugins section</a> or the <a href="../../workflows/">workflows section</a>.</p>
+<h1 id="flow-control-in-development">Flow control (in development)</h1>
+<p>The workflow contains several flow control operations. These flow control operations are not implemented by plugins, but are part of the workflow engine itself.</p>
+<h2 id="abort">Abort</h2>
+<p>The abort flow control is a quick way to exit out of a workflow. This is useful when entering a terminal error state and the workflow output data would be useless anyway.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  [*] --&gt; Step1
+  Step1 --&gt; Abort: Output 1
+  Step1 --&gt; Step2: Output 2
+  Step2 --&gt; [*]</code></pre>
+<p>However, this is only required if you want to abort the workflow immediately. If you want an error case to result in the workflow failing, but whatever steps can be finished being finished, you can leave error outputs unconnected.</p>
+<h2 id="do-while">Do-while</h2>
+<p>A do-while block will execute the steps in it as long as a certain condition is met. The condition is derived from the output of the step or steps executed inside the loop:</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  [*] --&gt; DoWhile
+  state DoWhile {
+    [*] --&gt; Step1
+    Step1 --&gt; [*]: output_1_condition=$.step1.output_1.finished == false   
+  }
+  DoWhile --&gt; [*]</code></pre>
+<p>If the step declares multiple outputs, multiple conditions are possible. The do-while block will also have multiple outputs:</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  [*] --&gt; DoWhile
+  state DoWhile {
+    [*] --&gt; Step1
+    Step1 --&gt; [*]: Output 1 condition
+    Step1 --&gt; [*]: Output 2 condition   
+  }
+  DoWhile --&gt; [*]: Output 1
+  DoWhile --&gt; [*]: Output 2</code></pre>
+<p>You may decide to only allow exit from a loop if one of the two outputs is satisfied:</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  [*] --&gt; DoWhile
+  state DoWhile {
+    [*] --&gt; Step1
+    Step1 --&gt; Step1: Output 1
+    Step1 --&gt; [*]: Output 2
+  }
+  DoWhile --&gt; [*]: Output 1</code></pre>
+<h2 id="condition">Condition</h2>
+<p>A condition is a flow control operation that redirects the flow one way or another based on an expression. You can also create multiple branches to create a switch-case effect.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  state if_state &lt;&lt;choice&gt;&gt;
+  Step1: Step 1
+  [*] --&gt; Step1
+  Step1 --&gt; if_state
+  Step2: Step 2
+  Step3: Step 3
+  if_state --&gt; Step2: $.step1.output_1 == true
+  if_state --&gt; Step3: $.step1.output_1 == false</code></pre>
+<h2 id="multiply">Multiply</h2>
+<p>The multiply flow control operation is useful when you need to dynamically execute sub-workflows in parallel based on an input condition. You can, for example, use this to run a workflow step on multiple or all Kubernetes nodes.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  Lookup: Lookup Kubernetes hosts
+  [*] --&gt; Lookup
+  Lookup --&gt; Multiply
+  state Multiply {
+    [*] --&gt; Stresstest
+    Stresstest --&gt; [*]
+  }
+  Multiply --&gt; [*]</code></pre>
+<p>The output of a Multiply operation will be a map, keyed with a string that is configured from the input.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+</div>
+<p>You can think of a Multiply step like a for-each loop, but the steps being executed in parallel.</p>
+<h2 id="synchronize">Synchronize</h2>
+<p>The synchronize step attempts to synchronize the execution of subsequent steps for a specified key. The key must be a constant and cannot be obtained from an input expression.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  [*] --&gt; Step1
+  [*] --&gt; Step2
+  Synchronize1: Synchronize (key=a)
+  Synchronize2: Synchronize (key=a)
+  Step1 --&gt; Synchronize1
+  Step2 --&gt; Synchronize2
+  Synchronize1 --&gt; Step3
+  Synchronize2 --&gt; Step4
+  Step3 --&gt; [*]
+  Step4 --&gt; [*]</code></pre>
 
 
 

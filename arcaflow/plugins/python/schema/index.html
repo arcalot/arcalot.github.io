@@ -1,0 +1,1725 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://arcalot.io/arcaflow/plugins/python/schema/">
+      
+      
+        <link rel="prev" href="../faq/">
+      
+      
+        <link rel="next" href="../official/">
+      
+      <link rel="icon" href="../../../../arcalot.svg">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
+    
+    
+      
+        <title>Creating a schema by hand - Arcalot</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.c4a75a56.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../../extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#writing-a-python-plugin-schema-by-hand" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Arcalot" class="md-header__button md-logo" aria-label="Arcalot" data-md-component="logo">
+      
+  <img src="../../../../arcalot.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Arcalot
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Creating a schema by hand
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/arcalot/arcalot.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    arcalot/arcalot.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../arcalog/" class="md-tabs__link">
+      Arcalog
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link md-tabs__link--active">
+        Arcaflow
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Arcalot" class="md-nav__button md-logo" aria-label="Arcalot" data-md-component="logo">
+      
+  <img src="../../../../arcalot.svg" alt="logo">
+
+    </a>
+    Arcalot
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/arcalot/arcalot.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    arcalot/arcalot.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../arcalog/" class="md-nav__link">
+        Arcalog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../">Arcaflow</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Arcaflow
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/" class="md-nav__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../concepts/">Concepts</a>
+          
+            <label for="__nav_3_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Concepts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/architecture/" class="md-nav__link">
+        Architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/typing/" class="md-nav__link">
+        Typing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/plugins/" class="md-nav__link">
+        Plugins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/workflows/" class="md-nav__link">
+        Workflows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/flowcontrol/" class="md-nav__link">
+        Flow control (WIP)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../running/">Running Arcaflow</a>
+          
+            <label for="__nav_3_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Running Arcaflow
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../running/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../running/setup/" class="md-nav__link">
+        Setting up Arcaflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../running/running/" class="md-nav__link">
+        Running a workflow
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../">Creating plugins</a>
+          
+            <label for="__nav_3_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          Creating plugins
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_3" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Python</a>
+          
+            <label for="__nav_3_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../first/" class="md-nav__link">
+        Your first plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-model/" class="md-nav__link">
+        Creating a data model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../embedding/" class="md-nav__link">
+        Embedding your plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        Testing your plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        Frequently asked questions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Creating a schema by hand
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Creating a schema by hand
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objecttype" class="md-nav__link">
+    ObjectType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scopetype-and-reftype" class="md-nav__link">
+    ScopeType and RefType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oneoftype" class="md-nav__link">
+    OneOfType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stringtype" class="md-nav__link">
+    StringType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patterntype" class="md-nav__link">
+    PatternType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inttype" class="md-nav__link">
+    IntType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#floattype" class="md-nav__link">
+    FloatType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#booltype" class="md-nav__link">
+    BoolType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enumtype" class="md-nav__link">
+    EnumType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#listtype" class="md-nav__link">
+    ListType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maptype" class="md-nav__link">
+    MapType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anytype" class="md-nav__link">
+    AnyType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-plugin" class="md-nav__link">
+    Running the plugin
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../official/" class="md-nav__link">
+        Contributing official plugins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../go/">Go</a>
+          
+            <label for="__nav_3_5_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Go
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../go/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../go/first/" class="md-nav__link">
+        Your first plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../go/schema/" class="md-nav__link">
+        Creating a schema
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../packaging/" class="md-nav__link">
+        Packaging plugins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../workflows/">Writing workflows</a>
+          
+            <label for="__nav_3_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Writing workflows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../workflows/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../workflows/input/" class="md-nav__link">
+        Creating your input schema
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../workflows/step/" class="md-nav__link">
+        Setting up a step
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../workflows/expressions/" class="md-nav__link">
+        Expressions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../workflows/output/" class="md-nav__link">
+        Outputs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../contributing/">Contributing</a>
+          
+            <label for="__nav_3_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Contributing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/typing/" class="md-nav__link">
+        Typing system
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/plugin-protocol/" class="md-nav__link">
+        Arcaflow Transport Protocol
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/expressions/" class="md-nav__link">
+        Expression language
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/deployers/" class="md-nav__link">
+        Deployers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/engine/" class="md-nav__link">
+        Engine
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="writing-a-python-plugin-schema-by-hand">Writing a Python plugin schema by hand</h1>
+<p>If you want to skip the automatic schema generation described in previous chapters, you can also create a schema by hand.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This process is complicated, requires providing redundant information and should be avoided if at all possible. We recommend creating a data model using dataclasses, decorators and annotations.</p>
+</div>
+<p>We start by defining a schema:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">arcaflow_plugin_sdk</span> <span class="kn">import</span> <span class="n">schema</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+
+<span class="n">steps</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">schema</span><span class="o">.</span><span class="n">StepSchema</span><span class="p">]</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span>
+    <span class="n">steps</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>The <code>steps</code> parameter here must be a dict, where the key is the step ID and the value is the step schema. So, let&rsquo;s create a step schema:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">arcaflow_plugin_sdk</span> <span class="kn">import</span> <span class="n">schema</span>
+
+<span class="n">step_schema</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">StepSchema</span><span class="p">(</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;pod&quot;</span><span class="p">,</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Pod scenario&quot;</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Kills pods&quot;</span><span class="p">,</span>
+    <span class="nb">input</span> <span class="o">=</span> <span class="n">input_schema</span><span class="p">,</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">,</span>
+    <span class="n">handler</span> <span class="o">=</span> <span class="n">my_handler_func</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Let&rsquo;s go in order:</p>
+<ul>
+<li>The <code>input</code> must be a schema of the type <code>schema.ObjectType</code>. This describes the single parameter that will be passed to <code>my_handler_func</code>.</li>
+<li>The <code>outputs</code> describe a <code>Dict[str, schema.ObjectType]</code>, where the key is the ID for the returned output type, while the value describes the output schema.</li>
+<li>The <code>handler</code> function takes one parameter, the object described in <code>input</code> and must return a tuple of a string and the output object. Here the ID uniquely identifies which output is intended, for example <code>success</code> and <code>error</code>, while  the second parameter in the tuple must match the <code>outputs</code> declaration.</li>
+</ul>
+<p>That&rsquo;s it! Now all that&rsquo;s left is to define the <code>ObjectType</code> and any subobjects.</p>
+<h3 id="objecttype">ObjectType</h3>
+<p>The ObjectType is intended as a backing type for <a href="https://docs.python.org/3/library/dataclasses.html">dataclasses</a>. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">(</span>
+    <span class="n">TestClass</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+            <span class="nb">type</span><span class="o">=</span><span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">(),</span>
+            <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+            <span class="nb">type</span><span class="o">=</span><span class="n">schema</span><span class="o">.</span><span class="n">IntType</span><span class="p">(),</span>
+            <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>The fields support the following parameters:</p>
+<ul>
+<li><code>type</code>: underlying type schema for the field (required)</li>
+<li><code>name</code>: name for the current field</li>
+<li><code>description</code>: description for the current field</li>
+<li><code>required</code>: marks the field as required</li>
+<li><code>required_if</code>: a list of other fields that, if filled, will also cause the current field to be required</li>
+<li><code>required_if_not</code>: a list of other fields that, if not set, will cause the current field to be required</li>
+<li><code>conflicts</code>: a list of other fields that cannot be set together with the current field</li>
+</ul>
+<h3 id="scopetype-and-reftype">ScopeType and RefType</h3>
+<p>Sometimes it is necessary to create circular references. This is where the <code>ScopeType</code> and the <code>RefType</code> comes into play. Scopes contain a list of objects that can be referenced by their ID, but one object is special: the root object of the scope. The RefType, on the other hand, is there to reference objects in a scope.</p>
+<p>Currently, the Python implementation passes the scope to the ref type directly, but the important rule is that ref types <strong>always</strong> reference their nearest scope up the tree. Do not create references that aim at scopes not directly above the ref!</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">OneOfData1</span><span class="p">:</span>
+    <span class="n">a</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">OneOfData2</span><span class="p">:</span>
+    <span class="n">b</span><span class="p">:</span> <span class="n">OneOfData1</span>
+
+<span class="n">scope</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">ScopeType</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;OneOfData1&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">(</span>
+            <span class="n">OneOfData1</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+                    <span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">()</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">),</span>
+    <span class="p">},</span>
+    <span class="c1"># Root object of scopes</span>
+    <span class="s2">&quot;OneOfData2&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">scope</span><span class="o">.</span><span class="n">objects</span><span class="p">[</span><span class="s2">&quot;OneOfData2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">(</span>
+    <span class="n">OneOfData2</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+            <span class="n">schema</span><span class="o">.</span><span class="n">RefType</span><span class="p">(</span><span class="s2">&quot;OneOfData1&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>As you can see, this API is not easy to use and is likely to change in the future.</p>
+<h3 id="oneoftype">OneOfType</h3>
+<p>The OneOfType allows you to create a type that is a combination of other ObjectTypes. When a value is deserialized, a special discriminator field is consulted to figure out which type is actually being sent.</p>
+<p>This discriminator field may be present in the underlying type. If it is, the type must match the declaration in the AnyOfType.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">OneOfData1</span><span class="p">:</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">a</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">OneOfData2</span><span class="p">:</span>
+    <span class="n">b</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="n">scope</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">ScopeType</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;OneOfData1&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">(</span>
+            <span class="n">OneOfData1</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="c1"># Here the discriminator field is also present in the underlying type</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+                    <span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">(),</span>
+                <span class="p">),</span>
+                <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+                    <span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">()</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;OneOfData2&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">(</span>
+            <span class="n">OneOfData2</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+                    <span class="n">schema</span><span class="o">.</span><span class="n">IntType</span><span class="p">()</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+    <span class="p">},</span>
+    <span class="c1"># Root object of scopes</span>
+    <span class="s2">&quot;OneOfData1&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">OneOfStringType</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="c1"># Option 1</span>
+        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">RefType</span><span class="p">(</span>
+            <span class="c1"># The RefType resolves against the scope.</span>
+            <span class="s2">&quot;OneOfData1&quot;</span><span class="p">,</span>
+            <span class="n">scope</span>
+        <span class="p">),</span>
+        <span class="c1"># Option 2</span>
+        <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">RefType</span><span class="p">(</span>
+            <span class="s2">&quot;OneOfData2&quot;</span><span class="p">,</span>
+            <span class="n">scope</span>
+        <span class="p">),</span>
+    <span class="p">},</span>
+    <span class="c1"># Pass the scope this type belongs do</span>
+    <span class="n">scope</span><span class="p">,</span>
+    <span class="c1"># Discriminator field</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">serialized_data</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">OneOfData1</span><span class="p">(</span>
+    <span class="s2">&quot;a&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Hello world!&quot;</span>
+<span class="p">))</span>
+<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">serialized_data</span><span class="p">)</span>
+</code></pre></div>
+<p>Note, that the OneOfTypes take all object-like elements, such as refs, objects, or scopes.</p>
+<h3 id="stringtype">StringType</h3>
+<p>String types indicate that the underlying type is a string.</p>
+<div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">()</span>
+</code></pre></div>
+<p>The string type supports the following parameters:</p>
+<ul>
+<li><code>min_length</code>: minimum length for the string (inclusive)</li>
+<li><code>max_length</code>: maximum length for the string (inclusive)</li>
+<li><code>pattern</code>: regular expression the string must match</li>
+</ul>
+<h3 id="patterntype">PatternType</h3>
+<p>The pattern type indicates that the field must contain a regular expression. It will be decoded as <code>re.Pattern</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">PatternType</span><span class="p">()</span>
+</code></pre></div>
+<p>The pattern type has no parameters.</p>
+<h3 id="inttype">IntType</h3>
+<p>The int type indicates that the underlying type is an integer.</p>
+<div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">IntType</span><span class="p">()</span>
+</code></pre></div>
+<p>The int type supports the following parameters:</p>
+<ul>
+<li><code>min</code>: minimum value for the number (inclusive).</li>
+<li><code>max</code>: minimum value for the number (inclusive).</li>
+</ul>
+<h3 id="floattype">FloatType</h3>
+<p>The float type indicates that the underlying type is a floating point number.</p>
+<div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">FloatType</span><span class="p">()</span>
+</code></pre></div>
+<p>The float type supports the following parameters:</p>
+<ul>
+<li><code>min</code>: minimum value for the number (inclusive).</li>
+<li><code>max</code>: minimum value for the number (inclusive).</li>
+</ul>
+<h3 id="booltype">BoolType</h3>
+<p>The bool type indicates that the underlying value is a boolean. When unserializing, this type also supports string and integer values of <code>true</code>, <code>yes</code>, <code>on</code>, <code>enable</code>, <code>enabled</code>, <code>1</code>, <code>false</code>, <code>no</code>, <code>off</code>, <code>disable</code>, <code>disabled</code> or <code>0</code>.</p>
+<h3 id="enumtype">EnumType</h3>
+<p>The enum type creates a type from an existing enum:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyEnum</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="s2">&quot;b&quot;</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">EnumType</span><span class="p">(</span><span class="n">MyEnum</span><span class="p">)</span>
+</code></pre></div>
+<p>The enum type has no further parameters.</p>
+<h3 id="listtype">ListType</h3>
+<p>The list type describes a list of items. The item type must be described:</p>
+<div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">ListType</span><span class="p">(</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>The list type supports the following extra parameters:</p>
+<ul>
+<li><code>min</code>: The minimum number of items in the list (inclusive)</li>
+<li><code>max</code>: The maximum number of items in the list (inclusive)</li>
+</ul>
+<h3 id="maptype">MapType</h3>
+<p>The map type describes a key-value type (dict). You must specify both the key and the value type:</p>
+<div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">MapType</span><span class="p">(</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">(),</span>
+    <span class="n">schema</span><span class="o">.</span><span class="n">StringType</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>The map type supports the following extra parameters:</p>
+<ul>
+<li><code>min</code>: The minimum number of items in the map (inclusive)</li>
+<li><code>max</code>: The maximum number of items in the map (inclusive)</li>
+</ul>
+<h3 id="anytype">AnyType</h3>
+<p>The &ldquo;any&rdquo; type allows any primitive type to pass through. However, this comes with severe limitations and the data cannot be validated, so its use is discouraged. You can create an <code>AnyType</code> by simply doing this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">AnyType</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="running-the-plugin">Running the plugin</h3>
+<p>If you create the schema by hand, you can add the following code to your plugin:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">plugin</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">your_schema</span><span class="p">))</span>
+</code></pre></div>
+<p>You can then run your plugin as described in the <a href="../first/">writing your first plugin</a> section.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/arcalot" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.efa0ade1.min.js"></script>
+      
+    
+  </body>
+</html>

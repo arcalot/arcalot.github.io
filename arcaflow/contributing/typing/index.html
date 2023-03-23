@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://arcalot.io/arcaflow/concepts/plugin-protocol/">
+        <link rel="canonical" href="https://arcalot.io/arcaflow/contributing/typing/">
       
       
-        <link rel="prev" href="../typing/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../../engine/">
+        <link rel="next" href="../plugin-protocol/">
       
       <link rel="icon" href="../../../arcalot.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
-        <title>The plugin protocol - Arcalot</title>
+        <title>Typing system - Arcalot</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#plugin-protocol-specification" class="md-skip">
+        <a href="#the-arcaflow-type-system" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              The plugin protocol
+              Typing system
             
           </span>
         </div>
@@ -259,7 +259,9 @@
   
 
 
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../../.." title="Arcalot" class="md-nav__button md-logo" aria-label="Arcalot" data-md-component="logo">
       
@@ -344,6 +346,10 @@
         
           
         
+          
+        
+          
+        
       
       
         
@@ -384,20 +390,28 @@
               
   
   
-    
-  
   
     
-      
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
       
       
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
         
           
         
@@ -407,12 +421,18 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
-          Concepts
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../concepts/">Concepts</a>
+          
+            <label for="__nav_3_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_3">
           <span class="md-nav__icon md-icon"></span>
           Concepts
@@ -420,12 +440,70 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+          
+            
               
   
   
   
     <li class="md-nav__item">
-      <a href="../workflows/" class="md-nav__link">
+      <a href="../../concepts/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        Architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/typing/" class="md-nav__link">
+        Typing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/plugins/" class="md-nav__link">
+        Plugins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/workflows/" class="md-nav__link">
         Workflows
       </a>
     </li>
@@ -439,8 +517,676 @@
   
   
     <li class="md-nav__item">
-      <a href="../typing/" class="md-nav__link">
-        The typing system
+      <a href="../../concepts/flowcontrol/" class="md-nav__link">
+        Flow control (WIP)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../running/">Running Arcaflow</a>
+          
+            <label for="__nav_3_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Running Arcaflow
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../running/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../running/setup/" class="md-nav__link">
+        Setting up Arcaflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../running/running/" class="md-nav__link">
+        Running a workflow
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../plugins/">Creating plugins</a>
+          
+            <label for="__nav_3_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          Creating plugins
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../plugins/python/">Python</a>
+          
+            <label for="__nav_3_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/first/" class="md-nav__link">
+        Your first plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/data-model/" class="md-nav__link">
+        Creating a data model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/embedding/" class="md-nav__link">
+        Embedding your plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/testing/" class="md-nav__link">
+        Testing your plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/faq/" class="md-nav__link">
+        Frequently asked questions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/schema/" class="md-nav__link">
+        Creating a schema by hand
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/official/" class="md-nav__link">
+        Contributing official plugins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../plugins/go/">Go</a>
+          
+            <label for="__nav_3_5_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Go
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/go/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/go/first/" class="md-nav__link">
+        Your first plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/go/schema/" class="md-nav__link">
+        Creating a schema
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/packaging/" class="md-nav__link">
+        Packaging plugins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../workflows/">Writing workflows</a>
+          
+            <label for="__nav_3_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Writing workflows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/input/" class="md-nav__link">
+        Creating your input schema
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/step/" class="md-nav__link">
+        Setting up a step
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/expressions/" class="md-nav__link">
+        Expressions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/output/" class="md-nav__link">
+        Outputs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Contributing</a>
+          
+            <label for="__nav_3_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Contributing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Overview
       </a>
     </li>
   
@@ -463,12 +1209,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          The plugin protocol
+          Typing system
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        The plugin protocol
+        Typing system
       </a>
       
         
@@ -487,57 +1233,104 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#execution-model" class="md-nav__link">
-    Execution model
+  <a href="#types" class="md-nav__link">
+    Types
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#protocol" class="md-nav__link">
-    Protocol
+  <a href="#validation" class="md-nav__link">
+    Validation
+  </a>
+  
+    <nav class="md-nav" aria-label="Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strings" class="md-nav__link">
+    Strings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ints-floats" class="md-nav__link">
+    Ints, floats
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#booleans" class="md-nav__link">
+    Booleans
+  </a>
+  
+    <nav class="md-nav" aria-label="Booleans">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lists-maps" class="md-nav__link">
+    Lists, maps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objects" class="md-nav__link">
+    Objects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oneof" class="md-nav__link">
+    OneOf
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scopes-and-refs" class="md-nav__link">
+    Scopes and refs
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-0-the-start-output-message" class="md-nav__link">
-    Step 0: The "start output" message
+  <a href="#any" class="md-nav__link">
+    Any
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-hello-message" class="md-nav__link">
-    Step 1: Hello message
+  <a href="#metadata" class="md-nav__link">
+    Metadata
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-start-work-message" class="md-nav__link">
-    Step 2: Start work message
+  <a href="#intent-inference" class="md-nav__link">
+    Intent inference
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3a-crash" class="md-nav__link">
-    Step 3/a: Crash
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-3b-output" class="md-nav__link">
-    Step 3/b: Output
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#schema" class="md-nav__link">
-    Schema
+  <a href="#reference-manual" class="md-nav__link">
+    Reference Manual
   </a>
   
 </li>
@@ -551,106 +1344,14 @@
 
             
           
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
-      
-      
-        
-          
-            
-          
-        
-      
-      
-        
-        
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../../engine/">Engine</a>
-          
-        </div>
-      
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_3_4">
-          <span class="md-nav__icon md-icon"></span>
-          Engine
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5" >
-      
-      
-        
-          
-        
-          
-        
-      
-      
-        <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
-          Creating plugins
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_3_5">
-          <span class="md-nav__icon md-icon"></span>
-          Creating plugins
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
             
               
   
   
   
     <li class="md-nav__item">
-      <a href="../../creating-plugins/python/" class="md-nav__link">
-        Python
+      <a href="../plugin-protocol/" class="md-nav__link">
+        Arcaflow Transport Protocol
       </a>
     </li>
   
@@ -663,8 +1364,36 @@
   
   
     <li class="md-nav__item">
-      <a href="../../creating-plugins/release/" class="md-nav__link">
-        Release
+      <a href="../expressions/" class="md-nav__link">
+        Expression language
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deployers/" class="md-nav__link">
+        Deployers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../engine/" class="md-nav__link">
+        Engine
       </a>
     </li>
   
@@ -691,88 +1420,6 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#execution-model" class="md-nav__link">
-    Execution model
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#protocol" class="md-nav__link">
-    Protocol
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-0-the-start-output-message" class="md-nav__link">
-    Step 0: The "start output" message
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-1-hello-message" class="md-nav__link">
-    Step 1: Hello message
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-2-start-work-message" class="md-nav__link">
-    Step 2: Start work message
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-3a-crash" class="md-nav__link">
-    Step 3/a: Crash
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-3b-output" class="md-nav__link">
-    Step 3/b: Output
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#schema" class="md-nav__link">
-    Schema
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           
             <div class="md-content" data-md-component="content">
@@ -784,113 +1431,92 @@
   
 
 
-<h1 id="plugin-protocol-specification">Plugin protocol specification</h1>
-<div class="admonition warning">
-<p class="admonition-title">Work in Progress</p>
-<p>This document is work in progress and may change until the final release!</p>
-</div>
-<p>Arcaflow runs plugins locally in a container using Docker or Podman, or remotely in Kubernetes. Each plugin must be
-containerized and communicates with the engine over standard input/output. This document outlines the protocol the
-engine and the plugins use to communicate.</p>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>You do not need this page if you only intend to implement a plugin with the SDK!</p>
-</div>
-<h2 id="execution-model">Execution model</h2>
-<p>A single plugin execution is intended to run a single task and not more. This simplifies the code since there is no need
-to try and clean up after each task. Each plugin is executed in a container and must communicate with the engine over
-standard input/output. Furthermore, the plugin must add a handler for <code>SIGTERM</code> and properly clean up if there are
-services running in the background.</p>
-<p>Each plugin is executed at the start of the workflow, or workflow block, and is terminated only at the end of the
-current workflow or workflow block. The plugin can safely rely on being able to start a service in the background and
-then keeping it running until the SIGTERM comes to shut down the container.</p>
-<p>However, the plugin must, under no circumstances, start doing work until the engine sends the command to do so. This
-includes starting any services inside the container or outside. This restriction is necessary to be able to launch the
-plugin with minimal resource consumption locally on the engine host to fetch the schema.</p>
-<p>The plugin execution is divided into three major steps.</p>
-<ol>
-<li>When the plugin is started, it must output the current plugin protocol version and its schema to the standard output.
-The engine will read this output from the container logs.</li>
-<li>When it is time to start the work, the engine will send the desired step ID with its input parameters over the
-standard input. The plugin acknowledges this and starts to work. When the work is complete, the plugin must
-automatically output the results to the standard output.</li>
-<li>When a shutdown is desired, the engine will send a <code>SIGTERM</code> to the plugin. The plugin has up to 30 seconds to shut
-down. The SIGTERM may come at any time, even while the work is still running, and the plugin must appropriately shut
-down. If the work is not complete, the plugin may attempt to output an error output data to the standard out, but
-must not do so. If the plugin fails to stop by itself within 30 seconds, the plugin container is forcefully stopped.</li>
-</ol>
-<h2 id="protocol">Protocol</h2>
-<p>As a data transport protocol, we
-use <a href="https://cbor.io/">CBOR messages</a> <a href="https://www.rfc-editor.org/rfc/rfc8949.html">RFC 8949</a> back to back due to their
-self-delimiting nature. This section provides the entire protocol as <a href="https://json-schema.org/">JSON schema</a> below.</p>
-<h2 id="step-0-the-start-output-message">Step 0: The &ldquo;start output&rdquo; message</h2>
-<p>Because Kubernetes has no clean way of capturing an output right at the start, the initial step of the plugin execution involves the engine sending an empty CBOR message (<code>None</code> or <code>Nil</code>) to the plugin. This indicates, that the plugin may start its output now.</p>
-<h2 id="step-1-hello-message">Step 1: Hello message</h2>
-<p>The &ldquo;Hello&rdquo; message is a way for the plugin to introduce itself and present its steps and schema. Transcribed to JSON, a
-message of this kind would look as follows:</p>
+<h1 id="the-arcaflow-type-system">The Arcaflow type system</h1>
+<p>Arcaflow takes a departure from the classic run-and-pray approach of running workloads and validates workflows for validity before executing them. To do this, Arcaflow starts the plugins as needed before the workflow is run and queries them for their <strong>schema</strong>. This schema will contain information about what kind of input a plugin requests and what kind of outputs it can produce.</p>
+<p>A plugin can support multiple <strong>workflow steps</strong> and must provide information about the data types in its <strong>input and output</strong> for each step. A step can have exactly one input format, but may declare more than one output.</p>
+<p>The typesystem is inspired by <a href="https://json-schema.org/">JSON schema</a> and <a href="https://swagger.io/specification/">OpenAPI</a>, but it is more restrictive due to the need to efficiently serialize workloads over various formats.</p>
+<h2 id="types">Types</h2>
+<p>The typing system supports the following data types.</p>
+<ul>
+<li><strong>Objects</strong> are key-value pairs where the keys are always a fixed set of strings and values are of various types declared for each key. They are similar to classes in most programming languages. Fields in objects can be <em>optional</em>, which means they will have no value (commonly known as <code>null</code>, <code>nil</code>, or <code>None</code>), or a default value.</li>
+<li><strong>OneOf</strong> are a special type that is a union of multiple objects, distinguished by a special field called the discriminator.</li>
+<li><strong>Lists</strong> are a sequence of values of the same type. The value type can be any of the other types described in this section. List items must always have a value and cannot be empty (<code>null</code>, <code>nil</code>, or <code>None</code>).</li>
+<li><strong>Maps</strong> are key-value pairs that always have fixed types for both keys and values. Maps with mixed keys or values are not supported. Map keys can only be strings, integers, or enums. Map keys and values must always have a value and cannot be empty (<code>null</code>, <code>nil</code>, or <code>None</code>).</li>
+<li><strong>Enums</strong> are either strings or integers that can take only a fixed set of values. Enums with mixed value types are not supported.</li>
+<li><strong>Strings</strong> are a sequence of bytes.</li>
+<li><strong>Patterns</strong> are regular expressions.</li>
+<li><strong>Integers</strong> are 64-bit numbers that can take both positive and negative values.</li>
+<li><strong>Floats</strong> are 64-bit floating point numbers that can take both positive and negative values.</li>
+<li><strong>Booleans</strong> are values of <code>true</code> or <code>false</code> and cannot take any other values.</li>
+<li><strong>Scopes</strong> and <strong>Refs</strong> are object-like types that allow you to create circular references (see below).</li>
+<li><strong>Any</strong> accepts any primitive type (string, int, float, bool, map, list) but no patterns, objects, etc.</li>
+</ul>
+<h2 id="validation">Validation</h2>
+<p>The typing system also contains more in-depth validation than just simple types:</p>
+<h3 id="strings">Strings</h3>
+<p>Strings can have a minimum or maximum length, as well as validation against a regular expression.</p>
+<h3 id="ints-floats">Ints, floats</h3>
+<p>Number types can have a minimum and maximum value (inclusive).</p>
+<h2 id="booleans">Booleans</h2>
+<p>Boolean types can take a value of either <code>true</code> or <code>false</code>, but when unserializing from YAML or JSON formats, strings or int values of <code>true</code>, <code>yes</code>, <code>on</code>, <code>enable</code>, <code>enabled</code>, <code>1</code>, <code>false</code>, <code>no</code>, <code>off</code>, <code>disable</code>, <code>disabled</code> or <code>0</code> are also accepted.</p>
+<h3 id="lists-maps">Lists, maps</h3>
+<p>Lists a7nd maps can have constraints on the minimum or maximum number of items in them (inclusive).</p>
+<h3 id="objects">Objects</h3>
+<p>Object fields can have several constraints:</p>
+<ul>
+<li><code>required_if</code> has a list of other fields that, if set, make the current field required.</li>
+<li><code>required_if_not</code> has a list of other fields that, if none are set, make the current field required.</li>
+<li><code>conflicts</code> has a list of other fields that cannot be set together with the current field.</li>
+</ul>
+<h3 id="oneof">OneOf</h3>
+<p>When you need to create a list of multiple object types, or simply have an either-or choice between two object types, you can use the OneOf type. This field uses an already existing field of the underlying objects, or adds an extra field to the schema to distinguish between the different types. Translated to JSON, you might see something like this:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;steps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;step-id-1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Step 1&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This is the first step&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;input&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="c1">// Input schema</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;output-id-1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Name for this output kind&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Description for this output&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// Output schema</span>
-<span class="w">          </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nt">&quot;_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Greeter&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello world!&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>The schemas must describe the data structure the plugin expects. For a simple hello world input would look as follows:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<h2 id="scopes-and-refs">Scopes and refs</h2>
+<p>Objects, on their own, cannot create circular references. It is not possible to create two objects that refer to each other. That&rsquo;s where scopes and refs come into play. Scopes hold a list of objects, identified by an ID. Refs inside the scope (for example, in an object property) can refer to these IDs. Every scope has a <em>root</em> object, which will be used to provide its &ldquo;object-like&rdquo; features, such as a list of fields.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">objects</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">my_root_object</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_root_object</span>
+<span class="w">    </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_root_object</span>
 </code></pre></div>
-<p>The full schema is described below in the <a href="#schema">Schema</a> section.</p>
-<h2 id="step-2-start-work-message">Step 2: Start work message</h2>
-<p>The &ldquo;start work&rdquo; message has the following parameters in CBOR:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id-of-the-step-to-execute&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Input parameters according to schema here</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>The plugin must respond with a CBOR message of the following format:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;started&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
-<h2 id="step-3a-crash">Step 3/a: Crash</h2>
-<p>If the plugin execution ended unexpectedly, the plugin should crash and output a reasonable error message to the standard error. The plugin must exit with a non-zero exit status to notify the engine that the execution failed.</p>
-<h2 id="step-3b-output">Step 3/b: Output</h2>
-<p>When the plugin has executed successfully, it must emit a CBOR message to the standard output:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;output_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id-of-the-declared-output&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;output_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Result data of the plugin</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;debug_logs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Unstructured logs here for debugging as a string.&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
-<h2 id="schema">Schema</h2>
-<p>This section contains the exact schema that the plugin sends to the engine.</p>
+<p>Multiple scopes can be nested into each other. The ref always refers to the closest scope up the tree. Multiple scopes can be used when combining objects from several sources (e.g. several plugins) into one schema to avoid conflicting ID assignments.</p>
+<h2 id="any">Any</h2>
+<p>Any accepts any primitive type (string, int, float, bool, map, list) but no patterns, objects, etc. This type is severely limited in its ability to validate data and should only be used in exceptional cases when there is no other way to describe a schema.</p>
+<h2 id="metadata">Metadata</h2>
+<p>Object fields can also declare metadata that will help with creating user interfaces for the object. These fields are:</p>
+<ul>
+<li><strong>name</strong>: A user-readable name for the field.</li>
+<li><strong>description</strong>: A user-readable description for the field. It may contain newlines, but no other formatting is allowed.</li>
+<li><strong>icon</strong>: SVG icon</li>
+</ul>
+<h2 id="intent-inference">Intent inference</h2>
+<p>For display purposes, the type system is designed so that it can infer the intent of the data. We wish to communicate the following intents:</p>
+<ul>
+<li>Graphs are x-y values of timestamps mapped to one or more values.</li>
+<li>Log lines are timestamps associated with text.</li>
+<li>Events are timestamps associated with other structured data.</li>
+</ul>
+<p>We explicitly document the following inference rules, which will probably change in the future.</p>
+<ul>
+<li>A map with keys of timestamps and values of integers or floats is rendered as a graph.</li>
+<li>A map with keys of timestamps and values of objects consisting only of integers and floats is rendered as a graph.</li>
+<li>A map with keys of timestamps and values of strings is considered a log line.</li>
+<li>A map with keys of timestamps and objects that don&rsquo;t match the rules above are considered an event.</li>
+<li>A map with keys of short strings and integer or float values is considered a pie chart.</li>
+<li>A list of objects consisting of a single timestamp and otherwise only integers and floats is rendered as a graph.</li>
+<li>A list of objects with a single timestamp and a single string are considered a log line.</li>
+<li>A list of objects with a single short string and a single integer or float is considered a pie chart.</li>
+<li>A list of objects consisting of no more than one timestamp and multiple other fields not matching the rules above is considered an event.</li>
+<li>If an object has a field called &ldquo;title&rdquo;, &ldquo;name&rdquo;, or &ldquo;label&rdquo;, it will be used as a label for the current data set in a chart, or as a title for the wrapping box for the user interface elements.</li>
+</ul>
+<h2 id="reference-manual">Reference Manual</h2>
+<p>This section explains how a scope object looks like. The <a href="../plugin-protocol/">plugin protocol</a> contains a few more types that are used when communicating a schema.</p>
 <table>
 <thead>
 <tr>
@@ -905,14 +1531,14 @@ message of this kind would look as follows:</p>
 </tr>
 <tr>
 <td>Root object:</td>
-<td>Schema</td>
+<td>Scope</td>
 </tr>
 </tbody>
 </table>
 <details class="note" open="open">
 <summary>Properties</summary>
 <details class="info">
-<summary>steps (<code>map[string, reference[Step]]</code>)</summary>
+<summary>objects (<code>map[string, reference[Object]]</code>)</summary>
 <table>
 <thead>
 <tr>
@@ -923,11 +1549,11 @@ message of this kind would look as follows:</p>
 <tbody>
 <tr>
 <td>Name:</td>
-<td>Steps</td>
+<td>Objects</td>
 </tr>
 <tr>
 <td>Description:</td>
-<td>Steps this schema supports.</td>
+<td>A set of referencable objects. These objects may contain references themselves.</td>
 </tr>
 <tr>
 <td>Required:</td>
@@ -976,15 +1602,52 @@ message of this kind would look as follows:</p>
 <tbody>
 <tr>
 <td>Type:</td>
-<td><code>reference[Step]</code></td>
+<td><code>reference[Object]</code></td>
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Step</td>
+<td>Object <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
 </details>
+</details>
+<details class="info">
+<summary>root (<code>string</code>)</summary>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name:</td>
+<td>Root object</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td>ID of the root object of the scope.</td>
+</tr>
+<tr>
+<td>Required:</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Minimum:</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Maximum:</td>
+<td>255</td>
+</tr>
+<tr>
+<td>Must match pattern:</td>
+<td><code>^[$@a-zA-Z0-9-_]&amp;#43;$</code></td>
+</tr>
+</tbody>
+</table>
 </details>
 </details>
 <details class="note" open="open">
@@ -1255,7 +1918,7 @@ message of this kind would look as follows:</p>
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Units</td>
+<td>Units <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -1377,7 +2040,7 @@ message of this kind would look as follows:</p>
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Units</td>
+<td>Units <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -1431,7 +2094,7 @@ message of this kind would look as follows:</p>
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Units</td>
+<td>Units <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -1500,7 +2163,7 @@ message of this kind would look as follows:</p>
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Display</td>
+<td>Display <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -1880,7 +2543,7 @@ message of this kind would look as follows:</p>
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Property</td>
+<td>Property <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -2228,7 +2891,7 @@ message of this kind would look as follows:</p>
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Display</td>
+<td>Display <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -2455,7 +3118,7 @@ message of this kind would look as follows:</p>
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Display</td>
+<td>Display <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -2496,101 +3159,6 @@ message of this kind would look as follows:</p>
 </tr>
 </tbody>
 </table>
-</details>
-</details>
-</details>
-<details class="info">
-<summary><strong>Schema</strong> (<code>object</code>)</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Type:</td>
-<td><code>object</code></td>
-</tr>
-</tbody>
-</table>
-<details class="note" open="open">
-<summary>Properties</summary>
-<details class="info">
-<summary>steps (<code>map[string, reference[Step]]</code>)</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Name:</td>
-<td>Steps</td>
-</tr>
-<tr>
-<td>Description:</td>
-<td>Steps this schema supports.</td>
-</tr>
-<tr>
-<td>Required:</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
-<details class="info">
-<summary>Key type</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Type:</td>
-<td><code>string</code></td>
-</tr>
-<tr>
-<td>Minimum:</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Maximum:</td>
-<td>255</td>
-</tr>
-<tr>
-<td>Must match pattern:</td>
-<td><code>^[$@a-zA-Z0-9-_]&amp;#43;$</code></td>
-</tr>
-</tbody>
-</table>
-</details>
-<details class="info">
-<summary>Value type</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Type:</td>
-<td><code>reference[Step]</code></td>
-</tr>
-<tr>
-<td>Referenced object:</td>
-<td>Step</td>
-</tr>
-</tbody>
-</table>
-</details>
 </details>
 </details>
 </details>
@@ -2681,7 +3249,7 @@ message of this kind would look as follows:</p>
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Object</td>
+<td>Object <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -2720,301 +3288,6 @@ message of this kind would look as follows:</p>
 <tr>
 <td>Must match pattern:</td>
 <td><code>^[$@a-zA-Z0-9-_]&amp;#43;$</code></td>
-</tr>
-</tbody>
-</table>
-</details>
-</details>
-</details>
-<details class="info">
-<summary><strong>Step</strong> (<code>object</code>)</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Type:</td>
-<td><code>object</code></td>
-</tr>
-</tbody>
-</table>
-<details class="note" open="open">
-<summary>Properties</summary>
-<details class="info">
-<summary>display (<code>reference[Display]</code>)</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Name:</td>
-<td>Display</td>
-</tr>
-<tr>
-<td>Description:</td>
-<td>Name, description and icon.</td>
-</tr>
-<tr>
-<td>Required:</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Referenced object:</td>
-<td>Display</td>
-</tr>
-</tbody>
-</table>
-</details>
-<details class="info">
-<summary>id (<code>string</code>)</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Name:</td>
-<td>ID</td>
-</tr>
-<tr>
-<td>Description:</td>
-<td>Machine identifier for this step.</td>
-</tr>
-<tr>
-<td>Required:</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Minimum:</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Maximum:</td>
-<td>255</td>
-</tr>
-<tr>
-<td>Must match pattern:</td>
-<td><code>^[$@a-zA-Z0-9-_]&amp;#43;$</code></td>
-</tr>
-</tbody>
-</table>
-</details>
-<details class="info">
-<summary>input (<code>reference[Scope]</code>)</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Name:</td>
-<td>Input</td>
-</tr>
-<tr>
-<td>Description:</td>
-<td>Input data schema.</td>
-</tr>
-<tr>
-<td>Required:</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Referenced object:</td>
-<td>Scope</td>
-</tr>
-</tbody>
-</table>
-</details>
-<details class="info">
-<summary>outputs (<code>map[string, reference[StepOutput]]</code>)</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Name:</td>
-<td>Input</td>
-</tr>
-<tr>
-<td>Description:</td>
-<td>Input data schema.</td>
-</tr>
-<tr>
-<td>Required:</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
-<details class="info">
-<summary>Key type</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Type:</td>
-<td><code>string</code></td>
-</tr>
-<tr>
-<td>Minimum:</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Maximum:</td>
-<td>255</td>
-</tr>
-<tr>
-<td>Must match pattern:</td>
-<td><code>^[$@a-zA-Z0-9-_]&amp;#43;$</code></td>
-</tr>
-</tbody>
-</table>
-</details>
-<details class="info">
-<summary>Value type</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Type:</td>
-<td><code>reference[StepOutput]</code></td>
-</tr>
-<tr>
-<td>Referenced object:</td>
-<td>StepOutput</td>
-</tr>
-</tbody>
-</table>
-</details>
-</details>
-</details>
-</details>
-<details class="info">
-<summary><strong>StepOutput</strong> (<code>object</code>)</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Type:</td>
-<td><code>object</code></td>
-</tr>
-</tbody>
-</table>
-<details class="note" open="open">
-<summary>Properties</summary>
-<details class="info">
-<summary>display (<code>reference[Display]</code>)</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Name:</td>
-<td>Display</td>
-</tr>
-<tr>
-<td>Description:</td>
-<td>Name, description and icon.</td>
-</tr>
-<tr>
-<td>Required:</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Referenced object:</td>
-<td>Display</td>
-</tr>
-</tbody>
-</table>
-</details>
-<details class="info">
-<summary>error (<code>bool</code>)</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Name:</td>
-<td>Error</td>
-</tr>
-<tr>
-<td>Description:</td>
-<td>If set to true, this output will be treated as an error output.</td>
-</tr>
-<tr>
-<td>Required:</td>
-<td>No</td>
-</tr>
-</tbody>
-</table>
-<div class="highlight"><span class="filename">Default</span><pre><span></span><code><span class="kc">false</span>
-</code></pre></div>
-</details>
-<details class="info">
-<summary>schema (<code>reference[Scope]</code>)</summary>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Name:</td>
-<td>Schema</td>
-</tr>
-<tr>
-<td>Description:</td>
-<td>Data schema for this particular output.</td>
-</tr>
-<tr>
-<td>Required:</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Referenced object:</td>
-<td>Scope</td>
 </tr>
 </tbody>
 </table>
@@ -3224,7 +3497,7 @@ message of this kind would look as follows:</p>
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Display</td>
+<td>Display <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -3426,7 +3699,7 @@ message of this kind would look as follows:</p>
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Unit</td>
+<td>Unit <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -3498,7 +3771,7 @@ message of this kind would look as follows:</p>
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Unit</td>
+<td>Unit <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -3577,7 +3850,7 @@ message of this kind would look as follows:</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../../assets/javascripts/bundle.efa0ade1.min.js"></script>

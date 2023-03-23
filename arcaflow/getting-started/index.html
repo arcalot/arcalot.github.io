@@ -14,7 +14,7 @@
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../concepts/workflows/">
+        <link rel="next" href="../concepts/">
       
       <link rel="icon" href="../../arcalot.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
@@ -259,7 +259,9 @@
   
 
 
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Arcalot" class="md-nav__button md-logo" aria-label="Arcalot" data-md-component="logo">
       
@@ -344,6 +346,10 @@
         
           
         
+          
+        
+          
+        
       
       
         
@@ -406,97 +412,64 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
+  <a href="#step-1-get-a-container-engine" class="md-nav__link">
+    Step 1: Get a container engine
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#workflow-basics" class="md-nav__link">
-    Workflow Basics
-  </a>
-  
-    <nav class="md-nav" aria-label="Workflow Basics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#logical-flow" class="md-nav__link">
-    Logical Flow
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#functional-flow" class="md-nav__link">
-    Functional Flow
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-workflow" class="md-nav__link">
-    Example Workflow
+  <a href="#step-2-get-the-engine" class="md-nav__link">
+    Step 2: Get the engine
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-and-contributing" class="md-nav__link">
-    Using and Contributing
+  <a href="#step-3-create-your-first-plugin" class="md-nav__link">
+    Step 3: Create your first plugin
   </a>
-  
-    <nav class="md-nav" aria-label="Using and Contributing">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#level-0" class="md-nav__link">
-    Level 0
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#level-1" class="md-nav__link">
-    Level 1
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#level-2" class="md-nav__link">
-    Level 2
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#level-3" class="md-nav__link">
-    Level 3
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#level-4" class="md-nav__link">
-    Level 4
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#community" class="md-nav__link">
-    Community
+  <a href="#step-4-building-the-plugin" class="md-nav__link">
+    Step 4: Building the plugin
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-creating-a-simple-workflow" class="md-nav__link">
+    Step 5: Creating a simple workflow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-create-an-input-file" class="md-nav__link">
+    Step 6: Create an input file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-create-an-engine-configuration" class="md-nav__link">
+    Step 7: Create an engine configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-running-the-workflow" class="md-nav__link">
+    Step 7: Running the workflow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    Next steps
   </a>
   
 </li>
@@ -516,18 +489,26 @@
   
   
     
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
       
       
         
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
-      
-      
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
         
           
         
@@ -537,10 +518,16 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
-          Concepts
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../concepts/">Concepts</a>
+          
+            <label for="__nav_3_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_3">
@@ -548,6 +535,64 @@
           Concepts
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/architecture/" class="md-nav__link">
+        Architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/typing/" class="md-nav__link">
+        Typing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/plugins/" class="md-nav__link">
+        Plugins
+      </a>
+    </li>
+  
+
+            
           
             
               
@@ -569,8 +614,78 @@
   
   
     <li class="md-nav__item">
-      <a href="../concepts/typing/" class="md-nav__link">
-        The typing system
+      <a href="../concepts/flowcontrol/" class="md-nav__link">
+        Flow control (WIP)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../running/">Running Arcaflow</a>
+          
+            <label for="__nav_3_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Running Arcaflow
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../running/" class="md-nav__link">
+        Overview
       </a>
     </li>
   
@@ -583,8 +698,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../concepts/plugin-protocol/" class="md-nav__link">
-        The plugin protocol
+      <a href="../running/setup/" class="md-nav__link">
+        Setting up Arcaflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../running/running/" class="md-nav__link">
+        Running a workflow
       </a>
     </li>
   
@@ -604,21 +733,27 @@
   
   
     
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
       
       
         
           
             
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
           
         
       
@@ -626,55 +761,13 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../engine/">Engine</a>
+          <a href="../plugins/">Creating plugins</a>
+          
+            <label for="__nav_3_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
           
         </div>
-      
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_3_4">
-          <span class="md-nav__icon md-icon"></span>
-          Engine
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5" >
-      
-      
-        
-          
-        
-          
-        
-      
-      
-        <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
-          Creating plugins
-          <span class="md-nav__icon md-icon"></span>
-        </label>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_5">
@@ -684,13 +777,88 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+          
+            
               
   
   
   
     <li class="md-nav__item">
-      <a href="../creating-plugins/python/" class="md-nav__link">
-        Python
+      <a href="../plugins/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../plugins/python/">Python</a>
+          
+            <label for="__nav_3_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/python/" class="md-nav__link">
+        Overview
       </a>
     </li>
   
@@ -703,8 +871,487 @@
   
   
     <li class="md-nav__item">
-      <a href="../creating-plugins/release/" class="md-nav__link">
-        Release
+      <a href="../plugins/python/first/" class="md-nav__link">
+        Your first plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/python/data-model/" class="md-nav__link">
+        Creating a data model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/python/embedding/" class="md-nav__link">
+        Embedding your plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/python/testing/" class="md-nav__link">
+        Testing your plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/python/faq/" class="md-nav__link">
+        Frequently asked questions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/python/schema/" class="md-nav__link">
+        Creating a schema by hand
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/python/official/" class="md-nav__link">
+        Contributing official plugins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../plugins/go/">Go</a>
+          
+            <label for="__nav_3_5_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Go
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/go/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/go/first/" class="md-nav__link">
+        Your first plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/go/schema/" class="md-nav__link">
+        Creating a schema
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/packaging/" class="md-nav__link">
+        Packaging plugins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../workflows/">Writing workflows</a>
+          
+            <label for="__nav_3_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Writing workflows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/input/" class="md-nav__link">
+        Creating your input schema
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/step/" class="md-nav__link">
+        Setting up a step
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/expressions/" class="md-nav__link">
+        Expressions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/output/" class="md-nav__link">
+        Outputs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../contributing/">Contributing</a>
+          
+            <label for="__nav_3_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Contributing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/typing/" class="md-nav__link">
+        Typing system
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/plugin-protocol/" class="md-nav__link">
+        Arcaflow Transport Protocol
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/expressions/" class="md-nav__link">
+        Expression language
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/deployers/" class="md-nav__link">
+        Deployers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/engine/" class="md-nav__link">
+        Engine
       </a>
     </li>
   
@@ -731,128 +1378,6 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#workflow-basics" class="md-nav__link">
-    Workflow Basics
-  </a>
-  
-    <nav class="md-nav" aria-label="Workflow Basics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#logical-flow" class="md-nav__link">
-    Logical Flow
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#functional-flow" class="md-nav__link">
-    Functional Flow
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-workflow" class="md-nav__link">
-    Example Workflow
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-and-contributing" class="md-nav__link">
-    Using and Contributing
-  </a>
-  
-    <nav class="md-nav" aria-label="Using and Contributing">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#level-0" class="md-nav__link">
-    Level 0
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#level-1" class="md-nav__link">
-    Level 1
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#level-2" class="md-nav__link">
-    Level 2
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#level-3" class="md-nav__link">
-    Level 3
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#level-4" class="md-nav__link">
-    Level 4
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#community" class="md-nav__link">
-    Community
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           
             <div class="md-content" data-md-component="content">
@@ -865,210 +1390,188 @@
 
 
 <h1 id="arcaflow-getting-started-guide">Arcaflow Getting Started Guide</h1>
-<h2 id="introduction">Introduction</h2>
-<p><a href="https://arcalot.io/arcaflow/">Arcaflow</a> is a modular system that enables engineers to easily build complex parallelized workflows without requiring any pre-installation or deployment of prerequisite software stacks. It has a <strong>plugin</strong> architecture that is used to build <strong>workflows</strong>, and execution of the workflows is coordinated by an <strong>engine</strong>. Workflows are composable and highly portable, capable of orchestrating complex interrelated actions between plugins. This effectively allows for engineering workflow expertise to be packaged up, version controlled, and shared for repeatability across environments and platforms.</p>
-<p>The engine component is intended to run from your laptop, jump host, or wherever you have network connectivity to the target environment. No installation is required of any Arcaflow components, either on your system or the target environment. The engine processes the workflow definition, invokes the plugins in the target environment, and passes the required data to the plugins as directed by the workflow.</p>
-<p>The plugins are containers that can speak the engine&rsquo;s <a href="https://cbor.io/">CBOR</a> protocol and that have explicitly defined input and output schemas. Plugins can be run locally via Docker or Podman, or in a remote Kubernetes cluster (and in the future on a remote system via SSH and Docker/Podman). Plugins can also be run alone from the command line, independent of the engine.</p>
-<h2 id="workflow-basics">Workflow Basics</h2>
-<p>Logically, a workflow looks like a path being followed from one plugin to another. Functionally, it works in a star pattern with the engine at the center. So the output of a plugin is passed back to the engine, which then hands off data to the next plugin(s).</p>
-<h3 id="logical-flow">Logical Flow</h3>
-<pre class="mermaid"><code>flowchart TD
-input(input)--&gt;plugin1[plugin]
-input--&gt;plugin2[plugin]
-input--&gt;plugin3[plugin]
-plugin1--&gt;plugin4[plugin]
-plugin2--&gt;plugin4
-plugin3---&gt;output(output)
-plugin4--&gt;output</code></pre>
-<h3 id="functional-flow">Functional Flow</h3>
-<pre class="mermaid"><code>flowchart TD
-input(input)--&gt;engine((engine))
-engine--&gt;plugin1[plugin]--&gt;engine
-engine--&gt;plugin2[plugin]--&gt;engine
-engine--&gt;plugin3[plugin]--&gt;engine
-engine--&gt;output(output)</code></pre>
-<h2 id="example-workflow">Example Workflow</h2>
-<p>Consider below a sample workflow that runs a <a href="https://github.com/akopytov/sysbench">sysbench</a> CPU load, a <a href="https://pcp.io/">PCP</a> metrics collector, an Ansible <a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/gather_facts_module.html">gather facts</a> metadata collector, and sends the output to an <a href="https://www.elastic.co/">Elasticsearch</a> index. A bonus feature we get from the engine is that it will output the workflow in <a href="https://mermaid-js.github.io/mermaid/#/">mermaid</a> format for rendering, so we can see that it looks like this visually (error nodes are removed below for simplicity):</p>
-<pre class="mermaid"><code>flowchart LR
-subgraph input
-input.sysbench_threads
-input.sysbench_events
-input.elastic_password
-input.sysbench_runtime
-input.elastic_index
-input.pmlogger_interval
-input.sysbench_cpumaxprime
-input.elastic_username
-input.elastic_host
-end
-steps.metadata--&gt;steps.metadata.outputs.success
-steps.metadata--&gt;steps.metadata.outputs.error
-input.elastic_password--&gt;steps.opensearch
-steps.opensearch.outputs.success--&gt;output
-steps.pcp.outputs.success--&gt;steps.opensearch
-steps.pcp.outputs.success--&gt;output
-input.pmlogger_interval--&gt;steps.pcp
-steps.sysbench.outputs.success--&gt;steps.opensearch
-steps.sysbench.outputs.success--&gt;output
-steps.metadata.outputs.success--&gt;steps.opensearch
-steps.metadata.outputs.success--&gt;output
-input.elastic_index--&gt;steps.opensearch
-input.sysbench_runtime--&gt;steps.pcp
-input.sysbench_runtime--&gt;steps.sysbench
-input.elastic_host--&gt;steps.opensearch
-input.elastic_username--&gt;steps.opensearch
-input.sysbench_events--&gt;steps.sysbench
-input.sysbench_cpumaxprime--&gt;steps.sysbench
-steps.opensearch--&gt;steps.opensearch.outputs.success
-steps.opensearch--&gt;steps.opensearch.outputs.error
-input.sysbench_threads--&gt;steps.sysbench
-steps.pcp--&gt;steps.pcp.outputs.error
-steps.pcp--&gt;steps.pcp.outputs.success
-steps.sysbench--&gt;steps.sysbench.outputs.error
-steps.sysbench--&gt;steps.sysbench.outputs.success</code></pre>
-<p>This example workflow expects <strong>input</strong> parameters that are passed down to the plugins, in this case to the <strong>PCP</strong>, <strong>sysbench</strong>, and <strong>opensearch</strong> plugins. These parameters determine the details of the actions that those plugins will perform. The <strong>metadata</strong> plugin used here requires no inputs, as evidenced in the workflow diagram. The <strong>success</strong> outputs of the PCP, sysbench, and metadata plugins are then directed to the elasticsearch plugin, and and all success outputs are directed to the <strong>output</strong> of the workflow.</p>
-<p><em>Note: The complete example workflow definition is below in the <a href="#level-2">Using and Contributing Level 2</a> section.</em></p>
-<h2 id="using-and-contributing">Using and Contributing</h2>
-<p>The entry point for working with Arcaflow as a new user is intended to be very low. Pre-composed workflows are things you should be able to download and use with very little in terms of prerequisites, allowing you with little experience to run workflows in the same ways as domain experts.</p>
-<p>Moving up through layers of sophistication as a user and contributor should be equally straightforward. As you become familiar with <a href="#level-0">running workflows</a>, you may be drawn into <a href="#level-1">tweaking</a> and <a href="#level-2">modifying</a> those workflows to suit your needs, or further into <a href="#level-3">authoring new plugins</a> to expand functionality or even into <a href="#level-4">contributing to our core components</a>. The sections below should give you an idea of how to get started at each level of sophistication.</p>
-<h3 id="level-0">Level 0</h3>
-<p><strong><em>Yeoman - Workflow User</em></strong></p>
-<p>Welcome to the community! We are more than happy to help you get started. You should get a feel for things by running a workflow or two. Below is an example you can try out. You will need a Golang runtime and Docker to run the containers (Podman can be used with the <a href="https://docs.podman.io/en/latest/markdown/podman-system-service.1.html">system service</a> enabled for socket connections, which are required by the engine to communicate with the plugins). The example used here is the same one from the <a href="#example-workflow">Example Workflow</a> section above.</p>
-<p>Clone the <a href="https://github.com/arcalot/arcaflow-engine">engine</a>:
-<div class="highlight"><pre><span></span><code>$ git clone https://github.com/arcalot/arcaflow-engine.git
-</code></pre></div></p>
-<p>Clone the <a href="https://github.com/arcalot/arcaflow-workflows">workflows</a> and set your workflow directory path:
-<div class="highlight"><pre><span></span><code>$ git clone https://github.com/arcalot/arcaflow-workflows.git
-$ export WFPATH=$(pwd)/arcaflow-workflows/example-workflow
-</code></pre></div></p>
-<p>Run the workflow (the containers will run on your local machine via Docker):
-<div class="highlight"><pre><span></span><code>$ cd arcaflow-engine
-$ go run cmd/arcaflow/main.go -input ${WFPATH}/input.yaml -config ${WFPATH}/config.yaml -context ${WFPATH}
-</code></pre></div></p>
-<p>The <a href="https://raw.githubusercontent.com/arcalot/arcaflow-workflows/main/example-workflow/config.yaml"><code>config.yaml</code></a> file is set for debug output, so you&rsquo;ll get a lot returned to the terminal (including the mermaid code mentioned above). This workflow is set to simply return the output of the various plugins, so in the end you&rsquo;ll get that formatted content dumped to the terminal.</p>
-<h3 id="level-1">Level 1</h3>
-<p><strong><em>Page - Advanced Workflow User</em></strong></p>
-<p>The next layer of sophistication is modifying the test parameters, which are in the <a href="https://raw.githubusercontent.com/arcalot/arcaflow-workflows/main/example-workflow/input-example.yaml"><code>input.yaml</code></a> file referenced in the above command. For our simple workflow here, there are parameters to adjust how the CPU stress test is performed and to adjust the resolution of PCP&rsquo;s data collection. You can freely adjust these parameters to your needs without needing to change anything about the workflow itself. This requires some understanding of what the underlying sysbench and PCP tools do, and of course caution should be taken since this test will apply load to the system where it is run.</p>
-<p>The example <code>input.yaml</code> file looks like this:
-<div class="highlight"><pre><span></span><code><span class="nt">pmlogger_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="nt">sysbench_threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
-<span class="nt">sysbench_events</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
-<span class="nt">sysbench_cpumaxprime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12000</span>
-<span class="nt">sysbench_runtime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
-<span class="nt">elastic_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
-<span class="nt">elastic_username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
-<span class="nt">elastic_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
-<span class="nt">elastic_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
-</code></pre></div></p>
-<h3 id="level-2">Level 2</h3>
-<p><strong><em>Squire - Workflow Creator</em></strong></p>
-<p>So you&rsquo;re more adventurous and want to change or author workflows? This is the layer at which we think most of our technical users will spend a majority of their effort. Our goals of packaging, version controlling, and shipping domain expertise are primarily facilitated here. A workflow author dreams up a series of tests with various loops and parallelizations they want to run, determines how to collect and transport data and metadata, and then bundles this all into a workflow that can be shared as easily as the one presented in the examples above. A workflow user just needs the engine and your <a href="https://raw.githubusercontent.com/arcalot/arcaflow-workflows/main/example-workflow/workflow.yaml"><code>workflow.yaml</code></a> file. That&rsquo;s it.</p>
-<p>The workflow file has an <strong>input</strong> section where it defines the workflow schema. The workflow author can get creative here in how they want to represent the available parameters to the user or set defaults, and there are mechanics for self-documentation when good practices are followed with schema metadata. Then there is a <strong>steps</strong> section, which defines the plugins and their relationships. In the reference examples here, we show some data passing both from the input section to the plugins and between plugins where outputs are passed to the elasticsearch plugin (we have another <a href="https://github.com/arcalot/arcaflow-workflows/tree/main/network-streaming-performance-k8s/">example with uperf</a> that gets more complicated with kubernetes and data passing, once you&rsquo;re ready to dig in more). Then finally the <strong>output</strong> section defines what the workflow will return to the user.</p>
-<p>The complete workflow definition for the example above looks like this:
+<h2 id="step-1-get-a-container-engine">Step 1: Get a container engine</h2>
+<p>In order to use Arcaflow, you will need a container engine on your computer. For the purposes of this guide, we&rsquo;ll assume you are using Docker or Podman.</p>
+<h2 id="step-2-get-the-engine">Step 2: Get the engine</h2>
+<p>Head on over to the <a href="https://github.com/arcalot/arcaflow-engine/releases">GitHub releases page</a> and download the latest release.</p>
+<h2 id="step-3-create-your-first-plugin">Step 3: Create your first plugin</h2>
+<p>Let&rsquo;s create a simple hello-world plugin in Python. We&rsquo;ll publish the code here, you can find the details in the <a href="../plugins/python/first/">Python plugin guide</a>.</p>
+<div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="ch">#!/usr/local/bin/python3</span>
+<span class="kn">import</span> <span class="nn">dataclasses</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">arcaflow_plugin_sdk</span> <span class="kn">import</span> <span class="n">plugin</span>
+
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">InputParams</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">SuccessOutput</span><span class="p">:</span>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="nd">@plugin</span><span class="o">.</span><span class="n">step</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;hello-world&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Says hello :)&quot;</span><span class="p">,</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">SuccessOutput</span><span class="p">},</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello_world</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">InputParams</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="n">SuccessOutput</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">params</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span>
+        <span class="n">plugin</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="n">plugin</span><span class="o">.</span><span class="n">build_schema</span><span class="p">(</span>
+                <span class="n">hello_world</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Further reading: <a href="../plugins/python/first/">Creating your first Python plugin</a></p>
+</div>
+<h2 id="step-4-building-the-plugin">Step 4: Building the plugin</h2>
+<p>Next, let&rsquo;s create a <code>Dockerfile</code> and build a container image:</p>
+<div class="highlight"><span class="filename">Dockerfile</span><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">python:alpine</span>
+
+<span class="k">ADD</span><span class="w"> </span>plugin.py<span class="w"> </span>/
+<span class="k">RUN</span><span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/plugin.py<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>arcaflow_plugin_sdk
+
+<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;/plugin.py&quot;</span><span class="p">]</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[]</span>
+</code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Docker</label><label for="__tabbed_1_2">Podman</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>You can now run <code>docker build -t example-plugin .</code></p>
+</div>
+<div class="tabbed-block">
+<p>You can now run <code>podman build -t example-plugin .</code></p>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Further reading: <a href="../plugins/packaging/">Packaging plugins</a></p>
+</div>
+<h2 id="step-5-creating-a-simple-workflow">Step 5: Creating a simple workflow</h2>
+<p>Let&rsquo;s start with something simple: we&rsquo;ll incorporate the plugin above into a workflow. Let&rsquo;s create a <code>workflow.yaml</code> in an empty directory</p>
 <div class="highlight"><pre><span></span><code><span class="nt">input</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
 <span class="w">  </span><span class="nt">objects</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">RootObject</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
 <span class="w">      </span><span class="nt">properties</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">pmlogger_interval</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The logger collection interval for PCP pmlogger</span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCP pmlogger collection interval</span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
-<span class="w">        </span><span class="nt">sysbench_threads</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The number of threads sysbench will run</span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench threads</span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
-<span class="w">        </span><span class="nt">sysbench_events</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The number of events sysbench will run</span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench events</span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
-<span class="w">        </span><span class="nt">sysbench_cpumaxprime</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The upper limit of the number of prime numbers generated</span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench cpu max primes</span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
-<span class="w">        </span><span class="nt">sysbench_runtime</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The total runtime in seconds for the sysbench tests</span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbench runtime seconds</span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
-<span class="w">        </span><span class="nt">elastic_host</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The host URL for the ElasticSearch service</span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch host url</span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">        </span><span class="nt">elastic_username</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The username for the ElasticSearch service</span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch username</span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">        </span><span class="nt">elastic_password</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The password for the ElasticSearch service</span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch password</span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">        </span><span class="nt">elastic_index</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">display</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The index for the ElasticSearch service</span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch index</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">type</span><span class="p">:</span>
 <span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="nt">steps</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">pcp</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/arcalot/arcaflow-plugin-pcp:0.2.0</span>
-<span class="w">    </span><span class="nt">step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">start-pcp</span>
+<span class="w">  </span><span class="nt">greet</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example-plugin</span>
 <span class="w">    </span><span class="nt">input</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">pmlogger_interval</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.pmlogger_interval</span>
-<span class="w">      </span><span class="nt">run_duration</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_runtime</span>
-<span class="w">  </span><span class="nt">sysbench</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/arcalot/arcaflow-plugin-sysbench:0.1.0</span>
-<span class="w">    </span><span class="nt">step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysbenchcpu</span>
-<span class="w">    </span><span class="nt">input</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">threads</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_threads</span>
-<span class="w">      </span><span class="nt">events</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_events</span>
-<span class="w">      </span><span class="nt">cpu-max-prime</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_cpumaxprime</span>
-<span class="w">      </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.sysbench_runtime</span>
-<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/arcalot/arcaflow-plugin-metadata:0.1.0</span>
-<span class="w">    </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<span class="w">  </span><span class="nt">opensearch</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/arcalot/arcaflow-plugin-opensearch:0.1.1</span>
-<span class="w">    </span><span class="nt">input</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_host</span>
-<span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_username</span>
-<span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_password</span>
-<span class="w">      </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.elastic_index</span>
-<span class="w">      </span><span class="nt">data</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">pcp</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.pcp.outputs.success</span>
-<span class="w">        </span><span class="nt">sysbench</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.sysbench.outputs.success</span>
-<span class="w">        </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.metadata.outputs.success</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.name</span>
 <span class="nt">output</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">pcp</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.pcp.outputs.success</span>
-<span class="w">  </span><span class="nt">sysbench</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.sysbench.outputs.success</span>
-<span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.metadata.outputs.success</span>
-<span class="w">  </span><span class="nt">opensearch</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.opensearch.outputs.success</span>
-</code></pre></div></p>
-<h3 id="level-3">Level 3</h3>
-<p><strong><em>Knight - Plugin Author</em></strong></p>
-<p>So now you want to build plugins or add features to existing plugins? Great! Welcome to the <a href="https://github.com/arcalot/arcalot-round-table">Arcalot Round Table</a>! We provide Software Development Kits (SDKs) for <a href="https://github.com/arcalot/arcaflow-plugin-sdk-python">Python</a> and <a href="https://github.com/arcalot/arcaflow-plugin-sdk-go">Golang</a> to get you started. The main thing you need to understand is that a plugin is expected to define and adhere to its schemas, so the SDK enforces strict typing, which can be a little strange at first for a Python developer. Optimally, a plugin follows the <a href="https://en.wikipedia.org/wiki/Unix_philosophy#:~:text=The%20Unix%20philosophy%20is%20documented,%2C%20as%20yet%20unknown%2C%20program.">Unix philosophy</a> of <em>do one thing and do it well</em>, and a plugin should not be created in an opinionated way &ndash; Leave the opinions for <em>how</em> a plugin&rsquo;s actions will run to the workflow definition as much as possible.</p>
-<p>When creating a plugin, you should consider how you will expose all parameters and configuration values via a single schema, and collect all output similarly in a single schema. The plugins provide the API endpoints for functions or actions, and workflows glue together those endpoints to make use of the data in an opinionated way. Sometimes creating a schema for a plugin wrapping an existing tool is relatively <a href="https://github.com/arcalot/arcaflow-plugin-smallfile">simple</a>, sometimes it is pretty <a href="https://github.com/arcalot/arcaflow-plugin-uperf">involved</a>. You can start digging into the technical details more in the <a href="https://arcalot.io/arcaflow/concepts/workflows/">Concepts</a> and <a href="https://arcalot.io/arcaflow/creating-plugins/python/">Plugins</a> sections of the documentation.</p>
-<h3 id="level-4">Level 4</h3>
-<p><strong><em>Liege - Core Components Contributor</em></strong></p>
-<p>If you have a grasp on everything above and still want to dig in deeper, then welcome to core components development! Here you can participate in the development of the workflow engine and its related libraries, the SDKs, the <a href="https://github.com/arcalot/arcaflow-plugin-image-builder">build system</a>, and more.</p>
-<h2 id="community">Community</h2>
-<p>If you&rsquo;re looking for a place to jump in and help, have a look at our <a href="https://github.com/orgs/arcalot/projects">Project</a> boards and our <a href="https://github.com/orgs/arcalot/discussions">Discussions</a> page. We also manage our charter, code of conduct, and licensing, as well as significant project decisions, via our <a href="https://github.com/arcalot/arcalot-round-table">Arcalot Round Table</a> project. We can also always use help with our <a href="https://github.com/arcalot/arcalot.github.io">documentation</a> efforts.</p>
+<span class="w">  </span><span class="nt">message</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.greet.outputs.success.message</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Further reading: <a href="../workflows/">Creating workflows</a></p>
+</div>
+<h2 id="step-6-create-an-input-file">Step 6: Create an input file</h2>
+<p>Now, let&rsquo;s create an input file for our workflow named <code>input.yaml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Arca Lot</span>
+</code></pre></div>
+<h2 id="step-7-create-an-engine-configuration">Step 7: Create an engine configuration</h2>
+<p>You will need an Arcaflow config file to prevent Arcaflow from trying to pull the container image.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Docker</label><label for="__tabbed_2_2">Podman</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">config.yaml</span><pre><span></span><code><span class="nt">deployer</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker</span>
+<span class="w">  </span><span class="nt">deployment</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Make sure we don&#39;t try to pull the image we have locally</span>
+<span class="w">    </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Never</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">config.yaml</span><pre><span></span><code><span class="nt">deployer</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">podman</span>
+<span class="w">  </span><span class="nt">deployment</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Make sure we don&#39;t try to pull the image we have locally</span>
+<span class="w">    </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Never</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Further reading: <a href="../running/setup/">Setting up Arcaflow</a></p>
+</div>
+<h2 id="step-7-running-the-workflow">Step 7: Running the workflow</h2>
+<p>Finally, let&rsquo;s run our workflow. Make sure you are in the directory where the workflow is located.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Linux/MacOS</label><label for="__tabbed_3_2">Windows</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>/path/to/arcaflow -input input.yaml -config config.yaml
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>C:\path\to\arcaflow.exe -input input.yaml -config config.yaml
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>If everything went well, you should see the following message after a few seconds:</p>
+<div class="highlight"><pre><span></span><code>2023-03-22T11:25:58+01:00       info            Loading plugins locally to determine schemas...
+2023-03-22T11:25:58+01:00       info            Deploying example-plugin...
+2023-03-22T11:25:58+01:00       info            Creating container from image example-plugin...
+2023-03-22T11:25:59+01:00       info            Container started.
+2023-03-22T11:25:59+01:00       info            Schema for example-plugin obtained.
+2023-03-22T11:25:59+01:00       info            Schema loading complete.
+2023-03-22T11:25:59+01:00       info            Building dependency tree...
+2023-03-22T11:25:59+01:00       info            Dependency tree complete.
+2023-03-22T11:25:59+01:00       info            Dependency tree Mermaid:
+flowchart TD
+subgraph input
+input.name
+end
+input.name--&gt;steps.greet
+steps.greet--&gt;steps.greet.outputs.success
+steps.greet.outputs.success--&gt;output
+2023-03-22T11:25:59+01:00       info            Starting step greet...
+2023-03-22T11:25:59+01:00       info            Creating container from image example-plugin...
+2023-03-22T11:26:00+01:00       info            Container started.
+2023-03-22T11:26:00+01:00       info            Step greet is now running...
+2023-03-22T11:26:00+01:00       info            Step greet is now executing ATP...
+2023-03-22T11:26:00+01:00       info            Step &quot;greet&quot; has finished with output success.
+message: Hello, Arca Lot
+</code></pre></div>
+<p>As you can see, the last line of the output is the output data from the workflow. If you want, you can also grab the Mermaid graph in the output and put it into <a href="https://mermaid.live/edit#pako:eNpdjz0OwjAMha8SeaY5QAem3gDGLCZxf6TGiRJHCFW9OxYwtEy2v_ee9LyBT4Ggh3FNTz9jEXMfHNf2mArm2Sycmzj-DMsYyTFxOIKuu1ahXO1UiNR6OM6STU00VG1t3lOtJ-u_qNEvgQtEKhGXoCU3x8Y4kJm0CPS6BhqxreLA8a5WbJJuL_bQj7hWukDLAYWGBfWd-KP7Gz-1Wos">the Mermaid editor</a>. It will look like this:</p>
+<pre class="mermaid"><code>flowchart TD
+subgraph input
+input.name
+end
+input.name--&gt;steps.greet
+steps.greet--&gt;steps.greet.outputs.success
+steps.greet.outputs.success--&gt;output</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Further reading: <a href="../running/running/">Running up Arcaflow</a></p>
+</div>
+<h2 id="next-steps">Next steps</h2>
+<p>Congratulations, you are now an Arcaflow user! Here&rsquo;s what you can do next:</p>
+<ul>
+<li><a href="../concepts/">Learn more about the concepts behind Arcaflow &raquo;</a></li>
+<li><a href="../running/">Learn how to set up Arcaflow &raquo;</a></li>
+<li><a href="../plugins/">Learn how to create plugins &raquo;</a></li>
+<li><a href="../workflows/">Learn how to create workflows &raquo;</a></li>
+<li><a href="../contributing/">Contribute to Arcaflow &raquo;</a></li>
+</ul>
 
 
 
@@ -1121,7 +1624,7 @@ $ go run cmd/arcaflow/main.go -input ${WFPATH}/input.yaml -config ${WFPATH}/conf
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.efa0ade1.min.js"></script>

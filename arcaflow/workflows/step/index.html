@@ -8,27 +8,27 @@
       
       
       
-        <link rel="canonical" href="https://arcalot.io/arcaflow/engine/">
+        <link rel="canonical" href="https://arcalot.io/arcaflow/workflows/step/">
       
       
-        <link rel="prev" href="../concepts/plugin-protocol/">
+        <link rel="prev" href="../input/">
       
       
-        <link rel="next" href="../creating-plugins/python/">
+        <link rel="next" href="../expressions/">
       
-      <link rel="icon" href="../../arcalot.svg">
+      <link rel="icon" href="../../../arcalot.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
-        <title>Configuring the engine - Arcalot</title>
+        <title>Setting up a step - Arcalot</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.c4a75a56.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.c4a75a56.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -38,9 +38,9 @@
       
     
     
-      <link rel="stylesheet" href="../../extra.css">
+      <link rel="stylesheet" href="../../../extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#configuring-the-arcaflow-engine" class="md-skip">
+        <a href="#writing-workflow-steps" class="md-skip">
           Skip to content
         </a>
       
@@ -85,9 +85,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Arcalot" class="md-header__button md-logo" aria-label="Arcalot" data-md-component="logo">
+    <a href="../../.." title="Arcalot" class="md-header__button md-logo" aria-label="Arcalot" data-md-component="logo">
       
-  <img src="../../arcalot.svg" alt="logo">
+  <img src="../../../arcalot.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Configuring the engine
+              Setting up a step
             
           </span>
         </div>
@@ -198,7 +198,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../.." class="md-tabs__link">
+    <a href="../../.." class="md-tabs__link">
       Home
     </a>
   </li>
@@ -210,7 +210,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../arcalog/" class="md-tabs__link">
+    <a href="../../../arcalog/" class="md-tabs__link">
       Arcalog
     </a>
   </li>
@@ -227,7 +227,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../" class="md-tabs__link md-tabs__link--active">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
         Arcaflow
       </a>
     </li>
@@ -259,11 +259,13 @@
   
 
 
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Arcalot" class="md-nav__button md-logo" aria-label="Arcalot" data-md-component="logo">
+    <a href="../../.." title="Arcalot" class="md-nav__button md-logo" aria-label="Arcalot" data-md-component="logo">
       
-  <img src="../../arcalot.svg" alt="logo">
+  <img src="../../../arcalot.svg" alt="logo">
 
     </a>
     Arcalot
@@ -291,7 +293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -306,7 +308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../arcalog/" class="md-nav__link">
+      <a href="../../../arcalog/" class="md-nav__link">
         Arcalog
       </a>
     </li>
@@ -344,12 +346,16 @@
         
           
         
+          
+        
+          
+        
       
       
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../">Arcaflow</a>
+          <a href="../../">Arcaflow</a>
           
             <label for="__nav_3">
               <span class="md-nav__icon md-icon"></span>
@@ -372,7 +378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/" class="md-nav__link">
+      <a href="../../getting-started/" class="md-nav__link">
         Getting Started
       </a>
     </li>
@@ -386,18 +392,26 @@
   
   
     
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
       
       
         
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
-      
-      
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
         
           
         
@@ -407,10 +421,16 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
-          Concepts
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../concepts/">Concepts</a>
+          
+            <label for="__nav_3_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_3">
@@ -420,12 +440,70 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+          
+            
               
   
   
   
     <li class="md-nav__item">
-      <a href="../concepts/workflows/" class="md-nav__link">
+      <a href="../../concepts/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        Architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/typing/" class="md-nav__link">
+        Typing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/plugins/" class="md-nav__link">
+        Plugins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/workflows/" class="md-nav__link">
         Workflows
       </a>
     </li>
@@ -439,8 +517,78 @@
   
   
     <li class="md-nav__item">
-      <a href="../concepts/typing/" class="md-nav__link">
-        The typing system
+      <a href="../../concepts/flowcontrol/" class="md-nav__link">
+        Flow control (WIP)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../running/">Running Arcaflow</a>
+          
+            <label for="__nav_3_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Running Arcaflow
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../running/" class="md-nav__link">
+        Overview
       </a>
     </li>
   
@@ -453,8 +601,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../concepts/plugin-protocol/" class="md-nav__link">
-        The plugin protocol
+      <a href="../../running/setup/" class="md-nav__link">
+        Setting up Arcaflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../running/running/" class="md-nav__link">
+        Running a workflow
       </a>
     </li>
   
@@ -472,18 +634,14 @@
               
   
   
-    
-  
   
     
-      
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
       
       
         
@@ -491,60 +649,28 @@
             
           
         
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
       
       
         
         
-        <div class="md-nav__link md-nav__link--index md-nav__link--active">
-          <a href="./">Engine</a>
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../plugins/">Creating plugins</a>
+          
+            <label for="__nav_3_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
           
         </div>
-      
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="true">
-        <label class="md-nav__title" for="__nav_3_4">
-          <span class="md-nav__icon md-icon"></span>
-          Engine
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5" >
-      
-      
-        
-          
-        
-          
-        
-      
-      
-        <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
-          Creating plugins
-          <span class="md-nav__icon md-icon"></span>
-        </label>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_5">
@@ -554,13 +680,88 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
+          
+            
               
   
   
   
     <li class="md-nav__item">
-      <a href="../creating-plugins/python/" class="md-nav__link">
-        Python
+      <a href="../../plugins/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../plugins/python/">Python</a>
+          
+            <label for="__nav_3_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/" class="md-nav__link">
+        Overview
       </a>
     </li>
   
@@ -573,8 +774,543 @@
   
   
     <li class="md-nav__item">
-      <a href="../creating-plugins/release/" class="md-nav__link">
-        Release
+      <a href="../../plugins/python/first/" class="md-nav__link">
+        Your first plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/data-model/" class="md-nav__link">
+        Creating a data model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/embedding/" class="md-nav__link">
+        Embedding your plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/testing/" class="md-nav__link">
+        Testing your plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/faq/" class="md-nav__link">
+        Frequently asked questions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/schema/" class="md-nav__link">
+        Creating a schema by hand
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/python/official/" class="md-nav__link">
+        Contributing official plugins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_4" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../plugins/go/">Go</a>
+          
+            <label for="__nav_3_5_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Go
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/go/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/go/first/" class="md-nav__link">
+        Your first plugin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/go/schema/" class="md-nav__link">
+        Creating a schema
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/packaging/" class="md-nav__link">
+        Packaging plugins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Writing workflows</a>
+          
+            <label for="__nav_3_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Writing workflows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../input/" class="md-nav__link">
+        Creating your input schema
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Setting up a step
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Setting up a step
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#plugin-steps" class="md-nav__link">
+    Plugin steps
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugin steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployers" class="md-nav__link">
+    Deployers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../expressions/" class="md-nav__link">
+        Expressions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../output/" class="md-nav__link">
+        Outputs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../contributing/">Contributing</a>
+          
+            <label for="__nav_3_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          Contributing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/typing/" class="md-nav__link">
+        Typing system
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/plugin-protocol/" class="md-nav__link">
+        Arcaflow Transport Protocol
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/expressions/" class="md-nav__link">
+        Expression language
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/deployers/" class="md-nav__link">
+        Deployers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/engine/" class="md-nav__link">
+        Engine
       </a>
     </li>
   
@@ -601,66 +1337,6 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#logging" class="md-nav__link">
-    Logging
-  </a>
-  
-    <nav class="md-nav" aria-label="Logging">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#basic-logging" class="md-nav__link">
-    Basic logging
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-logging" class="md-nav__link">
-    Step logging
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#deployers" class="md-nav__link">
-    Deployers
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           
             <div class="md-content" data-md-component="content">
@@ -672,74 +1348,87 @@
   
 
 
-<h1 id="configuring-the-arcaflow-engine">Configuring the Arcaflow Engine</h1>
-<p>All of these changes require specifying the config when you run the arcaflow-engine. To do so, create a config YAML file, and run the engine with the <code>-config your-arcaflow-config.yaml</code> flag.</p>
-<h2 id="logging">Logging</h2>
-<p>Logging is useful when you need more information about what is happening while you run a workload.</p>
-<h3 id="basic-logging">Basic logging</h3>
-<p>Here is the syntax for setting the log level:
-<div class="highlight"><pre><span></span><code><span class="nt">log</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">info</span>
-</code></pre></div></p>
-<p>Options are:
-- Debug: Info useful to the developers
-- Info: General info
-- Warning: Something went wrong, and you should know about it
-- Error: Something failed. This info should help you figure out why</p>
-<p>This sets which types of log output are shown or hidden. <code>debug</code> shows everything, while <code>error</code> shows the least, only showing <code>error</code> output. Each output shows more, rather than just its type, so <code>debug</code>, <code>info</code>, and <code>warning</code> still show <code>error</code> output.</p>
-<h3 id="step-logging">Step logging</h3>
-<p>Step logging is useful for getting output from failed steps, or general debugging.
-It is not recommended that you rely on this long term, as there may be better methods of debugging failed workflows.</p>
-<p>To make it output just error logs when a step fails, set it as shown:
-<div class="highlight"><pre><span></span><code><span class="nt">logged_outputs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">error</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">error</span>
-</code></pre></div></p>
-<p>You can specify multiple types of output and their log levels. For example, if you also want to output success steps as debug, set it as shown:
-<div class="highlight"><pre><span></span><code><span class="nt">logged_outputs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">error</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">error</span>
-<span class="w">  </span><span class="nt">success</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug</span>
-</code></pre></div></p>
-<p><strong>Note</strong>: If you set the level lower than the general log level shown above, it will not show up in the output.</p>
-<h2 id="deployers">Deployers</h2>
-<p>If you want to change the default deployer from Docker to Podman or Kubernetes, you will need to set up a configuration YAML file and pass it to the engine with the <code>-config your-arcaflow-config.yaml</code> flag.</p>
-<p>You can then change the deployer type like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">deployer</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">podman</span>
-<span class="w">  </span><span class="c1"># Deployer-specific options </span>
+<h1 id="writing-workflow-steps">Writing workflow steps</h1>
+<p>If your <a href="../input/">input</a> is complete, you can now turn to writing your workflow steps. You can connect workflow steps by using <a href="../expressions/">expressions</a>. For example, if step <code>A</code> has an input that needs data from step <code>B</code>, Arcaflow will automatically run step <code>B</code> first.</p>
+<p>To define a step type, you can do the following:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">steps</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">step_a</span><span class="p">:</span><span class="w"> </span><span class="c1"># Specify any ID here you want to reference the step by</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/some/container/image</span><span class="w"> </span><span class="c1"># This must be an Arcaflow-compatible image</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="c1"># specify input values as a data structure, mixing in expressions as needed</span>
+<span class="w">      </span><span class="nt">some</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.step_b.outputs.success.some_value</span><span class="w"> </span>
+<span class="w">  </span><span class="nt">step_b</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quay.io/some/container/image</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">some</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.some_value</span><span class="w"> </span><span class="c1"># Reference an input value</span>
 </code></pre></div>
+<h2 id="plugin-steps">Plugin steps</h2>
+<p>Plugin steps run Arcaflow plugins in containers. They can use Docker, Podman, or Kubernetes as deployers. If no deployer is specified in the workflow, the plugin will use the <a href="../../running/setup/">local deployer</a>.</p>
+<p>Plugin steps have the following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>plugin</code></td>
+<td>Full name of the container image to run. This must be an Arcaflow-compatible container image.</td>
+</tr>
+<tr>
+<td><code>step</code></td>
+<td>If a plugin provides more than one possible step, you can specify the step ID here.</td>
+</tr>
+<tr>
+<td><code>deploy</code></td>
+<td>Configuration for the deployer. (See below.) This can contain expressions, so you can dynamically specify deployment parameters.</td>
+</tr>
+<tr>
+<td><code>input</code></td>
+<td>Input data for the plugin. This can contain expressions, so you can dynamically define inputs.</td>
+</tr>
+</tbody>
+</table>
+<p>You can reference plugin outputs in the format of <code>$.steps.<em>your_step_id</em>.outputs.<em>your_plugin_output_id</em>.<em>some_variable</em></code>.</p>
+<h3 id="deployers">Deployers</h3>
+<p>The <code>deploy</code> key for plugins lets you control how the plugin container is deployed. You can use expressions to use other plugins (e.g. the <a href="https://github.com/arcalot/arcaflow-plugin-kubeconfig/">kubeconfig plugin</a>) to generate the deployment configuration and feed it into other steps.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Docker</label><label for="__tabbed_1_2">Kubernetes</label><label for="__tabbed_1_3">Podman</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>The docker deployer is the default. You can configure it like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">deployer</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker</span>
-<span class="w">  </span><span class="nt">connection</span><span class="p">:</span>
-<span class="w">    </span><span class="c1"># Change this to point to a TCP-based Docker socket</span>
-<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host-to-docker</span><span class="w"> </span>
-<span class="w">    </span><span class="c1"># Add a certificates here. This is usually needed in TCP mode.</span>
-<span class="w">    </span><span class="nt">cacert</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">      </span><span class="no">Add your CA cert PEM here</span>
-<span class="w">    </span><span class="nt">cert</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">      </span><span class="no">Add your client cert PEM here.</span>
-<span class="w">    </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">      </span><span class="no">Add your client key PEM here.</span>
-<span class="w">  </span><span class="nt">deployment</span><span class="p">:</span>
-<span class="w">    </span><span class="c1"># For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate</span>
-<span class="w">    </span><span class="nt">container</span><span class="p">:</span>
-<span class="w">      </span><span class="c1"># Add your container config here.</span>
-<span class="w">    </span><span class="nt">host</span><span class="p">:</span>
-<span class="w">      </span><span class="c1"># Add your host config here.</span>
-<span class="w">    </span><span class="nt">network</span><span class="p">:</span>
-<span class="w">      </span><span class="c1"># Add your network config here</span>
-<span class="w">    </span><span class="nt">platform</span><span class="p">:</span>
-<span class="w">      </span><span class="c1"># Add your platform config here</span>
-<span class="w">    </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Always|IfNotPresent|Never</span>
-<span class="w">  </span><span class="nt">timeouts</span><span class="p">:</span>
-<span class="w">    </span><span class="c1"># HTTP timeout</span>
-<span class="w">    </span><span class="nt">http</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5s</span>
+<p>You can configure the Docker deployer like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">step</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">your_step_id</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">    </span><span class="nt">deploy</span><span class="p">:</span><span class="w"> </span><span class="c1"># You can use expressions here</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker</span>
+<span class="w">      </span><span class="nt">connection</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># Change this to point to a TCP-based Docker socket</span>
+<span class="w">        </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host-to-docker</span>
+<span class="w">        </span><span class="c1"># Add a certificates here. This is usually needed in TCP mode.</span>
+<span class="w">        </span><span class="nt">cacert</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">Add your CA cert PEM here</span>
+<span class="w">        </span><span class="nt">cert</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">Add your client cert PEM here.</span>
+<span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">Add your client key PEM here.</span>
+<span class="w">      </span><span class="nt">deployment</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate</span>
+<span class="w">        </span><span class="nt">container</span><span class="p">:</span>
+<span class="w">          </span><span class="c1"># Add your container config here.</span>
+<span class="w">        </span><span class="nt">host</span><span class="p">:</span>
+<span class="w">          </span><span class="c1"># Add your host config here.</span>
+<span class="w">        </span><span class="nt">network</span><span class="p">:</span>
+<span class="w">          </span><span class="c1"># Add your network config here</span>
+<span class="w">        </span><span class="nt">platform</span><span class="p">:</span>
+<span class="w">          </span><span class="c1"># Add your platform config here</span>
+<span class="w">        </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Always|IfNotPresent|Never</span>
+<span class="w">      </span><span class="nt">timeouts</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># HTTP timeout</span>
+<span class="w">        </span><span class="nt">http</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5s</span>
 </code></pre></div>
 <details>
 <summary>All options for the Docker deployer</summary>
@@ -787,7 +1476,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Connection</td>
+<td>Connection <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -816,7 +1505,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Deployment</td>
+<td>Deployment <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -845,7 +1534,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Timeouts</td>
+<td>Timeouts <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -895,7 +1584,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Connection</td>
+<td>Connection <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -924,7 +1613,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Deployment</td>
+<td>Deployment <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -953,7 +1642,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Timeouts</td>
+<td>Timeouts <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -1443,7 +2132,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>ContainerConfig</td>
+<td>ContainerConfig <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -1472,7 +2161,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>HostConfig</td>
+<td>HostConfig <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -1536,7 +2225,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>NetworkConfig</td>
+<td>NetworkConfig <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -1565,7 +2254,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>PlatformConfig</td>
+<td>PlatformConfig <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -1998,7 +2687,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>PortBinding</td>
+<td>PortBinding <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -2175,16 +2864,20 @@ It is not recommended that you rely on this long term, as there may be better me
 </div>
 <div class="tabbed-block">
 <p>The Kubernetes deployer deploys on top of Kubernetes. You can set up the deployer like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">deployer</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kubernetes</span>
-<span class="w">  </span><span class="nt">connection</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost:6443</span>
-<span class="w">    </span><span class="nt">cert</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">      </span><span class="no">Add your client cert in PEM format here.</span>
-<span class="w">    </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">      </span><span class="no">Add your client key in PEM format here.</span>
-<span class="w">    </span><span class="nt">cacert</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">      </span><span class="no">Add the server CA cert in PEM format here.</span>
+<div class="highlight"><pre><span></span><code><span class="nt">step</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">your_step_id</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">    </span><span class="nt">deploy</span><span class="p">:</span><span class="w"> </span><span class="c1"># You can use expressions here</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kubernetes</span>
+<span class="w">      </span><span class="nt">connection</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost:6443</span>
+<span class="w">        </span><span class="nt">cert</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">Add your client cert in PEM format here.</span>
+<span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">Add your client key in PEM format here.</span>
+<span class="w">        </span><span class="nt">cacert</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">Add the server CA cert in PEM format here.</span>
 </code></pre></div>
 <details>
 <summary>All options for the Kubernetes deployer</summary>
@@ -2232,7 +2925,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Connection</td>
+<td>Connection <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -2261,7 +2954,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Pod</td>
+<td>Pod <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -2290,7 +2983,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Timeouts</td>
+<td>Timeouts <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -2466,7 +3159,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Connection</td>
+<td>Connection <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -2495,7 +3188,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Pod</td>
+<td>Pod <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -2524,7 +3217,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Timeouts</td>
+<td>Timeouts <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -3136,7 +3829,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>EnvFromSource</td>
+<td>EnvFromSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -3184,7 +3877,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>EnvFromSource</td>
+<td>EnvFromSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -4643,7 +5336,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>ObjectMeta</td>
+<td>ObjectMeta <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -4672,7 +5365,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>PodSpec</td>
+<td>PodSpec <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -5387,7 +6080,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Container</td>
+<td>Container <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -5433,7 +6126,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Container</td>
+<td>Container <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -5660,7 +6353,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>EnvFromSource</td>
+<td>EnvFromSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -5708,7 +6401,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>EnvFromSource</td>
+<td>EnvFromSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6269,7 +6962,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Volume</td>
+<td>Volume <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6521,7 +7214,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>AWSElasticBlockStoreVolumeSource</td>
+<td>AWSElasticBlockStoreVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6550,7 +7243,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>AzureDiskVolumeSource</td>
+<td>AzureDiskVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6579,7 +7272,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>AzureFileVolumeSource</td>
+<td>AzureFileVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6608,7 +7301,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>CephFSVolumeSource</td>
+<td>CephFSVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6637,7 +7330,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>CinderVolumeSource</td>
+<td>CinderVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6666,7 +7359,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>ConfigMapVolumeSource</td>
+<td>ConfigMapVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6695,7 +7388,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>CSIVolumeSource</td>
+<td>CSIVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6724,7 +7417,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>DownwardAPIVolumeSource</td>
+<td>DownwardAPIVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6753,7 +7446,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>EmptyDirVolumeSource</td>
+<td>EmptyDirVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6782,7 +7475,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>EphemeralVolumeSource</td>
+<td>EphemeralVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6811,7 +7504,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>FCVolumeSource</td>
+<td>FCVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6840,7 +7533,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>FlexVolumeSource</td>
+<td>FlexVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6869,7 +7562,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>FlockerVolumeSource</td>
+<td>FlockerVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6898,7 +7591,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>GCEPersistentDiskVolumeSource</td>
+<td>GCEPersistentDiskVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6927,7 +7620,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>GlusterfsVolumeSource</td>
+<td>GlusterfsVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6956,7 +7649,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>HostPathVolumeSource</td>
+<td>HostPathVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -6985,7 +7678,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>ISCSIVolumeSource</td>
+<td>ISCSIVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7047,7 +7740,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>NFSVolumeSource</td>
+<td>NFSVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7076,7 +7769,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>PersistentVolumeClaimVolumeSource</td>
+<td>PersistentVolumeClaimVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7105,7 +7798,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>PhotonPersistentDiskVolumeSource</td>
+<td>PhotonPersistentDiskVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7134,7 +7827,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>PortworxVolumeSource</td>
+<td>PortworxVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7163,7 +7856,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>ProjectedVolumeSource</td>
+<td>ProjectedVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7192,7 +7885,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>QuobyteVolumeSource</td>
+<td>QuobyteVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7221,7 +7914,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>RBDVolumeSource</td>
+<td>RBDVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7250,7 +7943,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>ScaleIOVolumeSource</td>
+<td>ScaleIOVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7279,7 +7972,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>SecretVolumeSource</td>
+<td>SecretVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7308,7 +8001,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>StorageOSVolumeSource</td>
+<td>StorageOSVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7337,7 +8030,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>VsphereVirtualDiskVolumeSource</td>
+<td>VsphereVirtualDiskVolumeSource <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7369,24 +8062,28 @@ It is not recommended that you rely on this long term, as there may be better me
 </details>
 </div>
 <div class="tabbed-block">
-<p>If you want to use Podman as your local deployer instead of Docker, you can do so like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">deployer</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">podman</span>
-<span class="w">  </span><span class="nt">podman</span><span class="p">:</span>
-<span class="w">    </span><span class="c1"># Change where Podman is. (You can use this to point to a shell script</span>
-<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/your/podman</span>
-<span class="w">    </span><span class="c1"># Change the network mode</span>
-<span class="w">    </span><span class="nt">networkMode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span>
-<span class="w">  </span><span class="nt">deployment</span><span class="p">:</span>
-<span class="w">    </span><span class="c1"># For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate</span>
-<span class="w">    </span><span class="nt">container</span><span class="p">:</span>
-<span class="w">      </span><span class="c1"># Add your container config here.</span>
-<span class="w">    </span><span class="nt">host</span><span class="p">:</span>
-<span class="w">      </span><span class="c1"># Add your host config here.</span>
-<span class="w">    </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Always|IfNotPresent|Never</span>
-<span class="w">  </span><span class="nt">timeouts</span><span class="p">:</span>
-<span class="w">    </span><span class="c1"># HTTP timeout</span>
-<span class="w">    </span><span class="nt">http</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5s</span>
+<p>If you want to use Podman as your local deployer, you can do so like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">step</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">your_step_id</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">    </span><span class="nt">deploy</span><span class="p">:</span><span class="w"> </span><span class="c1"># You can use expressions here</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">podman</span>
+<span class="w">      </span><span class="nt">podman</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># Change where Podman is. (You can use this to point to a shell script</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/your/podman</span>
+<span class="w">        </span><span class="c1"># Change the network mode</span>
+<span class="w">        </span><span class="nt">networkMode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span>
+<span class="w">      </span><span class="nt">deployment</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate</span>
+<span class="w">        </span><span class="nt">container</span><span class="p">:</span>
+<span class="w">          </span><span class="c1"># Add your container config here.</span>
+<span class="w">        </span><span class="nt">host</span><span class="p">:</span>
+<span class="w">          </span><span class="c1"># Add your host config here.</span>
+<span class="w">        </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Always|IfNotPresent|Never</span>
+<span class="w">      </span><span class="nt">timeouts</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># HTTP timeout</span>
+<span class="w">        </span><span class="nt">http</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5s</span>
 </code></pre></div>
 <details>
 <summary>All options for the Podman deployer</summary>
@@ -7434,7 +8131,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Deployment</td>
+<td>Deployment <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7463,7 +8160,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Podman</td>
+<td>Podman <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7513,7 +8210,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Deployment</td>
+<td>Deployment <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7542,7 +8239,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>Podman</td>
+<td>Podman <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7830,7 +8527,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>ContainerConfig</td>
+<td>ContainerConfig <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -7859,7 +8556,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>HostConfig</td>
+<td>HostConfig <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -8381,7 +9078,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 <tr>
 <td>Referenced object:</td>
-<td>PortBinding</td>
+<td>PortBinding <em>(see in the Objects section below)</em></td>
 </tr>
 </tbody>
 </table>
@@ -8585,7 +9282,7 @@ It is not recommended that you rely on this long term, as there may be better me
 </tr>
 </tbody>
 </table>
-<div class="highlight"><span class="filename">Default</span><pre><span></span><code><span class="s2">&quot;/usr/bin/podman&quot;</span>
+<div class="highlight"><span class="filename">Default</span><pre><span></span><code><span class="s2">&quot;podman&quot;</span>
 </code></pre></div>
 </details>
 </details>
@@ -8713,10 +9410,10 @@ It is not recommended that you rely on this long term, as there may be better me
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.efa0ade1.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.efa0ade1.min.js"></script>
       
     
   </body>
