@@ -1343,21 +1343,21 @@
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>With Python, the Dockerfile heavily depends on which build tool you are using. Here we are demonstrating the usage using pip.</p>
-<div class="highlight"><pre><span></span><code>FROM python:alpine
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">python:alpine</span>
 
-# Add the plugin contents
-ADD . /plugin
-# Set the working directory
-WORKDIR /plugin
+<span class="c"># Add the plugin contents</span>
+<span class="k">ADD</span><span class="w"> </span>.<span class="w"> </span>/plugin
+<span class="c"># Set the working directory</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/plugin</span>
 
-# Install the dependencies. Customize this
-# to your Python package manager.
-RUN pip install -r requirements.txt
+<span class="c"># Install the dependencies. Customize this</span>
+<span class="c"># to your Python package manager.</span>
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 
-# Set this to your .py file
-ENTRYPOINT [&quot;/usr/local/bin/python3&quot;, /plugin/plugin.py&quot;]
-# Make sure this stays empty!
-CMD []
+<span class="c"># Set this to your .py file</span>
+<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;/usr/local/bin/python3&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">/plugi</span><span class="kc">n</span><span class="err">/plugi</span><span class="kc">n</span><span class="err">.py&quot;]</span>
+<span class="c"># Make sure this stays empty!</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[]</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
