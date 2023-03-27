@@ -2,9 +2,12 @@
 
 The input section of a workflow is much like a plugin schema: it describes the data model of the workflow itself. This is useful because the input can be validated ahead of time. Any input data can then be referenced by the individual steps.
 
+!!! tip
+    The workflow input schema is analogous to the plugin input schema in that it defines the expected inputs and formats. But a workflow author has the freedom to define the schema independently of the plugin schema -- This means that objects can be named and documented differently, catering to the workflow user, and input validation can happen before a plugin is loaded.
+
 The workflow inputs start with a scope object. As an overview, a scope looks like this:
 
-```yaml
+```yaml title="workflow.yaml"
 input:
   root: RootObject
   objects:
@@ -20,7 +23,7 @@ input:
 
 This corresponds to the following workflow input:
 
-```yaml
+```yaml title="workflow_input.yaml"
 name: Arca Lot
 ```
 
@@ -95,7 +98,7 @@ Properties have the following attributes:
 
 Scopes behave like objects, but they serve an additional purpose. Suppose, object `A` had a property of the object type `B`, but now you needed to reference back to object `A`. Without references, there would be no way to do this.
 
-OpenAPI and JSON Schema have [a similar concept](https://json-schema.org/understanding-json-schema/structuring.html), but in those systems all references are global. This presents a problem when merging schemas. For example, both Docker and Kubernetes have an object called "Volume". These objects would need to be renamed when both configurations are in one schema.
+OpenAPI and JSON Schema have [a similar concept](https://json-schema.org/understanding-json-schema/structuring.html), but in those systems all references are global. This presents a problem when merging schemas. For example, both Docker and Kubernetes have an object called `Volume`. These objects would need to be renamed when both configurations are in one schema.
 
 Arcaflow has a different solution: every plugin, every part of a workflow has its own scope. When a reference is found in a scope, it always relates to its own scope. This way, references don't get mixed.
 
@@ -270,7 +273,7 @@ In contrast, you can specify `object_type` as `b` and that will cause the unseri
 One-of types allow you to specify multiple alternative objects, scopes, or refs. However, these objects must contain a common field (discriminator) and each value for that field must correspond to exactly one object type.
 
 !!! tip
-If the common field is not specified in the possible objects, it is implicitly added. If it is specified, however, it must match the discriminator type.
+    If the common field is not specified in the possible objects, it is implicitly added. If it is specified, however, it must match the discriminator type.
 
 ```yaml
 type_id: one_of_int

@@ -29,7 +29,11 @@ You can pass the following additional options to Arcaflow:
 
 Once you start Arcaflow, it will perform the following three phases:
 
-1. It will start all plugins using your local deployer (see the [configuration guide](setup.md)) and load their schema.
+1. It will start all plugins using your local deployer (see the [configuration guide](setup.md)), load their schemas, and then stop the plugins.
+
+!!! Note
+    The loading phase **only** reads the plugin schemas; it does not run any of the functional steps of the plugins.
+
 2. It will execute the workflow.
 3. Once the workflow execution is complete, it will output the resulting data.
 

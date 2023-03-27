@@ -20,7 +20,7 @@ A stretch goal for the engine is to make it fully embeddable, possibly with in-b
 
 ## Plugins
 
-[Plugins](plugins.md) provide execution for one or more **steps** for a workflow. The job of a plugin is to *do one job and do it well*. They provide a thin layer over third party tools, or an own implementation of features. Their main job is to provide accurate input and output schema information to the engine and transform the data as needed.
+[Plugins](plugins.md) provide execution for one or more **steps** for a workflow. The job of a plugin is to [*do one thing and do it well*](https://en.wikipedia.org/wiki/Unix_philosophy). A plugin provides a thin layer over third party tools, or its own implementation of features. Its main job is to provide accurate input and output schema information to the engine and transform the data as needed.
 
 For example, a plugin may output unformatted text, which a plugin has to parse and build a machine-readable data structure for that information. This reformatting of data allows the engine to pipe data between steps and reliably check the data for faults.
 
@@ -32,7 +32,7 @@ A core element of the Arcaflow system is the [typing system](typing.md). Each pl
 
 ## Executing workflows
 
-[Arcaflow workflows](workflows.md) are executed in the Engine, while plugins can be run locally or remotely on container engines. This lends itself to a Git-based workflow:
+[Arcaflow workflows](workflows.md) are orchestrated in the Engine, while plugins can be run locally or remotely on container engines. This lends itself to a Git-based workflow:
 
 ```mermaid
 flowchart LR

@@ -2,7 +2,11 @@
 
 This section of the documentation deals with theoretical concepts around Arcaflow. Fear not, it's not a university exam, but simply a description on how we designed Arcaflow the way we did and why we did so.
 
-If you want to get started, [read our architecture overview](architecture.md).
+<h2>Architecture</h2>
+
+Get started with a primer on the core architecture of Arcaflow.
+
+[Read more about architecture &raquo;](architecture.md){ .md-button }
 
 <h2>Typing</h2>
 

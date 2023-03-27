@@ -52,7 +52,7 @@ if __name__ == "__main__":
 !!! tip
     Further reading: [Creating your first Python plugin](plugins/python/first.md)
 
-## Step 4: Building the plugin
+## Step 4: Build the plugin
 
 Next, let's create a `Dockerfile` and build a container image:
 
@@ -65,19 +65,35 @@ RUN chmod +x /plugin.py && pip install arcaflow_plugin_sdk
 ENTRYPOINT ["/plugin.py"]
 CMD []
 ```
+You can now build the plugin container.
 
 === "Docker"
-    
-    You can now run `docker build -t example-plugin .`
+    ```
+    docker build -t example-plugin .
+    ```
 
 === "Podman"
-    
-    You can now run `podman build -t example-plugin .`
+    ```
+    podman build -t example-plugin .
+    ```
 
 !!! tip
     Further reading: [Packaging plugins](plugins/packaging.md)
 
-## Step 5: Creating a simple workflow
+!!! tip "Did you know?"
+    While Arcaflow is a workflow engine, plugins can be run independentily via the command line. Try running your containerized helo-world plugin directly.
+
+    === "Docker"
+        ```
+        echo "name: Arca Lot" | docker run -i --rm example-plugin -f -
+        ```
+    
+    === "Podman"
+        ```
+        echo "name: Arca Lot" | podman run -i --rm example-plugin -f -
+        ```
+
+## Step 5: Create a simple workflow
 
 Let's start with something simple: we'll incorporate the plugin above into a workflow. Let's create a `workflow.yaml` in an empty directory
 
@@ -113,7 +129,10 @@ name: Arca Lot
 
 ## Step 7: Create an engine configuration
 
-You will need an Arcaflow config file to prevent Arcaflow from trying to pull the container image.
+You will need an Arcaflow `config.yaml` file to prevent Arcaflow from trying to pull the container image.
+
+!!! tip
+    Without a config file, the default behavior of Arcaflow is to run with docker and to always pull plugin container images for the workflow.
 
 === "Docker"
 
@@ -138,7 +157,7 @@ You will need an Arcaflow config file to prevent Arcaflow from trying to pull th
 !!! tip
     Further reading: [Setting up Arcaflow](running/setup.md)
 
-## Step 7: Running the workflow
+## Step 7: Run the workflow
 
 Finally, let's run our workflow. Make sure you are in the directory where the workflow is located.
 
@@ -154,7 +173,7 @@ Finally, let's run our workflow. Make sure you are in the directory where the wo
     C:\path\to\arcaflow.exe -input input.yaml -config config.yaml
     ```
 
-If everything went well, you should see the following message after a few seconds:
+If everything went well, you should see a message similar to this after a few seconds:
 
 ```
 2023-03-22T11:25:58+01:00       info            Loading plugins locally to determine schemas...
@@ -182,27 +201,51 @@ steps.greet.outputs.success-->output
 message: Hello, Arca Lot
 ```
 
-As you can see, the last line of the output is the output data from the workflow. If you want, you can also grab the Mermaid graph in the output and put it into [the Mermaid editor](https://mermaid.live/edit#pako:eNpdjz0OwjAMha8SeaY5QAem3gDGLCZxf6TGiRJHCFW9OxYwtEy2v_ee9LyBT4Ggh3FNTz9jEXMfHNf2mArm2Sycmzj-DMsYyTFxOIKuu1ahXO1UiNR6OM6STU00VG1t3lOtJ-u_qNEvgQtEKhGXoCU3x8Y4kJm0CPS6BhqxreLA8a5WbJJuL_bQj7hWukDLAYWGBfWd-KP7Gz-1Wos). It will look like this:
+As you can see, the last line of the output is the output data from the workflow.
 
-```mermaid
-flowchart TD
-subgraph input
-input.name
-end
-input.name-->steps.greet
-steps.greet-->steps.greet.outputs.success
-steps.greet.outputs.success-->output
-```
+!!! tip "Did you know?"
+    Arcaflow provides [Mermaid](https://mermaid.js.org/) markdown in the workflow output that allows you to quickly visualize the workflow in a graphic format. You can grab the Mermaid graph you see in the output and put it into [the Mermaid editor](https://mermaid.live/edit#pako:eNpdjz0OwjAMha8SeaY5QAem3gDGLCZxf6TGiRJHCFW9OxYwtEy2v_ee9LyBT4Ggh3FNTz9jEXMfHNf2mArm2Sycmzj-DMsYyTFxOIKuu1ahXO1UiNR6OM6STU00VG1t3lOtJ-u_qNEvgQtEKhGXoCU3x8Y4kJm0CPS6BhqxreLA8a5WbJJuL_bQj7hWukDLAYWGBfWd-KP7Gz-1Wos).
+
+    === "Mermaid markdown"
+        ```
+        flowchart TD
+        subgraph input
+        input.name
+        end
+        input.name-->steps.greet
+        steps.greet-->steps.greet.outputs.success
+        steps.greet.outputs.success-->output
+        ```
+
+    === "Mermaid rendered flowchart"
+        ```mermaid
+        flowchart TD
+        subgraph input
+        input.name
+        end
+        input.name-->steps.greet
+        steps.greet-->steps.greet.outputs.success
+        steps.greet.outputs.success-->output
+        ```
 
 !!! tip
-    Further reading: [Running up Arcaflow](running/running.md)
+    Further reading: [Running Arcaflow](running/running.md)
 
 ## Next steps
 
-Congratulations, you are now an Arcaflow user! Here's what you can do next:
+Congratulations, you are now an Arcaflow user! Here are some things you can do next to start working with plugins and workflows:
+
+- [See our repostories of community-supported plugins &raquo;](https://github.com/orgs/arcalot/repositories?q=arcaflow-plugin&type=all&language=&sort=)
+- [Get our latest plugin container builds from quay.io &raquo;](https://quay.io/arcalot)
+- [Experiment with more advanced example workflows &raquo;](https://github.com/arcalot/arcaflow-workflows)
+
+## Keep learning
+
+Hungry for more? Keep digging into our docs::
 
 - [Learn more about the concepts behind Arcaflow &raquo;](concepts/index.md)
-- [Learn how to set up Arcaflow &raquo;](running/index.md)
+- [Learn how to set up Arcaflow &raquo;](running/setup.md)
 - [Learn how to create plugins &raquo;](plugins/index.md)
 - [Learn how to create workflows &raquo;](workflows/index.md)
-- [Contribute to Arcaflow &raquo;](contributing/index.md)
+
+[Contribute to Arcaflow &raquo;](contributing/index.md){ .md-button }
