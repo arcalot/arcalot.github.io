@@ -17,7 +17,7 @@
         <link rel="next" href="../embedding/">
       
       <link rel="icon" href="../../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.4">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.5">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.240905d7.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.7a7fce14.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -1456,7 +1456,7 @@
 <li><a href="#dicts"><code>typing.Dict[keytype, valuetype]</code></a></li>
 <li><a href="#union-types"><code>typing.Union[onedataclass, anotherdataclass]</code></a></li>
 <li>Dataclasses</li>
-<li><a href="#any-types"><code>schema.ANY_TYPE</code></a></li>
+<li><a href="#any-types"><code>typing.Any</code></a></li>
 </ul>
 <p>You can read more about the individual types in the <a href="#data-types">data types</a> section</p>
 <h2 id="optional-parameters">Optional parameters</h2>
@@ -1609,7 +1609,7 @@
 <h2 id="any-types">Any types</h2>
 <p>Any types allow you to pass through any primitive data (no dataclasses). However, this comes with severe limitations as far as validation and use in workflows is concerned, so this type should only be used in limited cases. For example, if you would like to create a plugin that inserts data into an ElasticSearch database the &ldquo;any&rdquo; type would be appropriate here.</p>
 <p>You can define an &ldquo;any&rdquo; type like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">my_data</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">ANY_TYPE</span>
+<div class="highlight"><pre><span></span><code><span class="n">my_data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span>
 </code></pre></div>
 <h2 id="units">Units</h2>
 <p>Integers and floats can have unit metadata associated with them. For example, a field may contain a unit description like this:</p>
@@ -1694,7 +1694,7 @@
     <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.19047be9.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.407015b8.min.js"></script>
       
     
   </body>
