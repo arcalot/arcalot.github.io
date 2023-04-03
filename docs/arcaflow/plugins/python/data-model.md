@@ -24,7 +24,7 @@ However, Arcaflow doesn't support all Python data types. You pick from the follo
 - [`typing.Dict[keytype, valuetype]`](#dicts)
 - [`typing.Union[onedataclass, anotherdataclass]`](#union-types)
 - Dataclasses
-- [`schema.ANY_TYPE`](#any-types)
+- [`typing.Any`](#any-types)
 
 You can read more about the individual types in the [data types](#data-types) section
 
@@ -226,7 +226,7 @@ Any types allow you to pass through any primitive data (no dataclasses). However
 You can define an "any" type like this:
 
 ```python
-my_data: schema.ANY_TYPE
+my_data: typing.Any
 ```
 
 ## Units
