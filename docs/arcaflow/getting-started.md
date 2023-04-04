@@ -81,7 +81,7 @@ CMD []
 
 Let's start with something simple: we'll incorporate the plugin above into a workflow. Let's create a `workflow.yaml` in an empty directory
 
-```yaml
+```yaml title="workflow.yaml"
 input:
   root: RootObject
   objects:
@@ -107,7 +107,7 @@ output:
 
 Now, let's create an input file for our workflow named `input.yaml`:
 
-```yaml
+```yaml title="input.yaml"
 name: Arca Lot
 ```
 
