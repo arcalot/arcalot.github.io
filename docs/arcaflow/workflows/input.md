@@ -94,6 +94,9 @@ Properties have the following attributes:
 | `default`         | `string`   | Default value for this property, JSON-encoded.                                             |
 | `examples`        | `[]string` | Examples for the current property, JSON-encoded.                                           |
 
+!!! note
+    Unlike the plugin schema where an unassigned default value is set to `None`, for the workflow schema you simply omit the default to leave it unassigned.
+
 ## Scopes and refs
 
 Scopes behave like objects, but they serve an additional purpose. Suppose, object `A` had a property of the object type `B`, but now you needed to reference back to object `A`. Without references, there would be no way to do this.
