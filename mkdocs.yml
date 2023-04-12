@@ -62,6 +62,10 @@ extra:
       link: https://github.com/arcalot
 plugins:
   - search
+  - redirects:
+      redirect_maps:
+        "arcaflow/creating-plugins/index.md": "arcaflow/plugins/index.md"
+        "arcaflow/creating-plugins/python.md": "arcaflow/plugins/python/index.md"
 theme:
   name: material
   logo: arcalot.svg
