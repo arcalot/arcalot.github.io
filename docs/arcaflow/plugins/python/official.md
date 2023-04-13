@@ -1,6 +1,6 @@
 # Creating official Arcaflow plugins
 
-Official arcaflow plugins have more [stringent requirements than normal](https://github.com/arcalot/arcaflow-plugins-incubator#readme). This document describes how to create a plugin that conforms to those requirements.
+Official Arcaflow plugins have more [stringent requirements than normal](https://github.com/arcalot/arcaflow-plugins-incubator#readme). This document describes how to create a plugin that conforms to those requirements.
 
 ## Development environment
 
@@ -41,10 +41,10 @@ Install Poetry using one of their [supported methods](https://python-poetry.org/
 
 Now, verify your Poetry version.
 
-    ```shell
-    $ poetry --version
-    Poetry (version 1.2.2)
-    ```
+```
+$ poetry --version
+Poetry (version 1.2.2)
+```
 
 ## Setting up your project
 
@@ -78,12 +78,12 @@ Python 3.9.15
 Set Poetry to use your Python that is at least 3.9.
 
 ```
-poetry env use $(which python3)
+$ poetry env use $(which python3)
 ```
 
 Check that your `pyproject.toml` is using at least Python 3.9 by looking for the following line.
 
-```toml
+```toml title="pyproject.toml"
 [tool.poetry.dependencies]
 python = "^3.9"
 ```
@@ -91,7 +91,7 @@ python = "^3.9"
 Add the [arcaflow plugin sdk for python](https://github.com/arcalot/arcaflow-plugin-sdk-python) as a software dependency for your Python project.
 
 ```
-poetry add arcaflow-plugin-sdk-python
+$ poetry add arcaflow-plugin-sdk-python
 ```
 
 You should now have a `poetry.lock` file in your project root. Poetry maintains the state of your `pyproject.toml`, and its exact software dependencies as hashes in the `poetry.lock` file.
@@ -117,12 +117,12 @@ To push an official package to PyPI, please contact an Arcalot chair to create a
 You can configure Poetry to use this API token by calling:
 
 ```
-poetry config pypi-token.<any name> <PYPI API TOKEN>
+$ poetry config pypi-token.<any name> <PYPI API TOKEN>
 ```
 
 Alternatively, you can also use environment variables:
 
-```bash
+```
 $ export POETRY_PYPI_TOKEN_PYPI=my-token
 $ export POETRY_HTTP_BASIC_PYPI_USERNAME=<username>
 $ export POETRY_HTTP_BASIC_PYPI_PASSWORD=<password>
@@ -131,7 +131,7 @@ $ export POETRY_HTTP_BASIC_PYPI_PASSWORD=<password>
 You can generate distribution archives by typing:
 
 ```
-poetry build
+$ poetry build
 ```
 
 You can then test publishing:

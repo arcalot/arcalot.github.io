@@ -1,6 +1,6 @@
 # Arcaflow: The noble workflow engine
 
-Arcaflow is a **workflow engine** that lets you run individual steps and pass data between them. The **data is validated** according to a schema along the way to make sure there is no corrupt data. Arcaflow runs on your laptop and deploys **plugins as containers** on Docker, Podman, or Kubernetes.
+Arcaflow is a **workflow engine** that lets you run individual steps and pass data between them. The **data is validated** according to a schema along the way to make sure there is no corrupt data. Arcaflow runs on your laptop, a jump host, or in a CI system and deploys **plugins as containers** on target systems via Docker, Podman, or Kubernetes.
 
 !!! tip "Did you know?"
     In Docker/Kubernetes, Arcaflow only needs network access to the API, not the plugin container itself. You can safely place a restrictive firewall on most plugins.

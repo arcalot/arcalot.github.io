@@ -51,7 +51,7 @@ Bugs? Yeah, we have those, and we want fewer of them. Since we are a community e
 
 Every software is... pardon our French: crap. Ours is no exception. The difference is how big and how stinky the piles are. We aim to make the piles small, well-defined and as stink-less as possible. If we need to replace a pile with another pile, it should be easy to do so.
 
-Translated to software engineering, we create APIs between our ~~piles~~components. These APIs can be in the form of code, or in the form of a GitHub Actions workflow. A non-leaky API helps us replace one side of the API without touching the other.
+Translated to software engineering, we create APIs between our ~~piles~~ components. These APIs can be in the form of code, or in the form of a GitHub Actions workflow. A non-leaky API helps us replace one side of the API without touching the other.
 
 ### The principle of kindness to our future self
 

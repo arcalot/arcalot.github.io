@@ -4,7 +4,7 @@ Arcaflow workflows consist of three parts:
 
 <h2>Inputs</h2>
 
-The input section of a workflow is much like a plugin schema: it describes the data model of the workflow itself. This is useful because the input can be validated ahead of time. Any input data can then be referenced by the individual steps.
+The input section of a workflow is much like a plugin schema: it describes the data model of the workflow itself. This is useful because the input can be validated ahead of time. Any input data can then be referenced by the individual plugin steps.
 
 [Learn more about inputs &raquo;](input.md){ .md-button }
 

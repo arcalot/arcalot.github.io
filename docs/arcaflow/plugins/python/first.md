@@ -103,7 +103,7 @@ Now you are ready to start hacking away at your plugin! You can open the `exampl
 
 Plugins in Arcaflow must explain how they want their input data and what kind of output they produce. Let's start with the input data model. In our case, we want to ask the user for a name. Normally, you would write this in Python:
 
-```python
+```python title="plugin.py"
 def hello_world(name):
     return f"Hello, {name}"
 ```
@@ -112,7 +112,7 @@ However, **that's not how the Arcaflow SDK works**. You must always specify the 
 
 So, let's change the code a little:
 
-```python
+```python title="plugin.py"
 import dataclasses
 
 
@@ -128,7 +128,7 @@ So far so good, but we are not done yet. The output also has special rules. One 
 
 For example:
 
-```python
+```python title="plugin.py"
 import dataclasses
 
 
@@ -147,13 +147,13 @@ def hello_world(params: InputParams):
 ```
 
 !!! tip
-    If your plugin has a problem, you could create and return an ErrorOutput instead. In the Arcaflow workflow you can then handle each output separately. 
+    If your plugin has a problem, you could create and return an `ErrorOutput` instead. In the Arcaflow workflow you can then handle each output separately. 
 
 ## Step 3: Decorating your step function
 
 Of course, Arcaflow doesn't know what to do with this code yet. You will need to add a decorator to the `hello_world` function in order to give Arcaflow the necessary information:
 
-```python
+```python title="plugin.py"
 from arcaflow_plugin_sdk import plugin
 
 
@@ -170,7 +170,7 @@ def hello_world(params: InputParams):
 Let's go through the parameters:
 
 * `id` provides the step identifier. If your plugin provides more than one step function, you need to specify this in your workflow.
-* `name` provides the human-readable name of the workflow. This will help render a user interface for the workflow.
+* `name` provides the human-readable name of the plugin step. This will help render a user interface for the workflow.
 * `description` is a longer description for the function and may contain line breaks.
 * `outputs` specifies the possible outputs and the dataclasses associated with these outputs. This is important so Arcaflow knows what to expect.
 
@@ -185,7 +185,7 @@ Let's go through the parameters:
 
 There is one more piece missing to run a plugin: the calling code. Add the following to your file:
 
-```python
+```python title="plugin.py"
 import sys
 from arcaflow_plugin_sdk import plugin
 
@@ -201,9 +201,15 @@ if __name__ == "__main__":
     )
 ```
 
-Now your plugin is ready. You can [package it up for a workflow](../packaging.md), or you can run it as a standalone tool from the command line: `python example_plugin.py -f input-data.yaml`. You will need to provide the input data in YAML format:
+Now your plugin is ready. You can [package it up for a workflow](../packaging.md), or you can run it as a standalone tool from the command line:
 
-```yaml
+```
+python example_plugin.py -f input-data.yaml
+```
+
+You will need to provide the input data in YAML format:
+
+```yaml title="input-data.yaml"
 name: Arca Lot
 ```
 
@@ -214,7 +220,13 @@ name: Arca Lot
     To prevent output from breaking the functionality when attached to the Arcaflow Engine, the SDK hides any output your step function writes to the standard output or standard error. You can use the `--debug` flag to show any output on the standard error in standalone mode.
 
 !!! tip
-    You can generate a JSON schema file for your step input by running `python example_plugin.py --json-schema input >example.schema.json`. If you are using the [YAML plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), add the following line to the top of your input file for code completion:
+    You can generate a JSON schema file for your step input by running
+    
+    ```
+    python example_plugin.py --json-schema input >example.schema.json
+    ```
+    
+    If you are using the [YAML plugin for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), add the following line to the top of your input file for code completion:
         ```yaml
         # yaml-language-server: $schema=example.schema.json
         ```

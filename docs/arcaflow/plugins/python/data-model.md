@@ -1,8 +1,10 @@
 # Creating a Python data model
 
+Every plugin needs a schema to represent its expected inputs and outputs in a machine-readable format. The schema [strong typing](/arcaflow/concepts/typing) is a core design element of Arcaflow, enabling us to build portable workflows that compartmentalize failure conditions and avoid data errors.
+
 When creating a data model for Arcaflow plugins in Python, everything starts with [dataclasses](https://docs.python.org/3/library/dataclasses.html). They allow Arcaflow to get information about the data types of individual fields in your class:
 
-```python
+```python title="plugin.py"
 import dataclasses
 
 
@@ -32,7 +34,7 @@ You can read more about the individual types in the [data types](#data-types) se
 
 You can also declare any parameter as optional like this:
 
-```python
+```python title="plugin.py"
 @dataclasses.dataclass
 class MyClass:
     param: typing.Optional[int] = None
@@ -44,11 +46,14 @@ Note that adding `typing.Optional` is not enough, you *must* specify the default
 
 You can specify desired validations for each field like this:
 
-```python
+```python title="plugin.py"
 @dataclasses.dataclass
 class MyClass:
     param: typing.Annotated[int, schema.name("Param")]
 ```
+
+!!! Tip
+    Annotated objects are preferred as a best practice for a documented schema, and are expected for any [officially-supported community plugins](/arcaflow/plugins/python/official/).
 
 You can use the following annotations to add metadata to your fields:
 
@@ -64,6 +69,18 @@ You can also add validations to the fields. The following annotations are valid 
 - `schema.conflicts` specifies a list of fields that cannot be used together with the current field.  (Make sure to use the optional annotation above.)
 
 Additionally, some data types have their own validations and metadata, such as `schema.min`, `schema.max`, `schema.pattern`, or `schema.units`.
+
+!!! Note
+    When combining `typing.Annotated` with `typing.Optional`, the default value is assigned to the `Annotated` object, **not** to the `Optional` object.
+
+    ```python title="plugin.py"
+    @dataclasses.dataclass
+    class MyClass:
+        param: typing.Annotated[
+            typing.Optional[int],
+            schema.name("Param")
+        ] = None
+    ```
 
 ## Data types
 
@@ -219,9 +236,9 @@ name: typing.Annotated[
 !!! tip
     The `schema.discriminator` and `schema.discriminator_value` annotations are optional. If you do not specify them, a discriminator will be generated for you.
 
-## Any types
+### Any types
 
-Any types allow you to pass through any primitive data (no dataclasses). However, this comes with severe limitations as far as validation and use in workflows is concerned, so this type should only be used in limited cases. For example, if you would like to create a plugin that inserts data into an ElasticSearch database the "any" type would be appropriate here.
+Any types allow you to pass through any primitive data (no dataclasses). **However, this comes with severe limitations as far as validation and use in workflows is concerned, so this type should only be used in limited cases.** For example, if you would like to create a plugin that inserts data into an ElasticSearch database the "any" type would be appropriate here.
 
 You can define an "any" type like this:
 
@@ -264,3 +281,12 @@ my_units = schema.Units(
 ```
 
 You can then use this description in your `schema.units` annotations. Additionally, you can also use it to convert an integer or float into its string representation with the `my_units.format_short` or `my_units.format_long` functions. If you need to parse a string yourself, you can use `my_units.parse`.
+
+### Built-In Units
+
+A number of unit types are built-in to the python SDK for convenience:
+
+- `UNIT_BYTE` - Bytes and 2^10 multiples (kilo-, mega-, giga-, tera-, peta-)
+- `UNIT_TIME` - Nanoseconds and human-friendly multiples (microseconds, seconds, minutes, hours, days)
+- `UNIT_CHARACTER` - Character notations (char, chars, character, characters)
+- `UNIT_PERCENT` - Percentage notations (%, percent)

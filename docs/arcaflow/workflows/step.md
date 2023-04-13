@@ -4,7 +4,7 @@ If your [input](input.md) is complete, you can now turn to writing your workflow
 
 To define a step type, you can do the following:
 
-```yaml
+```yaml title="workflow.yaml"
 steps:
   step_a: # Specify any ID here you want to reference the step by
     plugin: quay.io/some/container/image # This must be an Arcaflow-compatible image
@@ -563,8 +563,456 @@ The `deploy` key for plugins lets you control how the plugin container is deploy
                          ```json title="Default"
                          "15s"
                          ```
+
+
+=== "Podman"
+
+    If you want to use Podman as your local deployer, you can do so like this:
+
+    ```yaml
+    step:
+      your_step_id:
+        plugin: ...
+        input: ...
+        deploy: # You can use expressions here
+          type: podman
+          podman:
+            # Change where Podman is. (You can use this to point to a shell script
+            path: /path/to/your/podman
+            # Change the network mode
+            networkMode: host
+          deployment:
+            # For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate
+            container:
+              # Add your container config here.
+            host:
+              # Add your host config here.
+            imagePullPolicy: Always|IfNotPresent|Never
+          timeouts:
+            # HTTP timeout
+            http: 5s
+    ```
+
+    ??? "All options for the Podman deployer"
+        |    |    |
+        |----|----|
+        | Type: | `scope` |
+        | Root object: | Config |
+        ???+ note "Properties"
+            ??? info "deployment (`reference[Deployment]`)"
+                |    |    |
+                |----|----|
+                | Name: | Deployment |
+                | Description: | Deployment configuration for the plugin. |
+                | Required: | No || Type: | `reference[Deployment]` |
+                | Referenced object: | Deployment *(see in the Objects section below)* |
+                
+                
+            ??? info "podman (`reference[Podman]`)"
+                |    |    |
+                |----|----|
+                | Name: | Podman |
+                | Description: | Podman CLI configuration |
+                | Required: | No || Type: | `reference[Podman]` |
+                | Referenced object: | Podman *(see in the Objects section below)* |
+                
+                
+        ???+ note "Objects"
+            ??? info "**Config** (`object`)"
+                |    |    |
+                |----|----|
+                | Type: | `object` |
+                
+                ???+ note "Properties"
+                    ??? info "deployment (`reference[Deployment]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Deployment |
+                        | Description: | Deployment configuration for the plugin. |
+                        | Required: | No || Type: | `reference[Deployment]` |
+                        | Referenced object: | Deployment *(see in the Objects section below)* |
                         
                         
+                    ??? info "podman (`reference[Podman]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Podman |
+                        | Description: | Podman CLI configuration |
+                        | Required: | No || Type: | `reference[Podman]` |
+                        | Referenced object: | Podman *(see in the Objects section below)* |
+                        
+                        
+            ??? info "**ContainerConfig** (`object`)"
+                |    |    |
+                |----|----|
+                | Type: | `object` |
+                
+                ???+ note "Properties"
+                    ??? info "Domainname (`string`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Domain name |
+                        | Description: | Domain name for the plugin container. |
+                        | Required: | No || Type: | `string` |
+                        | Minimum: | 1 |
+                        | Maximum: | 255 |
+                        | Must match pattern: | `^[a-zA-Z0-9-_.]&#43;$` |
+                        
+                        
+                    ??? info "Env (`list[string]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Environment variables |
+                        | Description: | Environment variables to set on the plugin container. |
+                        | Required: | No || Type: | `list[string]` |
+                        
+                        ??? info "List Items"
+                            |    |    |
+                            |----|----|
+                            | Type: | `string` |
+                            | Minimum: | 1 |
+                            | Maximum: | 32760 |
+                            | Must match pattern: | `^.&#43;=.&#43;$` |
+                            
+                        
+                    ??? info "Hostname (`string`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Hostname |
+                        | Description: | Hostname for the plugin container. |
+                        | Required: | No || Type: | `string` |
+                        | Minimum: | 1 |
+                        | Maximum: | 255 |
+                        | Must match pattern: | `^[a-zA-Z0-9-_.]&#43;$` |
+                        
+                        
+                    ??? info "MacAddress (`string`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | MAC address |
+                        | Description: | Media Access Control address for the container. |
+                        | Required: | No || Type: | `string` |
+                        | Must match pattern: | `^[a-fA-F0-9]{2}(:[a-fA-F0-9]{2}){5}$` |
+                        
+                        
+                    ??? info "NetworkDisabled (`bool`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Disable network |
+                        | Description: | Disable container networking completely. |
+                        | Required: | No || Type: | `bool` |
+                        
+                        
+                    ??? info "User (`string`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Username |
+                        | Description: | User that will run the command inside the container. Optionally, a group can be specified in the user:group format. |
+                        | Required: | No || Type: | `string` |
+                        | Minimum: | 1 |
+                        | Maximum: | 255 |
+                        | Must match pattern: | `^[a-z_][a-z0-9_-]*[$]?(:[a-z_][a-z0-9_-]*[$]?)$` |
+                        
+                        
+            ??? info "**Deployment** (`object`)"
+                |    |    |
+                |----|----|
+                | Type: | `object` |
+                
+                ???+ note "Properties"
+                    ??? info "container (`reference[ContainerConfig]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Container configuration |
+                        | Description: | Provides information about the container for the plugin. |
+                        | Required: | No || Type: | `reference[ContainerConfig]` |
+                        | Referenced object: | ContainerConfig *(see in the Objects section below)* |
+                        
+                        
+                    ??? info "host (`reference[HostConfig]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Host configuration |
+                        | Description: | Provides information about the container host for the plugin. |
+                        | Required: | No || Type: | `reference[HostConfig]` |
+                        | Referenced object: | HostConfig *(see in the Objects section below)* |
+                        
+                        
+                    ??? info "imagePullPolicy (`enum[string]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Image pull policy |
+                        | Description: | When to pull the plugin image. |
+                        | Required: | No || Type: | `enum[string]` |
+                        ??? info "Values"
+                            - `Always` Always
+                            - `IfNotPresent` If not present
+                            - `Never` Never
+                         ```json title="Default"
+                         "IfNotPresent"
+                         ```
+                        
+                        
+            ??? info "**HostConfig** (`object`)"
+                |    |    |
+                |----|----|
+                | Type: | `object` |
+                
+                ???+ note "Properties"
+                    ??? info "Binds (`list[string]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Volume Bindings |
+                        | Description: | Volumes |
+                        | Required: | No || Type: | `list[string]` |
+                        
+                        ??? info "List Items"
+                            |    |    |
+                            |----|----|
+                            | Type: | `string` |
+                            | Minimum: | 1 |
+                            | Maximum: | 32760 |
+                            | Must match pattern: | `^.&#43;:.&#43;$` |
+                            
+                        
+                    ??? info "CapAdd (`list[string]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Add capabilities |
+                        | Description: | Add capabilities to the container. |
+                        | Required: | No || Type: | `list[string]` |
+                        
+                        ??? info "List Items"
+                            |    |    |
+                            |----|----|
+                            | Type: | `string` |
+                            
+                        
+                    ??? info "CapDrop (`list[string]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Drop capabilities |
+                        | Description: | Drop capabilities from the container. |
+                        | Required: | No || Type: | `list[string]` |
+                        
+                        ??? info "List Items"
+                            |    |    |
+                            |----|----|
+                            | Type: | `string` |
+                            
+                        
+                    ??? info "CgroupnsMode (`enum[string]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | CGroup namespace mode |
+                        | Description: | CGroup namespace mode to use for the container. |
+                        | Required: | No || Type: | `enum[string]` |
+                        ??? info "Values"
+                            - `` Empty
+                            - `host` Host
+                            - `private` Private
+                        
+                    ??? info "Dns (`list[string]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | DNS servers |
+                        | Description: | DNS servers to use for lookup. |
+                        | Required: | No || Type: | `list[string]` |
+                        
+                        ??? info "List Items"
+                            |    |    |
+                            |----|----|
+                            | Type: | `string` |
+                            
+                        
+                    ??? info "DnsOptions (`list[string]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | DNS options |
+                        | Description: | DNS options to look for. |
+                        | Required: | No || Type: | `list[string]` |
+                        
+                        ??? info "List Items"
+                            |    |    |
+                            |----|----|
+                            | Type: | `string` |
+                            
+                        
+                    ??? info "DnsSearch (`list[string]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | DNS search |
+                        | Description: | DNS search domain. |
+                        | Required: | No || Type: | `list[string]` |
+                        
+                        ??? info "List Items"
+                            |    |    |
+                            |----|----|
+                            | Type: | `string` |
+                            
+                        
+                    ??? info "ExtraHosts (`list[string]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Extra hosts |
+                        | Description: | Extra hosts entries to add |
+                        | Required: | No || Type: | `list[string]` |
+                        
+                        ??? info "List Items"
+                            |    |    |
+                            |----|----|
+                            | Type: | `string` |
+                            
+                        
+                    ??? info "NetworkMode (`string`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Network mode |
+                        | Description: | Specifies either the network mode, the container network to attach to, or a name of a Docker network to use. |
+                        | Required: | No || Type: | `string` |
+                        | Must match pattern: | `^(none|bridge|host|container:[a-zA-Z0-9][a-zA-Z0-9_.-]&#43;|[a-zA-Z0-9][a-zA-Z0-9_.-]&#43;)$` |
+                        
+                        
+                        ??? example "Examples"
+                            ```json
+                            "none"
+                            ```
+                        "
+                            ```json
+                            "bridge"
+                            ```
+                        "
+                            ```json
+                            "host"
+                            ```
+                        "
+                            ```json
+                            "container:container-name"
+                            ```
+                        "
+                            ```json
+                            "network-name"
+                            ```
+                        
+                        
+                    ??? info "PortBindings (`map[string, list[reference[PortBinding]]]`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Port bindings |
+                        | Description: | Ports to expose on the host machine. Ports are specified in the format of portnumber/protocol. |
+                        | Required: | No || Type: | `map[string, list[reference[PortBinding]]]` |
+                        
+                        ??? info "Key type"
+                            |    |    |
+                            |----|----|
+                            | Type: | `string` |
+                            | Must match pattern: | `^[0-9]&#43;(/[a-zA-Z0-9]&#43;)$` |
+                            
+                        ??? info "Value type"
+                            |    |    |
+                            |----|----|
+                            | Type: | `list[reference[PortBinding]]` |
+                            
+                            ??? info "List Items"
+                                |    |    |
+                                |----|----|
+                                | Type: | `reference[PortBinding]` |
+                                | Referenced object: | PortBinding *(see in the Objects section below)* |
+                                
+                        
+                        
+            ??? info "**Podman** (`object`)"
+                |    |    |
+                |----|----|
+                | Type: | `object` |
+                
+                ???+ note "Properties"
+                    ??? info "cgroupNs (`string`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | CGroup namespace |
+                        | Description: | Provides the Cgroup Namespace settings for the container |
+                        | Required: | No || Type: | `string` |
+                        | Must match pattern: | `^host|ns:/proc/\d&#43;/ns/cgroup|container:.&#43;|private$` |
+                        
+                        
+                    ??? info "containerName (`string`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Container Name |
+                        | Description: | Provides name of the container |
+                        | Required: | No || Type: | `string` |
+                        | Must match pattern: | `^.*$` |
+                        
+                        
+                    ??? info "imageArchitecture (`string`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Podman image Architecture |
+                        | Description: | Provides Podman Image Architecture |
+                        | Required: | No || Type: | `string` |
+                        | Must match pattern: | `^.*$` |
+                        
+                         ```json title="Default"
+                         "amd64"
+                         ```
+                        
+                        
+                    ??? info "imageOS (`string`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Podman Image OS |
+                        | Description: | Provides Podman Image Operating System |
+                        | Required: | No || Type: | `string` |
+                        | Must match pattern: | `^.*$` |
+                        
+                         ```json title="Default"
+                         "linux"
+                         ```
+                        
+                        
+                    ??? info "networkMode (`string`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Network Mode |
+                        | Description: | Provides network settings for the container |
+                        | Required: | No || Type: | `string` |
+                        | Must match pattern: | `^bridge:.*|host|none$` |
+                        
+                        
+                    ??? info "path (`string`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Podman path |
+                        | Description: | Provides the path of podman executable |
+                        | Required: | No || Type: | `string` |
+                        | Must match pattern: | `^.*$` |
+                        
+                         ```json title="Default"
+                         "podman"
+                         ```
+                        
+                        
+            ??? info "**PortBinding** (`object`)"
+                |    |    |
+                |----|----|
+                | Type: | `object` |
+                
+                ???+ note "Properties"
+                    ??? info "HostIP (`string`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Host IP |
+                        | Required: | No || Type: | `string` |
+                        
+                        
+                    ??? info "HostPort (`string`)"
+                        |    |    |
+                        |----|----|
+                        | Name: | Host port |
+                        | Required: | No || Type: | `string` |
+                        | Must match pattern: | `^0-9&#43;$` |
+
 
 === "Kubernetes"
 
@@ -2287,454 +2735,3 @@ The `deploy` key for plugins lets you control how the plugin container is deploy
                 
                 ???+ note "Properties"
                     *None*
-                
-
-=== "Podman"
-
-    If you want to use Podman as your local deployer, you can do so like this:
-
-    ```yaml
-    step:
-      your_step_id:
-        plugin: ...
-        input: ...
-        deploy: # You can use expressions here
-          type: podman
-          podman:
-            # Change where Podman is. (You can use this to point to a shell script
-            path: /path/to/your/podman
-            # Change the network mode
-            networkMode: host
-          deployment:
-            # For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate
-            container:
-              # Add your container config here.
-            host:
-              # Add your host config here.
-            imagePullPolicy: Always|IfNotPresent|Never
-          timeouts:
-            # HTTP timeout
-            http: 5s
-    ```
-
-    ??? "All options for the Podman deployer"
-        |    |    |
-        |----|----|
-        | Type: | `scope` |
-        | Root object: | Config |
-        ???+ note "Properties"
-            ??? info "deployment (`reference[Deployment]`)"
-                |    |    |
-                |----|----|
-                | Name: | Deployment |
-                | Description: | Deployment configuration for the plugin. |
-                | Required: | No || Type: | `reference[Deployment]` |
-                | Referenced object: | Deployment *(see in the Objects section below)* |
-                
-                
-            ??? info "podman (`reference[Podman]`)"
-                |    |    |
-                |----|----|
-                | Name: | Podman |
-                | Description: | Podman CLI configuration |
-                | Required: | No || Type: | `reference[Podman]` |
-                | Referenced object: | Podman *(see in the Objects section below)* |
-                
-                
-        ???+ note "Objects"
-            ??? info "**Config** (`object`)"
-                |    |    |
-                |----|----|
-                | Type: | `object` |
-                
-                ???+ note "Properties"
-                    ??? info "deployment (`reference[Deployment]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Deployment |
-                        | Description: | Deployment configuration for the plugin. |
-                        | Required: | No || Type: | `reference[Deployment]` |
-                        | Referenced object: | Deployment *(see in the Objects section below)* |
-                        
-                        
-                    ??? info "podman (`reference[Podman]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Podman |
-                        | Description: | Podman CLI configuration |
-                        | Required: | No || Type: | `reference[Podman]` |
-                        | Referenced object: | Podman *(see in the Objects section below)* |
-                        
-                        
-            ??? info "**ContainerConfig** (`object`)"
-                |    |    |
-                |----|----|
-                | Type: | `object` |
-                
-                ???+ note "Properties"
-                    ??? info "Domainname (`string`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Domain name |
-                        | Description: | Domain name for the plugin container. |
-                        | Required: | No || Type: | `string` |
-                        | Minimum: | 1 |
-                        | Maximum: | 255 |
-                        | Must match pattern: | `^[a-zA-Z0-9-_.]&#43;$` |
-                        
-                        
-                    ??? info "Env (`list[string]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Environment variables |
-                        | Description: | Environment variables to set on the plugin container. |
-                        | Required: | No || Type: | `list[string]` |
-                        
-                        ??? info "List Items"
-                            |    |    |
-                            |----|----|
-                            | Type: | `string` |
-                            | Minimum: | 1 |
-                            | Maximum: | 32760 |
-                            | Must match pattern: | `^.&#43;=.&#43;$` |
-                            
-                        
-                    ??? info "Hostname (`string`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Hostname |
-                        | Description: | Hostname for the plugin container. |
-                        | Required: | No || Type: | `string` |
-                        | Minimum: | 1 |
-                        | Maximum: | 255 |
-                        | Must match pattern: | `^[a-zA-Z0-9-_.]&#43;$` |
-                        
-                        
-                    ??? info "MacAddress (`string`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | MAC address |
-                        | Description: | Media Access Control address for the container. |
-                        | Required: | No || Type: | `string` |
-                        | Must match pattern: | `^[a-fA-F0-9]{2}(:[a-fA-F0-9]{2}){5}$` |
-                        
-                        
-                    ??? info "NetworkDisabled (`bool`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Disable network |
-                        | Description: | Disable container networking completely. |
-                        | Required: | No || Type: | `bool` |
-                        
-                        
-                    ??? info "User (`string`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Username |
-                        | Description: | User that will run the command inside the container. Optionally, a group can be specified in the user:group format. |
-                        | Required: | No || Type: | `string` |
-                        | Minimum: | 1 |
-                        | Maximum: | 255 |
-                        | Must match pattern: | `^[a-z_][a-z0-9_-]*[$]?(:[a-z_][a-z0-9_-]*[$]?)$` |
-                        
-                        
-            ??? info "**Deployment** (`object`)"
-                |    |    |
-                |----|----|
-                | Type: | `object` |
-                
-                ???+ note "Properties"
-                    ??? info "container (`reference[ContainerConfig]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Container configuration |
-                        | Description: | Provides information about the container for the plugin. |
-                        | Required: | No || Type: | `reference[ContainerConfig]` |
-                        | Referenced object: | ContainerConfig *(see in the Objects section below)* |
-                        
-                        
-                    ??? info "host (`reference[HostConfig]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Host configuration |
-                        | Description: | Provides information about the container host for the plugin. |
-                        | Required: | No || Type: | `reference[HostConfig]` |
-                        | Referenced object: | HostConfig *(see in the Objects section below)* |
-                        
-                        
-                    ??? info "imagePullPolicy (`enum[string]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Image pull policy |
-                        | Description: | When to pull the plugin image. |
-                        | Required: | No || Type: | `enum[string]` |
-                        ??? info "Values"
-                            - `Always` Always
-                            - `IfNotPresent` If not present
-                            - `Never` Never
-                         ```json title="Default"
-                         "IfNotPresent"
-                         ```
-                        
-                        
-            ??? info "**HostConfig** (`object`)"
-                |    |    |
-                |----|----|
-                | Type: | `object` |
-                
-                ???+ note "Properties"
-                    ??? info "Binds (`list[string]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Volume Bindings |
-                        | Description: | Volumes |
-                        | Required: | No || Type: | `list[string]` |
-                        
-                        ??? info "List Items"
-                            |    |    |
-                            |----|----|
-                            | Type: | `string` |
-                            | Minimum: | 1 |
-                            | Maximum: | 32760 |
-                            | Must match pattern: | `^.&#43;:.&#43;$` |
-                            
-                        
-                    ??? info "CapAdd (`list[string]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Add capabilities |
-                        | Description: | Add capabilities to the container. |
-                        | Required: | No || Type: | `list[string]` |
-                        
-                        ??? info "List Items"
-                            |    |    |
-                            |----|----|
-                            | Type: | `string` |
-                            
-                        
-                    ??? info "CapDrop (`list[string]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Drop capabilities |
-                        | Description: | Drop capabilities from the container. |
-                        | Required: | No || Type: | `list[string]` |
-                        
-                        ??? info "List Items"
-                            |    |    |
-                            |----|----|
-                            | Type: | `string` |
-                            
-                        
-                    ??? info "CgroupnsMode (`enum[string]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | CGroup namespace mode |
-                        | Description: | CGroup namespace mode to use for the container. |
-                        | Required: | No || Type: | `enum[string]` |
-                        ??? info "Values"
-                            - `` Empty
-                            - `host` Host
-                            - `private` Private
-                        
-                    ??? info "Dns (`list[string]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | DNS servers |
-                        | Description: | DNS servers to use for lookup. |
-                        | Required: | No || Type: | `list[string]` |
-                        
-                        ??? info "List Items"
-                            |    |    |
-                            |----|----|
-                            | Type: | `string` |
-                            
-                        
-                    ??? info "DnsOptions (`list[string]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | DNS options |
-                        | Description: | DNS options to look for. |
-                        | Required: | No || Type: | `list[string]` |
-                        
-                        ??? info "List Items"
-                            |    |    |
-                            |----|----|
-                            | Type: | `string` |
-                            
-                        
-                    ??? info "DnsSearch (`list[string]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | DNS search |
-                        | Description: | DNS search domain. |
-                        | Required: | No || Type: | `list[string]` |
-                        
-                        ??? info "List Items"
-                            |    |    |
-                            |----|----|
-                            | Type: | `string` |
-                            
-                        
-                    ??? info "ExtraHosts (`list[string]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Extra hosts |
-                        | Description: | Extra hosts entries to add |
-                        | Required: | No || Type: | `list[string]` |
-                        
-                        ??? info "List Items"
-                            |    |    |
-                            |----|----|
-                            | Type: | `string` |
-                            
-                        
-                    ??? info "NetworkMode (`string`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Network mode |
-                        | Description: | Specifies either the network mode, the container network to attach to, or a name of a Docker network to use. |
-                        | Required: | No || Type: | `string` |
-                        | Must match pattern: | `^(none|bridge|host|container:[a-zA-Z0-9][a-zA-Z0-9_.-]&#43;|[a-zA-Z0-9][a-zA-Z0-9_.-]&#43;)$` |
-                        
-                        
-                        ??? example "Examples"
-                            ```json
-                            "none"
-                            ```
-                        "
-                            ```json
-                            "bridge"
-                            ```
-                        "
-                            ```json
-                            "host"
-                            ```
-                        "
-                            ```json
-                            "container:container-name"
-                            ```
-                        "
-                            ```json
-                            "network-name"
-                            ```
-                        
-                        
-                    ??? info "PortBindings (`map[string, list[reference[PortBinding]]]`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Port bindings |
-                        | Description: | Ports to expose on the host machine. Ports are specified in the format of portnumber/protocol. |
-                        | Required: | No || Type: | `map[string, list[reference[PortBinding]]]` |
-                        
-                        ??? info "Key type"
-                            |    |    |
-                            |----|----|
-                            | Type: | `string` |
-                            | Must match pattern: | `^[0-9]&#43;(/[a-zA-Z0-9]&#43;)$` |
-                            
-                        ??? info "Value type"
-                            |    |    |
-                            |----|----|
-                            | Type: | `list[reference[PortBinding]]` |
-                            
-                            ??? info "List Items"
-                                |    |    |
-                                |----|----|
-                                | Type: | `reference[PortBinding]` |
-                                | Referenced object: | PortBinding *(see in the Objects section below)* |
-                                
-                        
-                        
-            ??? info "**Podman** (`object`)"
-                |    |    |
-                |----|----|
-                | Type: | `object` |
-                
-                ???+ note "Properties"
-                    ??? info "cgroupNs (`string`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | CGroup namespace |
-                        | Description: | Provides the Cgroup Namespace settings for the container |
-                        | Required: | No || Type: | `string` |
-                        | Must match pattern: | `^host|ns:/proc/\d&#43;/ns/cgroup|container:.&#43;|private$` |
-                        
-                        
-                    ??? info "containerName (`string`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Container Name |
-                        | Description: | Provides name of the container |
-                        | Required: | No || Type: | `string` |
-                        | Must match pattern: | `^.*$` |
-                        
-                        
-                    ??? info "imageArchitecture (`string`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Podman image Architecture |
-                        | Description: | Provides Podman Image Architecture |
-                        | Required: | No || Type: | `string` |
-                        | Must match pattern: | `^.*$` |
-                        
-                         ```json title="Default"
-                         "amd64"
-                         ```
-                        
-                        
-                    ??? info "imageOS (`string`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Podman Image OS |
-                        | Description: | Provides Podman Image Operating System |
-                        | Required: | No || Type: | `string` |
-                        | Must match pattern: | `^.*$` |
-                        
-                         ```json title="Default"
-                         "linux"
-                         ```
-                        
-                        
-                    ??? info "networkMode (`string`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Network Mode |
-                        | Description: | Provides network settings for the container |
-                        | Required: | No || Type: | `string` |
-                        | Must match pattern: | `^bridge:.*|host|none$` |
-                        
-                        
-                    ??? info "path (`string`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Podman path |
-                        | Description: | Provides the path of podman executable |
-                        | Required: | No || Type: | `string` |
-                        | Must match pattern: | `^.*$` |
-                        
-                         ```json title="Default"
-                         "podman"
-                         ```
-                        
-                        
-            ??? info "**PortBinding** (`object`)"
-                |    |    |
-                |----|----|
-                | Type: | `object` |
-                
-                ???+ note "Properties"
-                    ??? info "HostIP (`string`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Host IP |
-                        | Required: | No || Type: | `string` |
-                        
-                        
-                    ??? info "HostPort (`string`)"
-                        |    |    |
-                        |----|----|
-                        | Name: | Host port |
-                        | Required: | No || Type: | `string` |
-                        | Must match pattern: | `^0-9&#43;$` |
-                        
-                        
