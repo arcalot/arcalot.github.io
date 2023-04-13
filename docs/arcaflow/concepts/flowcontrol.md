@@ -92,7 +92,7 @@ stateDiagram-v2
 The output of a Multiply operation will be a map, keyed with a string that is configured from the input.
 
 !!! tip
-You can think of a Multiply step like a for-each loop, but the steps being executed in parallel.
+    You can think of a Multiply step like a for-each loop, but the steps being executed in parallel.
 
 ## Synchronize
 

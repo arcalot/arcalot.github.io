@@ -29,10 +29,10 @@ The Arcalot community develops tools, plugins, and libraries that you can use ei
 Arcaflow is a **workflow engine** consisting of three main components:
 
 * Core engine
-* UI
+* UI (planned)
 * Plugins (including SDKs for Go and Python to write your own plugins)
 
-It allows you to click and drag plugins into a workflow for your systems and, if needed, feed the resulting data back into the UI for further analysis. You can also use it just to generate a workflow with parallel and subsequent tasks via the command line. There is a range of supported plugins, written either in Go or Python.
+It allows you to connect plugins into workflows of parallel and serial tasks for your target systems. The engine is run as a single portable binary and therefore does not require installation of its components onto the target systems. A future UI will allow you to click and drag plugins into a workflow and, if needed, feed the resulting data back into the UI for further analysis. There is a range of supported plugins, written either in Go or Python.
 
 [Read more](arcaflow/){ .md-button }
 

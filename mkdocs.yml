@@ -29,7 +29,7 @@ nav:
               - arcaflow/plugins/python/index.md
               - Overview: arcaflow/plugins/python/index.md
               - Your first plugin: arcaflow/plugins/python/first.md
-              - Creating a data model: arcaflow/plugins/python/data-model.md
+              - Creating the plugin schema: arcaflow/plugins/python/data-model.md
               - Embedding your plugin: arcaflow/plugins/python/embedding.md
               - Testing your plugin: arcaflow/plugins/python/testing.md
               - Frequently asked questions: arcaflow/plugins/python/faq.md

@@ -9,7 +9,7 @@ Arcaflow runs plugins locally in a container using Docker or Podman, or remotely
 
 A single plugin execution is intended to run a single task and not more. This simplifies the code since there is no need to try and clean up after each task. Each plugin is executed in a container and must communicate with the engine over standard input/output. Furthermore, the plugin must add a handler for `SIGTERM` and properly clean up if there are services running in the background.
 
-Each plugin is executed at the start of the workflow, or workflow block, and is terminated only at the end of the current workflow or workflow block. The plugin can safely rely on being able to start a service in the background and then keeping it running until the SIGTERM comes to shut down the container.
+Each plugin is executed at the start of the workflow, or workflow block, and is terminated only at the end of the current workflow or workflow block. The plugin can safely rely on being able to start a service in the background and then keeping it running until the `SIGTERM` comes to shut down the container.
 
 However, the plugin must, under no circumstances, start doing work until the engine sends the command to do so. This includes starting any services inside the container or outside. This restriction is necessary to be able to launch the plugin with minimal resource consumption locally on the engine host to fetch the schema.
 
@@ -17,7 +17,7 @@ The plugin execution is divided into three major steps.
 
 1. When the plugin is started, it must output the current plugin protocol version and its schema to the standard output. The engine will read this output from the container logs.
 2. When it is time to start the work, the engine will send the desired step ID with its input parameters over the standard input. The plugin acknowledges this and starts to work. When the work is complete, the plugin must automatically output the results to the standard output.
-3. When a shutdown is desired, the engine will send a `SIGTERM` to the plugin. The plugin has up to 30 seconds to shut down. The SIGTERM may come at any time, even while the work is still running, and the plugin must appropriately shut down. If the work is not complete, the plugin may attempt to output an error output data to the standard out, but must not do so. If the plugin fails to stop by itself within 30 seconds, the plugin container is forcefully stopped.
+3. When a shutdown is desired, the engine will send a `SIGTERM` to the plugin. The plugin has up to 30 seconds to shut down. The `SIGTERM` may come at any time, even while the work is still running, and the plugin must appropriately shut down. If the work is not complete, it is important that the plugin does not send error output to STDOUT. If the plugin fails to stop by itself within 30 seconds, the plugin container is forcefully stopped.
 
 ## Protocol
 

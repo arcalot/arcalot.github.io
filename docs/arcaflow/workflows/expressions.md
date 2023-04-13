@@ -53,3 +53,47 @@ $.foo[0]
 ```
 
 In Arcaflow, the two are equivalent.
+
+More information on the expression language is available in the [development guide](/arcaflow/contributing/expressions).
+
+## Examples
+
+### Referencing inputs
+
+Pass a workflow input directly to a plugin input
+
+```yaml title="workflow.yaml"
+input:
+  root: RootObject
+  objects:
+    RootObject:
+      id: RootObject
+      properties:
+        name:
+          type:
+            type_id: string
+
+steps:
+  step_a:
+    plugin: quay.io/some/container/image
+    input:
+      some:
+        key: !expr $.input.name
+```
+
+### Passing between steps
+
+Pass output from one plugin to the input of another plugin
+
+```yaml title="workflow.yaml"
+steps:
+  step_a:
+    plugin: quay.io/some/container/image
+    input: {}
+
+  step_b:
+    plugin: quay.io/some/container/image
+    input:
+      some:
+        key: !expr $.steps.step_a.outputs.success.some_value
+```

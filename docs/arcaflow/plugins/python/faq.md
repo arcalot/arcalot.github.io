@@ -15,16 +15,16 @@ class MyData:
 
 ## How can I write a dataclass from a schema to a YAML or JSON file?
 
-You can [extend Pythons JSON encoder](https://stackoverflow.com/questions/51286748/make-the-python-json-encoder-support-pythons-new-dataclasses) to support dataclasses. If that doesn't suit your needs, you can use this SDK to convert the dataclasses to their basic representations and then write that to your JSON or YAML file. First, add this outside of your step:
+You can [extend Python's JSON encoder](https://stackoverflow.com/questions/51286748/make-the-python-json-encoder-support-pythons-new-dataclasses) to support dataclasses. If that doesn't suit your needs, you can use this SDK to convert the dataclasses to their basic representations and then write that to your JSON or YAML file. First, add this outside of your step:
 
 ```python
-my_object_schema = plugin.build_object_schema(YourDataclass)
+my_object_schema = plugin.build_object_schema(MyDataclass)
 ```
 
 Inside your step function you can then dump the data from your input
 
 ```python
-def your_step(params: YourParams):
+def my_step(params: MyParams):
     yaml_contents = yaml.dump(my_object_schema.serialize(params.some_param))
 ```
 

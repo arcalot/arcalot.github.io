@@ -1,17 +1,20 @@
 # Embedding your Python plugin
 
-Instead of using your plugin as a standalone tool or in conjunction with Arcaflow, you can also embed your plugin into your existing Python application. To do that you simply build a schema using one of the methods described above and then call the schema yourself. You can pass raw data as an input, and you'll get the benefit of schema validation.
+Instead of using your plugin as a standalone tool or in conjunction with Arcaflow, you can also embed your plugin into your existing Python application. To do that you simply [build a schema](/arcaflow/plugins/python/data-model/) and then call the schema yourself. You can pass raw data as an input, and you'll get the benefit of schema validation.
 
-```python
-# Build your schema using the schema builder from above with the step functions passed.
-schema = plugin.build_schema(pod_scenario)
+```python title="myapp.py"
+from arcaflow_plugin_sdk import plugin
+import my_arcaflow_plugin
 
-# Which step we want to execute
-step_id = "pod"
+# Build your schema with the step functions passed
+schema = plugin.build_schema(my_arcaflow_plugin.hello_world)
+
+# Which step from the plugin we want to execute
+step_id = "hello_world"
+
 # Input parameters. Note, these must be a dict, not a dataclass
 step_params = {
-    "pod_name_pattern": ".*",
-    "pod_namespace_pattern": ".*",
+    "name": "Arca Lot",
 }
 
 # Execute the step
@@ -19,6 +22,7 @@ output_id, output_data = schema(step_id, step_params)
 
 # Print which kind of result we have
 pprint.pprint(output_id)
+
 # Print the result data
 pprint.pprint(output_data)
 ```
