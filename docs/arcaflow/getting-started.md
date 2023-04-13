@@ -173,7 +173,7 @@ Finally, let's run our workflow. Make sure you are in the directory where the wo
     C:\path\to\arcaflow.exe -input input.yaml -config config.yaml
     ```
 
-If everything went well, you should see a message similar to this after a few seconds:
+If everything went well, after a few seconds you should see logs messages similar to the ones shown below:
 
 ```
 2023-03-22T11:25:58+01:00       info            Loading plugins locally to determine schemas...
