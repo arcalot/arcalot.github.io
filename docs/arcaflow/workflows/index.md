@@ -19,9 +19,3 @@ Steps hold the individual parts of the workflow. You can feed data from one step
 Outputs hold the final result of a workflow. Outputs can reference outputs of steps.
 
 [Learn more about output &raquo;](output.md){ .md-button }
-
-<h2>Multiple Outputs</h2>
-
-Arcaflow can produce multiple output groups for a workflow. These output groups are mutually exclusive to each other.
-
-[Learn more about multiple output &raquo;](multi-output.md){ .md-button }

@@ -48,7 +48,6 @@ nav:
           - Setting up a step: arcaflow/workflows/step.md
           - Expressions: arcaflow/workflows/expressions.md
           - Outputs: arcaflow/workflows/output.md
-          - Multiple outputs: arcaflow/workflows/multi-output.md
       - Contributing:
           - arcaflow/contributing/index.md
           - Overview: arcaflow/contributing/index.md
