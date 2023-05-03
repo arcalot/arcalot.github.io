@@ -36,21 +36,22 @@ You need to pick the right tool for the job. Sometimes, you need something simpl
     - It can run things on remote systems out of the box
     - It runs tasks as sequential (and, with some work, parallel) steps
     - You can pass data between steps
+    - Plugins and modules can be written in a variety of languages
+    - Tasks can run inside containers using custom connection plugins ([k8s example](https://docs.ansible.com/ansible/latest/collections/kubernetes/core/kubectl_connection.html))
 
     **What it does better than Arcaflow**
     
     - Well established and well known
     - Wide range of available plugins
     - Simple workflows are easy to write
-    - It runs comands over SSH by design
+    - It runs comands over SSH by default
+    - Users can define their own connection plugins
     
     **What it does worse than Arcaflow**
     
     - Parallelization is hard, it is intended for resource creation rather than generic workflows
     - It does not have a typing system and cannot guarantee type-safety or validation of data
-    - Plugins can only be written in Python
-    - Plugins are not transparently runnable in a container engine as Ansible intends to run commands over SSH
-    - It is written in Python and needs a large number of dependencies installed
+    - It is written in Python, so either needs to be installed using system python dependencies, run in a container, or in a virtual environment.
 
 ??? "Apache Airflow"
 
