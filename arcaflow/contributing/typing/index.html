@@ -1438,7 +1438,7 @@
 
 
 <h1 id="the-arcaflow-type-system">The Arcaflow type system</h1>
-<p>Arcaflow takes a departure from the classic run-and-pray approach of running workloads and validates workflows for validity before executing them. To do this, Arcaflow starts the plugins as needed before the workflow is run and queries them for their <strong>schema</strong>. This schema will contain information about what kind of input a plugin requests and what kind of outputs it can produce.</p>
+<p>Arcaflow takes a departure from the classic run-and-pray approach of running workloads and validates workflows before executing them. To do this, Arcaflow starts the plugins as needed before the workflow is run and queries them for their <strong>schema</strong>. This schema will contain information about what kind of input a plugin requests and what kind of outputs it can produce.</p>
 <p>A plugin can support multiple <strong>workflow steps</strong> and must provide information about the data types in its <strong>input and output</strong> for each step. A step can have exactly one input format, but may declare more than one output.</p>
 <p>The typesystem is inspired by <a href="https://json-schema.org/">JSON schema</a> and <a href="https://swagger.io/specification/">OpenAPI</a>, but it is more restrictive due to the need to efficiently serialize workloads over various formats.</p>
 <h2 id="types">Types</h2>
