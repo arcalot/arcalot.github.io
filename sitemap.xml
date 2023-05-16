@@ -26,11 +26,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://arcalot.io/arcaflow/concepts/flowcontrol/</loc>
-         <lastmod>2023-05-16</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://arcalot.io/arcaflow/concepts/plugins/</loc>
          <lastmod>2023-05-16</lastmod>
          <changefreq>daily</changefreq>
@@ -162,6 +157,11 @@
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/workflows/expressions/</loc>
+         <lastmod>2023-05-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://arcalot.io/arcaflow/workflows/flow-control/</loc>
          <lastmod>2023-05-16</lastmod>
          <changefreq>daily</changefreq>
     </url>

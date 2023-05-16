@@ -14,7 +14,7 @@
         <link rel="prev" href="../plugins/">
       
       
-        <link rel="next" href="../flowcontrol/">
+        <link rel="next" href="../../running/">
       
       <link rel="icon" href="../../../arcalot.svg">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
@@ -425,8 +425,6 @@
         
           
         
-          
-        
       
       
         
@@ -579,24 +577,65 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#flow-control-wip" class="md-nav__link">
+    Flow control (WIP)
+  </a>
+  
+    <nav class="md-nav" aria-label="Flow control (WIP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#foreach" class="md-nav__link">
+    Foreach
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abort" class="md-nav__link">
+    Abort
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#do-while" class="md-nav__link">
+    Do-while
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#condition" class="md-nav__link">
+    Condition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiply" class="md-nav__link">
+    Multiply
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronize" class="md-nav__link">
+    Synchronize
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../flowcontrol/" class="md-nav__link">
-        Flow control (WIP)
-      </a>
     </li>
   
 
@@ -1100,6 +1139,8 @@
         
           
         
+          
+        
       
       
         
@@ -1172,6 +1213,20 @@
     <li class="md-nav__item">
       <a href="../../workflows/expressions/" class="md-nav__link">
         Expressions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workflows/flow-control/" class="md-nav__link">
+        Flow Control
       </a>
     </li>
   
@@ -1441,6 +1496,103 @@
 <p class="admonition-title">Background processes</p>
 <p>Each plugin will only be invoked once, allowing plugins to run background processes, such as server applications. The plugins must handle SIGINT and SIGTERM events properly.</p>
 </div>
+<h2 id="flow-control-wip">Flow control (WIP)</h2>
+<p>The workflow contains several flow control operations. These flow control operations are not implemented by plugins, but are part of the workflow engine itself.</p>
+<h3 id="foreach">Foreach</h3>
+<p>The foreach flow control allows you to loop over a sub-workflow with a list of input objects.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  [*] --&gt; ForEach
+  state ForEach {
+    [*] --&gt; loop_list_input
+    loop_list_input --&gt; sub_workflow
+    sub_workflow --&gt; loop_list_input
+    state sub_workflow {
+      [*] --&gt; Step1
+      Step1 --&gt; [*]
+    }
+    sub_workflow --&gt; [*]: Sub Output
+  }
+  ForEach --&gt; [*]: Output</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The features below are in-development and not yet implemented in the released codebase.</p>
+</div>
+<h3 id="abort">Abort</h3>
+<p>The abort flow control is a quick way to exit out of a workflow. This is useful when entering a terminal error state and the workflow output data would be useless anyway.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  [*] --&gt; Step1
+  Step1 --&gt; Abort: Output 1
+  Step1 --&gt; Step2: Output 2
+  Step2 --&gt; [*]</code></pre>
+<p>However, this is only required if you want to abort the workflow immediately. If you want an error case to result in the workflow failing, but whatever steps can be finished being finished, you can leave error outputs unconnected.</p>
+<h3 id="do-while">Do-while</h3>
+<p>A do-while block will execute the steps in it as long as a certain condition is met. The condition is derived from the output of the step or steps executed inside the loop:</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  [*] --&gt; DoWhile
+  state DoWhile {
+    [*] --&gt; Step1
+    Step1 --&gt; [*]: output_1_condition=$.step1.output_1.finished == false   
+  }
+  DoWhile --&gt; [*]</code></pre>
+<p>If the step declares multiple outputs, multiple conditions are possible. The do-while block will also have multiple outputs:</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  [*] --&gt; DoWhile
+  state DoWhile {
+    [*] --&gt; Step1
+    Step1 --&gt; [*]: Output 1 condition
+    Step1 --&gt; [*]: Output 2 condition   
+  }
+  DoWhile --&gt; [*]: Output 1
+  DoWhile --&gt; [*]: Output 2</code></pre>
+<p>You may decide to only allow exit from a loop if one of the two outputs is satisfied:</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  [*] --&gt; DoWhile
+  state DoWhile {
+    [*] --&gt; Step1
+    Step1 --&gt; Step1: Output 1
+    Step1 --&gt; [*]: Output 2
+  }
+  DoWhile --&gt; [*]: Output 1</code></pre>
+<h3 id="condition">Condition</h3>
+<p>A condition is a flow control operation that redirects the flow one way or another based on an expression. You can also create multiple branches to create a switch-case effect.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  state if_state &lt;&lt;choice&gt;&gt;
+  Step1: Step 1
+  [*] --&gt; Step1
+  Step1 --&gt; if_state
+  Step2: Step 2
+  Step3: Step 3
+  if_state --&gt; Step2: $.step1.output_1 == true
+  if_state --&gt; Step3: $.step1.output_1 == false</code></pre>
+<h3 id="multiply">Multiply</h3>
+<p>The multiply flow control operation is useful when you need to dynamically execute sub-workflows in parallel based on an input condition. You can, for example, use this to run a workflow step on multiple or all Kubernetes nodes.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  Lookup: Lookup Kubernetes hosts
+  [*] --&gt; Lookup
+  Lookup --&gt; Multiply
+  state Multiply {
+    [*] --&gt; Stresstest
+    Stresstest --&gt; [*]
+  }
+  Multiply --&gt; [*]</code></pre>
+<p>The output of a Multiply operation will be a map, keyed with a string that is configured from the input.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can think of a Multiply step like a for-each loop, but the steps being executed in parallel.</p>
+</div>
+<h3 id="synchronize">Synchronize</h3>
+<p>The synchronize step attempts to synchronize the execution of subsequent steps for a specified key. The key must be a constant and cannot be obtained from an input expression.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  [*] --&gt; Step1
+  [*] --&gt; Step2
+  Synchronize1: Synchronize (key=a)
+  Synchronize2: Synchronize (key=a)
+  Step1 --&gt; Synchronize1
+  Step2 --&gt; Synchronize2
+  Synchronize1 --&gt; Step3
+  Synchronize2 --&gt; Step4
+  Step3 --&gt; [*]
+  Step4 --&gt; [*]</code></pre>
 
 
 
