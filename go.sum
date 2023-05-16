@@ -21,8 +21,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/docker/distribution v2.8.1+incompatible h1:Q50tZOPR6T/hjNsyc9g8/syEs6bk8XXApsHjKukMl68=
 github.com/docker/distribution v2.8.1+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
-github.com/docker/docker v23.0.1+incompatible h1:vjgvJZxprTTE1A37nm+CLNAdwu6xZekyoiVlUZEINcY=
-github.com/docker/docker v23.0.1+incompatible/go.mod h1:eEKB0N0r5NX/I1kEveEz05bcu8tLC/8azJZsviup8Sk=
+github.com/docker/docker v23.0.3+incompatible h1:9GhVsShNWz1hO//9BNg/dpMnZW25KydO4wtVxWAIbho=
+github.com/docker/docker v23.0.3+incompatible/go.mod h1:eEKB0N0r5NX/I1kEveEz05bcu8tLC/8azJZsviup8Sk=
 github.com/docker/go-connections v0.4.0 h1:El9xVISelRB7BuFusrZozjnkIM5YnzCViNKohAFqRJQ=
 github.com/docker/go-connections v0.4.0/go.mod h1:Gbd7IOopHjR8Iph03tsViu4nIes5XhDvyHbTtUxmeec=
 github.com/docker/go-units v0.5.0 h1:69rxXcBk27SvSaaxTtLh/8llcHD8vYHT7WSdRZ/jvr4=
@@ -155,8 +155,6 @@ go.flow.arcalot.io/kubernetesdeployer v0.1.0 h1:d9TltGmFHIXenaln8UirBEqMHSAYTghR
 go.flow.arcalot.io/kubernetesdeployer v0.1.0/go.mod h1:Ptjkx3WTMGK7B1I7h3Wq/48Y3iC8NkHns25VZUEYttA=
 go.flow.arcalot.io/pluginsdk v0.1.1 h1:dFyjaNEW/tuosHpYCb9BJLWIm5ohvXmtv6GqJn8yekE=
 go.flow.arcalot.io/pluginsdk v0.1.1/go.mod h1:ceY4HhUbnhZyQa3C7lXu25TNVCbsWGuYZapsV5RuIrk=
-go.flow.arcalot.io/podmandeployer v0.2.0 h1:FUEaOl+o20vnhDBf3W/K+HNvRRHeH9RQoT2QXTL3T6k=
-go.flow.arcalot.io/podmandeployer v0.2.0/go.mod h1:EJtBVsGvI5NK/645qUMvEz8WfhDVMjH4cikYj+eE/Dk=
 go.flow.arcalot.io/podmandeployer v0.2.1 h1:TTm1+DB7L1JFNnSP55N9/FKdHmC0UFZMHupLdfLX2xI=
 go.flow.arcalot.io/podmandeployer v0.2.1/go.mod h1:EJtBVsGvI5NK/645qUMvEz8WfhDVMjH4cikYj+eE/Dk=
 go.opentelemetry.io/proto/otlp v0.7.0/go.mod h1:PqfVotwruBrMGOCsRd/89rSnXhoiJIqeYNgFYFoEGnI=
