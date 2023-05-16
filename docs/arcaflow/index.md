@@ -50,9 +50,11 @@ You need to pick the right tool for the job. Sometimes, you need something simpl
     **What it does worse than Arcaflow**
     
     - Ansible's approach to parallelization is in terms of executing the same tasks against different hosts in parallel (see "forks" and "strategy"). Defining different tasks to perform in parallel is more challenging.
-    - By default, input/output data is not strongly typed. Any data type validation must be done explicitly within playbooks.
-    - It is written in Python, so the control host where it is run from needs system python dependencies (or to run from inside a container or python virtualenv)
-    - Depending on the module used, there may be system requirements for python or other dependencies on the target host/container. See [ansible documentation](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-handle-not-having-a-python-interpreter-at-usr-bin-python-on-a-remote-machine)
+    - By default, input/output data is not strongly typed. Any data type validation must be done explicitly within playbooks, and is executed at run time.
+    - It is written in Python, so the control host where it is run from needs system python dependencies.
+        - Alternatively, you can run it from inside a container or python virtualenv
+    - Depending on the module used, there may be system requirements for python or other dependencies on the target host/container.
+        -  See [ansible documentation](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-handle-not-having-a-python-interpreter-at-usr-bin-python-on-a-remote-machine)
 
 ??? "Apache Airflow"
 
