@@ -16,7 +16,6 @@ nav:
           - Typing: arcaflow/concepts/typing.md
           - Plugins: arcaflow/concepts/plugins.md
           - Workflows: arcaflow/concepts/workflows.md
-          - Flow control (WIP): arcaflow/concepts/flowcontrol.md
       - Running Arcaflow:
           - arcaflow/running/index.md
           - Overview: arcaflow/running/index.md
@@ -47,6 +46,7 @@ nav:
           - Creating your input schema: arcaflow/workflows/input.md
           - Setting up a step: arcaflow/workflows/step.md
           - Expressions: arcaflow/workflows/expressions.md
+          - Flow Control: arcaflow/workflows/flow-control.md
           - Outputs: arcaflow/workflows/output.md
       - Contributing:
           - arcaflow/contributing/index.md
