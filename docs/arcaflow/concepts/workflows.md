@@ -115,6 +115,26 @@ stateDiagram-v2
 
 The workflow contains several flow control operations. These flow control operations are not implemented by plugins, but are part of the workflow engine itself.
 
+### Foreach
+
+The foreach flow control allows you to loop over a sub-workflow with a list of input objects.
+
+```mermaid
+stateDiagram-v2
+  [*] --> ForEach
+  state ForEach {
+    [*] --> loop_list_input
+    loop_list_input --> sub_workflow
+    sub_workflow --> loop_list_input
+    state sub_workflow {
+      [*] --> Step1
+      Step1 --> [*]
+    }
+    sub_workflow --> [*]: Sub Output
+  }
+  ForEach --> [*]: Output
+```
+
 !!! warning
     The features below are in-development and not yet implemented in the released codebase.
 
