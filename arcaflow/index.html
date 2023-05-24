@@ -17,7 +17,7 @@
         <link rel="next" href="getting-started/">
       
       <link rel="icon" href="../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.14">
     
     
       
@@ -1332,21 +1332,29 @@
 <li>It can run things on remote systems out of the box</li>
 <li>It runs tasks as sequential (and, with some work, parallel) steps</li>
 <li>You can pass data between steps</li>
+<li>Plugins and modules can be written in a variety of languages</li>
+<li>Users can define their own connection plugins</li>
+<li>Tasks can run inside containers using custom connection plugins (<a href="https://docs.ansible.com/ansible/latest/collections/kubernetes/core/kubectl_connection.html">k8s example</a>)</li>
 </ul>
 <p><strong>What it does better than Arcaflow</strong></p>
 <ul>
 <li>Well established and well known</li>
 <li>Wide range of available plugins</li>
 <li>Simple workflows are easy to write</li>
-<li>It runs comands over SSH by design</li>
+<li>It runs comands over SSH by default</li>
 </ul>
 <p><strong>What it does worse than Arcaflow</strong></p>
 <ul>
-<li>Parallelization is hard, it is intended for resource creation rather than generic workflows</li>
-<li>It does not have a typing system and cannot guarantee type-safety or validation of data</li>
-<li>Plugins can only be written in Python</li>
-<li>Plugins are not transparently runnable in a container engine as Ansible intends to run commands over SSH</li>
-<li>It is written in Python and needs a large number of dependencies installed</li>
+<li>Ansible&rsquo;s approach to parallelization is in terms of executing the same tasks against different hosts in parallel (see &ldquo;forks&rdquo; and &ldquo;strategy&rdquo;). Defining different tasks to perform in parallel is more challenging.</li>
+<li>By default, input/output data is not strongly typed. Any data type validation must be done explicitly within playbooks, and is executed at run time.</li>
+<li>It is written in Python, so the control host where it is run from needs system python dependencies.<ul>
+<li>Alternatively, you can run it from inside a container or python virtualenv</li>
+</ul>
+</li>
+<li>Depending on the module used, there may be system requirements for python or other dependencies on the target host/container.<ul>
+<li>See <a href="https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-handle-not-having-a-python-interpreter-at-usr-bin-python-on-a-remote-machine">ansible documentation</a></li>
+</ul>
+</li>
 </ul>
 </details>
 <details>
@@ -1516,7 +1524,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.c2be25ad.min.js"></script>
+      <script src="../assets/javascripts/bundle.b4d07000.min.js"></script>
       
     
   </body>
