@@ -55,6 +55,7 @@ You need to pick the right tool for the job. Sometimes, you need something simpl
         - Alternatively, you can run it from inside a container or python virtualenv
     - Depending on the module used, there may be system requirements for python or other dependencies on the target host/container.
         -  See [ansible documentation](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-handle-not-having-a-python-interpreter-at-usr-bin-python-on-a-remote-machine)
+    - Does not provide a consistent experience across baremetal and kubernetes environments (benchmarking may involve the use of different plugins to cover each scenario)
 
 ??? "Apache Airflow"
 
