@@ -12,6 +12,7 @@ Arcaflow is a good fit to:
 - Run ad-hoc tasks across several container systems
 - Pass data between them
 - Make sure your data is correct
+- Make workflows portable with minimal dependencies
 
 You can use Arcaflow for many things. We use it for:
 
@@ -27,34 +28,26 @@ You need to pick the right tool for the job. Sometimes, you need something simpl
 
 ??? "Ansible"
 
-    [Ansible](https://www.ansible.com/) is an automation and configuration management tool often used by system administrators to automate the deployment of servers and other resources.
+    [Ansible](https://www.ansible.com/) is an automation and configuration management tool often used by system administrators to automate the management of servers and other resources. It excels in declarative state management, application deployment, and idempotent processes, often referred to as "infrastructure as code."
     
-    **How it is similar to Arcaflow**
+    **How are Arcaflow and Ansible similar?**
 
-    - It runs on your laptop and doesn't need a large server
-    - You don't need to deploy it or run it permanently
-    - It can run things on remote systems out of the box
-    - It runs tasks as sequential (and, with some work, parallel) steps
+    - They can both run on your laptop and don't need a large server
+    - You don't need to deploy them on target hosts or run them permanently
+    - They can perform actions on remote systems
+    - They can run tasks as sequential steps
     - You can pass data between steps
     - Plugins and modules can be written in a variety of languages
-    - Users can define their own connection plugins
-    - Tasks can run inside containers using custom connection plugins ([k8s example](https://docs.ansible.com/ansible/latest/collections/kubernetes/core/kubectl_connection.html))
 
-    **What it does better than Arcaflow**
+    **How is Arcaflow different from Ansible?**
     
-    - Well established and well known
-    - Wide range of available plugins
-    - Simple workflows are easy to write
-    - It runs comands over SSH by default
-    
-    **What it does worse than Arcaflow**
-    
-    - Ansible's approach to parallelization is in terms of executing the same tasks against different hosts in parallel (see "forks" and "strategy"). Defining different tasks to perform in parallel is more challenging.
-    - By default, input/output data is not strongly typed. Any data type validation must be done explicitly within playbooks, and is executed at run time.
-    - It is written in Python, so the control host where it is run from needs system python dependencies.
-        - Alternatively, you can run it from inside a container or python virtualenv
-    - Depending on the module used, there may be system requirements for python or other dependencies on the target host/container.
-        -  See [ansible documentation](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-handle-not-having-a-python-interpreter-at-usr-bin-python-on-a-remote-machine)
+    - Arcaflow plugins are less diverse than Ansible modules, and they are typically action-focused rather than state-focused
+    - Arcaflow workflows are defined in YAML and may be more complex to write than Ansible playbooks
+    - Arcaflow runs plugins via container orchestrators while Ansible runs modules typically over SSH or PowerShell
+    - Arcaflow is designed for branching action workflows and parallelization while Ansible is well-suited to declaritave state management and linear action workflows with minimal parallelization
+    - Arcaflow expects strongly-typed input and output to ensure machine readabilitly, workflow validation, and data integrity, while type validation and data management must be handled explicitly within playbooks with Ansible
+    - Arcaflow is run as a single golang binary, and plugins are run as containers, so the dependencies are minimial, while Ansible can have significant python dependencies on the control host and often on the target system
+    - Arcaflow workflows are designed to be explicitly version controlled to ensure portability without drift to other environments, while Ansible playbooks and roles are often subject to dependency and version changes between control hosts.
 
 ??? "Apache Airflow"
 
