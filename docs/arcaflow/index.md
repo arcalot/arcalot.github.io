@@ -28,7 +28,9 @@ It's important that you pick the right tool for the job. Sometimes, you need som
 
 ??? "Ansible"
 
-    [Ansible](https://www.ansible.com/) is an automation and configuration management tool often used by system administrators to automate the management of servers and other resources. It excels in state management, application deployment, and idempotent processes, often referred to as "infrastructure as code."
+    [Ansible](https://www.ansible.com/) is an IT automation and configuration management system. It handles configuration management, application deployment, cloud provisioning, ad-hoc task execution, network automation, and multi-node orchestration. Ansible makes complex changes like zero-downtime rolling updates with load balancers easy.
+
+
     
     **How are Arcaflow and Ansible similar?**
 
