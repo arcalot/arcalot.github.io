@@ -9,7 +9,7 @@ Arcaflow is a **workflow engine** that lets you run individual steps and pass da
 
 Arcaflow is a good fit to:
 
-- Run ad-hoc tasks across several container systems
+- Run ad-hoc tasks across container systems
 - Pass data between them
 - Make sure your data is correct
 - Make workflows portable with minimal dependencies
@@ -24,30 +24,28 @@ You can use Arcaflow for many things. We use it for:
 
 <h2>Alternatives</h2>
 
-You need to pick the right tool for the job. Sometimes, you need something simple. Sometimes, you want something persistent that keeps track of the workflows you run over time. We have collected the open source workflow and workflow-like engines we could find into this list, so you can find the right tool for the job.
+It's important that you pick the right tool for the job. Sometimes, you need something simple. Sometimes, you want something persistent that keeps track of the workflows you run over time. We have collected some common and well-known open source workflow and workflow-like engines into this list and have provided some comparisons to help you find the right tool for your needs.
 
 ??? "Ansible"
 
-    [Ansible](https://www.ansible.com/) is an automation and configuration management tool often used by system administrators to automate the management of servers and other resources. It excels in declarative state management, application deployment, and idempotent processes, often referred to as "infrastructure as code."
+    [Ansible](https://www.ansible.com/) is an automation and configuration management tool often used by system administrators to automate the management of servers and other resources. It excels in state management, application deployment, and idempotent processes, often referred to as "infrastructure as code."
     
     **How are Arcaflow and Ansible similar?**
 
-    - They can both run on your laptop and don't need a large server
-    - You don't need to deploy them on target hosts or run them permanently
-    - They can perform actions on remote systems
-    - They can run tasks as sequential steps
-    - You can pass data between steps
-    - Plugins and modules can be written in a variety of languages
+    - They both perform actions on local and remote systems using modular architectures.
+    - Their core engines can both run on your laptop and don't need a large server.
+    - You don't need to deploy them on target hosts or run them permanently.
+    - They both allow for passing of data between steps.
+    - They both use YAML to define their workflows.
+    - Their plugins and modules can be written in a variety of languages.
 
-    **How is Arcaflow different from Ansible?**
+    **How is Arcaflow different?**
     
-    - Arcaflow plugins are less diverse than Ansible modules, and they are typically action-focused rather than state-focused
-    - Arcaflow workflows are defined in YAML and may be more complex to write than Ansible playbooks
-    - Arcaflow runs plugins via container orchestrators while Ansible runs modules typically over SSH or PowerShell
-    - Arcaflow is designed for branching action workflows and parallelization while Ansible is well-suited to declaritave state management and linear action workflows with minimal parallelization
-    - Arcaflow expects strongly-typed input and output to ensure machine readabilitly, workflow validation, and data integrity, while type validation and data management must be handled explicitly within playbooks with Ansible
-    - Arcaflow is run as a single golang binary, and plugins are run as containers, so the dependencies are minimial, while Ansible can have significant python dependencies on the control host and often on the target system
-    - Arcaflow workflows are designed to be explicitly version controlled to ensure portability without drift to other environments, while Ansible playbooks and roles are often subject to dependency and version changes between control hosts.
+    - Arcaflow is designed for complex branching-action workflows and parallelization rather than state management and linear actions.
+    - Arcaflow prioritizes data passing and management via strong typing and schemas to ensure machine readabilitly, workflow validation, and data integrity.
+    - Arcaflow runs plugins via container orchestrator APIs rather than over remote shell connections.
+    - Arcaflow is run as a single golang binary, and plugins are run as containers, minimizing the dependencies while maximizing the portability.
+    - Arcaflow workflows are designed to be explicitly version controlled to ensure portability without drift to other environments.
 
 ??? "Apache Airflow"
 
