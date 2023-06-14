@@ -66,7 +66,7 @@ You can also add validations to the fields. The following annotations are valid 
 
 - `schema.required_if` specifies a list of fields that cause the current field to be required. If the other fields are empty, the current field is not required. (Make sure to use the optional annotation above.)
 - `schema.required_if_not` specifies a list of fields that, if not filled, cause the current field to be required. (Make sure to use the optional annotation above.)
-- `schema.conflicts` specifies a list of fields that cannot be used together with the current field.  (Make sure to use the optional annotation above.)
+- `schema.conflicts` specifies a field that cannot be used together with the current field. You can repeat this annotation multiple times. (Make sure to use the optional annotation above.)
 
 Additionally, some data types have their own validations and metadata, such as `schema.min`, `schema.max`, `schema.pattern`, or `schema.units`.
 
