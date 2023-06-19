@@ -17,7 +17,7 @@
         <link rel="next" href="../embedding/">
       
       <link rel="icon" href="../../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.14">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
     
     
       
@@ -25,10 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.85bb2934.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.26e3688c.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.a6bdf11c.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ecc896b0.min.css">
       
       
 
@@ -1505,9 +1505,9 @@
 </ul>
 <p>You can also add validations to the fields. The following annotations are valid for all data types:</p>
 <ul>
-<li><code>schema.required_if</code> specifies a list of fields that cause the current field to be required. If the other fields are empty, the current field is not required. (Make sure to use the optional annotation above.)</li>
-<li><code>schema.required_if_not</code> specifies a list of fields that, if not filled, cause the current field to be required. (Make sure to use the optional annotation above.)</li>
-<li><code>schema.conflicts</code> specifies a list of fields that cannot be used together with the current field.  (Make sure to use the optional annotation above.)</li>
+<li><code>schema.required_if</code> specifies a field that causes the current field to be required. If the other field is empty, the current field is not required. You can repeat this annotation multiple times. (Make sure to use the optional annotation above.)</li>
+<li><code>schema.required_if_not</code> specifies a field that, if not filled, causes the current field to be required. You can repeat this annotation multiple times.(Make sure to use the optional annotation above.)</li>
+<li><code>schema.conflicts</code> specifies a field that cannot be used together with the current field. You can repeat this annotation multiple times. (Make sure to use the optional annotation above.)</li>
 </ul>
 <p>Additionally, some data types have their own validations and metadata, such as <code>schema.min</code>, <code>schema.max</code>, <code>schema.pattern</code>, or <code>schema.units</code>.</p>
 <div class="admonition note">
@@ -1737,7 +1737,7 @@
     <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.a51614de.min.js"></script>
       
     
   </body>
