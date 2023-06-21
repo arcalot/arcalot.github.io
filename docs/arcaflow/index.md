@@ -67,6 +67,7 @@ It's important that you pick the right tool for the job. Sometimes, you need som
     - Ansible’s approach to parallelization is in terms of executing the same tasks against different hosts in parallel (see “forks” and “strategy”). Defining different tasks to perform in parallel is more challenging.
     - Ansible is written in Python and has many dependencies on the control host, though it can be run as a container to simplify this.
     - Some modules may have system requirements for python or other dependencies on the target hosts/containers. (See [Ansible documentation](https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-handle-not-having-a-python-interpreter-at-usr-bin-python-on-a-remote-machine))
+    - Ansible workflows may not be consistent or portable across bare metal and Kubernetes environments.
 
 ??? "Apache Airflow"
 
