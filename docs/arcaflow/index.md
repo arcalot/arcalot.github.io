@@ -154,6 +154,5 @@ It's important that you pick the right tool for the job. Sometimes, you need som
 
     - qDup has advanced controls for creating loops, signaling, waiting for events, etc.
     - qDup makes it very simple to run scripts in a parallelized way.
-    - qDup runs comands over SSH by design.
+    - qDup runs commands over SSH locally, or integrates with podman. There are plans to support Docker and Kubernetes in the future.
     - qDup is written in Java.
-    - qDup does not integrate with container engines natively.
