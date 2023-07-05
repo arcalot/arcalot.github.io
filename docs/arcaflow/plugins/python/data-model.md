@@ -141,6 +141,13 @@ Booleans have no additional validations or metadata.
 
 ### Enums
 
+
+Enums, short for enumerations, are used to define a set of named values as unique constants. They provide a way to represent a fixed number of possible values for a variable, parameter, or property.
+
+By using enums, you can give meaningful names to distinct values, making the code more self-explanatory and provides a convenient way to work with fixed sets of named constants.
+
+The "key" refers to the names assigned to each member of the enumeration, while the "value" represents the associated data or constant values assigned to those members.
+
 Sometimes, you need to specify a set of values that are valid for a field. In Arcaflow, this list of valid values can either be a list of strings, or a list of integers. You can specify an enum like this:
 
 ```python
@@ -153,6 +160,16 @@ class MyEnum(enum.Enum):
 
 my_field: MyEnum
 ```
+The MyEnum class above is defined as a subclass of enum.Enum, indicating that it represents an enumeration. It contains two members, Value1 and Value2, which are defined as class attributes. Each member is associated with a constant value, in this case, the strings "value 1" and "value 2" respectively.
+
+The 'my_field' variable is a variable of type MyEnum. It can store one of the defined enumeration members (Value1 or Value2).
+
+The members of the MyEnum enumeration are accessed using dot notation. 
+
+```python
+     value = MyEnum.Value1
+```
+In the above example, the Value1 member of MyEnum is accessed and assigned to the variable value.
 
 !!! tip
     Enums don't need to be dataclasses.
@@ -171,6 +188,23 @@ my_field: re.Pattern
 ```
 
 Pattern fields have no additional validations or metadata.
+
+!!! Note
+    If you are looking for a way to do pattern/regex matching for a string you will need to use the schema.pattern() validation which specifies the regular expression, to which the string must match.
+
+    The below example declares that the first_name variable must only have uppercase and lowercase alphabets. 
+
+    ```python title="plugin.py"
+    @dataclasses.dataclass
+    class MyClass:
+        first_name: typing.Annotated[
+            str,
+            schema.min(2),
+            schema.pattern(re.compile("^[a-zA-Z]+$")),
+            schema.example("Arca"),
+            schema.name("First name")
+        ]
+    ```
 
 ### Lists
 
