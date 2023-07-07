@@ -146,8 +146,6 @@ Enums, short for enumerations, are used to define a set of named values as uniqu
 
 By using enums, you can give meaningful names to distinct values, making the code more self-explanatory and provides a convenient way to work with fixed sets of named constants.
 
-The "key" refers to the names assigned to each member of the enumeration, while the "value" represents the associated data or constant values assigned to those members.
-
 Sometimes, you need to specify a set of values that are valid for a field. In Arcaflow, this list of valid values can either be a list of strings, or a list of integers. You can specify an enum like this:
 
 ```python
@@ -170,6 +168,11 @@ The members of the MyEnum enumeration are accessed using dot notation.
      value = MyEnum.Value1
 ```
 In the above example, the Value1 member of MyEnum is accessed and assigned to the variable value.
+
+!!! Note 
+    The keys are the names of the enum elements, and the values are the corresponding values associated with those elements. The keys are used to refer to specific enum elements, while the values represent the actual values assigned to each element. The values can be of string or integer data types. The keys are used to reference specific enum elements, and the values represent the assigned values for comparison or other purposes.
+
+    When checking parameters against enum items, it is the key (enum item name) that is used for comparison, not the value. The purpose of enum items is to provide a set of distinct named constants, and the key (name) serves as an identifier for each constant. The values associated with the enum items are typically used for other purposes, such as representation, comparison, or additional information associated with the enum item.
 
 !!! tip
     Enums don't need to be dataclasses.
