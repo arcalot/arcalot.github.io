@@ -17,7 +17,7 @@
         <link rel="next" href="../embedding/">
       
       <link rel="icon" href="../../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
     
     
       
@@ -1562,8 +1562,10 @@
 </code></pre></div>
 <p>Booleans have no additional validations or metadata.</p>
 <h3 id="enums">Enums</h3>
+<p>Enums, short for enumerations, are used to define a set of named values as unique constants. They provide a way to represent a fixed number of possible values for a variable, parameter, or property.</p>
+<p>By using enums, you can give meaningful names to distinct values, making the code more self-explanatory and provides a convenient way to work with fixed sets of named constants.</p>
 <p>Sometimes, you need to specify a set of values that are valid for a field. In Arcaflow, this list of valid values can either be a list of strings, or a list of integers. You can specify an enum like this:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">enum</span>
+<p><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">enum</span>
 
 
 <span class="k">class</span> <span class="nc">MyEnum</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
@@ -1572,6 +1574,17 @@
 
 <span class="n">my_field</span><span class="p">:</span> <span class="n">MyEnum</span>
 </code></pre></div>
+The MyEnum class above is defined as a subclass of enum.Enum, indicating that it represents an enumeration. It contains two members, Value1 and Value2, which are defined as class attributes. Each member is associated with a constant value, in this case, the strings &ldquo;value 1&rdquo; and &ldquo;value 2&rdquo; respectively.</p>
+<p>The &lsquo;my_field&rsquo; variable is a variable of type MyEnum. It can store one of the defined enumeration members (Value1 or Value2).</p>
+<p>The members of the MyEnum enumeration are accessed using dot notation. </p>
+<p><div class="highlight"><pre><span></span><code>     <span class="n">value</span> <span class="o">=</span> <span class="n">MyEnum</span><span class="o">.</span><span class="n">Value1</span>
+</code></pre></div>
+In the above example, the Value1 member of MyEnum is accessed and assigned to the variable value.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The keys are the names of the enum elements, and the values are the corresponding values associated with those elements. The keys are used to refer to specific enum elements, while the values represent the actual values assigned to each element. The values can be of string or integer data types. The keys are used to reference specific enum elements, and the values represent the assigned values for comparison or other purposes.</p>
+<p>When checking parameters against enum items, it is the key (enum item name) that is used for comparison, not the value. The purpose of enum items is to provide a set of distinct named constants, and the key (name) serves as an identifier for each constant. The values associated with the enum items are typically used for other purposes, such as representation, comparison, or additional information associated with the enum item.</p>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Enums don&rsquo;t need to be dataclasses.</p>
@@ -1587,6 +1600,21 @@
 <span class="n">my_field</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Pattern</span>
 </code></pre></div>
 <p>Pattern fields have no additional validations or metadata.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are looking for a way to do pattern/regex matching for a string you will need to use the schema.pattern() validation which specifies the regular expression, to which the string must match.</p>
+<p>The below example declares that the first_name variable must only have uppercase and lowercase alphabets. </p>
+<div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
+    <span class="n">first_name</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span>
+        <span class="nb">str</span><span class="p">,</span>
+        <span class="n">schema</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+        <span class="n">schema</span><span class="o">.</span><span class="n">pattern</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;^[a-zA-Z]+$&quot;</span><span class="p">)),</span>
+        <span class="n">schema</span><span class="o">.</span><span class="n">example</span><span class="p">(</span><span class="s2">&quot;Arca&quot;</span><span class="p">),</span>
+        <span class="n">schema</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s2">&quot;First name&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+</code></pre></div>
+</div>
 <h3 id="lists">Lists</h3>
 <p>When you want to make a list in Arcaflow, you always need to specify its contents. You can do that like this:</p>
 <div class="highlight"><pre><span></span><code><span class="n">my_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
@@ -1734,10 +1762,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.220ee61c.min.js"></script>
       
     
   </body>
