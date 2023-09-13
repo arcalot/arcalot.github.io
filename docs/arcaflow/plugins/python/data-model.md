@@ -20,7 +20,7 @@ However, Arcaflow doesn't support all Python data types. You pick from the follo
 - [`int`](#integers)
 - [`float`](#floating-point-numbers)
 - [`bool`](#booleans)
-- [Enums](#enum)
+- [Enums](#enums)
 - [`re.Pattern`](#patterns)
 - [`typing.List[othertype]`](#lists)
 - [`typing.Dict[keytype, valuetype]`](#dicts)
@@ -141,12 +141,13 @@ Booleans have no additional validations or metadata.
 
 ### Enums
 
+Enums, short for enumerations, are used to define a set of named values as unique constants. They provide a way to represent a fixed number of possible values for a variable, parameter, or property. In Python, an enum is declared as a class, but doesn't behave as a normal class. Instead, the "attributes" of the class act as independent "member" or "enumeration member" objects, each of which has a name and a constant value.
 
-Enums, short for enumerations, are used to define a set of named values as unique constants. They provide a way to represent a fixed number of possible values for a variable, parameter, or property.
+By using enums, you can give meaningful names to distinct values, making the code more self-explanatory and providing a convenient way to work with sets of related constants.
 
-By using enums, you can give meaningful names to distinct values, making the code more self-explanatory and provides a convenient way to work with fixed sets of named constants.
+In an Arcaflow schema, an Enum type provides a list of valid values for a field. The Enum must define a set of members with unique values, all of which are either strings or integers.
 
-Sometimes, you need to specify a set of values that are valid for a field. In Arcaflow, this list of valid values can either be a list of strings, or a list of integers. You can specify an enum like this:
+You can specify an enum with string values like this:
 
 ```python
 import enum
@@ -158,27 +159,35 @@ class MyEnum(enum.Enum):
 
 my_field: MyEnum
 ```
-The MyEnum class above is defined as a subclass of enum.Enum, indicating that it represents an enumeration. It contains two members, Value1 and Value2, which are defined as class attributes. Each member is associated with a constant value, in this case, the strings "value 1" and "value 2" respectively.
+The MyEnum class above defines two members, Value1 and Value2. Each member is associated with a constant value, in this case, the strings "value 1" and "value 2" respectively. An input value of "value 1" will result in the plugin seeing a value for `my_field` of MyEnum.Value1.
 
-The 'my_field' variable is a variable of type MyEnum. It can store one of the defined enumeration members (Value1 or Value2).
+You can specify an Enum class with integer values like this:
 
-The members of the MyEnum enumeration are accessed using dot notation. 
+```python
+import enum
+
+class MyEnum(enum.Enum):
+    Value1 = 1
+    Value2 = 2
+
+my_field: MyEnum
+```
+
+The `my_field` variable is a variable of type MyEnum. It can store one of the defined enumeration members (Value1 or Value2). An input value of 1 in this case will result in the plugin receiving a value for `my_field` of MyEnum.Value1.
 
 ```python
      value = MyEnum.Value1
 ```
 In the above example, the Value1 member of MyEnum is accessed and assigned to the variable value.
 
-!!! Note 
-    The keys are the names of the enum elements, and the values are the corresponding values associated with those elements. The keys are used to refer to specific enum elements, while the values represent the actual values assigned to each element. The values can be of string or integer data types. The keys are used to reference specific enum elements, and the values represent the assigned values for comparison or other purposes.
-
-    When checking parameters against enum items, it is the key (enum item name) that is used for comparison, not the value. The purpose of enum items is to provide a set of distinct named constants, and the key (name) serves as an identifier for each constant. The values associated with the enum items are typically used for other purposes, such as representation, comparison, or additional information associated with the enum item.
+!!! Note
+    Enumeration members are "singleton" objects, which have a single instance. In Python you should compare enumeration members using `is` rather than `==` (for example, `variable is MyEnum.Value1`). The values of an Enum used in an Arcaflow schema must have values of string or integer data type.
 
 !!! tip
-    Enums don't need to be dataclasses.
+    Enums aren't dataclasses, but can be used as the type of dataclass attributes.
 
 !!! warning
-    Do not mix integers and strings in the same enum!
+    Do not mix integers and strings in the same enum! The values for each Enum type must all be strings, or all integers.
 
 ### Patterns
 
@@ -195,7 +204,7 @@ Pattern fields have no additional validations or metadata.
 !!! Note
     If you are looking for a way to do pattern/regex matching for a string you will need to use the schema.pattern() validation which specifies the regular expression, to which the string must match.
 
-    The below example declares that the first_name variable must only have uppercase and lowercase alphabets. 
+    The below example declares that the first_name variable must only have uppercase and lowercase alphabets.
 
     ```python title="plugin.py"
     @dataclasses.dataclass
