@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.8">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.3.1">
     
     
       
@@ -1791,7 +1791,7 @@
 <li><a href="#integers"><code>int</code></a></li>
 <li><a href="#floating-point-numbers"><code>float</code></a></li>
 <li><a href="#booleans"><code>bool</code></a></li>
-<li><a href="#enum">Enums</a></li>
+<li><a href="#enums">Enums</a></li>
 <li><a href="#patterns"><code>re.Pattern</code></a></li>
 <li><a href="#lists"><code>typing.List[othertype]</code></a></li>
 <li><a href="#dicts"><code>typing.Dict[keytype, valuetype]</code></a></li>
@@ -1883,9 +1883,10 @@
 </code></pre></div>
 <p>Booleans have no additional validations or metadata.</p>
 <h3 id="enums">Enums</h3>
-<p>Enums, short for enumerations, are used to define a set of named values as unique constants. They provide a way to represent a fixed number of possible values for a variable, parameter, or property.</p>
-<p>By using enums, you can give meaningful names to distinct values, making the code more self-explanatory and provides a convenient way to work with fixed sets of named constants.</p>
-<p>Sometimes, you need to specify a set of values that are valid for a field. In Arcaflow, this list of valid values can either be a list of strings, or a list of integers. You can specify an enum like this:</p>
+<p>Enums, short for enumerations, are used to define a set of named values as unique constants. They provide a way to represent a fixed number of possible values for a variable, parameter, or property. In Python, an enum is declared as a class, but doesn&rsquo;t behave as a normal class. Instead, the &ldquo;attributes&rdquo; of the class act as independent &ldquo;member&rdquo; or &ldquo;enumeration member&rdquo; objects, each of which has a name and a constant value.</p>
+<p>By using enums, you can give meaningful names to distinct values, making the code more self-explanatory and providing a convenient way to work with sets of related constants.</p>
+<p>In an Arcaflow schema, an Enum type provides a list of valid values for a field. The Enum must define a set of members with unique values, all of which are either strings or integers.</p>
+<p>You can specify an enum with string values like this:</p>
 <p><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">enum</span>
 
 
@@ -1895,24 +1896,31 @@
 
 <span class="n">my_field</span><span class="p">:</span> <span class="n">MyEnum</span>
 </code></pre></div>
-The MyEnum class above is defined as a subclass of enum.Enum, indicating that it represents an enumeration. It contains two members, Value1 and Value2, which are defined as class attributes. Each member is associated with a constant value, in this case, the strings &ldquo;value 1&rdquo; and &ldquo;value 2&rdquo; respectively.</p>
-<p>The &lsquo;my_field&rsquo; variable is a variable of type MyEnum. It can store one of the defined enumeration members (Value1 or Value2).</p>
-<p>The members of the MyEnum enumeration are accessed using dot notation. </p>
+The MyEnum class above defines two members, Value1 and Value2. Each member is associated with a constant value, in this case, the strings &ldquo;value 1&rdquo; and &ldquo;value 2&rdquo; respectively. An input value of &ldquo;value 1&rdquo; will result in the plugin seeing a value for <code>my_field</code> of MyEnum.Value1.</p>
+<p>You can specify an Enum class with integer values like this:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">enum</span>
+
+<span class="k">class</span> <span class="nc">MyEnum</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">Value1</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">Value2</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">my_field</span><span class="p">:</span> <span class="n">MyEnum</span>
+</code></pre></div>
+<p>The <code>my_field</code> variable is a variable of type MyEnum. It can store one of the defined enumeration members (Value1 or Value2). An input value of 1 in this case will result in the plugin receiving a value for <code>my_field</code> of MyEnum.Value1.</p>
 <p><div class="highlight"><pre><span></span><code>     <span class="n">value</span> <span class="o">=</span> <span class="n">MyEnum</span><span class="o">.</span><span class="n">Value1</span>
 </code></pre></div>
 In the above example, the Value1 member of MyEnum is accessed and assigned to the variable value.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The keys are the names of the enum elements, and the values are the corresponding values associated with those elements. The keys are used to refer to specific enum elements, while the values represent the actual values assigned to each element. The values can be of string or integer data types. The keys are used to reference specific enum elements, and the values represent the assigned values for comparison or other purposes.</p>
-<p>When checking parameters against enum items, it is the key (enum item name) that is used for comparison, not the value. The purpose of enum items is to provide a set of distinct named constants, and the key (name) serves as an identifier for each constant. The values associated with the enum items are typically used for other purposes, such as representation, comparison, or additional information associated with the enum item.</p>
+<p>Enumeration members are &ldquo;singleton&rdquo; objects, which have a single instance. In Python you should compare enumeration members using <code>is</code> rather than <code>==</code> (for example, <code>variable is MyEnum.Value1</code>). The values of an Enum used in an Arcaflow schema must have values of string or integer data type.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Enums don&rsquo;t need to be dataclasses.</p>
+<p>Enums aren&rsquo;t dataclasses, but can be used as the type of dataclass attributes.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Do not mix integers and strings in the same enum!</p>
+<p>Do not mix integers and strings in the same enum! The values for each Enum type must all be strings, or all integers.</p>
 </div>
 <h3 id="patterns">Patterns</h3>
 <p>When you need to hold regular expressions, you can use a pattern field. This is tied to the <a href="https://docs.python.org/3/library/re.html">Python regular expressions library</a>. You can specify a pattern field like this:</p>
@@ -1924,7 +1932,7 @@ In the above example, the Value1 member of MyEnum is accessed and assigned to th
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you are looking for a way to do pattern/regex matching for a string you will need to use the schema.pattern() validation which specifies the regular expression, to which the string must match.</p>
-<p>The below example declares that the first_name variable must only have uppercase and lowercase alphabets. </p>
+<p>The below example declares that the first_name variable must only have uppercase and lowercase alphabets.</p>
 <div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
     <span class="n">first_name</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span>
