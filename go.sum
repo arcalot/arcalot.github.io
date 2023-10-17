@@ -110,10 +110,14 @@ go.flow.arcalot.io/dockerdeployer v0.3.0 h1:9F9ZyaiB1kwKLRMXAktkyD3eDVvWoMYSHCoj
 go.flow.arcalot.io/dockerdeployer v0.3.0/go.mod h1:9cMMHmkHxzHgLOLva6RmGb5d8jrbRkar/PcjeiU0QvA=
 go.flow.arcalot.io/kubernetesdeployer v0.5.1 h1:YpPFSouEWjxN8sxdr4BuZMl3IM9jCGEXBAnyoWJnHls=
 go.flow.arcalot.io/kubernetesdeployer v0.5.1/go.mod h1:mdhwBGQ0wlquo+wUR0VNSAyj9NYxDdTwM7vYV1XmRnw=
+go.flow.arcalot.io/kubernetesdeployer v0.6.0 h1:qny4uuR3KplHrjRWW7euq3tv7zMJm2+mOyf/RmWafuA=
+go.flow.arcalot.io/kubernetesdeployer v0.6.0/go.mod h1:RCRi7u9RZoKAtG8XyvoqvB2VWro/YjUE4kybgpGBbRI=
 go.flow.arcalot.io/pluginsdk v0.4.1 h1:sooyHRNCH/EIQJe+842qZJAgXHuffclFbc3hPMgbhCc=
 go.flow.arcalot.io/pluginsdk v0.4.1/go.mod h1:8Gp8Q0Eo0s+2I4nNl3uQ95jPi2zFKEX7JqyjhmK7BiI=
 go.flow.arcalot.io/podmandeployer v0.3.1 h1:AbRmTTtuK50PLkZyu194oSra0zUCeM3lDCWTc7oo4Ys=
 go.flow.arcalot.io/podmandeployer v0.3.1/go.mod h1:SmROc9nHG+KfKasyTeKtGmI9EBlXCupXjBIgX5glGn8=
+go.flow.arcalot.io/podmandeployer v0.4.1 h1:TnGmYSilOcSZj8dn98kvsnEC4q+6Npu/ejepIUJXlQw=
+go.flow.arcalot.io/podmandeployer v0.4.1/go.mod h1:dWLUNpbdnZAqy1S4oWb/0cLNI1PI2Z3Eupn0o/yWNUw=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550/go.mod h1:yigFU9vqHzYiE8UmvKecakEJjdnWj3jj499lnFckfCI=
 golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
