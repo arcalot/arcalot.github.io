@@ -4,9 +4,9 @@ go 1.18
 
 require (
 	go.flow.arcalot.io/dockerdeployer v0.3.0
-	go.flow.arcalot.io/kubernetesdeployer v0.5.1
+	go.flow.arcalot.io/kubernetesdeployer v0.6.0
 	go.flow.arcalot.io/pluginsdk v0.4.1
-	go.flow.arcalot.io/podmandeployer v0.3.1
+	go.flow.arcalot.io/podmandeployer v0.4.1
 )
 
 require (
