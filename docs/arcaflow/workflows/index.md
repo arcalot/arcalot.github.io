@@ -1,6 +1,12 @@
 # Creating Arcaflow workflows
 
-Arcaflow workflows consist of three parts:
+Arcaflow workflows consist of four parts:
+
+<h2>Version</h2>
+
+The version section states which workflow schema version you are using to write your workflow. The latest supported workflow schema is `v0.1.0`.
+
+[Workflow and Engine Compatibility &raquo;](matrix.md){ .md-button }
 
 <h2>Inputs</h2>
 
