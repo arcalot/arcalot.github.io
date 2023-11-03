@@ -3,10 +3,10 @@ module docsgen
 go 1.18
 
 require (
-	go.flow.arcalot.io/dockerdeployer v0.3.0
-	go.flow.arcalot.io/kubernetesdeployer v0.6.0
-	go.flow.arcalot.io/pluginsdk v0.4.1
-	go.flow.arcalot.io/podmandeployer v0.4.1
+	go.flow.arcalot.io/dockerdeployer v0.5.0
+	go.flow.arcalot.io/kubernetesdeployer v0.8.0
+	go.flow.arcalot.io/pluginsdk v0.5.0
+	go.flow.arcalot.io/podmandeployer v0.6.1
 )
 
 require (
@@ -15,7 +15,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/distribution/reference v0.5.0 // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
-	github.com/docker/docker v24.0.6+incompatible // indirect
+	github.com/docker/docker v24.0.7+incompatible // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
 	github.com/emicklei/go-restful/v3 v3.11.0 // indirect
@@ -41,7 +41,7 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	go.arcalot.io/lang v1.0.0 // indirect
 	go.arcalot.io/log/v2 v2.0.0 // indirect
-	go.flow.arcalot.io/deployer v0.2.0 // indirect
+	go.flow.arcalot.io/deployer v0.4.0 // indirect
 	golang.org/x/mod v0.12.0 // indirect
 	golang.org/x/net v0.15.0 // indirect
 	golang.org/x/oauth2 v0.12.0 // indirect
