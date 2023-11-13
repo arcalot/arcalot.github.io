@@ -124,12 +124,16 @@ go.flow.arcalot.io/pluginsdk v0.4.1 h1:sooyHRNCH/EIQJe+842qZJAgXHuffclFbc3hPMgbh
 go.flow.arcalot.io/pluginsdk v0.4.1/go.mod h1:8Gp8Q0Eo0s+2I4nNl3uQ95jPi2zFKEX7JqyjhmK7BiI=
 go.flow.arcalot.io/pluginsdk v0.5.0 h1:TRS/waCTcdoMZ9neDAcfy3zpzyDnPHRbhV+Y1kpcw3Y=
 go.flow.arcalot.io/pluginsdk v0.5.0/go.mod h1:2s2f//7uOkBjr1QaiWJD/bqDIeLlINJtD1BhiY4aGPM=
+go.flow.arcalot.io/pluginsdk v0.5.1 h1:ebb2ThAqmjmwGpDyKpd1wEDUisPqPabgARjFohy47Io=
+go.flow.arcalot.io/pluginsdk v0.5.1/go.mod h1:2s2f//7uOkBjr1QaiWJD/bqDIeLlINJtD1BhiY4aGPM=
 go.flow.arcalot.io/podmandeployer v0.3.1 h1:AbRmTTtuK50PLkZyu194oSra0zUCeM3lDCWTc7oo4Ys=
 go.flow.arcalot.io/podmandeployer v0.3.1/go.mod h1:SmROc9nHG+KfKasyTeKtGmI9EBlXCupXjBIgX5glGn8=
 go.flow.arcalot.io/podmandeployer v0.4.1 h1:TnGmYSilOcSZj8dn98kvsnEC4q+6Npu/ejepIUJXlQw=
 go.flow.arcalot.io/podmandeployer v0.4.1/go.mod h1:dWLUNpbdnZAqy1S4oWb/0cLNI1PI2Z3Eupn0o/yWNUw=
 go.flow.arcalot.io/podmandeployer v0.6.1 h1:NPSQ82PyvxTRDsHuLj6oBhPUlhVVqPlnXWkElF2PcT8=
 go.flow.arcalot.io/podmandeployer v0.6.1/go.mod h1:4wfcl0qjV02y64We3ZSDz+3lwdOfbe+gpFjm7SQKTRA=
+go.flow.arcalot.io/podmandeployer v0.6.2 h1:iAAZGgwhxInEVAleakavGruHnW4qsD/v39JpfnTeXiE=
+go.flow.arcalot.io/podmandeployer v0.6.2/go.mod h1:BmKbyG2qZG9PMPLkIeXUvKVJfU+AZx+POLvydZN26IY=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550/go.mod h1:yigFU9vqHzYiE8UmvKecakEJjdnWj3jj499lnFckfCI=
 golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
