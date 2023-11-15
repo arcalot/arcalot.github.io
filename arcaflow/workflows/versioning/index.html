@@ -8,13 +8,9 @@
       
       
       
-        <link rel="canonical" href="https://arcalot.io/arcaflow/workflows/output/">
+        <link rel="canonical" href="https://arcalot.io/arcaflow/workflows/versioning/">
       
       
-        <link rel="prev" href="../flow-control/">
-      
-      
-        <link rel="next" href="../../contributing/">
       
       
       <link rel="icon" href="../../../arcalot.svg">
@@ -22,7 +18,7 @@
     
     
       
-        <title>Outputs - Arcalot</title>
+        <title>Workflow schema versions - Arcalot</title>
       
     
     
@@ -73,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#writing-workflow-outputs" class="md-skip">
+        <a href="#workflow-schema-versions" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Outputs
+              Workflow schema versions
             
           </span>
         </div>
@@ -245,12 +241,10 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
+      <li class="md-tabs__item">
         <a href="../../" class="md-tabs__link">
           
   
@@ -358,8 +352,6 @@
       
   
   
-    
-  
   
     
     
@@ -387,12 +379,12 @@
       
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           
@@ -414,7 +406,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Arcaflow
@@ -1223,8 +1215,6 @@
                 
   
   
-    
-  
   
     
     
@@ -1251,12 +1241,12 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
         
           
           
@@ -1278,7 +1268,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_6">
             <span class="md-nav__icon md-icon"></span>
             Writing workflows
@@ -1391,29 +1381,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Outputs
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../output/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1422,33 +1392,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#writing-multiple-outputs" class="md-nav__link">
-    Writing multiple outputs
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1681,34 +1624,54 @@
   
 
 
-<h1 id="writing-workflow-outputs">Writing workflow outputs</h1>
-<p>Outputs in Arcaflow serve a dual purpose:</p>
-<ol>
-<li>They provide the desired resulting data from steps and inputs to STDOUT.</li>
-<li>They allow for the conditional pass/fail state of the workflow (if any defined output is not available, the workflow reports a failure).</li>
-</ol>
-<p>You can define an output simply with <a href="../expressions/">expressions</a>. Outputs generally include desired output parameters from individual steps, but may also include data from inputs or even static values.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">output</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">some_key</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">some_other_key</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.some_step.outputs.success.some_value</span>
-<span class="w">  </span><span class="nt">foo</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.inputs.bar</span>
-<span class="w">  </span><span class="nt">arca</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;flow&quot;</span>
+<h1 id="workflow-schema-versions">Workflow schema versions</h1>
+<h2 id="valid-version-string">Valid version string</h2>
+<p>All workflow schema versions conform to <a href="https://semver.org/#backusnaur-form-grammar-for-valid-semver-versions">semantic version 2.0.0</a> with a major, minor, and patch version. In this document, since the prepended <code>v</code> is unnecessary it is not used. However, it is required as a value for the version key in your workflow file.</p>
+<p>Invalid version string for <code>workflow.yaml</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2.0</span>
+<span class="nt">input</span><span class="p">:</span>
+<span class="nt">steps</span><span class="p">:</span>
+<span class="nt">outputs</span><span class="p">:</span>
 </code></pre></div>
-<h2 id="writing-multiple-outputs">Writing multiple outputs</h2>
-<p>Arcaflow can produce multiple output groups for a workflow. These output groups are mutually exclusive to each other.</p>
-<p>A common example of two mutually exclusive events could be the availability of your data storage service. Let&rsquo;s assume the service is either available, or unavailable (the unavailble state also includes any states where an error is thrown during data insertion). Multiple workflow outputs allows you to plan for these two events.</p>
-<p>In this example taken from the <a href="https://github.com/arcalot/arcaflow-workflows/blob/main/example-workflow/workflow.yaml">Arcaflow Workflows</a> project, the <code>success</code> output collects the data from the specified steps and inserts it into data storage. The <code>no-indexing</code> output collects the data, the error logs, and does not store the data.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">outputs</span><span class="p">:</span>
-<span class="w"> </span><span class="nt">success</span><span class="p">:</span>
-<span class="w">   </span><span class="nt">pcp</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.pcp.outputs.success</span>
-<span class="w">   </span><span class="nt">sysbench</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.sysbench.outputs.success</span>
-<span class="w">   </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.metadata.outputs.success</span>
-<span class="w">   </span><span class="nt">opensearch</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.opensearch.outputs.success</span>
-<span class="w"> </span><span class="nt">no-indexing</span><span class="p">:</span>
-<span class="w">   </span><span class="nt">pcp</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.pcp.outputs.success</span>
-<span class="w">   </span><span class="nt">sysbench</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.sysbench.outputs.success</span>
-<span class="w">   </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.metadata.outputs.success</span>
-<span class="w">   </span><span class="nt">no-index</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.opensearch.outputs.error</span>
+<p><strong>Valid</strong> version string for <code>workflow.yaml</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.2.0</span>
+<span class="nt">input</span><span class="p">:</span>
+<span class="nt">steps</span><span class="p">:</span>
+<span class="nt">outputs</span><span class="p">:</span>
+</code></pre></div>
+<h2 id="supported-versions">Supported versions</h2>
+<ul>
+<li>0.2.0</li>
+</ul>
+<h2 id="compatibility-matrix">Compatibility Matrix</h2>
+<table>
+<thead>
+<tr>
+<th>Workflow schema version</th>
+<th>Arcaflow Engine release</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.2.0</td>
+<td>0.9.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="upgrading">Upgrading</h2>
+<h3 id="020">0.2.0</h3>
+<p>For the configuration file, <code>config.yaml</code>, two types of deployers are now possible, <code>image</code> and <code>python</code>, so <code>deployer</code> has become <code>deployers</code>. Effectively, the <code>type</code> key has become the <code>deployer_name</code> key. The <code>deployer_name</code> key and value are <strong>required</strong> which means you must also have either the <code>image</code> key or the <code>python</code> key.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">deployers</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">deployer_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker|podman|kubernetes</span>
+<span class="w">  </span><span class="nt">python</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">deployer_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
+</code></pre></div>
+<p>For your workflow file, <code>workflow.yaml</code>, the <code>version</code> key and value are <strong>required</strong>, and they must be at the root of the file.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.2.0</span>
+<span class="nt">inputs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="nt">steps</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="nt">outputs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
 </code></pre></div>
 
 
