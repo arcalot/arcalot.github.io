@@ -37,7 +37,7 @@ outputs:
 
 ### 0.2.0
 
-For the configuration file, `config.yaml`, two types of deployers are now possible, `image` and `python`, so `deployer` has become `deployers`. The `deployer_name` key and value are now **required**.
+For the configuration file, `config.yaml`, two types of deployers are now possible, `image` and `python`, so `deployer` has become `deployers`. Effectively, the `type` key has become the `deployer_name` key. The `deployer_name` key and value are **required** which means you must also have either the `image` key or the `python` key.
 
 ```yaml
 deployers:
