@@ -1,6 +1,13 @@
 # Creating Arcaflow workflows
 
-Arcaflow workflows consist of three parts:
+Arcaflow workflows consist of four parts:
+
+
+<h2>Version</h2>
+
+The schema version must be at the root of your workflow file. It indicates the semantic version of the workflow file structure being used.
+
+[Learn more about versioning &raquo;](versioning.md){ .md-button }
 
 <h2>Inputs</h2>
 
