@@ -317,6 +317,7 @@ Order (highest to lowest):
  - [`! ` logical complement](#logical-complement)
  - [`&&` logical AND](#logical-and)
  - [`||` logical OR](#logical-or)
+ - [literals](#literals), [identifiers](#root-reference), [dot notation](#dot-notation), and [bracket access](#bracket-accessor)
 
 ## Other information
 
