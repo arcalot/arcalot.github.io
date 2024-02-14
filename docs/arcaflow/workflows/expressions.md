@@ -190,7 +190,7 @@ Functions:
 | function definition          | return type | description                                          |
 | ---------------------------- | ----------- | ---------------------------------------------------- |
 | `intToFloat(integer)`        | float       | Converts an integer type into a floating point type. |
-| `floatToInt(float)`          | integer     | Converts a float type into an integer type by discarding the fraction. In other words, it is rounded to the nearest integer towards zero. <br> For example, `5.5` becomes `5`, and `-1.9` becomes `-1`" |
+| `floatToInt(float)`          | integer     | Converts a float type into an integer type by discarding the fraction. In other words, it is rounded to the nearest integer towards zero. <br>Special cases:<br>&nbsp; +Inf outputs the maximum 64-bit integer (9223372036854775807)<br>&nbsp; -Inf and NaN output the minimum 64-bit integer (-9223372036854775808)\n\n"<br><br> For example, `5.5` becomes `5`, and `-1.9` becomes `-1`" |
 | `intToString(integer)`       | string      | Converts an integer to a string whose characters represent that integer in base-10. <br> For example, an input of `55` will output `"55"` |
 | `floatToString(float)`       | string      | Converts a floating point number to a string whose characters represent that number in base-10 as as simple decimal. <br> For example, an input of `5000.5` will output `"5000.5"` |
 | `boolToString(boolean)`      | string      | Returns `"true"` for `true`, and `"false"` for `false`. |
