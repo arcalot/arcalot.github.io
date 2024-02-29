@@ -7,7 +7,7 @@ Flow control allows the workflow author to build a workflow with a decision tree
 Foreach loops allow for running a sub-workflow with iterative inputs from a parent workflow. A sub-workflow is a complete Arcaflow workflow file with it's own input and output schemas as described in this section. The inputs for the sub-workflow are provided as a list, where each list item is an object that matches the sub-workflow input schema.
 
 !!! tip
-    A complete functional example is available in the [arcaflow-workflows](https://github.com/arcalot/arcaflow-workflows/tree/main/example-foreach-loop) repository.
+    A complete functional example is available in the [arcaflow-workflows](https://github.com/arcalot/arcaflow-workflows/tree/main/examples/sub-workflow-foreach) repository.
 
 In the parent workflow file, the author can define an input schema with the list that will contain the input object that will be passed to the sub-workflow. For example:
 
