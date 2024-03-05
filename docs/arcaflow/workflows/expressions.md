@@ -3,7 +3,7 @@
 Arcaflow expressions were inspired by JSONPath but have diverged from the syntax. You can use expressions in a workflow YAML like this:
 
 ```yaml
-some_value: !expr $.your.expresion.here
+some_value: !expr $.your.expression.here
 ```
 
 This page explains the language elements of expressions.
@@ -13,27 +13,31 @@ This page explains the language elements of expressions.
 
 ## Literals
 
-Literals represent values described in an expression, as opposed to values referenced from other sources.
+Literals represent constant values in an expression.
 
 ### String values
 
-Normal string literals start and end with a matched pair of either single quotes `'` or double quotes `"` and have zero or more characters between the quotes.
+Normal string literals start and end with a matched pair of either single quotes (`'`) or double quotes (`"`) and have zero or more characters between the quotes.
 
-Strings may have escaped values. The most important ones are for backslashes (`\\` for `\`) or for embedded newlines `\n`.
-
-You do not need to escape double quotes in a single-quote string, or single-quotes in a double quote string. However, 
+Strings may contain special characters.  In normal strings, these characters are represented by "escape sequences" consisting of a
+backslash followed by another character.  Since a backslash therefore has a special meaning, in order to represent a
+literal backslash character, it must be preceded by another backslash.  Similarly, in a string delimited by double
+quotes, a double quote occurring inside the string must be escaped to prevent it from marking the end of the string.
+The same is true for single quotes occurring inside a string delimited by single quotes.  However, you do not need to escape
+double quotes in a single-quoted string nor single-quotes in a double-quoted string.
 
 Here is the list of supported escape characters:
-| Escape | Result |
-| ------ | ------ |
-| `\\` | `\` backslash character |
-| `\t` | tab character |
-| `\n` | newline character |
-| `\r` | carriage return character |
-| `\b` | backspace character |
-| `\"` | `"` double quote character |
-| `\'` | `'` single quote character |
-| `\0` | null character |
+
+| Escape | Result                     |
+|--------|----------------------------|
+| `\\`   | `\` backslash character    |
+| `\t`   | tab character              |
+| `\n`   | newline character          |
+| `\r`   | carriage return character  |
+| `\b`   | backspace character        |
+| `\"`   | `"` double quote character |
+| `\'`   | `'` single quote character |
+| `\0`   | null character             |
 
 For example, to have the following text represented in a single string:
 > test
@@ -41,60 +45,108 @@ For example, to have the following text represented in a single string:
 
 You would need the expression `"test\ntest2/\\"`
 
-#### String-expressions in YAML
+#### String Expressions in YAML
 
-If an expression has a string literal in it, then you must account for it in the YAML.
+When expressing string literals in YAML, be aware that YAML has its own rules around the use of quotation marks.
 
-For example, to include a double-quoted string in an expression, you must either add single quotes around expression, or use block flow scalars. A single apostrophe within an expression needs to be added twice in a row to count as one while in an inlined string.
+For example, to include a double-quoted string in an expression, you must either add single quotes around the expression
+or use block flow scalars. Inside a single-quoted string, an apostrophe needs to be preceded
+by another apostrophe to indicate that it does not terminate the string.
 
 Here is an example of the following value represented in a few of the various ways:
-> just a string with sub-quotes "hello" and an apostrophe '
+> Here's an apostrophe and "embedded quotes".
 
-Inlined:
+Inlined with single quotes:
 ```
-some_value: !expr '"just a string with sub-quotes \"hello\" and an apostrophe \'' "'
+some_value_1: !expr '"Here''s an apostrophe and \"embedded quotes\"."'
 ```
+> [!TIP]
+> - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
+> - The single quotes cause the YAML processor to pass the contents of the string intact except for replacing the
+    repeated apostrophe with a single one.  (They are not included in the expression value.)
+> - The backslash-escapes are replaced by Arca's expression processing.  (The unescaped double quotes are not included
+    in the expression value.)
+
+Inlined with double quotes:
+```
+some_value_2: !expr "'Here\\'s an apostrophe and \"embedded quotes\".'"
+```
+> [!TIP]
+> - The `!expr` tag indicates to the YAML processor that the value is an Arca expression.
+> - The double quotes cause the YAML processor to interpret the contents of the string:
+>   - the `\\` is replaced with a single backslash;
+>   - each `\"` is replaced with a literal `"`;
+>   - the surrounding double quotes are not included in the expression value.
+> - The backslash-escapes are replaced by Arca's expression processing.  (The unescaped single quotes are not included
+    in the expression value.)
 
 With Block Flow Scalar:
 ```
 some_value_1: !expr |-
-  'just a string with sub-quotes "hello" and an apostrophe \' '
+  'Here\'s an apostrophe and "embedded quotes".'
 some_value_2: !expr |-
-  "just a string with sub-quotes \"hello\" and an apostrophe ' "
+  "Here's an apostrophe and \"embedded quotes\"."
 ```
 
-See [Raw String](#raw-string) to see how to do this without escaping.
+> [!TIP]
+> - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
+> - The vertical bar (`|`) causes the YAML processor to pass the contents of the string without modification.
+> - Newlines within the expression are included in the string; the hyphen (`-`) after the vertical bar causes the
+    trailing newline to be omitted from the end of the string.
+> - The backslash-escapes are replaced by Arca's expression processing.  The unescaped quotes are not included
+    in the expression value; the other quotes are escaped to prevent them from ending the string prematurely; the
+    double quotes in `some_value_1` do not need to be escaped nor do the single quotes in `some_value_2`.
+
+See [Raw String](#raw-string-values) to see how to do this without escaping.
 
 ### Raw String values
 
-Raw string literals start and end with back-tick characters "`".
+Raw string literals start and end with backtick characters "`".
 
-The main point of a raw string is that it does not escape characters. This means that you can put `'` and `"` characters in withine escaping them.
+In a raw string, all characters are interpreted literally. This means that you can use `'` and `"` characters without
+escaping them, and backslashes are treated like any other character.  However, backtick characters cannot appear in a
+raw string.
 
 Here is an example of the following value represented using raw strings:
-> just a string with sub-quotes "hello" and an apostrophe '
+> Here's an apostrophe and "embedded quotes".
 
 Inlined:
 ```
-some_value: !expr '`just a string with sub-quotes "hello" and an apostrophe \'' `'
+some_value: !expr '`Here''s an apostrophe and "embedded quotes".`'
 ```
+> [!TIP]
+> - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
+> - The single quotes cause the YAML processor to pass the contents of the string intact except for replacing the
+    repeated apostrophe with a single one.  (They are not included in the expression value.)
+> - The backticks cause Arca's expression processing to use the string verbatim.  (The backticks are not included
+    in the expression value.)
 
 With Block Flow Scalar:
 ```
 some_value: !expr |-
-  `just a string with sub-quotes "hello" and an apostrophe ' `
+  `Here's an apostrophe and "embedded quotes".`
 ```
+
+> [!TIP]
+> - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
+> - The vertical bar (`|`) causes the YAML processor to pass the contents of the string without modification.
+> - Newlines within the expression are included in the string; the hyphen (`-`) after the vertical bar causes the
+    trailing newline to be omitted from the end of the string.
+> - The backticks cause Arca's expression processing to use the string verbatim, thus the embedded quotes don't require
+    escapes.  (The backticks are not included in the expression value.)
 
 ### Integer numbers
 
-Integers are whole non-negative base-10 numbers. They may not start with `0`, unless the value is `0`. For example, `001` is not a valid integer literal.
+Integers are whole numbers expressed as sequences of base-10 digits.
+
+Integer literals may not start with `0`, unless the value is `0`. For example, `001` is not a valid integer literal.
 
 Examples:
 - `0`
 - `1`
 - `503`
 
-Negative values are constructed by applying the [negation operator `-`](#negation) to a literal numeric value.
+Negative values are constructed by applying the [negation operator (`-`)](#negation) to a literal numeric value.
 
 ### Floating point numbers
 
@@ -104,7 +156,7 @@ Supported formats include:
 - number characters followed by a period followed by zero or more number characters: `1.1` or `1.`
 - base-10 exponential scientific notation formats like `5.0e5` and `5.0E-5`
 
-Negative values are constructed by applying the [negation operator `-`](#negation) to a literal numeric value.
+Negative values are constructed by applying the [negation operator (`-`)](#negation) to a literal numeric value.
 
 ### Boolean values
 
@@ -112,7 +164,7 @@ Boolean literals have two valid values:
 - `true`
 - `false`
 
-No other values are valid boolean literals. The values are case sensitive.
+No other values are valid boolean literals. The values are case-sensitive.
 
 ## Root reference
 
@@ -182,30 +234,31 @@ $.foo["b"]
 
 ## Functions
 
-Functions are built-in tasks with pre-defined behavior and a known input and output schema.
-
-Functions are defined by the engine.
+The engine provides predefined functions for use in expressions.  These provide transformations beyond what is
+available from operators.
 
 Functions:
-| function definition          | return type | description                                          |
-| ---------------------------- | ----------- | ---------------------------------------------------- |
-| `intToFloat(integer)`        | float       | Converts an integer type into a floating point type. |
-| `floatToInt(float)`          | integer     | Converts a float type into an integer type by discarding the fraction. In other words, it is rounded to the nearest integer towards zero. <br>Special cases:<br>&nbsp; +Inf outputs the maximum 64-bit integer (9223372036854775807)<br>&nbsp; -Inf and NaN output the minimum 64-bit integer (-9223372036854775808)\n\n"<br><br> For example, `5.5` becomes `5`, and `-1.9` becomes `-1`" |
-| `intToString(integer)`       | string      | Converts an integer to a string whose characters represent that integer in base-10. <br> For example, an input of `55` will output `"55"` |
-| `floatToString(float)`       | string      | Converts a floating point number to a string whose characters represent that number in base-10 as as simple decimal. <br> For example, an input of `5000.5` will output `"5000.5"` |
-| `boolToString(boolean)`      | string      | Returns `"true"` for `true`, and `"false"` for `false`. |
-| `stringToInt(string)`        | integer     | Interprets the string as a base-10 integer. Will fail if the input is not a valid integer. |
-| `stringToFloat(string)`      | float       | Converts the input string to a 64-bit floating-point number<br><br>Accepts decimal and hexadecimal floating-point numbers as defined by the [Go syntax for floating point literals](https://go.dev/ref/spec#Floating-point_literals).<br> If the input is well-formed and near a valid floating-point number, stringToFloat returns the nearest floating-point number rounded using IEEE754 unbiased rounding. <br> Returns an error when an invalid input is received. |
-| `stringToBool(string)`       | boolean      | Interprets the input as a boolean. <br> Case insensitively accepts `"1"`, `"t"`, and `"true"` for `true`.\n <br>Case insensitively accepts `"0"`, '"f"', and '"false"' for `false`.<br>Returns an error for any other input. |
-| `ceil(float)`                | float       | Returns the least integer value greater than or equal to the input.<br>For example `ceil(1.5)` outputs `2.0`, and `ceil(-1.5)` outputs `-1.0`<br>Special cases are:<br>&nbsp; ceil(±0) = ±0<br>&nbsp; ceil(±Inf) = ±Inf<br>&nbsp; ceil(NaN) = NaN" |
-| `floor(float)`               | float       | Returns the greatest integer value less than or equal to the input.<br>For example `floor(1.5)` outputs `1.0`, and `floor(-1.5)` outputs `-2.0`<br>Special cases are:<br>&nbsp; floor(±0) = ±0<br>&nbsp; floor(±Inf) = ±Inf<br>&nbsp; floor(NaN) = NaN |
-| `round(float)`               | float       | Returns the nearest integer to the input, rounding half away from zero.<br>For example `round(1.5)` outputs `2.0`, and `round(-1.5)` outputs `-2.0`<br>Special cases are:<br>&nbsp; round(±0) = ±0<br>&nbsp; round(±Inf) = ±Inf<br>&nbsp; round(NaN) = NaN" |
-| `abs(float)`                 | float       | Returns the absolute value of x.<br>Special cases are:<br>&nbsp; abs(±Inf) = +Inf<br>&nbsp; abs(NaN) = NaN |
-| `toLower(string)`            | string      | Outputs the input with Unicode letters mapped to their lower case. |
-| `toUpper(string)`            | string      | Outputs the input with Unicode letters mapped to their upper case. |
-| `splitString(string, string)`| list[string]| Splits the given string with the given separator.<br>&nbsp; Param 1: The string to split.<br>&nbsp; Param 2: The separator." |
 
-The syntax for a function has multiple parts. First, you have the function's identifying name, followed by `(`, followed by 0 or more comma-separated expressions, followed by `)`.
+| function definition           | return type  | description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|-------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `intToFloat(integer)`         | float        | Converts an integer value into the equivalent floating point value.                                                                                                                                                                                                                                                                                                                                                                     |
+| `floatToInt(float)`           | integer      | Converts a floating point value into an integer value by discarding the fraction, rounding toward zero to the nearest integer.<br>Special cases:<br>&nbsp; +Inf yields the maximum 64-bit integer (9223372036854775807)<br>&nbsp; -Inf and NaN yield the minimum 64-bit integer (-9223372036854775808)\n\n"<br><br>For example, `5.5` yields `5`, and `-1.9` yields `-1`"                                                               |
+| `intToString(integer)`        | string       | Returns a string containing the base-10 representation of the input.<br><br>For example, an input of `55` yields `"55"`                                                                                                                                                                                                                                                                                                                 |
+| `floatToString(float)`        | string       | Returns a string containing the base-10 representation of the input.<br><br>For example, an input of `5000.5` yields `"5000.5"`                                                                                                                                                                                                                                                                                                         |
+| `boolToString(boolean)`       | string       | Returns `"true"` for `true`, and `"false"` for `false`.                                                                                                                                                                                                                                                                                                                                                                                 |
+| `stringToInt(string)`         | integer      | Interprets the string as a base-10 integer. Returns an error if the input is not a valid integer.                                                                                                                                                                                                                                                                                                                                       |
+| `stringToFloat(string)`       | float        | Converts the input string to a double-precision floating-point number.<br><br>Accepts floating-point numbers as defined by the [Go syntax for floating point literals](https://go.dev/ref/spec#Floating-point_literals).  If the input is well-formed and near a valid floating-point number, returns the nearest floating-point number rounded using IEEE754 unbiased rounding.<br>Returns an error when an invalid input is received. |
+| `stringToBool(string)`        | boolean      | Interprets the input as a boolean.<br>Accepts `"1"`, `"t"`, and `"true"` as `true` and `"0"`, `"f"`, and `"false"` as `false` (case is not significant).<br>Returns an error for any other input.                                                                                                                                                                                                                                       |
+| `ceil(float)`                 | float        | Returns the least integer value greater than or equal to the input.<br><br>For example `ceil(1.5)` yields `2.0`, and `ceil(-1.5)` yields `-1.0`<br>Special cases are:<br>&nbsp; ceil(±0.0) = ±0.0<br>&nbsp; ceil(±Inf) = ±Inf<br>&nbsp; ceil(NaN) = NaN                                                                                                                                                                                 |
+| `floor(float)`                | float        | Returns the greatest integer value less than or equal to the input.<br><br>For example `floor(1.5)` yields `1.0`, and `floor(-1.5)` yields `-2.0`<br>Special cases are:<br>&nbsp; floor(±0.0) = ±0.0<br>&nbsp; floor(±Inf) = ±Inf<br>&nbsp; floor(NaN) = NaN                                                                                                                                                                            |
+| `round(float)`                | float        | Returns the nearest integer to the input, rounding half away from zero.<br><br>For example `round(1.5)` yields `2.0`, and `round(-1.5)` yields `-2.0`<br>Special cases are:<br>&nbsp; round(±0.0) = ±0.0<br>&nbsp; round(±Inf) = ±Inf<br>&nbsp; round(NaN) = NaN                                                                                                                                                                        |
+| `abs(float)`                  | float        | Returns the absolute value of the input.<br>Special cases are:<br>&nbsp; abs(±Inf) = +Inf<br>&nbsp; abs(NaN) = NaN                                                                                                                                                                                                                                                                                                                      |
+| `toLower(string)`             | string       | Returns the input with Unicode letters mapped to their lower case.                                                                                                                                                                                                                                                                                                                                                                      |
+| `toUpper(string)`             | string       | Returns the input with Unicode letters mapped to their upper case.                                                                                                                                                                                                                                                                                                                                                                      |
+| `splitString(string, string)` | list[string] | Returns a list of the substrings which appear between instances of the specified separator; the separator instances are not included in the resulting list elements; adjacent occurrences of separator instances as well as instances appearing at the beginning or ending of the input will produce empty string list elements.<br>&nbsp; Param 1: The string to split.<br>&nbsp; Param 2: The separator.                              |
+
+A function is used in an expression by referencing its name followed by a comma-separated list of zero or more argument
+expressions enclosed in parentheses.
 
 Example:
 ```JavaScript
@@ -215,26 +268,27 @@ thisIsAFunction("this is a string literal for the first parameter", $.a.b)
 ## Binary Operations
 
 Binary Operations have an expression to the left and right, with an operator in between.
-The order of operations determines which operators run first. See [Order of Operations](#order-of-operations)
+The order of operations determines which operators are evaluated first. See [Order of Operations](#order-of-operations)
 
-The left and right types **must** match. To convert types, see the list of [available functions](#functions).
+The types of the left and right operand expressions **must** match. To convert between types, see the list of [available functions](#functions).
+The type of the resulting expression is the same as the type of its operands.
 
-| Operator| Description        |
-| --------|--------------------|
-| `+`     | [Addition/Concatenation](#additionconcatenation) |
-| `-`     | [Subtraction](#subtraction) |
-| `*`     | [Multiplication](#multiplication)|
-| `/`     | [Division](#division)|
-| `%`     | [Modulus](#modulus)|
-| `^`     | [Exponentiation](#exponentiation)|
-| `==`    | [Equal To](#equal-to)|
-| `!=`    | [Not Equal To](#not-equal-to)|
-| `>`     | [Greater Than](#greater-than)|
-| `<`     | [Less Than](#less-than)|
-| `>=`    | [Greater Than or Equal To](#greater-than-or-equal-to)|
-| `<=`    | [Less Than or Equal To](#less-than-or-equal-to)|
-| `&&`    | [Logical And](#logical-and)|
-| `\|\|`  | [Logical Or](#logical-or)|
+| Operator | Description                                           |
+|----------|-------------------------------------------------------|
+| `+`      | [Addition/Concatenation](#additionconcatenation)      |
+| `-`      | [Subtraction](#subtraction)                           |
+| `*`      | [Multiplication](#multiplication)                     |
+| `/`      | [Division](#division)                                 |
+| `%`      | [Modulus](#modulus)                                   |
+| `^`      | [Exponentiation](#exponentiation)                     |
+| `==`     | [Equal To](#equal-to)                                 |
+| `!=`     | [Not Equal To](#not-equal-to)                         |
+| `>`      | [Greater Than](#greater-than)                         |
+| `<`      | [Less Than](#less-than)                               |
+| `>=`     | [Greater Than or Equal To](#greater-than-or-equal-to) |
+| `<=`     | [Less Than or Equal To](#less-than-or-equal-to)       |
+| `&&`     | [Logical And](#logical-and)                           |
+| `\|\|`   | [Logical Or](#logical-or)                             |
 
 
 ### Addition/Concatenation
@@ -261,21 +315,21 @@ The expression `$.a - $.b` would evaluate the values of `a` and `b` within the r
 
 ### Multiplication
 
-When the `*` operator is used with a numerical operands, it multiplies them. The operator requires numerical operands with the same type.
+When the `*` operator is used with numerical operands, it multiplies them. The operator requires numerical operands with the same type.
 
 For example, the expression `3 * 3` would output the integer `9`.
 
 ### Division
 
-When the `/` operator is used with a numerical operands, it outputs the value of the right expression divided by the value of the left. The operator requires numerical operands with the same type.
+When the `/` operator is used with numerical operands, it outputs the value of the left expression divided by the value of the right. The operator requires numerical operands with the same type.
 
-The output type matches the input type. Integer division results in the value being rounded towards zero. If a non-whole number output is required, or if different rounding logic is required, convert the inputs into floating point number with the [`intToFloat` function](#functions), or back into integers with the [`floatToInt` function](#functions). Different types of rounding can be achieved for floating point numbers with the [functions `ceil`, `floor`, and `round`](#functions).
+The result of integer division is rounded towards zero. If a non-integral result is required, or if different rounding logic is required, convert the inputs into floating point numbers with the [`intToFloat` function](#functions). Different types of rounding can be performed on floating point numbers with the [functions](#functions) `ceil`, `floor`, and `round`.
 
-For example, the expression `-3 / 2` would output the integer `-1`.
+For example, the expression `-3 / 2` would yield the integer value `-1`.
 
 ### Modulus
 
-When the `%` operator is used with a numerical operands, it outputs the remainder of value of the right expression divided by the value of the left. The operator requires numerical operands with the same type.
+When the `%` operator is used with numerical operands, it evaluates to the remainder when the value of the left expression is divided by the value of the right. The operator requires numerical operands with the same type.
 
 For example, the expression `5 % 3` would output the integer `2`.
 
@@ -287,19 +341,19 @@ The mathematical expression 2<sup>3</sup> is represented in the expression langu
 
 ### Equal To
 
-The `==` operator checks for equality between the left and right type. It returns true when the left and right match. The type must be the same for both operands, so the expression `1 == 1.0` would produce a type error. You may use functions to convert types. For example, `intToFloat(1) == 1.0`. See [functions](#functions) for more type conversions.
+The `==` operator evaluates to true if the values of the left and right operands are the same. Both operands must have
+the same type. You may use functions to convert between types -- see [functions](#functions) for more type conversions.
+The operator supports the types `integer`, `float`, `string`, and `boolean`.
 
-The operator currently supports the types `integer`, `float`, `string`, and `boolean`. If another type is required, please create an issue with the expected behavior of the operator with the needed type.
-
-For example, `2 == 2` results in `true`, and `"a" == "b"` results in `false`.
+For example, `2 == 2` results in `true`, and `"a" == "b"` results in `false`.  `1 == 1.0` would result in a type error.
 
 ### Not Equal To
 
-The `!=` operator is the inverse of the [==](#equals ) operator. It returns true when the values do not match. The type must be the same for both operands, so the expression `1 != 1.0` would produce a type error. You may use functions to convert types. For example, `intToFloat(1) != 1.0`. See [functions](#functions) for more type conversions.
+The `!=` operator is the inverse of the [`==`](#equal-to) operator. It evaluates to false if the values of the left and right operands are the same. Both operands must have
+the same type. You may use functions to convert between types -- see [functions](#functions) for more type conversions.
+The operator supports the types `integer`, `float`, `string`, and `boolean`.
 
-The operator currently supports the types `integer`, `float`, `string`, and `boolean`. If another type is required, please create an issue with the expected behavior of the operator with the needed type.
-
-For example, `2 != 2` results in `false`, and `"a" != "b"` results in `true`.
+For example, `2 != 2` results in `false`, and `"a" != "b"` results in `true`.  `1 != 1.0` would result in a type error.
 
 ### Greater Than
 
@@ -334,11 +388,12 @@ For example, the expression `3 <= 3` would output the boolean `true`, `3 <= 4` w
 ### Logical AND
 
 The `&&` operator returns `true` if both the left and right sides are `true`, and `false` otherwise. This operator requires boolean operands.
-Note: There is no short-circuiting as it's currently implemented. Both the left and right are evaluated before the comparison takes place.
+Note: The operation does not "short-circuit" -- both the left and right expressions are evaluated before the comparison takes place.
 
 All cases:
+
 | Left    | Right   | `&&`    |
-| ------- | ------- | ------- |
+|---------|---------|---------|
 | `true`  | `true`  | `true`  |
 | `true`  | `false` | `false` |
 | `false` | `true`  | `false` |
@@ -347,11 +402,12 @@ All cases:
 ### Logical OR
 
 The `||` operator returns `true` if **either or both** of the left and right sides are `true`, and `false` otherwise. This operator requires boolean operands.
-Note: There is no short-circuiting as it's currently implemented. Both the left and right are evaluated before the comparison takes place.
+Note: The operation does not "short-circuit" -- both the left and right expressions are evaluated before the comparison takes place.
 
 All cases:
+
 | Left    | Right   | `\|\|`  |
-| ------- | ------- | ------- |
+|---------|---------|---------|
 | `true`  | `true`  | `true`  |
 | `true`  | `false` | `true`  |
 | `false` | `true`  | `true`  |
@@ -359,33 +415,31 @@ All cases:
 
 ## Unary Operations
 
-Unary operations are operations that have one input. They are formatted as one operator to the left of the operand expression.
+Unary operations are operations that have one input. The operator is applied to the expression which follows it.
 
-| Operator | Description        |
-| ---------|--------------------|
-| -        | [Negation](#Negation)           |
+| Operator | Description                               |
+|----------|-------------------------------------------|
+| -        | [Negation](#Negation)                     |
 | !        | [Logical complement](#logical-complement) |
 
 ### Negation
 
-The negation operator negates the numeric value from the input expression.
-The required format is a dash `-` before the expression.
+The `-` operator negates the value of the expression which follows it.
 
 This operation requires numeric input.
 
-Examples with integer literals: `-5`, `- 5`
-Example with a float literal: `-50.0`
-Example with a reference: `-$.foo`
+Examples with integer literals: `-5`, `- 5`<br>
+Example with a float literal: `-50.0`<br>
+Example with a reference: `-$.foo`<br>
 Example with parentheses and a sub-expression: `-(5 + 5)`
 
 ### Logical complement
 
-The logical complement unary operator logically inverts the boolean input.
-The required format is an exclamation point `!` before the expression.
+The `!` operator logically inverts the value of the expression which follows it.
 
 This operation requires boolean input.
 
-Example with a boolean literal: `!true`
+Example with a boolean literal: `!true`<br>
 Example with a reference: `!$.foo`
 
 ## Parentheses
@@ -406,8 +460,8 @@ Order (highest to lowest):
  - [`* ` multiplication](#multiplication) and [division `/`](#division)
  - [`+ ` addition/concatenation](#additionconcatenation) and [subtraction `-`](#subtraction)
  - binary equality and inequality (all equal)
-   - [`==` equals](#equals)
-   - [`!=` not equals](#not-equals)
+   - [`==` equals](#equal-to)
+   - [`!=` not equals](#not-equal-to)
    - [`> ` greater than](#greater-than)
    - [`< ` less than](#less-than)
    - [`>=` greater than or equal to](#greater-than-or-equal-to)
