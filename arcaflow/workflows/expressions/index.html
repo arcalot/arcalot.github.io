@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.12">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
     
     
       
@@ -1441,6 +1441,81 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#literals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Literals
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Literals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#string-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      String values
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="String values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#string-expressions-in-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      String Expressions in YAML
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raw-string-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Raw string values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integer-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integer numbers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#floating-point-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Floating point numbers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boolean-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Boolean values
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#root-reference" class="md-nav__link">
     <span class="md-ellipsis">
       Root reference
@@ -1459,9 +1534,267 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#array-accessor" class="md-nav__link">
+  <a href="#bracket-accessor" class="md-nav__link">
     <span class="md-ellipsis">
-      Array accessor
+      Bracket accessor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bracket accessor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      List access
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Map access
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#binary-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Binary Operations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Binary Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#additionconcatenation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Addition/Concatenation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Addition/Concatenation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#string-concatenation" class="md-nav__link">
+    <span class="md-ellipsis">
+      String Concatenation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-addition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mathematical Addition
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subtraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Subtraction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiplication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#division" class="md-nav__link">
+    <span class="md-ellipsis">
+      Division
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modulus
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exponentiation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exponentiation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equal-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      Equal To
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#not-equal-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      Not Equal To
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#greater-than" class="md-nav__link">
+    <span class="md-ellipsis">
+      Greater Than
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#less-than" class="md-nav__link">
+    <span class="md-ellipsis">
+      Less Than
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#greater-than-or-equal-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      Greater Than or Equal To
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#less-than-or-equal-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      Less Than or Equal To
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logical-and" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logical AND
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logical-or" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logical OR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unary-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unary Operations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Unary Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#negation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Negation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logical-complement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logical complement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parentheses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parentheses
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#order-of-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Order of Operations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other information
     </span>
   </a>
   
@@ -1787,14 +2120,191 @@
 
 
 <h1 id="arcaflow-expressions">Arcaflow expressions</h1>
-<p>Arcaflow expressions are heavily inspired by JSONPath, but have diverged from the syntax. You can use expressions in a workflow YAML like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">some_value</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.your.expresion.here</span>
+<p>Arcaflow expressions were inspired by JSONPath but have diverged from the syntax. You can use expressions in a workflow YAML like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">some_value</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.your.expression.here</span>
 </code></pre></div>
 <p>This page explains the language elements of expressions.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Expressions in workflow definitions <strong>must</strong> be prefixed with <code>!expr</code>, otherwise their literal value will be taken as a string.</p>
 </div>
+<h2 id="literals">Literals</h2>
+<p>Literals represent constant values in an expression.</p>
+<h3 id="string-values">String values</h3>
+<p>Normal string literals start and end with a matched pair of either single quotes (<code>'</code>) or double quotes (<code>"</code>) and have zero or more characters between the quotes.</p>
+<p>Strings may contain special characters.  In normal strings, these characters are represented by &ldquo;escape sequences&rdquo; consisting of a
+backslash followed by another character.  Since a backslash therefore has a special meaning, in order to represent a
+literal backslash character, it must be preceded by another backslash.  Similarly, in a string delimited by double
+quotes, a double quote occurring inside the string must be escaped to prevent it from marking the end of the string.
+The same is true for single quotes occurring inside a string delimited by single quotes.  However, you do not need to escape
+double quotes in a single-quoted string nor single-quotes in a double-quoted string.</p>
+<p>Here is the list of supported escape characters:</p>
+<table>
+<thead>
+<tr>
+<th>Escape</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\\</code></td>
+<td><code>\</code> backslash character</td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>tab character</td>
+</tr>
+<tr>
+<td><code>\n</code></td>
+<td>newline character</td>
+</tr>
+<tr>
+<td><code>\r</code></td>
+<td>carriage return character</td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>backspace character</td>
+</tr>
+<tr>
+<td><code>\"</code></td>
+<td><code>"</code> double quote character</td>
+</tr>
+<tr>
+<td><code>\'</code></td>
+<td><code>'</code> single quote character</td>
+</tr>
+<tr>
+<td><code>\0</code></td>
+<td>null character</td>
+</tr>
+</tbody>
+</table>
+<p>For example, to have the following text represented in a single string:</p>
+<blockquote>
+<p>test
+test2/\</p>
+</blockquote>
+<p>You would need the expression <code>"test\ntest2/\\"</code></p>
+<h4 id="string-expressions-in-yaml">String Expressions in YAML</h4>
+<p>When expressing string literals in YAML, be aware that YAML has its own rules around the use of quotation marks.</p>
+<p>For example, to include a double-quoted string in an expression, you must either add single quotes around the expression
+or use block flow scalars. Inside a single-quoted string, an apostrophe needs to be preceded
+by another apostrophe to indicate that it does not terminate the string.</p>
+<p>Here is an example of the following value represented in a few of the various ways:</p>
+<blockquote>
+<p>Here&rsquo;s an apostrophe and &ldquo;embedded quotes&rdquo;.</p>
+</blockquote>
+<p>Inlined with single quotes:
+<div class="highlight"><pre><span></span><code>some_value_1: !expr &#39;&quot;Here&#39;&#39;s an apostrophe and \&quot;embedded quotes\&quot;.&quot;&#39;
+</code></pre></div></p>
+<blockquote>
+<p>[!TIP]</p>
+<ul>
+<li>The <code>!expr</code> tag indicates to the YAML processor that the value is an Arca <em>expression</em>.</li>
+<li>The single quotes cause the YAML processor to pass the contents of the string intact except for replacing the
+    repeated apostrophe with a single one.  (They are not included in the expression value.)</li>
+<li>The backslash-escapes are replaced by Arca&rsquo;s expression processing.  (The unescaped double quotes are not included
+    in the expression value.)</li>
+</ul>
+</blockquote>
+<p>Inlined with double quotes:
+<div class="highlight"><pre><span></span><code>some_value_2: !expr &quot;&#39;Here\\&#39;s an apostrophe and \&quot;embedded quotes\&quot;.&#39;&quot;
+</code></pre></div></p>
+<blockquote>
+<p>[!TIP]</p>
+<ul>
+<li>The <code>!expr</code> tag indicates to the YAML processor that the value is an Arca expression.</li>
+<li>The double quotes cause the YAML processor to interpret the contents of the string:</li>
+<li>the <code>\\</code> is replaced with a single backslash;</li>
+<li>each <code>\"</code> is replaced with a literal <code>"</code>;</li>
+<li>the surrounding double quotes are not included in the expression value.</li>
+<li>The backslash-escapes are replaced by Arca&rsquo;s expression processing.  (The unescaped single quotes are not included
+    in the expression value.)</li>
+</ul>
+</blockquote>
+<p>With Block Flow Scalar:
+<div class="highlight"><pre><span></span><code>some_value_1: !expr |-
+  &#39;Here\&#39;s an apostrophe and &quot;embedded quotes&quot;.&#39;
+some_value_2: !expr |-
+  &quot;Here&#39;s an apostrophe and \&quot;embedded quotes\&quot;.&quot;
+</code></pre></div></p>
+<blockquote>
+<p>[!TIP]</p>
+<ul>
+<li>The <code>!expr</code> tag indicates to the YAML processor that the value is an Arca <em>expression</em>.</li>
+<li>The vertical bar (<code>|</code>) causes the YAML processor to pass the contents of the string without modification.</li>
+<li>Newlines within the expression are included in the string; the hyphen (<code>-</code>) after the vertical bar causes the
+    trailing newline to be omitted from the end of the string.</li>
+<li>The backslash-escapes are replaced by Arca&rsquo;s expression processing.  The unescaped quotes are not included
+    in the expression value; the other quotes are escaped to prevent them from ending the string prematurely; the
+    double quotes in <code>some_value_1</code> do not need to be escaped nor do the single quotes in <code>some_value_2</code>.</li>
+</ul>
+</blockquote>
+<p>See <a href="#raw-string-values">Raw string values</a> to see how to do this without escaping.</p>
+<h3 id="raw-string-values">Raw string values</h3>
+<p>Raw string literals start and end with backtick characters &ldquo;`&ldquo;.</p>
+<p>In a raw string, all characters are interpreted literally. This means that you can use <code>'</code> and <code>"</code> characters without
+escaping them, and backslashes are treated like any other character.  However, backtick characters cannot appear in a
+raw string.</p>
+<p>Here is an example of the following value represented using raw strings:</p>
+<blockquote>
+<p>Here&rsquo;s an apostrophe and &ldquo;embedded quotes&rdquo;.</p>
+</blockquote>
+<p>Inlined:
+<div class="highlight"><pre><span></span><code>some_value: !expr &#39;`Here&#39;&#39;s an apostrophe and &quot;embedded quotes&quot;.`&#39;
+</code></pre></div></p>
+<blockquote>
+<p>[!TIP]</p>
+<ul>
+<li>The <code>!expr</code> tag indicates to the YAML processor that the value is an Arca <em>expression</em>.</li>
+<li>The single quotes cause the YAML processor to pass the contents of the string intact except for replacing the
+    repeated apostrophe with a single one.  (They are not included in the expression value.)</li>
+<li>The backticks cause Arca&rsquo;s expression processing to use the string verbatim.  (The backticks are not included
+    in the expression value.)</li>
+</ul>
+</blockquote>
+<p>With Block Flow Scalar:
+<div class="highlight"><pre><span></span><code>some_value: !expr |-
+  `Here&#39;s an apostrophe and &quot;embedded quotes&quot;.`
+</code></pre></div></p>
+<blockquote>
+<p>[!TIP]</p>
+<ul>
+<li>The <code>!expr</code> tag indicates to the YAML processor that the value is an Arca <em>expression</em>.</li>
+<li>The vertical bar (<code>|</code>) causes the YAML processor to pass the contents of the string without modification.</li>
+<li>Newlines within the expression are included in the string; the hyphen (<code>-</code>) after the vertical bar causes the
+    trailing newline to be omitted from the end of the string.</li>
+<li>The backticks cause Arca&rsquo;s expression processing to use the string verbatim, thus the embedded quotes don&rsquo;t require
+    escapes.  (The backticks are not included in the expression value.)</li>
+</ul>
+</blockquote>
+<h3 id="integer-numbers">Integer numbers</h3>
+<p>Integers are whole numbers expressed as sequences of base-10 digits.</p>
+<p>Integer literals may not start with <code>0</code>, unless the value is <code>0</code>. For example, <code>001</code> is not a valid integer literal.</p>
+<p>Examples:</p>
+<ul>
+<li><code>0</code></li>
+<li><code>1</code></li>
+<li><code>503</code></li>
+</ul>
+<p>Negative values are constructed by applying the <a href="#negation">negation operator (<code>-</code>)</a> to a literal numeric value.</p>
+<h3 id="floating-point-numbers">Floating point numbers</h3>
+<p>Floating point literals are non-negative double-precision floating point numbers.</p>
+<p>Supported formats include:</p>
+<ul>
+<li>number characters followed by a period followed by zero or more number characters: <code>1.1</code> or <code>1.</code></li>
+<li>base-10 exponential scientific notation formats like <code>5.0e5</code> and <code>5.0E-5</code></li>
+</ul>
+<p>Negative values are constructed by applying the <a href="#negation">negation operator (<code>-</code>)</a> to a literal numeric value.</p>
+<h3 id="boolean-values">Boolean values</h3>
+<p>Boolean literals have two valid values:</p>
+<ul>
+<li><code>true</code></li>
+<li><code>false</code></li>
+</ul>
+<p>No other values are valid boolean literals. The values are case-sensitive.</p>
 <h2 id="root-reference">Root reference</h2>
 <p>The <code>$</code> character always references the root of the data structure. Let&rsquo;s take this data structure:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">foo</span><span class="p">:</span>
@@ -1804,20 +2314,386 @@
 <div class="highlight"><pre><span></span><code>$.foo.bar
 </code></pre></div>
 <h2 id="dot-notation">Dot notation</h2>
-<p>The dot notation allows you to dive into a data structure. If the data structure is a map, it will look up the map keys. If it&rsquo;s a list, it will look up the list item. If it&rsquo;s an object, it will look up the object property.</p>
-<p>For example, you can look up the list item from this data structure:</p>
+<p>The dot notation allows you to reference fields of an object.</p>
+<p>For example, if you have an object on the root data structure named &ldquo;a&rdquo; with the field &ldquo;b&rdquo; in it, you can access it with:</p>
+<div class="highlight"><pre><span></span><code>$.a.b
+</code></pre></div>
+<h2 id="bracket-accessor">Bracket accessor</h2>
+<p>The bracket accessor is used for referencing values in maps or lists.</p>
+<h4 id="list-access">List access</h4>
+<p>For list access, you specify the index of the value you want to access. The index should be an expression yielding a non-negative integer value, where zero corresponds to the first value in the list.</p>
+<p>If you have a list named <code>foo</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">foo</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Hello world!</span>
 </code></pre></div>
-<p>You can use the following expression to access it:</p>
-<div class="highlight"><pre><span></span><code>$.foo.0
+<p>You can access the first value with the expression:
+<div class="highlight"><pre><span></span><code><span class="nx">$</span><span class="p">.</span><span class="nx">foo</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span>
+</code></pre></div></p>
+<p>Giving the output <code>"Hello world!"</code></p>
+<h4 id="map-access">Map access</h4>
+<p>Maps, also known as dictionaries in some languages, are key-value pair data structures.</p>
+<p>To use a map in an expression, the expression to the left of the brackets must be a reference to a map. That is then followed by a pair of brackets with a sub-expression between them. That sub-expression must evaluate to a valid key in the map.</p>
+<p>Here is an example of a map with string keys and integer values. The map is stored in a field called <code>foo</code> in the root-level object:</p>
+<div class="highlight"><pre><span></span><code>foo:
+  a: 1
+  b: 2
 </code></pre></div>
-<h2 id="array-accessor">Array accessor</h2>
-<p>Alternative to the dot notation, you can also use the array accessor:</p>
-<div class="highlight"><pre><span></span><code>$.foo[0]
-</code></pre></div>
-<p>In Arcaflow, the two are equivalent.</p>
-<p>More information on the expression language is available in the <a href="/arcaflow/contributing/expressions">development guide</a>.</p>
+<p>Given the map shown above, the following expression would yield a value of <code>2</code>:
+<div class="highlight"><pre><span></span><code><span class="nx">$</span><span class="p">.</span><span class="nx">foo</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>
+</code></pre></div></p>
+<h2 id="functions">Functions</h2>
+<p>The engine provides predefined functions for use in expressions.  These provide transformations beyond what is
+available from operators.</p>
+<p>Functions:</p>
+<table>
+<thead>
+<tr>
+<th>function definition</th>
+<th>return type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>intToFloat(integer)</code></td>
+<td>float</td>
+<td>Converts an integer value into the equivalent floating point value.</td>
+</tr>
+<tr>
+<td><code>floatToInt(float)</code></td>
+<td>integer</td>
+<td>Converts a floating point value into an integer value by discarding the fraction, rounding toward zero to the nearest integer.<br><br>Special cases:<br>&nbsp; +Inf yields the maximum 64-bit integer (9223372036854775807)<br>&nbsp; -Inf and NaN yield the minimum 64-bit integer (-9223372036854775808)<br><br>For example, <code>5.5</code> yields <code>5</code>, and <code>-1.9</code> yields <code>-1</code></td>
+</tr>
+<tr>
+<td><code>intToString(integer)</code></td>
+<td>string</td>
+<td>Returns a string containing the base-10 representation of the input.<br><br>For example, an input of <code>55</code> yields <code>"55"</code></td>
+</tr>
+<tr>
+<td><code>floatToString(float)</code></td>
+<td>string</td>
+<td>Returns a string containing the base-10 representation of the input.<br><br>For example, an input of <code>5000.5</code> yields <code>"5000.5"</code></td>
+</tr>
+<tr>
+<td><code>floatToFormattedString(float, string, integer)</code></td>
+<td>string</td>
+<td>Returns a string containing the input in the specified format with the specified precision.<br>&nbsp; Param 1: the floating point input value<br>&nbsp; Param 2: the format specifier: <code>"e"</code>, <code>"E"</code>, <code>"f"</code>, <code>"g"</code>, <code>"G"</code><br>&nbsp; Param 3: the number of digits<br><br>Specifying -1 for the precision will produce the minimum number of digits required to represent the value exactly.  (See the <a href="https://pkg.go.dev/strconv@go1.22.0#FormatFloat">Go runtime documentation</a> for details.)</td>
+</tr>
+<tr>
+<td><code>boolToString(boolean)</code></td>
+<td>string</td>
+<td>Returns <code>"true"</code> for <code>true</code>, and <code>"false"</code> for <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>stringToInt(string)</code></td>
+<td>integer</td>
+<td>Interprets the string as a base-10 integer. Returns an error if the input is not a valid integer.</td>
+</tr>
+<tr>
+<td><code>stringToFloat(string)</code></td>
+<td>float</td>
+<td>Converts the input string to a double-precision floating-point number.<br><br>Accepts floating-point numbers as defined by the <a href="https://go.dev/ref/spec#Floating-point_literals">Go syntax for floating point literals</a>.  If the input is well-formed and near a valid floating-point number, returns the nearest floating-point number rounded using IEEE754 unbiased rounding. Returns an error when an invalid input is received.</td>
+</tr>
+<tr>
+<td><code>stringToBool(string)</code></td>
+<td>boolean</td>
+<td>Interprets the input as a boolean.<br><br>Accepts <code>"1"</code>, <code>"t"</code>, and <code>"true"</code> as <code>true</code> and <code>"0"</code>, <code>"f"</code>, and <code>"false"</code> as <code>false</code> (case is not significant). Returns an error for any other input.</td>
+</tr>
+<tr>
+<td><code>ceil(float)</code></td>
+<td>float</td>
+<td>Returns the least integer value greater than or equal to the input.<br><br>Special cases are:<br>&nbsp; ceil(±0.0) = ±0.0<br>&nbsp; ceil(±Inf) = ±Inf<br>&nbsp; ceil(NaN) = NaN<br><br>For example <code>ceil(1.5)</code> yields <code>2.0</code>, and <code>ceil(-1.5)</code> yields <code>-1.0</code></td>
+</tr>
+<tr>
+<td><code>floor(float)</code></td>
+<td>float</td>
+<td>Returns the greatest integer value less than or equal to the input.<br><br>Special cases are:<br>&nbsp; floor(±0.0) = ±0.0<br>&nbsp; floor(±Inf) = ±Inf<br>&nbsp; floor(NaN) = NaN<br><br>For example <code>floor(1.5)</code> yields <code>1.0</code>, and <code>floor(-1.5)</code> yields <code>-2.0</code></td>
+</tr>
+<tr>
+<td><code>round(float)</code></td>
+<td>float</td>
+<td>Returns the nearest integer to the input, rounding half away from zero.<br><br>Special cases are:<br>&nbsp; round(±0.0) = ±0.0<br>&nbsp; round(±Inf) = ±Inf<br>&nbsp; round(NaN) = NaN<br><br>For example <code>round(1.5)</code> yields <code>2.0</code>, and <code>round(-1.5)</code> yields <code>-2.0</code></td>
+</tr>
+<tr>
+<td><code>abs(float)</code></td>
+<td>float</td>
+<td>Returns the absolute value of the input.<br><br>Special cases are:<br>&nbsp; abs(±Inf) = +Inf<br>&nbsp; abs(NaN) = NaN</td>
+</tr>
+<tr>
+<td><code>toLower(string)</code></td>
+<td>string</td>
+<td>Returns the input with Unicode letters mapped to their lower case.</td>
+</tr>
+<tr>
+<td><code>toUpper(string)</code></td>
+<td>string</td>
+<td>Returns the input with Unicode letters mapped to their upper case.</td>
+</tr>
+<tr>
+<td><code>splitString(string, string)</code></td>
+<td>list[string]</td>
+<td>Returns a list of the substrings which appear between instances of the specified separator; the separator instances are not included in the resulting list elements; adjacent occurrences of separator instances as well as instances appearing at the beginning or ending of the input will produce empty string list elements.<br>&nbsp; Param 1: The string to split.<br>&nbsp; Param 2: The separator.</td>
+</tr>
+</tbody>
+</table>
+<p>A function is used in an expression by referencing its name followed by a comma-separated list of zero or more argument
+expressions enclosed in parentheses.</p>
+<p>Example:
+<div class="highlight"><pre><span></span><code><span class="nx">thisIsAFunction</span><span class="p">(</span><span class="s2">&quot;this is a string literal for the first parameter&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">$</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">b</span><span class="p">)</span>
+</code></pre></div></p>
+<h2 id="binary-operations">Binary Operations</h2>
+<p>Binary Operations have an expression to the left and right, with an operator in between.
+The order of operations determines which operators are evaluated first. See <a href="#order-of-operations">Order of Operations</a></p>
+<p>The types of the left and right operand expressions <strong>must</strong> match. To convert between types, see the list of <a href="#functions">available functions</a>.
+The type of the resulting expression is the same as the type of its operands.</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+</code></td>
+<td><a href="#additionconcatenation">Addition/Concatenation</a></td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td><a href="#subtraction">Subtraction</a></td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td><a href="#multiplication">Multiplication</a></td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td><a href="#division">Division</a></td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td><a href="#modulus">Modulus</a></td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td><a href="#exponentiation">Exponentiation</a></td>
+</tr>
+<tr>
+<td><code>==</code></td>
+<td><a href="#equal-to">Equal To</a></td>
+</tr>
+<tr>
+<td><code>!=</code></td>
+<td><a href="#not-equal-to">Not Equal To</a></td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td><a href="#greater-than">Greater Than</a></td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td><a href="#less-than">Less Than</a></td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td><a href="#greater-than-or-equal-to">Greater Than or Equal To</a></td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td><a href="#less-than-or-equal-to">Less Than or Equal To</a></td>
+</tr>
+<tr>
+<td><code>&amp;&amp;</code></td>
+<td><a href="#logical-and">Logical And</a></td>
+</tr>
+<tr>
+<td><code>\|\|</code></td>
+<td><a href="#logical-or">Logical Or</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="additionconcatenation">Addition/Concatenation</h3>
+<p>This operator has different behavior depending on the type.</p>
+<h5 id="string-concatenation">String Concatenation</h5>
+<p>When the <code>+</code> operator is used with two strings, it concatenates them together.
+For example, the expression <code>"a" + "b"</code> would output the string <code>"ab"</code>.</p>
+<h5 id="mathematical-addition">Mathematical Addition</h5>
+<p>When the <code>+</code> operator is used with numerical operands, it adds them together. The operator requires numerical operands with the same type. You cannot mix float and integer operands.
+For example, the expression <code>2 + 2</code> would output the integer <code>4</code>.</p>
+<h3 id="subtraction">Subtraction</h3>
+<p>When the <code>-</code> operator is applied to numerical operands, the result is the value of the right operand subtracted from the value of the left. The operator requires numerical operands with the same type. You cannot mix float and integer operands.</p>
+<p>For example, the expression <code>6 - 4</code> would output the integer <code>2</code>.
+The expression <code>$.a - $.b</code> would evaluate the values of <code>a</code> and <code>b</code> within the root, and subtract the value of <code>$.b</code> from <code>$.a</code>.</p>
+<h3 id="multiplication">Multiplication</h3>
+<p>When the <code>*</code> operator is used with numerical operands, it multiplies them. The operator requires numerical operands with the same type.</p>
+<p>For example, the expression <code>3 * 3</code> would output the integer <code>9</code>.</p>
+<h3 id="division">Division</h3>
+<p>When the <code>/</code> operator is used with numerical operands, it outputs the value of the left expression divided by the value of the right. The operator requires numerical operands with the same type.</p>
+<p>The result of integer division is rounded towards zero. If a non-integral result is required, or if different rounding logic is required, convert the inputs into floating point numbers with the <a href="#functions"><code>intToFloat</code> function</a>. Different types of rounding can be performed on floating point numbers with the <a href="#functions">functions</a> <code>ceil</code>, <code>floor</code>, and <code>round</code>.</p>
+<p>For example, the expression <code>-3 / 2</code> would yield the integer value <code>-1</code>.</p>
+<h3 id="modulus">Modulus</h3>
+<p>When the <code>%</code> operator is used with numerical operands, it evaluates to the remainder when the value of the left expression is divided by the value of the right. The operator requires numerical operands with the same type.</p>
+<p>For example, the expression <code>5 % 3</code> would output the integer <code>2</code>.</p>
+<h3 id="exponentiation">Exponentiation</h3>
+<p>The <code>^</code> operator outputs the result of the left side raised to the power of the right side. The operator requires numerical operands with the same type.</p>
+<p>The mathematical expression 2<sup>3</sup> is represented in the expression language as <code>2^3</code>, which would output the integer <code>8</code>.</p>
+<h3 id="equal-to">Equal To</h3>
+<p>The <code>==</code> operator evaluates to true if the values of the left and right operands are the same. Both operands must have
+the same type. You may use functions to convert between types &ndash; see <a href="#functions">functions</a> for more type conversions.
+The operator supports the types <code>integer</code>, <code>float</code>, <code>string</code>, and <code>boolean</code>.</p>
+<p>For example, <code>2 == 2</code> results in <code>true</code>, and <code>"a" == "b"</code> results in <code>false</code>.  <code>1 == 1.0</code> would result in a type error.</p>
+<h3 id="not-equal-to">Not Equal To</h3>
+<p>The <code>!=</code> operator is the inverse of the <a href="#equal-to"><code>==</code></a> operator. It evaluates to false if the values of the left and right operands are the same. Both operands must have
+the same type. You may use functions to convert between types &ndash; see <a href="#functions">functions</a> for more type conversions.
+The operator supports the types <code>integer</code>, <code>float</code>, <code>string</code>, and <code>boolean</code>.</p>
+<p>For example, <code>2 != 2</code> results in <code>false</code>, and <code>"a" != "b"</code> results in <code>true</code>.  <code>1 != 1.0</code> would result in a type error.</p>
+<h3 id="greater-than">Greater Than</h3>
+<p>The <code>&gt;</code> operator outputs <code>true</code> if the left side is greater than the right side, and <code>false</code> otherwise. The operator requires numerical or string operands. The type must be the same for both operands.
+String operands are compared using the lexicographical order of the charset.</p>
+<p>For an integer example, the expression <code>3 &gt; 3</code> would output the boolean <code>false</code>, and <code>4 &gt; 3</code> would output <code>true</code>.
+For a string example, the expression <code>"a" &gt; "b"</code> would output <code>false</code>.</p>
+<h3 id="less-than">Less Than</h3>
+<p>The <code>&lt;</code> operator outputs <code>true</code> if the left side is less than the right side, and <code>false</code> otherwise. The operator requires numerical or string operands. The type must be the same for both operands.
+String operands are compared using the lexicographical order of the charset.</p>
+<p>For an integer example, the expression <code>3 &lt; 3</code> would output the boolean <code>false</code>, and <code>1 &lt; 2</code> would output <code>true</code>.
+For a string example, the expression <code>"a" &lt; "b"</code> would output <code>true</code>.</p>
+<h3 id="greater-than-or-equal-to">Greater Than or Equal To</h3>
+<p>The <code>&gt;=</code> operator outputs <code>true</code> if the left side is greater than or equal to (not less than) the right side, and <code>false</code> otherwise. The operator requires numerical or string operands. The type must be the same for both operands.
+String operands are compared using the lexicographical order of the charset.</p>
+<p>For an integer example, the expression <code>3 &gt;= 3</code> would output the boolean <code>true</code>, <code>3 &gt;= 4</code> would output <code>false</code>, and <code>4 &gt;= 3</code> would output <code>true</code>.</p>
+<h3 id="less-than-or-equal-to">Less Than or Equal To</h3>
+<p>The <code>&lt;=</code> operator outputs <code>true</code> if the left side is less than or equal to (not greater than) the right side, and <code>false</code> otherwise. The operator requires numerical or string operands. The type must be the same for both operands.
+String operands are compared using the lexicographical order of the charset.</p>
+<p>For example, the expression <code>3 &lt;= 3</code> would output the boolean <code>true</code>, <code>3 &lt;= 4</code> would output <code>true</code>, and <code>4 &lt;= 3</code> would output <code>false</code>.</p>
+<h3 id="logical-and">Logical AND</h3>
+<p>The <code>&amp;&amp;</code> operator returns <code>true</code> if both the left and right sides are <code>true</code>, and <code>false</code> otherwise. This operator requires boolean operands.
+Note: The operation does not &ldquo;short-circuit&rdquo; &ndash; both the left and right expressions are evaluated before the comparison takes place.</p>
+<p>All cases:</p>
+<table>
+<thead>
+<tr>
+<th>Left</th>
+<th>Right</th>
+<th><code>&amp;&amp;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>true</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>false</code></td>
+<td><code>true</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="logical-or">Logical OR</h3>
+<p>The <code>||</code> operator returns <code>true</code> if <strong>either or both</strong> of the left and right sides are <code>true</code>, and <code>false</code> otherwise. This operator requires boolean operands.
+Note: The operation does not &ldquo;short-circuit&rdquo; &ndash; both the left and right expressions are evaluated before the comparison takes place.</p>
+<p>All cases:</p>
+<table>
+<thead>
+<tr>
+<th>Left</th>
+<th>Right</th>
+<th><code>\|\|</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>true</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td><code>false</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>false</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="unary-operations">Unary Operations</h2>
+<p>Unary operations are operations that have one input. The operator is applied to the expression which follows it.</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td><a href="#negation">Negation</a></td>
+</tr>
+<tr>
+<td>!</td>
+<td><a href="#logical-complement">Logical complement</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="negation">Negation</h3>
+<p>The <code>-</code> operator negates the value of the expression which follows it.</p>
+<p>This operation requires numeric input.</p>
+<p>Examples with integer literals: <code>-5</code>, <code>- 5</code><br>
+Example with a float literal: <code>-50.0</code><br>
+Example with a reference: <code>-$.foo</code><br>
+Example with parentheses and a sub-expression: <code>-(5 + 5)</code></p>
+<h3 id="logical-complement">Logical complement</h3>
+<p>The <code>!</code> operator logically inverts the value of the expression which follows it.</p>
+<p>This operation requires boolean input.</p>
+<p>Example with a boolean literal: <code>!true</code><br>
+Example with a reference: <code>!$.foo</code></p>
+<h2 id="parentheses">Parentheses</h2>
+<p>Parentheses are used to force precedence in the expression. They do not do anything implicitly (for example, there is no implied multiplication).</p>
+<p>For example, the expression <code>5 + 5 * 5</code> evaluates the <code>5 * 5</code> before the <code>+</code>, resulting in <code>5 + 25</code>, and finally <code>30</code>.
+If you want the 5 + 5 to be run first, you must use parentheses. That gives you the expression <code>(5 + 5) * 5</code>, resulting in <code>10 * 5</code>, and finally <code>50</code>.</p>
+<h2 id="order-of-operations">Order of Operations</h2>
+<p>The order of operations is designed to match mathematics and most programming languages.</p>
+<p>Order (highest to lowest; items on the same line are evaluated left-to-right):</p>
+<ul>
+<li><a href="#negation">negation (<code>-</code>)</a></li>
+<li><a href="#parentheses">parentheses (<code>()</code>)</a></li>
+<li><a href="#exponentiation">exponent (<code>^</code>)</a></li>
+<li><a href="#multiplication">multiplication (<code>*</code>)</a> and <a href="#division">division (<code>/</code>)</a></li>
+<li><a href="#additionconcatenation">addition/concatenation (<code>+</code>)</a> and <a href="#subtraction">subtraction (<code>-</code>)</a></li>
+<li>binary equality and inequality (all equal)</li>
+<li><a href="#equal-to">equals (<code>==</code>)</a></li>
+<li><a href="#not-equal-to">not equals (<code>!=</code>)</a></li>
+<li><a href="#greater-than">greater than (<code>&gt;</code>)</a></li>
+<li><a href="#less-than">less than (<code>&lt;</code>)</a></li>
+<li><a href="#greater-than-or-equal-to">greater than or equal to (<code>&gt;=</code>)</a></li>
+<li><a href="#less-than-or-equal-to">less than or equal to (<code>&lt;=</code>)</a></li>
+<li><a href="#logical-complement">logical complement (<code>!</code>)</a></li>
+<li><a href="#logical-and">logical AND (<code>&amp;&amp;</code>)</a></li>
+<li><a href="#logical-or">logical OR (<code>||</code>)</a></li>
+<li><a href="#dot-notation">dot notation (<code>.</code>)</a>, and <a href="#bracket-accessor">bracket access (<code>[]</code>)</a></li>
+</ul>
+<h2 id="other-information">Other information</h2>
+<p>More information on the expression language is available in the <a href="../../contributing/expressions/">development guide</a>.</p>
 <h2 id="examples">Examples</h2>
 <h3 id="referencing-inputs">Referencing inputs</h3>
 <p>Pass a workflow input directly to a plugin input</p>

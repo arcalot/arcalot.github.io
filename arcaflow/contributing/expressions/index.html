@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.12">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
     
     
       
@@ -1645,35 +1645,44 @@
         <li class="md-nav__item">
   <a href="#the-parser-ast" class="md-nav__link">
     <span class="md-ellipsis">
-      The parser / AST
+      The Parser / AST
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="The parser / AST">
+    <nav class="md-nav" aria-label="The Parser / AST">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#dot-notation" class="md-nav__link">
     <span class="md-ellipsis">
-      Dot notation
+      Dot Notation
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#map-accessor" class="md-nav__link">
+  <a href="#bracket-expression" class="md-nav__link">
     <span class="md-ellipsis">
-      Map accessor
+      Bracket Expression
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#key" class="md-nav__link">
+  <a href="#binary-operations" class="md-nav__link">
     <span class="md-ellipsis">
-      Key
+      Binary Operations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unary-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unary Operations
     </span>
   </a>
   
@@ -1696,7 +1705,7 @@
         <li class="md-nav__item">
   <a href="#the-api-layer" class="md-nav__link">
     <span class="md-ellipsis">
-      The API layer
+      The API Layer
     </span>
   </a>
   
@@ -1789,25 +1798,26 @@
 <h1 id="arcaflow-expressions-development-guide">Arcaflow Expressions Development Guide</h1>
 <p>The <a href="https://github.com/arcalot/arcaflow-expressions/">expressions library</a> provides the engine and other potential users with a simple way to compile expressions and provide typing information about an expression result.</p>
 <p>The library consists of two parts: the internal <a href="https://github.com/arcalot/arcaflow-expressions/tree/main/internal/ast">parser/AST</a> and the <a href="https://github.com/arcalot/arcaflow-expressions">API layer</a>.</p>
-<h2 id="the-parser-ast">The parser / AST</h2>
+<h2 id="the-parser-ast">The Parser / AST</h2>
 <p>The expressions parser constructs an <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree</a> from the expression which can then be walked by the API layer. The AST consists of the following node types:</p>
-<h3 id="dot-notation">Dot notation</h3>
+<h3 id="dot-notation">Dot Notation</h3>
 <p>Let&rsquo;s say you have an expression <code>foo.bar</code>. The dot notation node is the dot in the middle. The left subtree of the dot will be the entire expression left of the dot, while the right subtree will be everything to the right.</p>
-<h3 id="map-accessor">Map accessor</h3>
-<p>Map accessors are expressions in the form of <code>foo[bar]</code>. The left subtree will be the expression to the left, while the right subtree will be everything within the brackets.</p>
-<h3 id="key">Key</h3>
-<p>Keys can have two kinds:</p>
-<ol>
-<li>They can be literals, such as <code>foo</code> in the expression <code>foo.bar</code>,</li>
-<li>or they can be subexpressions, which need to be evaluated as a full expression.</li>
-</ol>
+<h3 id="bracket-expression">Bracket Expression</h3>
+<p>Bracket expressions are expressions in the form of <code>foo[bar]</code>. The left subtree will represent the expression to the left of the brackets (<code>foo</code> in the example), while the right subtree will represent the subexpression within the brackets (<code>bar</code> in the example).</p>
+<h3 id="binary-operations">Binary Operations</h3>
+<p>Binary operations include all of the operations that have a left and right subtree that do not have a special node representing them (dot notation and bracket expression are examples of special cases).
+Binary operations are represented by a node containing an operation and the subtrees to which the operation is applied.</p>
+<h3 id="unary-operations">Unary Operations</h3>
+<p>Unary operations include boolean complement <code>!</code> and numeric negation <code>-</code>.
+Unary operations are represented by a node containing an operation and the subtree to which the operation is applied.
+Unlike binary operations, unary operations have only one subtree.</p>
 <h3 id="identifiers">Identifiers</h3>
 <p>Identifiers come in two forms:</p>
 <ol>
 <li><code>$</code> references the root of the data structure.</li>
-<li>Any other value behaves like a key in a map accessor.</li>
+<li>A plain string identifier from a token matching the regular expression <code>^\w+$</code>. This may be used for accessing object fields or as function identifiers.</li>
 </ol>
-<h2 id="the-api-layer">The API layer</h2>
+<h2 id="the-api-layer">The API Layer</h2>
 <p>The API layer provides three functions:</p>
 <ol>
 <li>Evaluate an expression against a data structure without type checking</li>
