@@ -465,12 +465,12 @@ Order (highest to lowest; items on the same line are evaluated left-to-right):
 - [multiplication (`*`)](#multiplication) and [division (`/`)](#division)
 - [addition/concatenation (`+`)](#additionconcatenation) and [subtraction (`-`)](#subtraction)
 - binary equality and inequality (all equal)
-  <ul><li><a href="#equal-to">equals</a> (<code>==</code>)
-  <li><a href="#not-equal-to">not equals</a> (<code>!=</code>)
-  <li><a href="#greater-than">greater than</a> (<code>></code>)
-  <li><a href="#less-than">less than</a> (<code><</code>)
-  <li><a href="#greater-than-or-equal-to">greater than or equal to</a> (<code>>=</code>)
-  <li><a href="#less-than-or-equal-to">less than or equal to</a> (<code><=</code>)</li></ul>
+  <ul><li><a href="#equal-to">equals (<code>==</code>)</a>
+  <li><a href="#not-equal-to">not equals (<code>!=</code>)</a>
+  <li><a href="#greater-than">greater than (<code>></code>)</a>
+  <li><a href="#less-than">less than (<code><</code>)</a>
+  <li><a href="#greater-than-or-equal-to">greater than or equal to (<code>>=</code>)</a>
+  <li><a href="#less-than-or-equal-to">less than or equal to (<code><=</code>)</a></li></ul>
 - [logical complement (`!`)](#logical-complement)
 - [logical AND (`&&`)](#logical-and)
 - [logical OR (`||`)](#logical-or)
