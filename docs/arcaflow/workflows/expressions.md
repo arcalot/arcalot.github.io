@@ -60,27 +60,25 @@ Inlined with single quotes:
 ```
 some_value_1: !expr '"Here''s an apostrophe and \"embedded quotes\"."'
 ```
-> [!TIP]
->
-> - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
-> - The single quotes cause the YAML processor to pass the contents of the string intact except for replacing the
-    repeated apostrophe with a single one.  (They are not included in the expression value.)
-> - The backslash-escapes are replaced by Arca's expression processing.  (The unescaped double quotes are not included
-    in the expression value.)
+!!! tip
+    - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
+    - The single quotes cause the YAML processor to pass the contents of the string intact except for replacing the
+      repeated apostrophe with a single one.  (They are not included in the expression value.)
+    - The backslash-escapes are replaced by Arca's expression processing.  (The unescaped double quotes are not included
+      in the expression value.)
 
 Inlined with double quotes:
 ```
 some_value_2: !expr "'Here\\'s an apostrophe and \"embedded quotes\".'"
 ```
-> [!TIP]
->
-> - The `!expr` tag indicates to the YAML processor that the value is an Arca expression.
-> - The double quotes cause the YAML processor to interpret the contents of the string:
->   - the `\\` is replaced with a single backslash;
->   - each `\"` is replaced with a literal `"`;
->   - the surrounding double quotes are not included in the expression value.
-> - The backslash-escapes are replaced by Arca's expression processing.  (The unescaped single quotes are not included
-    in the expression value.)
+!!! tip
+    - The `!expr` tag indicates to the YAML processor that the value is an Arca expression.
+    - The double quotes cause the YAML processor to interpret the contents of the string:
+      <ul><li>the <code>\\\\</code> is replaced with a single backslash;
+      <li>each <code>\\\"</code> is replaced with a literal `"`;
+      <li>the surrounding double quotes are not included in the expression value.</ul>
+    - The backslash-escapes are replaced by Arca's expression processing.  (The unescaped single quotes are not included
+      in the expression value.)
 
 With Block Flow Scalar:
 ```
@@ -90,13 +88,12 @@ some_value_2: !expr |-
   "Here's an apostrophe and \"embedded quotes\"."
 ```
 
-> [!TIP]
->
-> - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
-> - The vertical bar (`|`) causes the YAML processor to pass the contents of the string without modification.
-> - Newlines within the expression are included in the string; the hyphen (`-`) after the vertical bar causes the
+!!! tip
+    - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
+    - The vertical bar (`|`) causes the YAML processor to pass the contents of the string without modification.
+    - Newlines within the expression are included in the string; the hyphen (`-`) after the vertical bar causes the
     trailing newline to be omitted from the end of the string.
-> - The backslash-escapes are replaced by Arca's expression processing.  The unescaped quotes are not included
+    - The backslash-escapes are replaced by Arca's expression processing.  The unescaped quotes are not included
     in the expression value; the other quotes are escaped to prevent them from ending the string prematurely; the
     double quotes in `some_value_1` do not need to be escaped nor do the single quotes in `some_value_2`.
 
@@ -117,13 +114,12 @@ Inlined:
 ```
 some_value: !expr '`Here''s an apostrophe and "embedded quotes".`'
 ```
-> [!TIP]
->
-> - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
-> - The single quotes cause the YAML processor to pass the contents of the string intact except for replacing the
-    repeated apostrophe with a single one.  (They are not included in the expression value.)
-> - The backticks cause Arca's expression processing to use the string verbatim.  (The backticks are not included
-    in the expression value.)
+!!! tip
+    - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
+    - The single quotes cause the YAML processor to pass the contents of the string intact except for replacing the
+      repeated apostrophe with a single one.  (They are not included in the expression value.)
+    - The backticks cause Arca's expression processing to use the string verbatim.  (The backticks are not included
+      in the expression value.)
 
 With Block Flow Scalar:
 ```
@@ -131,14 +127,13 @@ some_value: !expr |-
   `Here's an apostrophe and "embedded quotes".`
 ```
 
-> [!TIP]
->
-> - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
-> - The vertical bar (`|`) causes the YAML processor to pass the contents of the string without modification.
-> - Newlines within the expression are included in the string; the hyphen (`-`) after the vertical bar causes the
-    trailing newline to be omitted from the end of the string.
-> - The backticks cause Arca's expression processing to use the string verbatim, thus the embedded quotes don't require
-    escapes.  (The backticks are not included in the expression value.)
+!!! tip
+    - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
+    - The vertical bar (`|`) causes the YAML processor to pass the contents of the string without modification.
+    - Newlines within the expression are included in the string; the hyphen (`-`) after the vertical bar causes the
+      trailing newline to be omitted from the end of the string.
+    - The backticks cause Arca's expression processing to use the string verbatim, thus the embedded quotes don't require
+      escapes.  (The backticks are not included in the expression value.)
 
 ### Integer numbers
 
@@ -470,12 +465,12 @@ Order (highest to lowest; items on the same line are evaluated left-to-right):
 - [multiplication (`*`)](#multiplication) and [division (`/`)](#division)
 - [addition/concatenation (`+`)](#additionconcatenation) and [subtraction (`-`)](#subtraction)
 - binary equality and inequality (all equal)
-  - [equals (`==`)](#equal-to)
-  - [not equals (`!=`)](#not-equal-to)
-  - [greater than (`>`)](#greater-than)
-  - [less than (`<`)](#less-than)
-  - [greater than or equal to (`>=`)](#greater-than-or-equal-to)
-  - [less than or equal to (`<=`)](#less-than-or-equal-to)
+  <ul><li><a href="#equal-to">equals (<code>==</code>)</a>
+  <li><a href="#not-equal-to">not equals (<code>!=</code>)</a>
+  <li><a href="#greater-than">greater than (<code>></code>)</a>
+  <li><a href="#less-than">less than (<code><</code>)</a>
+  <li><a href="#greater-than-or-equal-to">greater than or equal to (<code>>=</code>)</a>
+  <li><a href="#less-than-or-equal-to">less than or equal to (<code><=</code>)</a></li></ul>
 - [logical complement (`!`)](#logical-complement)
 - [logical AND (`&&`)](#logical-and)
 - [logical OR (`||`)](#logical-or)
