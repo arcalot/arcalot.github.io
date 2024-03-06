@@ -4,33 +4,37 @@ The [expressions library](https://github.com/arcalot/arcaflow-expressions/) prov
 
 The library consists of two parts: the internal [parser/AST](https://github.com/arcalot/arcaflow-expressions/tree/main/internal/ast) and the [API layer](https://github.com/arcalot/arcaflow-expressions).
 
-## The parser / AST
+## The Parser / AST
 
 The expressions parser constructs an [Abstract Syntax Tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) from the expression which can then be walked by the API layer. The AST consists of the following node types:
 
-### Dot notation
+### Dot Notation
 
 Let's say you have an expression `foo.bar`. The dot notation node is the dot in the middle. The left subtree of the dot will be the entire expression left of the dot, while the right subtree will be everything to the right.
 
-### Map accessor
+### Bracket Expression
 
-Map accessors are expressions in the form of `foo[bar]`. The left subtree will be the expression to the left, while the right subtree will be everything within the brackets.
+Bracket expressions are expressions in the form of `foo[bar]`. The left subtree will represent the expression to the left of the brackets (`foo` in the example), while the right subtree will represent the subexpression within the brackets (`bar` in the example).
 
-### Key
+### Binary Operations
 
-Keys can have two kinds:
+Binary operations include all of the operations that have a left and right subtree that do not have a special node representing them (dot notation and bracket expression are examples of special cases).
+Binary operations are represented by a node containing an operation and the subtrees to which the operation is applied.
 
-1. They can be literals, such as `foo` in the expression `foo.bar`,
-2. or they can be subexpressions, which need to be evaluated as a full expression.
+### Unary Operations
+
+Unary operations include boolean complement `!` and numeric negation `-`.
+Unary operations are represented by a node containing an operation and the subtree to which the operation is applied.
+Unlike binary operations, unary operations have only one subtree.
 
 ### Identifiers
 
 Identifiers come in two forms:
 
 1. `$` references the root of the data structure.
-2. Any other value behaves like a key in a map accessor.
+2. A plain string identifier from a token matching the regular expression `^\w+$`. This may be used for accessing object fields or as function identifiers.
 
-## The API layer
+## The API Layer
 
 The API layer provides three functions:
 
