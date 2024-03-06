@@ -2199,49 +2199,49 @@ by another apostrophe to indicate that it does not terminate the string.</p>
 <p>Inlined with single quotes:
 <div class="highlight"><pre><span></span><code>some_value_1: !expr &#39;&quot;Here&#39;&#39;s an apostrophe and \&quot;embedded quotes\&quot;.&quot;&#39;
 </code></pre></div></p>
-<blockquote>
-<p>[!TIP]</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <ul>
 <li>The <code>!expr</code> tag indicates to the YAML processor that the value is an Arca <em>expression</em>.</li>
 <li>The single quotes cause the YAML processor to pass the contents of the string intact except for replacing the
-    repeated apostrophe with a single one.  (They are not included in the expression value.)</li>
+  repeated apostrophe with a single one.  (They are not included in the expression value.)</li>
 <li>The backslash-escapes are replaced by Arca&rsquo;s expression processing.  (The unescaped double quotes are not included
-    in the expression value.)</li>
+  in the expression value.)</li>
 </ul>
-</blockquote>
+</div>
 <p>Inlined with double quotes:
 <div class="highlight"><pre><span></span><code>some_value_2: !expr &quot;&#39;Here\\&#39;s an apostrophe and \&quot;embedded quotes\&quot;.&#39;&quot;
 </code></pre></div></p>
-<blockquote>
-<p>[!TIP]</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <ul>
 <li>The <code>!expr</code> tag indicates to the YAML processor that the value is an Arca expression.</li>
-<li>The double quotes cause the YAML processor to interpret the contents of the string:</li>
-<li>the <code>\\</code> is replaced with a single backslash;</li>
-<li>each <code>\"</code> is replaced with a literal <code>"</code>;</li>
-<li>the surrounding double quotes are not included in the expression value.</li>
+<li>The double quotes cause the YAML processor to interpret the contents of the string:
+  <ul><li>the <code>\\</code> is replaced with a single backslash;
+  <li>each <code>\"</code> is replaced with a literal <code>"</code>;
+  <li>the surrounding double quotes are not included in the expression value.</ul></li>
 <li>The backslash-escapes are replaced by Arca&rsquo;s expression processing.  (The unescaped single quotes are not included
-    in the expression value.)</li>
+  in the expression value.)</li>
 </ul>
-</blockquote>
+</div>
 <p>With Block Flow Scalar:
 <div class="highlight"><pre><span></span><code>some_value_1: !expr |-
   &#39;Here\&#39;s an apostrophe and &quot;embedded quotes&quot;.&#39;
 some_value_2: !expr |-
   &quot;Here&#39;s an apostrophe and \&quot;embedded quotes\&quot;.&quot;
 </code></pre></div></p>
-<blockquote>
-<p>[!TIP]</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <ul>
 <li>The <code>!expr</code> tag indicates to the YAML processor that the value is an Arca <em>expression</em>.</li>
 <li>The vertical bar (<code>|</code>) causes the YAML processor to pass the contents of the string without modification.</li>
 <li>Newlines within the expression are included in the string; the hyphen (<code>-</code>) after the vertical bar causes the
-    trailing newline to be omitted from the end of the string.</li>
+trailing newline to be omitted from the end of the string.</li>
 <li>The backslash-escapes are replaced by Arca&rsquo;s expression processing.  The unescaped quotes are not included
-    in the expression value; the other quotes are escaped to prevent them from ending the string prematurely; the
-    double quotes in <code>some_value_1</code> do not need to be escaped nor do the single quotes in <code>some_value_2</code>.</li>
+in the expression value; the other quotes are escaped to prevent them from ending the string prematurely; the
+double quotes in <code>some_value_1</code> do not need to be escaped nor do the single quotes in <code>some_value_2</code>.</li>
 </ul>
-</blockquote>
+</div>
 <p>See <a href="#raw-string-values">Raw string values</a> to see how to do this without escaping.</p>
 <h3 id="raw-string-values">Raw string values</h3>
 <p>Raw string literals start and end with backtick characters &ldquo;`&ldquo;.</p>
@@ -2255,31 +2255,31 @@ raw string.</p>
 <p>Inlined:
 <div class="highlight"><pre><span></span><code>some_value: !expr &#39;`Here&#39;&#39;s an apostrophe and &quot;embedded quotes&quot;.`&#39;
 </code></pre></div></p>
-<blockquote>
-<p>[!TIP]</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <ul>
 <li>The <code>!expr</code> tag indicates to the YAML processor that the value is an Arca <em>expression</em>.</li>
 <li>The single quotes cause the YAML processor to pass the contents of the string intact except for replacing the
-    repeated apostrophe with a single one.  (They are not included in the expression value.)</li>
+  repeated apostrophe with a single one.  (They are not included in the expression value.)</li>
 <li>The backticks cause Arca&rsquo;s expression processing to use the string verbatim.  (The backticks are not included
-    in the expression value.)</li>
+  in the expression value.)</li>
 </ul>
-</blockquote>
+</div>
 <p>With Block Flow Scalar:
 <div class="highlight"><pre><span></span><code>some_value: !expr |-
   `Here&#39;s an apostrophe and &quot;embedded quotes&quot;.`
 </code></pre></div></p>
-<blockquote>
-<p>[!TIP]</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <ul>
 <li>The <code>!expr</code> tag indicates to the YAML processor that the value is an Arca <em>expression</em>.</li>
 <li>The vertical bar (<code>|</code>) causes the YAML processor to pass the contents of the string without modification.</li>
 <li>Newlines within the expression are included in the string; the hyphen (<code>-</code>) after the vertical bar causes the
-    trailing newline to be omitted from the end of the string.</li>
+  trailing newline to be omitted from the end of the string.</li>
 <li>The backticks cause Arca&rsquo;s expression processing to use the string verbatim, thus the embedded quotes don&rsquo;t require
-    escapes.  (The backticks are not included in the expression value.)</li>
+  escapes.  (The backticks are not included in the expression value.)</li>
 </ul>
-</blockquote>
+</div>
 <h3 id="integer-numbers">Integer numbers</h3>
 <p>Integers are whole numbers expressed as sequences of base-10 digits.</p>
 <p>Integer literals may not start with <code>0</code>, unless the value is <code>0</code>. For example, <code>001</code> is not a valid integer literal.</p>
@@ -2680,14 +2680,19 @@ If you want the 5 + 5 to be run first, you must use parentheses. That gives you 
 <li><a href="#exponentiation">exponent (<code>^</code>)</a></li>
 <li><a href="#multiplication">multiplication (<code>*</code>)</a> and <a href="#division">division (<code>/</code>)</a></li>
 <li><a href="#additionconcatenation">addition/concatenation (<code>+</code>)</a> and <a href="#subtraction">subtraction (<code>-</code>)</a></li>
-<li>binary equality and inequality (all equal)</li>
-<li><a href="#equal-to">equals (<code>==</code>)</a></li>
-<li><a href="#not-equal-to">not equals (<code>!=</code>)</a></li>
-<li><a href="#greater-than">greater than (<code>&gt;</code>)</a></li>
-<li><a href="#less-than">less than (<code>&lt;</code>)</a></li>
-<li><a href="#greater-than-or-equal-to">greater than or equal to (<code>&gt;=</code>)</a></li>
-<li><a href="#less-than-or-equal-to">less than or equal to (<code>&lt;=</code>)</a></li>
-<li><a href="#logical-complement">logical complement (<code>!</code>)</a></li>
+<li>
+<p>binary equality and inequality (all equal)
+<br />
+<ul><li><a href="#equal-to">equals (<code>==</code>)</a>
+  <li><a href="#not-equal-to">not equals (<code>!=</code>)</a>
+  <li><a href="#greater-than">greater than (<code>></code>)</a>
+  <li><a href="#less-than">less than (<code><</code>)</a>
+  <li><a href="#greater-than-or-equal-to">greater than or equal to (<code>>=</code>)</a>
+  <li><a href="#less-than-or-equal-to">less than or equal to (<code><=</code>)</a></li></ul></p>
+</li>
+<li>
+<p><a href="#logical-complement">logical complement (<code>!</code>)</a></p>
+</li>
 <li><a href="#logical-and">logical AND (<code>&amp;&amp;</code>)</a></li>
 <li><a href="#logical-or">logical OR (<code>||</code>)</a></li>
 <li><a href="#dot-notation">dot notation (<code>.</code>)</a>, and <a href="#bracket-accessor">bracket access (<code>[]</code>)</a></li>
