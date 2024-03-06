@@ -30,4 +30,4 @@ Arcaflow runs several steps and connects them together into a workflow.
 
 In the future, we want to add the ability to perform loops, dynamic parallelization, etc.
 
-[Read more about flow control &raquo;](flowcontrol.md){ .md-button }
+[Read more about flow control &raquo;](../workflows/flow-control.md){ .md-button }

@@ -457,7 +457,7 @@ If you want the 5 + 5 to be run first, you must use parentheses. That gives you 
 
 The order of operations is designed to match mathematics and most programming languages.
 
-Order (highest to lowest; items on the same line are evaluated left-to-right):
+Order (highest to lowest; operators listed on the same line are evaluated in the order they appear in the expression):
 
 - [negation (`-`)](#negation)
 - [parentheses (`()`)](#parentheses)
@@ -474,7 +474,7 @@ Order (highest to lowest; items on the same line are evaluated left-to-right):
 - [logical complement (`!`)](#logical-complement)
 - [logical AND (`&&`)](#logical-and)
 - [logical OR (`||`)](#logical-or)
-- [dot notation (`.`)](#dot-notation), and [bracket access (`[]`)](#bracket-accessor)
+- [dot notation (`.`)](#dot-notation) and [bracket access (`[]`)](#bracket-accessor)
 
 ## Other information
 

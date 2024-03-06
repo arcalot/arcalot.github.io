@@ -32,4 +32,4 @@ properties:
         <svg ...></svg>
 ```
 
-That's all it takes to render a nice form field or automatic documentation. You can read more about creating types in the [plugins section](../plugins/index.md) or the [workflows section](../workflows/index.md), or see the complete [typing reference](/arcaflow/contributing/typing/) in the Contributing guide.
+That's all it takes to render a nice form field or automatic documentation. You can read more about creating types in the [plugins section](../plugins/index.md) or the [workflows section](../workflows/index.md), or see the complete [typing reference](../contributing/typing.md) in the Contributing guide.

@@ -24,5 +24,5 @@ A common example of two mutually exclusive events could be the availability of y
 In this example taken from the [Arcaflow Workflows](https://github.com/arcalot/arcaflow-workflows/blob/main/example-workflow/workflow.yaml) project, the `success` output collects the data from the specified steps and inserts it into data storage. The `no-indexing` output collects the data, the error logs, and does not store the data.
 
 ```yaml
-{!https://raw.githubusercontent.com/arcalot/arcaflow-workflows/main/system-performance/sysbench/workflow.yaml [ln:90-100]!}
+{!https://raw.githubusercontent.com/arcalot/arcaflow-workflows/88d07bf83c286eedae76fde72f5165b577e68927/advanced-examples/system-performance/sysbench/workflow.yaml [ln:102-112]!}
 ```
