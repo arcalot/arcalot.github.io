@@ -61,6 +61,7 @@ Inlined with single quotes:
 some_value_1: !expr '"Here''s an apostrophe and \"embedded quotes\"."'
 ```
 > [!TIP]
+>
 > - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
 > - The single quotes cause the YAML processor to pass the contents of the string intact except for replacing the
     repeated apostrophe with a single one.  (They are not included in the expression value.)
@@ -72,6 +73,7 @@ Inlined with double quotes:
 some_value_2: !expr "'Here\\'s an apostrophe and \"embedded quotes\".'"
 ```
 > [!TIP]
+>
 > - The `!expr` tag indicates to the YAML processor that the value is an Arca expression.
 > - The double quotes cause the YAML processor to interpret the contents of the string:
 >   - the `\\` is replaced with a single backslash;
@@ -89,6 +91,7 @@ some_value_2: !expr |-
 ```
 
 > [!TIP]
+>
 > - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
 > - The vertical bar (`|`) causes the YAML processor to pass the contents of the string without modification.
 > - Newlines within the expression are included in the string; the hyphen (`-`) after the vertical bar causes the
@@ -101,7 +104,7 @@ See [Raw string values](#raw-string-values) to see how to do this without escapi
 
 ### Raw string values
 
-Raw string literals start and end with backtick characters "`".
+Raw string literals start and end with backtick characters "\`".
 
 In a raw string, all characters are interpreted literally. This means that you can use `'` and `"` characters without
 escaping them, and backslashes are treated like any other character.  However, backtick characters cannot appear in a
@@ -115,6 +118,7 @@ Inlined:
 some_value: !expr '`Here''s an apostrophe and "embedded quotes".`'
 ```
 > [!TIP]
+>
 > - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
 > - The single quotes cause the YAML processor to pass the contents of the string intact except for replacing the
     repeated apostrophe with a single one.  (They are not included in the expression value.)
@@ -128,6 +132,7 @@ some_value: !expr |-
 ```
 
 > [!TIP]
+>
 > - The `!expr` tag indicates to the YAML processor that the value is an Arca _expression_.
 > - The vertical bar (`|`) causes the YAML processor to pass the contents of the string without modification.
 > - Newlines within the expression are included in the string; the hyphen (`-`) after the vertical bar causes the
@@ -142,6 +147,7 @@ Integers are whole numbers expressed as sequences of base-10 digits.
 Integer literals may not start with `0`, unless the value is `0`. For example, `001` is not a valid integer literal.
 
 Examples:
+
 - `0`
 - `1`
 - `503`
@@ -153,6 +159,7 @@ Negative values are constructed by applying the [negation operator (`-`)](#negat
 Floating point literals are non-negative double-precision floating point numbers.
 
 Supported formats include:
+
 - number characters followed by a period followed by zero or more number characters: `1.1` or `1.`
 - base-10 exponential scientific notation formats like `5.0e5` and `5.0E-5`
 
@@ -161,6 +168,7 @@ Negative values are constructed by applying the [negation operator (`-`)](#negat
 ### Boolean values
 
 Boolean literals have two valid values:
+
 - `true`
 - `false`
 
@@ -239,24 +247,24 @@ available from operators.
 
 Functions:
 
-| function definition                              | return type  | description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|--------------------------------------------------|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `intToFloat(integer)`                            | float        | Converts an integer value into the equivalent floating point value.                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `floatToInt(float)`                              | integer      | Converts a floating point value into an integer value by discarding the fraction, rounding toward zero to the nearest integer.<br>Special cases:<br>&nbsp; +Inf yields the maximum 64-bit integer (9223372036854775807)<br>&nbsp; -Inf and NaN yield the minimum 64-bit integer (-9223372036854775808)\n\n"<br><br>For example, `5.5` yields `5`, and `-1.9` yields `-1`                                                                                                                         |
-| `intToString(integer)`                           | string       | Returns a string containing the base-10 representation of the input.<br><br>For example, an input of `55` yields `"55"`                                                                                                                                                                                                                                                                                                                                                                          |
-| `floatToString(float)`                           | string       | Returns a string containing the base-10 representation of the input.<br><br>For example, an input of `5000.5` yields `"5000.5"`                                                                                                                                                                                                                                                                                                                                                                  |
-| `floatToFormattedString(float, string, integer)` | string       | Returns a string containing the input in the specified format with the specified precision.<br>&nbsp; Param 1: the floating point input value<br>&nbsp; Param 2: the format specifier: `"e"`, `"E"`, `"f"`, `"g"`, `"G"`<br>&nbsp; Param 3: the number of digits<br><br>Specifying -1 for the precision will produce the minimum number of digits required to represent the value exactly.<br>(See the [Go runtime documentation](https://pkg.go.dev/strconv@go1.22.0#FormatFloat) for details.) |
-| `boolToString(boolean)`                          | string       | Returns `"true"` for `true`, and `"false"` for `false`.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `stringToInt(string)`                            | integer      | Interprets the string as a base-10 integer. Returns an error if the input is not a valid integer.                                                                                                                                                                                                                                                                                                                                                                                                |
-| `stringToFloat(string)`                          | float        | Converts the input string to a double-precision floating-point number.<br><br>Accepts floating-point numbers as defined by the [Go syntax for floating point literals](https://go.dev/ref/spec#Floating-point_literals).  If the input is well-formed and near a valid floating-point number, returns the nearest floating-point number rounded using IEEE754 unbiased rounding.<br>Returns an error when an invalid input is received.                                                          |
-| `stringToBool(string)`                           | boolean      | Interprets the input as a boolean.<br>Accepts `"1"`, `"t"`, and `"true"` as `true` and `"0"`, `"f"`, and `"false"` as `false` (case is not significant).<br>Returns an error for any other input.                                                                                                                                                                                                                                                                                                |
-| `ceil(float)`                                    | float        | Returns the least integer value greater than or equal to the input.<br><br>For example `ceil(1.5)` yields `2.0`, and `ceil(-1.5)` yields `-1.0`<br>Special cases are:<br>&nbsp; ceil(±0.0) = ±0.0<br>&nbsp; ceil(±Inf) = ±Inf<br>&nbsp; ceil(NaN) = NaN                                                                                                                                                                                                                                          |
-| `floor(float)`                                   | float        | Returns the greatest integer value less than or equal to the input.<br><br>For example `floor(1.5)` yields `1.0`, and `floor(-1.5)` yields `-2.0`<br>Special cases are:<br>&nbsp; floor(±0.0) = ±0.0<br>&nbsp; floor(±Inf) = ±Inf<br>&nbsp; floor(NaN) = NaN                                                                                                                                                                                                                                     |
-| `round(float)`                                   | float        | Returns the nearest integer to the input, rounding half away from zero.<br><br>For example `round(1.5)` yields `2.0`, and `round(-1.5)` yields `-2.0`<br>Special cases are:<br>&nbsp; round(±0.0) = ±0.0<br>&nbsp; round(±Inf) = ±Inf<br>&nbsp; round(NaN) = NaN                                                                                                                                                                                                                                 |
-| `abs(float)`                                     | float        | Returns the absolute value of the input.<br>Special cases are:<br>&nbsp; abs(±Inf) = +Inf<br>&nbsp; abs(NaN) = NaN                                                                                                                                                                                                                                                                                                                                                                               |
-| `toLower(string)`                                | string       | Returns the input with Unicode letters mapped to their lower case.                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `toUpper(string)`                                | string       | Returns the input with Unicode letters mapped to their upper case.                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `splitString(string, string)`                    | list[string] | Returns a list of the substrings which appear between instances of the specified separator; the separator instances are not included in the resulting list elements; adjacent occurrences of separator instances as well as instances appearing at the beginning or ending of the input will produce empty string list elements.<br>&nbsp; Param 1: The string to split.<br>&nbsp; Param 2: The separator.                                                                                       |
+| function definition                              | return type  | description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|--------------------------------------------------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `intToFloat(integer)`                            | float        | Converts an integer value into the equivalent floating point value.                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `floatToInt(float)`                              | integer      | Converts a floating point value into an integer value by discarding the fraction, rounding toward zero to the nearest integer.<br><br>Special cases:<br>&nbsp; +Inf yields the maximum 64-bit integer (9223372036854775807)<br>&nbsp; -Inf and NaN yield the minimum 64-bit integer (-9223372036854775808)<br><br>For example, `5.5` yields `5`, and `-1.9` yields `-1`                                                                                                                        |
+| `intToString(integer)`                           | string       | Returns a string containing the base-10 representation of the input.<br><br>For example, an input of `55` yields `"55"`                                                                                                                                                                                                                                                                                                                                                                        |
+| `floatToString(float)`                           | string       | Returns a string containing the base-10 representation of the input.<br><br>For example, an input of `5000.5` yields `"5000.5"`                                                                                                                                                                                                                                                                                                                                                                |
+| `floatToFormattedString(float, string, integer)` | string       | Returns a string containing the input in the specified format with the specified precision.<br>&nbsp; Param 1: the floating point input value<br>&nbsp; Param 2: the format specifier: `"e"`, `"E"`, `"f"`, `"g"`, `"G"`<br>&nbsp; Param 3: the number of digits<br><br>Specifying -1 for the precision will produce the minimum number of digits required to represent the value exactly.  (See the [Go runtime documentation](https://pkg.go.dev/strconv@go1.22.0#FormatFloat) for details.) |
+| `boolToString(boolean)`                          | string       | Returns `"true"` for `true`, and `"false"` for `false`.                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `stringToInt(string)`                            | integer      | Interprets the string as a base-10 integer. Returns an error if the input is not a valid integer.                                                                                                                                                                                                                                                                                                                                                                                              |
+| `stringToFloat(string)`                          | float        | Converts the input string to a double-precision floating-point number.<br><br>Accepts floating-point numbers as defined by the [Go syntax for floating point literals](https://go.dev/ref/spec#Floating-point_literals).  If the input is well-formed and near a valid floating-point number, returns the nearest floating-point number rounded using IEEE754 unbiased rounding. Returns an error when an invalid input is received.                                                           |
+| `stringToBool(string)`                           | boolean      | Interprets the input as a boolean.<br><br>Accepts `"1"`, `"t"`, and `"true"` as `true` and `"0"`, `"f"`, and `"false"` as `false` (case is not significant). Returns an error for any other input.                                                                                                                                                                                                                                                                                             |
+| `ceil(float)`                                    | float        | Returns the least integer value greater than or equal to the input.<br><br>Special cases are:<br>&nbsp; ceil(±0.0) = ±0.0<br>&nbsp; ceil(±Inf) = ±Inf<br>&nbsp; ceil(NaN) = NaN<br><br>For example `ceil(1.5)` yields `2.0`, and `ceil(-1.5)` yields `-1.0`                                                                                                                                                                                                                                    |
+| `floor(float)`                                   | float        | Returns the greatest integer value less than or equal to the input.<br><br>Special cases are:<br>&nbsp; floor(±0.0) = ±0.0<br>&nbsp; floor(±Inf) = ±Inf<br>&nbsp; floor(NaN) = NaN<br><br>For example `floor(1.5)` yields `1.0`, and `floor(-1.5)` yields `-2.0`                                                                                                                                                                                                                               |
+| `round(float)`                                   | float        | Returns the nearest integer to the input, rounding half away from zero.<br><br>Special cases are:<br>&nbsp; round(±0.0) = ±0.0<br>&nbsp; round(±Inf) = ±Inf<br>&nbsp; round(NaN) = NaN<br><br>For example `round(1.5)` yields `2.0`, and `round(-1.5)` yields `-2.0`                                                                                                                                                                                                                           |
+| `abs(float)`                                     | float        | Returns the absolute value of the input.<br><br>Special cases are:<br>&nbsp; abs(±Inf) = +Inf<br>&nbsp; abs(NaN) = NaN                                                                                                                                                                                                                                                                                                                                                                         |
+| `toLower(string)`                                | string       | Returns the input with Unicode letters mapped to their lower case.                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `toUpper(string)`                                | string       | Returns the input with Unicode letters mapped to their upper case.                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `splitString(string, string)`                    | list[string] | Returns a list of the substrings which appear between instances of the specified separator; the separator instances are not included in the resulting list elements; adjacent occurrences of separator instances as well as instances appearing at the beginning or ending of the input will produce empty string list elements.<br>&nbsp; Param 1: The string to split.<br>&nbsp; Param 2: The separator.                                                                                     |
 
 A function is used in an expression by referencing its name followed by a comma-separated list of zero or more argument
 expressions enclosed in parentheses.
@@ -454,23 +462,24 @@ If you want the 5 + 5 to be run first, you must use parentheses. That gives you 
 
 The order of operations is designed to match mathematics and most programming languages.
 
-Order (highest to lowest):
- - [`- ` negation](#negation)
- - [`()` parentheses](#parentheses)
- - [`^ ` exponent](#exponentiation)
- - [`* ` multiplication](#multiplication) and [division `/`](#division)
- - [`+ ` addition/concatenation](#additionconcatenation) and [subtraction `-`](#subtraction)
- - binary equality and inequality (all equal)
-   - [`==` equals](#equal-to)
-   - [`!=` not equals](#not-equal-to)
-   - [`> ` greater than](#greater-than)
-   - [`< ` less than](#less-than)
-   - [`>=` greater than or equal to](#greater-than-or-equal-to)
-   - [`<=` less than or equal to](#less-than-or-equal-to)
- - [`! ` logical complement](#logical-complement)
- - [`&&` logical AND](#logical-and)
- - [`||` logical OR](#logical-or)
- - [literals](#literals), [identifiers](#root-reference), [dot notation](#dot-notation), and [bracket access](#bracket-accessor)
+Order (highest to lowest; items on the same line are evaluated left-to-right):
+
+- [negation (`-`)](#negation)
+- [parentheses (`()`)](#parentheses)
+- [exponent (`^`)](#exponentiation)
+- [multiplication (`*`)](#multiplication) and [division (`/`)](#division)
+- [addition/concatenation (`+`)](#additionconcatenation) and [subtraction (`-`)](#subtraction)
+- binary equality and inequality (all equal)
+  - [equals (`==`)](#equal-to)
+  - [not equals (`!=`)](#not-equal-to)
+  - [greater than (`>`)](#greater-than)
+  - [less than (`<`)](#less-than)
+  - [greater than or equal to (`>=`)](#greater-than-or-equal-to)
+  - [less than or equal to (`<=`)](#less-than-or-equal-to)
+- [logical complement (`!`)](#logical-complement)
+- [logical AND (`&&`)](#logical-and)
+- [logical OR (`||`)](#logical-or)
+- [dot notation (`.`)](#dot-notation), and [bracket access (`[]`)](#bracket-accessor)
 
 ## Other information
 
