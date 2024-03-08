@@ -34,7 +34,7 @@ Arcaflow is a **workflow engine** consisting of three main components:
 
 It allows you to connect plugins into workflows of parallel and serial tasks for your target systems. The engine is run as a single portable binary and therefore does not require installation of its components onto the target systems. A future UI will allow you to click and drag plugins into a workflow and, if needed, feed the resulting data back into the UI for further analysis. There is a range of supported plugins, written either in Go or Python.
 
-[Read more](arcaflow/){ .md-button }
+[Read more](arcaflow/index.md){ .md-button }
 
 </div>
 
@@ -50,7 +50,7 @@ Arcalog can assist you with or automate your **root cause analysis** in CI or ot
 
 It also provides additional tooling to download jobs from various log systems or add your own log files for analysis.
 
-[Read more](arcalog/){ .md-button }
+[Read more](arcalog/index.md){ .md-button }
 
 </div>
 

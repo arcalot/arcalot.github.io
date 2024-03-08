@@ -1,6 +1,6 @@
 # Embedding your Python plugin
 
-Instead of using your plugin as a standalone tool or in conjunction with Arcaflow, you can also embed your plugin into your existing Python application. To do that you simply [build a schema](/arcaflow/plugins/python/data-model/) and then call the schema yourself. You can pass raw data as an input, and you'll get the benefit of schema validation.
+Instead of using your plugin as a standalone tool or in conjunction with Arcaflow, you can also embed your plugin into your existing Python application. To do that you simply [build a schema](./data-model.md) and then call the schema yourself. You can pass raw data as an input, and you'll get the benefit of schema validation.
 
 ```python title="myapp.py"
 from arcaflow_plugin_sdk import plugin

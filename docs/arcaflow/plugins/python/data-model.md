@@ -1,6 +1,6 @@
 # Creating a Python data model
 
-Every plugin needs a schema to represent its expected inputs and outputs in a machine-readable format. The schema [strong typing](/arcaflow/concepts/typing) is a core design element of Arcaflow, enabling us to build portable workflows that compartmentalize failure conditions and avoid data errors.
+Every plugin needs a schema to represent its expected inputs and outputs in a machine-readable format. The schema [strong typing](../../concepts/typing.md) is a core design element of Arcaflow, enabling us to build portable workflows that compartmentalize failure conditions and avoid data errors.
 
 When creating a data model for Arcaflow plugins in Python, everything starts with [dataclasses](https://docs.python.org/3/library/dataclasses.html). They allow Arcaflow to get information about the data types of individual fields in your class:
 
@@ -53,7 +53,7 @@ class MyClass:
 ```
 
 !!! Tip
-    Annotated objects are preferred as a best practice for a documented schema, and are expected for any [officially-supported community plugins](/arcaflow/plugins/python/official/).
+    Annotated objects are preferred as a best practice for a documented schema, and are expected for any [officially-supported community plugins](./official.md).
 
 You can use the following annotations to add metadata to your fields:
 
