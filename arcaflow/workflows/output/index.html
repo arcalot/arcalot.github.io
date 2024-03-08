@@ -1284,6 +1284,8 @@
       
         
       
+        
+      
     
     
       
@@ -1337,6 +1339,27 @@
   
   <span class="md-ellipsis">
     Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../versioning/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Versioning
   </span>
   
 
@@ -1752,7 +1775,17 @@
 <p>Arcaflow can produce multiple output groups for a workflow. These output groups are mutually exclusive to each other.</p>
 <p>A common example of two mutually exclusive events could be the availability of your data storage service. Let&rsquo;s assume the service is either available, or unavailable (the unavailble state also includes any states where an error is thrown during data insertion). Multiple workflow outputs allows you to plan for these two events.</p>
 <p>In this example taken from the <a href="https://github.com/arcalot/arcaflow-workflows/blob/main/example-workflow/workflow.yaml">Arcaflow Workflows</a> project, the <code>success</code> output collects the data from the specified steps and inserts it into data storage. The <code>no-indexing</code> output collects the data, the error logs, and does not store the data.</p>
-<div class="highlight"><pre><span></span><code>
+<div class="highlight"><pre><span></span><code><span class="nt">outputs</span><span class="p">:</span>
+<span class="w"> </span><span class="nt">success</span><span class="p">:</span>
+<span class="w">   </span><span class="nt">pcp</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.pcp.outputs.success</span>
+<span class="w">   </span><span class="nt">sysbench</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.sysbench.outputs.success</span>
+<span class="w">   </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.metadata.outputs.success</span>
+<span class="w">   </span><span class="nt">opensearch</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.opensearch.outputs.success</span>
+<span class="w"> </span><span class="nt">no-indexing</span><span class="p">:</span>
+<span class="w">   </span><span class="nt">pcp</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.pcp.outputs.success</span>
+<span class="w">   </span><span class="nt">sysbench</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.sysbench.outputs.success</span>
+<span class="w">   </span><span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.metadata.outputs.success</span>
+<span class="w">   </span><span class="nt">no-index</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.opensearch.outputs.error</span>
 </code></pre></div>
 
 

@@ -1473,6 +1473,8 @@
       
         
       
+        
+      
     
     
       
@@ -1526,6 +1528,27 @@
   
   <span class="md-ellipsis">
     Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../workflows/versioning/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Versioning
   </span>
   
 
@@ -1876,7 +1899,7 @@
 
 
 <h1 id="creating-a-python-data-model">Creating a Python data model</h1>
-<p>Every plugin needs a schema to represent its expected inputs and outputs in a machine-readable format. The schema <a href="/arcaflow/concepts/typing">strong typing</a> is a core design element of Arcaflow, enabling us to build portable workflows that compartmentalize failure conditions and avoid data errors.</p>
+<p>Every plugin needs a schema to represent its expected inputs and outputs in a machine-readable format. The schema <a href="../../../concepts/typing/">strong typing</a> is a core design element of Arcaflow, enabling us to build portable workflows that compartmentalize failure conditions and avoid data errors.</p>
 <p>When creating a data model for Arcaflow plugins in Python, everything starts with <a href="https://docs.python.org/3/library/dataclasses.html">dataclasses</a>. They allow Arcaflow to get information about the data types of individual fields in your class:</p>
 <div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">dataclasses</span>
 
@@ -1916,7 +1939,7 @@
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Annotated objects are preferred as a best practice for a documented schema, and are expected for any <a href="/arcaflow/plugins/python/official/">officially-supported community plugins</a>.</p>
+<p>Annotated objects are preferred as a best practice for a documented schema, and are expected for any <a href="../official/">officially-supported community plugins</a>.</p>
 </div>
 <p>You can use the following annotations to add metadata to your fields:</p>
 <ul>
