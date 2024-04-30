@@ -2,7 +2,7 @@
 
 In order to use Arcaflow, you will need to download the [Arcaflow Engine](https://github.com/arcalot/arcaflow-engine/releases). You can simply unpack and run it, no need for installing it.
 
-On Linux and MacOS, you may need to run `chmod +x` on the engine binary.
+On Linux and macOS, you may need to run `chmod +x` on the engine binary.
 
 ## Configuration
 

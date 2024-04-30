@@ -81,7 +81,7 @@ You can now build the plugin container.
     Further reading: [Packaging plugins](plugins/packaging.md)
 
 !!! tip "Did you know?"
-    While Arcaflow is a workflow engine, plugins can be run independentily via the command line. Try running your containerized helo-world plugin directly.
+    While Arcaflow is a workflow engine, plugins can be run independently via the command line. Try running your containerized hello-world plugin directly.
 
     === "Docker"
         ```
@@ -235,7 +235,7 @@ As you can see, the last line of the output is the output data from the workflow
 
 Congratulations, you are now an Arcaflow user! Here are some things you can do next to start working with plugins and workflows:
 
-- [See our repostories of community-supported plugins &raquo;](https://github.com/orgs/arcalot/repositories?q=arcaflow-plugin&type=all&language=&sort=)
+- [See our repositories of community-supported plugins &raquo;](https://github.com/orgs/arcalot/repositories?q=arcaflow-plugin&type=all&language=&sort=)
 - [Get our latest plugin container builds from quay.io &raquo;](https://quay.io/arcalot)
 - [Experiment with more advanced example workflows &raquo;](https://github.com/arcalot/arcaflow-workflows)
 

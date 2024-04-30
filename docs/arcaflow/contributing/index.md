@@ -25,7 +25,7 @@ All code in Arcaflow is licensed under the [Apache 2.0 license](https://www.apac
 
 ## Principles
 
-While we don't deal in absolutes (only a sith would do that) we hold ourselves to a few key principles. There are plenty of things where we could do better in these areas, so if you find something, please open an issue. It's important!
+While we don't deal in absolutes (only a Sith would do that) we hold ourselves to a few key principles. There are plenty of things where we could do better in these areas, so if you find something, please open an issue. It's important!
 
 ### The principle of the least surprise
 

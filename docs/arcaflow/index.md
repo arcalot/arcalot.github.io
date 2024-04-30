@@ -30,7 +30,7 @@ Arcaflow's design can drastically simplify much of the workflow creation process
 
 <h2>Not a CI system</h2>
 
-Arcaflow is **not designed to run as a persistent service nor to record workflow histories**, and in most cases it is **probably not the best tool to setup or manage infrastructure**. For end-to-end CI needs, you should leverage a system that provdes these and other features (possibly something from the Alternatives list below).
+Arcaflow is **not designed to run as a persistent service nor to record workflow histories**, and in most cases it is **probably not the best tool to set up or manage infrastructure**. For end-to-end CI needs, you should leverage a system that provides these and other features (possibly something from the Alternatives list below).
 
 Arcaflow is, however, **an excellent companion to a CI system**. In many cases, building complex workflows completely within a CI environment can effectively lock you into that system because the workflow may not be easily portable outside of it or run independently by a user. An Arcaflow workflow **can be easily integrated into most CI systems**, so a workflow that you define once may be moved in most cases without modification to different environments or run directly by users.
 
@@ -41,7 +41,7 @@ It's important that you pick the right tool for the job. Sometimes, you need som
 **Here are some of the features that make Arcaflow a unique solution to the below alternatives:**
 
 - Designed for complex branching-action workflows and parallelization
-- Prioritizes data passing and management via strong typing and schemas to ensure machine readabilitly, workflow validation, and data integrity
+- Prioritizes data passing and management via strong typing and schemas to ensure machine readability, workflow validation, and data integrity
 - Runs actions as plugins via container orchestrator APIs
 - Engine is deployed as a single Golang binary, and plugins are run as containers, minimizing dependencies and maximizing portability
 - Workflows are designed to be explicitly version controlled to ensure portability to other environments without code or feature drift

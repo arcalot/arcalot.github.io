@@ -1,6 +1,6 @@
 # Writing your first Go plugin
 
-In order to create a Go plugin, you will need to create a Go module project (`go mod init`) and install the Arcaflow SDK usin `go get go.flow.arcalot.io/pluginsdk`.
+In order to create a Go plugin, you will need to create a Go module project (`go mod init`) and install the Arcaflow SDK using `go get go.flow.arcalot.io/pluginsdk`.
 
 Writing a Go plugin consists of the following 4 parts:
 
@@ -25,7 +25,7 @@ type Input struct {
 In addition to the struct above, we must also define a schema for the input data structure:
 
 ```go
-// We define a separate scope, so we can add subobjects later.
+// We define a separate scope, so we can add sub-objects later.
 var inputSchema = schema.NewScopeSchema(
     // Struct-mapped object schemas are object definitions that are mapped to a specific struct (Input)
     schema.NewStructMappedObjectSchema[Input](

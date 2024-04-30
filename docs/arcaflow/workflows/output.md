@@ -19,9 +19,10 @@ output:
 
 Arcaflow can produce multiple output groups for a workflow. These output groups are mutually exclusive to each other.
 
-A common example of two mutually exclusive events could be the availability of your data storage service. Let's assume the service is either available, or unavailable (the unavailble state also includes any states where an error is thrown during data insertion). Multiple workflow outputs allows you to plan for these two events.
+A common example of two mutually exclusive events could be the availability of your data storage service. Let's assume the service is either available, or unavailable (the unavailable state also includes any states where an error is thrown during data insertion). Multiple workflow outputs allows you to plan for these two events.
 
-In this example taken from the [Arcaflow Workflows](https://github.com/arcalot/arcaflow-workflows/blob/main/example-workflow/workflow.yaml) project, the `success` output collects the data from the specified steps and inserts it into data storage. The `no-indexing` output collects the data, the error logs, and does not store the data.
+In this example taken from the [Arcaflow Workflows](https://github.com/arcalot/arcaflow-workflows/blob/main/advanced-examples/system-performance/sysbench/workflow.yaml#L102
+) project, the `success` output collects the data from the specified steps and inserts it into data storage. The `no-indexing` output collects the data, the error logs, and does not store the data.
 
 ```yaml
 {!https://raw.githubusercontent.com/arcalot/arcaflow-workflows/88d07bf83c286eedae76fde72f5165b577e68927/advanced-examples/system-performance/sysbench/workflow.yaml [ln:102-112]!}
