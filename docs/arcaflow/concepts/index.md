@@ -16,7 +16,7 @@ We believe in strong and static typing to avoid bugs, so Arcaflow has its own ty
 
 <h2>Plugins</h2>
 
-Arcaflow is interoperable between several programming languages. Currently we provide SDKs for Python and Go.
+Arcaflow is interoperable between several programming languages. Currently, we provide SDKs for Python and Go.
 
 [Read more about plugins &raquo;](plugins.md){ .md-button }
 

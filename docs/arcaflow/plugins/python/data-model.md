@@ -32,7 +32,7 @@ You can read more about the individual types in the [data types](#data-types) se
 
 ## Optional parameters
 
-You can also declare any parameter as optional like this:
+You can also declare any parameter as optional, like this:
 
 ```python title="plugin.py"
 @dataclasses.dataclass
@@ -181,7 +181,7 @@ The `my_field` variable is a variable of type MyEnum. It can store one of the de
 In the above example, the Value1 member of MyEnum is accessed and assigned to the variable value.
 
 !!! Note
-    Enumeration members are "singleton" objects, which have a single instance. In Python you should compare enumeration members using `is` rather than `==` (for example, `variable is MyEnum.Value1`). The values of an Enum used in an Arcaflow schema must have values of string or integer data type.
+    Enumeration members are "singleton" objects which have a single instance. In Python, you should compare enumeration members using `is` rather than `==` (for example, `variable is MyEnum.Value1`). The values of an Enum used in an Arcaflow schema must have values of string or integer data type.
 
 !!! tip
     Enums aren't dataclasses, but can be used as the type of dataclass attributes.

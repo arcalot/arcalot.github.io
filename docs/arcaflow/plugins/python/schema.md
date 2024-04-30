@@ -39,7 +39,7 @@ Let's go in order:
 - The `outputs` describe a `Dict[str, schema.ObjectType]`, where the key is the ID for the returned output type, while the value describes the output schema.
 - The `handler` function takes one parameter, the object described in `input` and must return a tuple of a string and the output object. Here the ID uniquely identifies which output is intended, for example `success` and `error`, while  the second parameter in the tuple must match the `outputs` declaration.
 
-That's it! Now all that's left is to define the `ObjectType` and any subobjects.
+That's it! Now all that's left is to define the `ObjectType` and any sub-objects.
 
 ### ObjectType
 

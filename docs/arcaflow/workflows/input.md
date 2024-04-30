@@ -305,7 +305,7 @@ In contrast, you can specify `object_type` as `2` and that will cause the unseri
 
 ## Any types
 
-Any types allow any data to pass through without validation. We recommend using the "any" type due to its lack of validation and the risk to cause runtime errors. Only use any types if you can truly handle **any** data that is passed.
+Any types allow any data to pass through without validation. We do not recommend using the "any" type due to its lack of validation and the risk to cause runtime errors. Only use any types if you can truly handle **any** data that is passed.
 
 ```yaml
 type_id: any

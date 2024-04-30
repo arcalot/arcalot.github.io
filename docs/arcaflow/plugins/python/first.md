@@ -108,7 +108,7 @@ def hello_world(name):
     return f"Hello, {name}"
 ```
 
-However, **that's not how the Arcaflow SDK works**. You must always specify the *data type* of any variable. Additionally, every function can only have **one input** and it must be a **dataclass**.
+However, **that's not how the Arcaflow SDK works**. You must always specify the *data type* of any variable. Additionally, every function can only have **one input**, and it must be a **dataclass**.
 
 So, let's change the code a little:
 
@@ -124,7 +124,7 @@ def hello_world(params: InputParams):
     # ...
 ```
 
-So far so good, but we are not done yet. The output also has special rules. One plugin function can have more than one possible output, so you need to say which output it is and you need to also return a dataclass.
+So far so good, but we are not done yet. The output also has special rules. One plugin function can have more than one possible output, so you need to say which output it is, and you need to also return a dataclass.
 
 For example:
 

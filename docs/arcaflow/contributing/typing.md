@@ -4,7 +4,7 @@ Arcaflow takes a departure from the classic run-and-pray approach of running wor
 
 A plugin can support multiple **workflow steps** and must provide information about the data types in its **input and output** for each step. A step can have exactly one input format, but may declare more than one output.
 
-The typesystem is inspired by [JSON schema](https://json-schema.org/) and [OpenAPI](https://swagger.io/specification/), but it is more restrictive due to the need to efficiently serialize workloads over various formats.
+The type system is inspired by [JSON schema](https://json-schema.org/) and [OpenAPI](https://swagger.io/specification/), but it is more restrictive due to the need to efficiently serialize workloads over various formats.
 
 ## Types
 
@@ -41,7 +41,7 @@ Boolean types can take a value of either `true` or `false`, but when unserializi
 
 ### Lists, maps
 
-Lists a7nd maps can have constraints on the minimum or maximum number of items in them (inclusive).
+Lists and maps can have constraints on the minimum or maximum number of items in them (inclusive).
 
 ### Objects
 
