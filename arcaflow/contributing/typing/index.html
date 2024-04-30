@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.19">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.20">
     
     
       
@@ -1748,7 +1748,7 @@
 <h1 id="the-arcaflow-type-system">The Arcaflow type system</h1>
 <p>Arcaflow takes a departure from the classic run-and-pray approach of running workloads and validates workflows before executing them. To do this, Arcaflow starts the plugins as needed before the workflow is run and queries them for their <strong>schema</strong>. This schema will contain information about what kind of input a plugin requests and what kind of outputs it can produce.</p>
 <p>A plugin can support multiple <strong>workflow steps</strong> and must provide information about the data types in its <strong>input and output</strong> for each step. A step can have exactly one input format, but may declare more than one output.</p>
-<p>The typesystem is inspired by <a href="https://json-schema.org/">JSON schema</a> and <a href="https://swagger.io/specification/">OpenAPI</a>, but it is more restrictive due to the need to efficiently serialize workloads over various formats.</p>
+<p>The type system is inspired by <a href="https://json-schema.org/">JSON schema</a> and <a href="https://swagger.io/specification/">OpenAPI</a>, but it is more restrictive due to the need to efficiently serialize workloads over various formats.</p>
 <h2 id="types">Types</h2>
 <p>The typing system supports the following data types.</p>
 <ul>
@@ -1774,7 +1774,7 @@
 <h2 id="booleans">Booleans</h2>
 <p>Boolean types can take a value of either <code>true</code> or <code>false</code>, but when unserializing from YAML or JSON formats, strings or int values of <code>true</code>, <code>yes</code>, <code>on</code>, <code>enable</code>, <code>enabled</code>, <code>1</code>, <code>false</code>, <code>no</code>, <code>off</code>, <code>disable</code>, <code>disabled</code> or <code>0</code> are also accepted.</p>
 <h3 id="lists-maps">Lists, maps</h3>
-<p>Lists a7nd maps can have constraints on the minimum or maximum number of items in them (inclusive).</p>
+<p>Lists and maps can have constraints on the minimum or maximum number of items in them (inclusive).</p>
 <h3 id="objects">Objects</h3>
 <p>Object fields can have several constraints:</p>
 <ul>

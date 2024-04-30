@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.19">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.20">
     
     
       
@@ -1756,7 +1756,7 @@ which python
 <div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="k">def</span> <span class="nf">hello_world</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
 </code></pre></div>
-<p>However, <strong>that&rsquo;s not how the Arcaflow SDK works</strong>. You must always specify the <em>data type</em> of any variable. Additionally, every function can only have <strong>one input</strong> and it must be a <strong>dataclass</strong>.</p>
+<p>However, <strong>that&rsquo;s not how the Arcaflow SDK works</strong>. You must always specify the <em>data type</em> of any variable. Additionally, every function can only have <strong>one input</strong>, and it must be a <strong>dataclass</strong>.</p>
 <p>So, let&rsquo;s change the code a little:</p>
 <div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">dataclasses</span>
 
@@ -1768,7 +1768,7 @@ which python
 <span class="k">def</span> <span class="nf">hello_world</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">InputParams</span><span class="p">):</span>
     <span class="c1"># ...</span>
 </code></pre></div>
-<p>So far so good, but we are not done yet. The output also has special rules. One plugin function can have more than one possible output, so you need to say which output it is and you need to also return a dataclass.</p>
+<p>So far so good, but we are not done yet. The output also has special rules. One plugin function can have more than one possible output, so you need to say which output it is, and you need to also return a dataclass.</p>
 <p>For example:</p>
 <div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">dataclasses</span>
 

@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.19">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.20">
     
     
       
@@ -1792,7 +1792,7 @@
 </ul>
 <p>You can read more about the individual types in the <a href="#data-types">data types</a> section</p>
 <h2 id="optional-parameters">Optional parameters</h2>
-<p>You can also declare any parameter as optional like this:</p>
+<p>You can also declare any parameter as optional, like this:</p>
 <div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
     <span class="n">param</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1903,7 +1903,7 @@ The MyEnum class above defines two members, Value1 and Value2. Each member is as
 In the above example, the Value1 member of MyEnum is accessed and assigned to the variable value.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Enumeration members are &ldquo;singleton&rdquo; objects, which have a single instance. In Python you should compare enumeration members using <code>is</code> rather than <code>==</code> (for example, <code>variable is MyEnum.Value1</code>). The values of an Enum used in an Arcaflow schema must have values of string or integer data type.</p>
+<p>Enumeration members are &ldquo;singleton&rdquo; objects which have a single instance. In Python, you should compare enumeration members using <code>is</code> rather than <code>==</code> (for example, <code>variable is MyEnum.Value1</code>). The values of an Enum used in an Arcaflow schema must have values of string or integer data type.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>

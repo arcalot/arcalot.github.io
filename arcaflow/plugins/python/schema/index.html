@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.19">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.20">
     
     
       
@@ -1769,7 +1769,7 @@
 <li>The <code>outputs</code> describe a <code>Dict[str, schema.ObjectType]</code>, where the key is the ID for the returned output type, while the value describes the output schema.</li>
 <li>The <code>handler</code> function takes one parameter, the object described in <code>input</code> and must return a tuple of a string and the output object. Here the ID uniquely identifies which output is intended, for example <code>success</code> and <code>error</code>, while  the second parameter in the tuple must match the <code>outputs</code> declaration.</li>
 </ul>
-<p>That&rsquo;s it! Now all that&rsquo;s left is to define the <code>ObjectType</code> and any subobjects.</p>
+<p>That&rsquo;s it! Now all that&rsquo;s left is to define the <code>ObjectType</code> and any sub-objects.</p>
 <h3 id="objecttype">ObjectType</h3>
 <p>The ObjectType is intended as a backing type for <a href="https://docs.python.org/3/library/dataclasses.html">dataclasses</a>. For example:</p>
 <div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">(</span>

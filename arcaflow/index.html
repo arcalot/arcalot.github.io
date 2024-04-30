@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.19">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.20">
     
     
       
@@ -1602,7 +1602,7 @@
 <p>Arcaflow&rsquo;s design can drastically simplify much of the workflow creation process, and it allows the workflow author to ensure the workflow is <em>locked in end-to-end</em>. <strong>A complete workflow can be version-controlled as a simple YAML file and in most cases can be expected to run in exactly the same way in any compatible environment.</strong></p>
 <h2>Not a CI system</h2>
 
-<p>Arcaflow is <strong>not designed to run as a persistent service nor to record workflow histories</strong>, and in most cases it is <strong>probably not the best tool to setup or manage infrastructure</strong>. For end-to-end CI needs, you should leverage a system that provdes these and other features (possibly something from the Alternatives list below).</p>
+<p>Arcaflow is <strong>not designed to run as a persistent service nor to record workflow histories</strong>, and in most cases it is <strong>probably not the best tool to set up or manage infrastructure</strong>. For end-to-end CI needs, you should leverage a system that provides these and other features (possibly something from the Alternatives list below).</p>
 <p>Arcaflow is, however, <strong>an excellent companion to a CI system</strong>. In many cases, building complex workflows completely within a CI environment can effectively lock you into that system because the workflow may not be easily portable outside of it or run independently by a user. An Arcaflow workflow <strong>can be easily integrated into most CI systems</strong>, so a workflow that you define once may be moved in most cases without modification to different environments or run directly by users.</p>
 <h2>Alternatives</h2>
 
@@ -1610,7 +1610,7 @@
 <p><strong>Here are some of the features that make Arcaflow a unique solution to the below alternatives:</strong></p>
 <ul>
 <li>Designed for complex branching-action workflows and parallelization</li>
-<li>Prioritizes data passing and management via strong typing and schemas to ensure machine readabilitly, workflow validation, and data integrity</li>
+<li>Prioritizes data passing and management via strong typing and schemas to ensure machine readability, workflow validation, and data integrity</li>
 <li>Runs actions as plugins via container orchestrator APIs</li>
 <li>Engine is deployed as a single Golang binary, and plugins are run as containers, minimizing dependencies and maximizing portability</li>
 <li>Workflows are designed to be explicitly version controlled to ensure portability to other environments without code or feature drift</li>

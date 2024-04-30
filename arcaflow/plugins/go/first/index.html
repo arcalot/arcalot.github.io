@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.19">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.20">
     
     
       
@@ -1673,7 +1673,7 @@
 
 
 <h1 id="writing-your-first-go-plugin">Writing your first Go plugin</h1>
-<p>In order to create a Go plugin, you will need to create a Go module project (<code>go mod init</code>) and install the Arcaflow SDK usin <code>go get go.flow.arcalot.io/pluginsdk</code>.</p>
+<p>In order to create a Go plugin, you will need to create a Go module project (<code>go mod init</code>) and install the Arcaflow SDK using <code>go get go.flow.arcalot.io/pluginsdk</code>.</p>
 <p>Writing a Go plugin consists of the following 4 parts:</p>
 <ol>
 <li>The input data model</li>
@@ -1692,7 +1692,7 @@
 <p>The Arcaflow serialization does not use the built-in Go JSON marshaling, so any additional tags like <code>omitempty</code>, or <code>yaml</code> tags are ignored.</p>
 </div>
 <p>In addition to the struct above, we must also define a schema for the input data structure:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// We define a separate scope, so we can add subobjects later.</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// We define a separate scope, so we can add sub-objects later.</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">inputSchema</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewScopeSchema</span><span class="p">(</span>
 <span class="w">    </span><span class="c1">// Struct-mapped object schemas are object definitions that are mapped to a specific struct (Input)</span>
 <span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewStructMappedObjectSchema</span><span class="p">[</span><span class="nx">Input</span><span class="p">](</span>

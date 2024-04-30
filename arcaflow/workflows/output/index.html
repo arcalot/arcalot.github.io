@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.19">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.20">
     
     
       
@@ -1640,8 +1640,8 @@
 </code></pre></div>
 <h2 id="writing-multiple-outputs">Writing multiple outputs</h2>
 <p>Arcaflow can produce multiple output groups for a workflow. These output groups are mutually exclusive to each other.</p>
-<p>A common example of two mutually exclusive events could be the availability of your data storage service. Let&rsquo;s assume the service is either available, or unavailable (the unavailble state also includes any states where an error is thrown during data insertion). Multiple workflow outputs allows you to plan for these two events.</p>
-<p>In this example taken from the <a href="https://github.com/arcalot/arcaflow-workflows/blob/main/example-workflow/workflow.yaml">Arcaflow Workflows</a> project, the <code>success</code> output collects the data from the specified steps and inserts it into data storage. The <code>no-indexing</code> output collects the data, the error logs, and does not store the data.</p>
+<p>A common example of two mutually exclusive events could be the availability of your data storage service. Let&rsquo;s assume the service is either available, or unavailable (the unavailable state also includes any states where an error is thrown during data insertion). Multiple workflow outputs allows you to plan for these two events.</p>
+<p>In this example taken from the <a href="https://github.com/arcalot/arcaflow-workflows/blob/main/advanced-examples/system-performance/sysbench/workflow.yaml#L102">Arcaflow Workflows</a> project, the <code>success</code> output collects the data from the specified steps and inserts it into data storage. The <code>no-indexing</code> output collects the data, the error logs, and does not store the data.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">outputs</span><span class="p">:</span>
 <span class="w"> </span><span class="nt">success</span><span class="p">:</span>
 <span class="w">   </span><span class="nt">pcp</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.pcp.outputs.success</span>

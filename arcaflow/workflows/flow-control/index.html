@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.19">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.20">
     
     
       
@@ -1628,7 +1628,7 @@
 <h1 id="using-flow-control-mechanics">Using Flow Control Mechanics</h1>
 <p>Flow control allows the workflow author to build a workflow with a decision tree based on supported flow logic. These flow control operations are not implemented by plugins, but are part of the workflow engine itself.</p>
 <h2 id="foreach-loops">Foreach Loops</h2>
-<p>Foreach loops allow for running a sub-workflow with iterative inputs from a parent workflow. A sub-workflow is a complete Arcaflow workflow file with it&rsquo;s own input and output schemas as described in this section. The inputs for the sub-workflow are provided as a list, where each list item is an object that matches the sub-workflow input schema.</p>
+<p>Foreach loops allow for running a sub-workflow with iterative inputs from a parent workflow. A sub-workflow is a complete Arcaflow workflow file with its own input and output schemas as described in this section. The inputs for the sub-workflow are provided as a list, where each list item is an object that matches the sub-workflow input schema.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>A complete functional example is available in the <a href="https://github.com/arcalot/arcaflow-workflows/tree/main/examples/sub-workflow-foreach">arcaflow-workflows</a> repository.</p>
@@ -1657,7 +1657,7 @@
 <span class="w">                  </span><span class="nt">type</span><span class="p">:</span>
 <span class="w">                    </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 </code></pre></div>
-<p>Then in the <code>steps</code> secton of the workflow, the sub-workflow can be defined as a step with the <code>loop</code> list object from above passed to its input.</p>
+<p>Then in the <code>steps</code> section of the workflow, the sub-workflow can be defined as a step with the <code>loop</code> list object from above passed to its input.</p>
 <p>The parameters for the sub-workflow step are:</p>
 <ul>
 <li><code>kind</code> - The type of loop (currently only foreach is supported)</li>
