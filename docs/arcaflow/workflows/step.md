@@ -7,12 +7,16 @@ To define a step type, you can do the following:
 ```yaml title="workflow.yaml"
 steps:
   step_a: # Specify any ID here you want to reference the step by
-    plugin: quay.io/some/container/image # This must be an Arcaflow-compatible image
+    plugin: 
+      deployment_type: image
+      src: quay.io/some/container/image # This must be an Arcaflow-compatible image
     input: # specify input values as a data structure, mixing in expressions as needed
       some:
         key: !expr $.steps.step_b.outputs.success.some_value 
   step_b:
-    plugin: quay.io/some/container/image
+    plugin: 
+      deployment_type: image
+      src: quay.io/some/container/image
     input:
       some:
         key: !expr $.input.some_value # Reference an input value

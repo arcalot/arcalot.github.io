@@ -89,11 +89,15 @@ input:
             type_id: string
 steps:
   my_plugin:
-    plugin: path/to/my_plugin:1
+    plugin: 
+      deployment_type: image
+      src: path/to/my_plugin:1
     input:
       param_1: !expr $.input.param_1
   my_other_plugin:
-    plugin: path/to/my_other_plugin:1
+    plugin: 
+      deployment_type: image
+      src: path/to/my_other_plugin:1
     input:
       param_2: !expr $.input.param_2
 outputs:

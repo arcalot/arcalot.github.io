@@ -109,7 +109,9 @@ input:
             type_id: string
 steps:
   greet:
-    plugin: example-plugin
+    plugin:
+      deployment_type: image 
+      src: example-plugin
     input:
       name: !expr $.input.name
 output:
