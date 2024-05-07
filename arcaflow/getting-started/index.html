@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.20">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.21">
     
     
       
@@ -1795,7 +1795,8 @@ You can now build the plugin container.</p>
 </div>
 <h2 id="step-5-create-a-simple-workflow">Step 5: Create a simple workflow</h2>
 <p>Let&rsquo;s start with something simple: we&rsquo;ll incorporate the plugin above into a workflow. Let&rsquo;s create a <code>workflow.yaml</code> in an empty directory</p>
-<div class="highlight"><span class="filename">workflow.yaml</span><pre><span></span><code><span class="nt">input</span><span class="p">:</span>
+<div class="highlight"><span class="filename">workflow.yaml</span><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.2.0</span>
+<span class="nt">input</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
 <span class="w">  </span><span class="nt">objects</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">RootObject</span><span class="p">:</span>
@@ -1806,7 +1807,9 @@ You can now build the plugin container.</p>
 <span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="nt">steps</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">greet</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example-plugin</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">deployment_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image</span><span class="w"> </span>
+<span class="w">      </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example-plugin</span>
 <span class="w">    </span><span class="nt">input</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.name</span>
 <span class="nt">output</span><span class="p">:</span>
@@ -2001,7 +2004,7 @@ steps.greet.outputs.success--&gt;output</code></pre>
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.dd8806f2.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a7c05c9e.min.js"></script>
       
     
   </body>
