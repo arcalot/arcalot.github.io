@@ -488,6 +488,7 @@ More information on the expression language is available in the [development gui
 Pass a workflow input directly to a plugin input
 
 ```yaml title="workflow.yaml"
+version: v0.2.0
 input:
   root: RootObject
   objects:
@@ -513,6 +514,7 @@ steps:
 Pass output from one plugin to the input of another plugin
 
 ```yaml title="workflow.yaml"
+version: v0.2.0
 steps:
   step_a:
     plugin: 

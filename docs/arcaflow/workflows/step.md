@@ -5,6 +5,7 @@ If your [input](input.md) is complete, you can now turn to writing your workflow
 To define a step type, you can do the following:
 
 ```yaml title="workflow.yaml"
+version: v0.2.0
 steps:
   step_a: # Specify any ID here you want to reference the step by
     plugin: 
@@ -46,12 +47,13 @@ The `deploy` key for plugins lets you control how the plugin container is deploy
     You can configure the Docker deployer like this:
 
     ```yaml
+    version: v0.2.0
     step:
       your_step_id:
         plugin: ...
         input: ...
         deploy: # You can use expressions here
-          type: docker
+          deployer_name: docker
           connection:
             # Change this to point to a TCP-based Docker socket
             host: host-to-docker
@@ -574,12 +576,13 @@ The `deploy` key for plugins lets you control how the plugin container is deploy
     If you want to use Podman as your local deployer, you can do so like this:
 
     ```yaml
+    version: v0.2.0
     step:
       your_step_id:
         plugin: ...
         input: ...
         deploy: # You can use expressions here
-          type: podman
+          deployer_name: podman
           podman:
             # Change where Podman is. (You can use this to point to a shell script
             path: /path/to/your/podman
@@ -1023,12 +1026,13 @@ The `deploy` key for plugins lets you control how the plugin container is deploy
     The Kubernetes deployer deploys on top of Kubernetes. You can set up the deployer like this:
 
     ```yaml
+    version: v0.2.0
     step:
       your_step_id:
         plugin: ...
         input: ...
         deploy: # You can use expressions here
-          type: kubernetes
+          deployer_name: kubernetes
           connection:
             host: localhost:6443
             cert: |

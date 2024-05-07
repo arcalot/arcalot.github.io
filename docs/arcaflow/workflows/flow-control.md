@@ -72,6 +72,7 @@ loop:
 The sub-workflow file then has its complete schema and set of steps as in this example:
 
 ```yaml title="sub-workflow.yaml"
+version: v0.2.0
 input:
   root: RootObject
   objects:
