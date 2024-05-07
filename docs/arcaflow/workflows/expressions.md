@@ -532,15 +532,3 @@ steps:
         key: !expr $.steps.step_a.outputs.success.some_value
 ```
 
-### Binding Constants to List Items
-
-```yaml title="workflow.yaml"
-
-steps:
-  opensearch:
-    plugin:
-      src: quay.io/arcaflow-plugin-opensearch:all_b3c9160
-      deployer_name: podman
-
-
-```

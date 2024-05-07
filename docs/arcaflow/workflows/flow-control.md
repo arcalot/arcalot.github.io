@@ -107,3 +107,178 @@ outputs:
     my_plugin: !expr $.steps.my_plugin.outputs.success
     my_other_plugin: !expr $.steps.my_other_plugin.outputs.success
 ```
+
+### Dry Out with bindConstants()
+
+The builtin function [bindConstants()](expressions.md#functions) allows you to factor out any constant input variables to a foreach subworkflow.
+
+```yaml title="input-repeat-name.yaml"
+iterations:
+  - loop_id: 1
+    name: Matt
+  - loop_id: 2
+    name: Matt
+  - loop_id: 3
+    name: Matt
+  - loop_id: 4
+    name: Matt
+```
+
+```yaml title="workflow-repeat-name.yaml"
+version: v0.2.0
+input:
+  root: RootObject
+  objects:
+    RootObject:
+      id: RootObject
+      properties:
+        iterations:
+          type:
+            type_id: list
+            items:
+              type_id: object
+              id: SubRootObject
+              properties:
+                loop_id:
+                  type:
+                    type_id: integer
+                name:
+                  type:
+                    type_id: string
+
+steps:
+  foreach_loop:
+    kind: foreach
+    items: !expr $.input.iterations
+    workflow: sub-workflow.yaml
+    parallelism: 1
+
+outputs:
+  success:
+    fab_four: !expr $.steps.foreach_loop.outputs.success.data
+```
+
+```yaml title="subworkflow-repeat-name.yaml"
+version: v0.2.0
+input:
+  root: SubRootObject
+  objects:
+    SubRootObject:
+      id: SubRootObject
+      properties: 
+        name:
+          type:
+            type_id: string
+steps:
+  example:
+    plugin:
+      src: quay.io/arcalot/arcaflow-plugin-template-python:all_d5dd9d6
+      deployment_type: image
+    input:
+      name: !expr $.input.name
+
+outputs:
+  success:
+    name: !expr $.steps.example.outputs.success
+```
+
+The input variable `name`'s value is repeated across for each iteration in this input.
+
+```yaml title="input.yaml"
+repeated_inputs: 
+  name: Matt
+iterations:
+  - loop_id: 1
+  - loop_id: 2
+  - loop_id: 3
+  - loop_id: 4
+```
+
+Using `bindConstants()` we can factor out `name` into its own subsection, here we have named our new subsection `repeated_inputs`.
+
+
+```yaml title="workflow.yaml"
+version: v0.2.0
+input:
+  root: RootObject
+  objects:
+    RootObject:
+      id: RootObject
+      properties:
+        repeated_inputs:
+          type:
+            type_id: ref
+            id: RepeatedValues
+        iterations:
+          type:
+            type_id: list
+            items:
+              id: SubRootObject
+              type_id: ref
+    RepeatedValues:
+      id: RepeatedValues
+      properties:
+        name:
+          type:
+            type_id: string
+    SubRootObject:
+      id: SubRootObject
+      properties:
+        loop_id:
+          type:
+            type_id: integer            
+            
+steps:
+  foreach_loop:
+    kind: foreach
+    items: !expr 'bindConstants($.input.iterations, $.input.repeated_inputs)'
+    workflow: subwf.yaml
+    parallelism: 1
+
+outputs:
+  success:
+    fab_four: !expr $.steps.foreach_loop.outputs.success.data
+```
+
+```yaml title="subworkflow.yaml"
+version: v0.2.0
+input:
+  root: SubRootObject__RepeatedValues
+  objects:
+    SubRootObject__RepeatedValues:
+      id: SubRootObject__RepeatedValues
+      properties:
+        constant:
+          type:
+            type_id: ref
+            id: RepeatedValues
+        item:
+          type:
+            type_id: ref
+            id: SubRootObject
+    RepeatedValues:
+      id: RepeatedValues
+      properties:
+        name:
+          type:
+            type_id: string
+    SubRootObject:
+      id: SubRootObject
+      properties:
+        loop_id:
+          type:
+            type_id: integer
+
+steps:
+  example:
+    plugin:
+      deployment_type: image
+      src: quay.io/arcalot/arcaflow-plugin-template-python::all_d5dd9d6
+    input:
+      name: !expr $.input.constant.name
+
+outputs:
+  success:
+    loop_id: !expr $.input.item.loop_id
+    beatle: !expr $.steps.example.outputs.success
+```
