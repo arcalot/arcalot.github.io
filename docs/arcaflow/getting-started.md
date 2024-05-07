@@ -98,6 +98,7 @@ You can now build the plugin container.
 Let's start with something simple: we'll incorporate the plugin above into a workflow. Let's create a `workflow.yaml` in an empty directory
 
 ```yaml title="workflow.yaml"
+version: v0.2.0
 input:
   root: RootObject
   objects:
@@ -109,7 +110,9 @@ input:
             type_id: string
 steps:
   greet:
-    plugin: example-plugin
+    plugin:
+      deployment_type: image 
+      src: example-plugin
     input:
       name: !expr $.input.name
 output:

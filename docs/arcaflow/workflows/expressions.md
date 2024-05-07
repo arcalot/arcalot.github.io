@@ -488,6 +488,7 @@ More information on the expression language is available in the [development gui
 Pass a workflow input directly to a plugin input
 
 ```yaml title="workflow.yaml"
+version: v0.2.0
 input:
   root: RootObject
   objects:
@@ -500,7 +501,9 @@ input:
 
 steps:
   step_a:
-    plugin: quay.io/some/container/image
+    plugin:
+      deployment_type: image
+      src: quay.io/some/container/image
     input:
       some:
         key: !expr $.input.name
@@ -511,13 +514,18 @@ steps:
 Pass output from one plugin to the input of another plugin
 
 ```yaml title="workflow.yaml"
+version: v0.2.0
 steps:
   step_a:
-    plugin: quay.io/some/container/image
+    plugin: 
+      deployment_type: image
+      src: quay.io/some/container/image
     input: {}
 
   step_b:
-    plugin: quay.io/some/container/image
+    plugin:
+      deployment_type: image 
+      src: quay.io/some/container/image
     input:
       some:
         key: !expr $.steps.step_a.outputs.success.some_value
