@@ -193,9 +193,7 @@ iterations:
   - loop_id: 3
   - loop_id: 4
 ```
-
 Using `bindConstants()` we can factor out `name` into its own subsection, here we have named our new subsection `repeated_inputs`.
-
 
 ```yaml title="workflow.yaml"
 version: v0.2.0
@@ -232,7 +230,7 @@ steps:
   foreach_loop:
     kind: foreach
     items: !expr 'bindConstants($.input.iterations, $.input.repeated_inputs)'
-    workflow: subwf.yaml
+    workflow: subworkflow.yaml
     parallelism: 1
 
 outputs:
@@ -282,3 +280,6 @@ outputs:
     loop_id: !expr $.input.item.loop_id
     beatle: !expr $.steps.example.outputs.success
 ```
+
+To use the generated values from `bindConstants()`, a new schema representing these bound values must be added to the input schema section of our `subworkflow.yaml`, `input`. This new schema's ID will be the ID of the schema that defines the items in your list, in this case `SubRootObject` and the schema name that defines your repeated inputs, in this case `RepeatedValues`, concatenated with a double underscore, `__`. This creates our new schema ID, `SubRootObject__RepeatedValues`. You are required to use this schema ID because it is generated from the names of your other schemas.
+
