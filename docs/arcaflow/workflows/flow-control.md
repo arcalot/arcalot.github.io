@@ -282,4 +282,3 @@ outputs:
 ```
 
 To use the generated values from `bindConstants()`, a new schema representing these bound values must be added to the input schema section of our `subworkflow.yaml`, `input`. This new schema's ID will be the ID of the schema that defines the items in your list, in this case `SubRootObject` and the schema name that defines your repeated inputs, in this case `RepeatedValues`, concatenated with a double underscore, `__`. This creates our new schema ID, `SubRootObject__RepeatedValues`. You are required to use this schema ID because it is generated from the names of your other schemas.
-
