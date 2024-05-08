@@ -35,21 +35,27 @@ Schemas that are not composed within an ObjectSchema do not have an `Object ID`.
 
 `ObjectSchema`s use their `Object ID` as their schema name. `ListSchema`s that have an `ObjectSchema` as their item value use that `ObjectSchema`'s name.
 
-| schema                    |      id       | name                         |
-|---------------------------|---------------|------------------------------|
-| Object                    | MyFirstObject | MyFirstObject                |
-| List[Object]              | MyFirstObject | list_MyFirstObject           |
-| List[List[String]]        | MyFirstObject |  list_list_MyFirstObject     |
-| List[List[List[String]]]  | MyFirstObject |  list_list_list_MyFirstObject |
+| schema                    | object id     | name                          |
+|---------------------------|---------------|-------------------------------|
+| Object                    | MyFirstObject | MyFirstObject                 |
+| List[Object]              | MyFirstObject | list_MyFirstObject            |
+| List[List[String]]        | MyFirstObject | list_list_MyFirstObject       |
+| List[List[List[String]]]  | MyFirstObject | list_list_list_MyFirstObject  |
  
-### Remainder
+### Remaining Schemas
 
-`ScopeSchemas` do not get a schema name, and `RefSchema`s use the schema name of the type to which they point.
+* `ScopeSchema`s do not get a schema name.
+* `RefSchema`s use the schema name of the type to which they point.
 
 
 ## Generated Combined Schema Names
 
-|                                        |               |                                 |
-|---------------------------------|---------------|------------------------------------------|
-| IntSchema                       |               |                                         |
-|                                        |               |                                         |
+`bindConstants(list[any], any)` generates a new schema name from the schemas provided as arguments. Because the output of this function is a schema name and ID for a single list element, only the scheme name of the list's items is used. It is concatenated with a double underscore `__` with the schema name of the second argument.
+
+| first schema           | second schema              | new name                      |
+|------------------------|----------------------------|-------------------------------|
+| List[Int]                          | Object(ID="MyFirstObject")   | int__MyFirstObject        |
+| List[Object(ID="MyFirstObject") ]  | Object(ID="Constants")       | MyFirstObject__Constants  |
+| List[Object(ID="MyFirstObject") ]  | String                       | MyFirstObject__string     |
+| List[String]                       | Int                          | string__int               |
+| List[String]                       | List[Object(ID="Constants")] | string__list_Constants    |
