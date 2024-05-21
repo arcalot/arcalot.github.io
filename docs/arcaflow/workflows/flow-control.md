@@ -115,89 +115,18 @@ The builtin function [bindConstants()](expressions.md#functions) allows you to f
 ```yaml title="input-repeat-name.yaml"
 iterations:
   - loop_id: 1
-    name: Matt
+    name: mogo
+    ratio: 3.14
   - loop_id: 2
-    name: Matt
+    name: mogo
+    ratio: 3.14
   - loop_id: 3
-    name: Matt
+    name: mogo
+    ratio: 3.14
   - loop_id: 4
-    name: Matt
+    name: mogo
+    ratio: 3.14
 ```
-
-```yaml title="workflow-repeat-name.yaml"
-version: v0.2.0
-input:
-  root: RootObject
-  objects:
-    RootObject:
-      id: RootObject
-      properties:
-        iterations:
-          type:
-            type_id: list
-            items:
-              type_id: object
-              id: SubRootObject
-              properties:
-                loop_id:
-                  type:
-                    type_id: integer
-                name:
-                  type:
-                    type_id: string
-
-steps:
-  foreach_loop:
-    kind: foreach
-    items: !expr $.input.iterations
-    workflow: subworkflow-repeat-name.yaml
-    parallelism: 1
-
-outputs:
-  success:
-    fab_four: !expr $.steps.foreach_loop.outputs.success.data
-```
-
-```yaml title="subworkflow-repeat-name.yaml"
-version: v0.2.0
-input:
-  root: SubRootObject
-  objects:
-    SubRootObject:
-      id: SubRootObject
-      properties: 
-        name:
-          type:
-            type_id: string
-steps:
-  example:
-    plugin:
-      src: quay.io/arcalot/arcaflow-plugin-template-python:all_d5dd9d6
-      deployment_type: image
-    input:
-      name: !expr $.input.name
-
-outputs:
-  success:
-    loop_id: !expr $.input.item.loop_id
-    beatle: !expr $.steps.example.outputs.success
-```
-
-#### Dried Out Workflow
-
-Using `bindConstants()` we can factor out `name` into its own subsection. Here we have named our new subsection `repeated_inputs`.
-
-```yaml title="input.yaml"
-repeated_inputs: 
-  name: Matt
-iterations:
-  - loop_id: 1
-  - loop_id: 2
-  - loop_id: 3
-  - loop_id: 4
-```
-
-To use the generated values from `bindConstants()`, a new schema representing these bound values must be added to the input schema section of our `subworkflow.yaml`, `input`. This new schema's ID will be the ID of the schema that defines the items in your list, in this case `SubRootObject` and the schema name that defines your repeated inputs, in this case `RepeatedValues`, concatenated with a double underscore, `__`. This creates our new schema ID, `SubRootObject__RepeatedValues`. You are required to use this schema ID because it is generated from the names of your other schemas.
 
 ```yaml title="workflow.yaml"
 version: v0.2.0
@@ -207,33 +136,29 @@ input:
     RootObject:
       id: RootObject
       properties:
-        repeated_inputs:
-          type:
-            type_id: ref
-            id: RepeatedValues
         iterations:
           type:
             type_id: list
             items:
               id: SubRootObject
               type_id: ref
-    RepeatedValues:
-      id: RepeatedValues
-      properties:
-        name:
-          type:
-            type_id: string
     SubRootObject:
       id: SubRootObject
       properties:
         loop_id:
           type:
-            type_id: integer            
+            type_id: integer    
+        ratio:
+          type:
+            type_id: float                                
+        name:
+          type:
+            type_id: string
             
 steps:
   foreach_loop:
     kind: foreach
-    items: !expr 'bindConstants($.input.iterations, $.input.repeated_inputs)'
+    items: !expr $.input.iterations
     workflow: subworkflow.yaml
     parallelism: 1
 
@@ -245,31 +170,20 @@ outputs:
 ```yaml title="subworkflow.yaml"
 version: v0.2.0
 input:
-  root: SubRootObject__RepeatedValues
+  root: SubRootObject
   objects:
-    SubRootObject__RepeatedValues:
-      id: SubRootObject__RepeatedValues
-      properties:
-        constant:
-          type:
-            type_id: ref
-            id: RepeatedValues
-        item:
-          type:
-            type_id: ref
-            id: SubRootObject
-    RepeatedValues:
-      id: RepeatedValues
-      properties:
-        name:
-          type:
-            type_id: string
     SubRootObject:
       id: SubRootObject
       properties:
         loop_id:
           type:
             type_id: integer
+        name:
+          type:
+            type_id: string
+        ratio:
+          type:
+            type_id: float            
 
 steps:
   example:
@@ -277,12 +191,41 @@ steps:
       deployment_type: image
       src: quay.io/arcalot/arcaflow-plugin-template-python:all_d5dd9d6
     input:
-      name: !expr $.input.constant.name
+      name: !expr $.input.name
 
 outputs:
   success:
-    loop_id: !expr $.input.item.loop_id
+    loop_id: !expr $.input.loop_id
+    ratio: !expr $.input.ratio
     beatle: !expr $.steps.example.outputs.success
 ```
+
+#### Dried Out Workflow
+
+Using `bindConstants()` we can factor out `name` and `ratio` into their own subsection, `repeated_inputs`.
+
+```yaml title="input.yaml"
+repeated_inputs: 
+  name: mogo
+  ratio: 3.14
+iterations:
+  - loop_id: 1
+  - loop_id: 2
+  - loop_id: 3
+  - loop_id: 4
+```
+
+To use the generated values from `bindConstants()`, a new schema representing these bound values must be added to the input schema section of our `subworkflow.yaml`, `input`. This new schema's ID will be the ID of the schema that defines the items in your list, in this case `SubRootObject` and the schema name that defines your repeated inputs, in this case `RepeatedValues`, concatenated with a double underscore, `__`. This creates our new schema ID, `SubRootObject__RepeatedValues`. You are required to use this schema ID because it is generated from the names of your other schemas.
+
+```yaml title="workflow.yaml"            
+steps:
+  foreach_loop:
+    kind: foreach
+    items: !expr 'bindConstants($.input.iterations, $.input.repeated_inputs)'
+    workflow: subworkflow.yaml
+    parallelism: 1
+```
+
+See the [full workflow](www.redhat.com).
 
 To use `bindConstants()` with an `outputSchema` in your workflow, [learn more about our workflow schema naming conventions.](schemas.md)
