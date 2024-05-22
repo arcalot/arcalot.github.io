@@ -226,6 +226,6 @@ steps:
     parallelism: 1
 ```
 
-See the [full workflow](www.redhat.com).
+See the [full workflow](https://github.com/arcalot/arcaflow-workflows/blob/492e30ffbea6ce902e6e7ec050c4d1be307b6d73/basic-examples/bind-constants/workflow.yaml#L28).
 
 To use `bindConstants()` with an `outputSchema` in your workflow, [learn more about our workflow schema naming conventions.](schemas.md)
