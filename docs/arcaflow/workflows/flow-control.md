@@ -108,9 +108,9 @@ outputs:
     my_other_plugin: !expr $.steps.my_other_plugin.outputs.success
 ```
 
-### Reduce Repeition with `bindConstants()`
+### Reduce Repetition with `bindConstants()`
 
-The builtin function [bindConstants()](expressions.md#functions) allows you to factor out any constant input variables to a foreach subworkflow. The input variable `name`'s value is repeated across each iteration in this input. This section will show you how to simplify it.
+The builtin function [bindConstants()](expressions.md#functions) allows you to factor out any constant input variables to a foreach subworkflow. The input variable `name`'s value is repeated across each iteration in this input. This requires a more repetitive input and schema definition. This section will show you how to simplify it. 
 
 ```yaml title="input-repeat-name.yaml"
 iterations:
