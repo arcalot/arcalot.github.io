@@ -110,13 +110,15 @@ outputs:
 
 ### Reduce Repetition with `bindConstants()`
 
-The builtin function [bindConstants()](expressions.md#functions) allows you to 
-avoid repeating input variables for a foreach subworkflow. In the example 
+The builtin function [`bindConstants()`](expressions.md#functions) allows you to 
+avoid repeating input variables for a `foreach` subworkflow. In the example 
 below, the input variable `name`'s value is repeated across each iteration in 
-this input. This requires a more repetitive input and schema definition. This 
+this input. This results in a more repetitive input and schema definition. This 
 section will show you how to simplify it. 
 
-```yaml title="input-repeat-name.yaml"
+#### Workflow and Input Before `bindConstants()`
+
+```yaml title="input-repeated.yaml"
 iterations:
   - loop_id: 1
     repeated_inputs:
@@ -206,12 +208,12 @@ outputs:
 
 #### Reduced Repetition Workflow
 
-Here we restructure the input, factoring out the repeated `name` entry in the 
-list and placing it into a single field; we will use `bindConstants()` to 
-construct the `foreach` list with repeated entries.
+Here we restructure the input, factoring out the repeated `name` and `ratio` 
+entries in the list and placing them into a single field; we will use 
+`bindConstants()` to construct the `foreach` list with repeated entries.
 
 ```yaml title="input.yaml"
-data: 
+repeated_inputs: 
   name: mogo
   ratio: 3.14
 iterations:
@@ -241,6 +243,8 @@ steps:
     parallelism: 1
 ```
 
-See the [full workflow](https://github.com/arcalot/arcaflow-workflows/blob/492e30ffbea6ce902e6e7ec050c4d1be307b6d73/basic-examples/bind-constants/workflow.yaml#L28).
+To use `bindConstants()` with an `outputSchema` in your workflow, you need to 
+reference the schema of the list items returned by `bindConstants()`, see 
+[Generated Schema Name](schemas.md#generated-combined-schema-names).
 
-To use `bindConstants()` with an `outputSchema` in your workflow, you need to reference the scehma of the list items returned by `bindConstants()`, see [Generated Schema Name](schemas.md#generated-combined-schema-names).
+See the [full workflow](https://github.com/arcalot/arcaflow-workflows/blob/492e30ffbea6ce902e6e7ec050c4d1be307b6d73/basic-examples/bind-constants/workflow.yaml#L28).

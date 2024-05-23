@@ -23,8 +23,7 @@ their schema name.
 
 The name of a `ListSchema` is the name of the schema of its element type 
 prefixed with `list_`. For lists of lists, the schema name is the name of 
-the inner list schema prefixed with an additional `list_`. These names are 
-joined with a single underscore, `_`.
+the inner list schema prefixed with an additional `list_`. 
 
 ### List Names
 
@@ -40,8 +39,8 @@ joined with a single underscore, `_`.
 
 ### Object Names
 
-The name of an `ObjectSchema` is their `Object ID`. `ListSchema`s that 
-have an `ObjectSchema` as their item value use the name of that `ObjectSchema`.
+The name of an `ObjectSchema` is its `Object ID`. `ListSchema`s that 
+have an `ObjectSchema` as its item value uses the name of that `ObjectSchema`.
 
 | schema                   | object id     | name                         |
 |--------------------------|---------------|------------------------------|
