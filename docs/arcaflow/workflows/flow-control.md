@@ -108,7 +108,7 @@ outputs:
     my_other_plugin: !expr $.steps.my_other_plugin.outputs.success
 ```
 
-### Dry Out with bindConstants()
+### Reduce Repeition with `bindConstants()`
 
 The builtin function [bindConstants()](expressions.md#functions) allows you to factor out any constant input variables to a foreach subworkflow. The input variable `name`'s value is repeated across each iteration in this input. This section will show you how to simplify it.
 

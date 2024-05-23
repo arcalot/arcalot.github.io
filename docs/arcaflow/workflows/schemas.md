@@ -8,8 +8,8 @@ Schemas that are not composed within an ObjectSchema do not have an `Object ID`.
 
 | schema        |     type id                 |
 |---------------|-----------------------------|
-| IntEnum       | enum_string                      |
-| StringEnum    | enum_integer                      |
+| IntEnum       | enum_integer                      |
+| StringEnum    | enum_string                      |
 | String        | string                      |
 | Pattern       | pattern                      |
 | Int           | integer                     |
