@@ -142,18 +142,7 @@ input:
             items:
               id: SubRootObject
               type_id: ref
-    SubRootObject:
-      id: SubRootObject
-      properties:
-        loop_id:
-          type:
-            type_id: integer    
-        ratio:
-          type:
-            type_id: float                                
-        name:
-          type:
-            type_id: string
+              namespace: $.steps.foreach_loop.execute.inputs.items
             
 steps:
   foreach_loop:
