@@ -261,7 +261,7 @@ Functions:
 | `toUpper(string)`                                | string       | Returns the input with Unicode letters mapped to their upper case.                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `splitString(string, string)`                    | list[string] | Returns a list of the substrings which appear between instances of the specified separator; the separator instances are not included in the resulting list elements; adjacent occurrences of separator instances as well as instances appearing at the beginning or ending of the input will produce empty string list elements.<br>&nbsp; Param 1: The string to split.<br>&nbsp; Param 2: The separator.                                                                                     |
 | `readFile(string)`                               | string |  Returns the contents of a file as a UTF-8 character string, given a file path string. Relative file paths are resolved from the Arcaflow process working directory. Shell environment variables are not expanded.                                                                                     |
-| `bindConstants(list[any], any)`                               | list[object] |  Returns a list of objects each containing two properties: an `item` property which contains the corresponding item from the list in the first parameter; and, a `constant` property which contains the value of the second input parameter. The output list items will have a generated schema name as described in [Generated Schema Names](schemas.md#generated-combined-schema-names).                                                                                 |
+| `bindConstants(list[any], any)`                               | list[object] |  Returns a list of objects each containing two properties: an `item` property which contains the corresponding item from the list in the first parameter; and, a `constant` property which contains the value of the second input parameter. The output list items will have a generated schema name as described in [Generated Schema Names](schemas.md#generated-combined-schema-names). For usage see [this example](expressions.md#binding-constants).                                                                                |
 
 
 
@@ -535,8 +535,6 @@ steps:
 ```
 
 ### Binding Constants
-
-
 
 ```yaml title="input.yaml"
 repeated_inputs: 
