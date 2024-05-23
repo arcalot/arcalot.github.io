@@ -110,7 +110,11 @@ outputs:
 
 ### Reduce Repetition with `bindConstants()`
 
-The builtin function [bindConstants()](expressions.md#functions) allows you to factor out any constant input variables to a foreach subworkflow. The input variable `name`'s value is repeated across each iteration in this input. This requires a more repetitive input and schema definition. This section will show you how to simplify it. 
+The builtin function [bindConstants()](expressions.md#functions) allows you to 
+avoid repeating input variables for a foreach subworkflow. In the example 
+below, the input variable `name`'s value is repeated across each iteration in 
+this input. This requires a more repetitive input and schema definition. This 
+section will show you how to simplify it. 
 
 ```yaml title="input-repeat-name.yaml"
 iterations:
@@ -178,7 +182,7 @@ steps:
   example:
     plugin:
       deployment_type: image
-      src: quay.io/arcalot/arcaflow-plugin-template-python:all_d5dd9d6
+      src: quay.io/arcalot/arcaflow-plugin-template-python:0.4.0
     input:
       name: !expr $.input.name
 
@@ -191,7 +195,9 @@ outputs:
 
 #### Dried Out Workflow
 
-Using `bindConstants()` we can factor out `name` and `ratio` into their own subsection, `repeated_inputs`.
+Here we restructure the input, factoring out the repeated `name` entry in the 
+list and placing it into a single field; we will use `bindConstants()` to 
+construct the `foreach` list with repeated entries.
 
 ```yaml title="input.yaml"
 repeated_inputs: 
@@ -204,7 +210,14 @@ iterations:
   - loop_id: 4
 ```
 
-To use the generated values from `bindConstants()`, a new schema representing these bound values must be added to the input schema section of our `subworkflow.yaml`, `input`. This new schema's ID will be the ID of the schema that defines the items in your list, in this case `SubRootObject` and the schema name that defines your repeated inputs, in this case `RepeatedValues`, concatenated with a double underscore, `__`. This creates our new schema ID, `SubRootObject__RepeatedValues`. You are required to use this schema ID because it is generated from the names of your other schemas.
+To use the generated values from `bindConstants()`, a new schema representing 
+these bound values must be added to the input schema section of our 
+`subworkflow.yaml`, `input`. This new schema's ID will be the ID of the schema 
+that defines the items in your list, in this case `SubRootObject` and the 
+schema name that defines your repeated inputs, in this case `RepeatedValues`, 
+concatenated with a double underscore, `__`. This creates our new schema ID, 
+`SubRootObject__RepeatedValues`. You are required to use this schema ID 
+because it is generated from the names of your other schemas.
 
 ```yaml title="workflow.yaml"            
 steps:
@@ -217,4 +230,4 @@ steps:
 
 See the [full workflow](https://github.com/arcalot/arcaflow-workflows/blob/492e30ffbea6ce902e6e7ec050c4d1be307b6d73/basic-examples/bind-constants/workflow.yaml#L28).
 
-To use `bindConstants()` with an `outputSchema` in your workflow, [learn more about our workflow schema naming conventions.](schemas.md)
+To use `bindConstants()` with an `outputSchema` in your workflow, you need to reference the scehma of the list items returned by `bindConstants()`, see [Generated Schema Name](schemas.md#generated-combined-schema-names).
