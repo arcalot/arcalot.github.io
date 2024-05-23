@@ -61,8 +61,8 @@ The name of the schema for the value returned by a given call to `bindConstants(
 
 | first schema                      | second schema                | name                     |
 |-----------------------------------|------------------------------|--------------------------|
-| List[Int]                         | Object(ID="MyFirstObject")   | int__MyFirstObject       |
+| List[Int]                         | Object(ID="MyFirstObject")   | integer__MyFirstObject       |
 | List[Object(ID="MyFirstObject") ] | Object(ID="Constants")       | MyFirstObject__Constants |
 | List[Object(ID="MyFirstObject") ] | String                       | MyFirstObject__string    |
-| List[String]                      | Int                          | string__int              |
+| List[String]                      | Int                          | string__integer              |
 | List[String]                      | List[Object(ID="Constants")] | string__list_Constants   |

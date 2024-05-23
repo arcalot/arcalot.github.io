@@ -119,17 +119,21 @@ section will show you how to simplify it.
 ```yaml title="input-repeat-name.yaml"
 iterations:
   - loop_id: 1
-    name: mogo
-    ratio: 3.14
+    repeated_inputs:
+      name: mogo
+      ratio: 3.14
   - loop_id: 2
-    name: mogo
-    ratio: 3.14
+    repeated_inputs:
+      name: mogo
+      ratio: 3.14
   - loop_id: 3
-    name: mogo
-    ratio: 3.14
+    repeated_inputs:
+      name: mogo
+      ratio: 3.14
   - loop_id: 4
-    name: mogo
-    ratio: 3.14
+    repeated_inputs:
+      name: mogo
+      ratio: 3.14
 ```
 
 ```yaml title="workflow.yaml"
@@ -171,6 +175,13 @@ input:
         loop_id:
           type:
             type_id: integer
+        repeated_inputs:
+          type:
+            type_id: ref
+            id: RepeatedInputs
+    RepeatedInputs:
+      id: RepeatedInputs
+      properties:
         name:
           type:
             type_id: string
@@ -184,12 +195,12 @@ steps:
       deployment_type: image
       src: quay.io/arcalot/arcaflow-plugin-template-python:0.4.0
     input:
-      name: !expr $.input.name
+      name: !expr $.input.repeated_inputs.name
 
 outputs:
   success:
     loop_id: !expr $.input.loop_id
-    ratio: !expr $.input.ratio
+    ratio: !expr $.input.repeated_inputs.ratio
     beatle: !expr $.steps.example.outputs.success
 ```
 
@@ -200,7 +211,7 @@ list and placing it into a single field; we will use `bindConstants()` to
 construct the `foreach` list with repeated entries.
 
 ```yaml title="input.yaml"
-repeated_inputs: 
+data: 
   name: mogo
   ratio: 3.14
 iterations:
