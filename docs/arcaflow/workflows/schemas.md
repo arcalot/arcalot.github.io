@@ -39,8 +39,8 @@ the inner list schema prefixed with an additional `list_`.
 
 ### Object Names
 
-The name of an `ObjectSchema` is its `Object ID`. `ListSchema`s that 
-have an `ObjectSchema` as its item value uses the name of that `ObjectSchema`.
+The name of an `ObjectSchema` is its `Object ID`. A `ListSchema` that
+has an `ObjectSchema` as its item value uses the name of that `ObjectSchema`.
 
 | schema                   | object id     | name                         |
 |--------------------------|---------------|------------------------------|
