@@ -26,3 +26,7 @@ Steps hold the individual parts of the workflow. You can feed data from one step
 Outputs hold the final result of a workflow. Outputs can reference outputs of steps.
 
 [Learn more about output &raquo;](output.md){ .md-button }
+
+<h2>Schema Names</h2>
+
+[Learn more about our schema naming conventions &raquo;](schemas.md){ .md-button }
