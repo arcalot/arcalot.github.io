@@ -40,22 +40,6 @@ It allows you to connect plugins into workflows of parallel and serial tasks for
 
 ---
 
-## Arcalog
-
-<div class="media" markdown>
-
-![Arcalog logo showing an ark floating on a blue scroll symbolizing the many logs it is scrolling through](https://github.com/arcalot/.github/raw/main/branding/arcalog.png)
-
-Arcalog can assist you with or automate your **root cause analysis** in CI or other log systems either as a standalone tool or by embedding it into your applications.
-
-It also provides additional tooling to download jobs from various log systems or add your own log files for analysis.
-
-[Read more](arcalog/index.md){ .md-button }
-
-</div>
-
----
-
 ## Community
 
 You can find our general community health files like our code of conduct and contribution guidelines in the [.github repository](https://github.com/arcalot/.github). If you have any questions or suggestions, please use the issues in the respective repository or contribute to the [discussions](https://github.com/orgs/arcalot/discussions).
