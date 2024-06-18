@@ -1,7 +1,7 @@
 site_name: Arcalot
 site_url: https://arcalot.io/
-repo_url: https://github.com/arcalot/arcalot.github.io
-repo_name: arcalot/arcalot.github.io
+repo_url: https://github.com/arcalot/arcaflow-engine
+repo_name: arcalot/arcaflow-engine
 edit_uri: edit/main/docs/
 nav:
   - Home: index.md
