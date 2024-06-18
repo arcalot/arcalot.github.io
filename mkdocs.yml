@@ -43,6 +43,7 @@ nav:
           - arcaflow/workflows/index.md
           - Overview: arcaflow/workflows/index.md
           - Versioning: arcaflow/workflows/versioning.md
+          - Workflow schemas: arcaflow/workflows/schemas.md
           - Creating your input schema: arcaflow/workflows/input.md
           - Setting up a step: arcaflow/workflows/step.md
           - Expressions: arcaflow/workflows/expressions.md
