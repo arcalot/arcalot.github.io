@@ -34,7 +34,26 @@ output_id: success
 
 ![animation of a Linux text console showing the contents of the workflow YAML files and then the execution of the workflow](https://raw.githubusercontent.com/arcalot/arcaflow-engine/main/arcaflow-basic-demo.gif)
 
-It's that simple! And the basics of running a workflow are the same, whether it's this single-step hello-world example or a much more complex workflow like this [stress-ng plus PCP data collection](https://github.com/arcalot/arcaflow-workflows/tree/main/advanced-examples/system-performance/stressng-pcp) example:
+It's that simple! And the basics of running a workflow are the same, whether it's this single-step hello-world example:
+
+```mermaid
+flowchart LR
+%% Success path
+steps.example.deploy-->steps.example.starting
+steps.example.running-->steps.example.outputs
+steps.example.starting-->steps.example.running
+steps.example.starting-->steps.example.starting.started
+steps.example.disabled-->steps.example.disabled.output
+steps.example.outputs-->steps.example.outputs.success
+steps.example.enabling-->steps.example.enabling.resolved
+steps.example.enabling-->steps.example.starting
+steps.example.enabling-->steps.example.disabled
+steps.example.outputs.success-->outputs.success
+input-->steps.example.starting
+steps.example.cancelled-->steps.example.outputs
+```
+
+... or a much more complex workflow like this [stress-ng plus PCP data collection](https://github.com/arcalot/arcaflow-workflows/tree/main/advanced-examples/system-performance/stressng-pcp) example:
 
 ```mermaid
 %% Mermaid markdown workflow
