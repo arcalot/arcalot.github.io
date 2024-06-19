@@ -14,13 +14,13 @@ First we will clone the example workflows repository and set our working directo
 
 ```bash
 git clone https://github.com/arcalot/arcaflow-workflows.git
-export WFDIR=arcaflow-workflows/basic-examples/basic/
 ```
 
 Then we will run the workflow, setting the working directory as the context, and defining the workflow, configuration, and input files to use:
 
 ```bash
-arcaflow --context $WFDIR --workflow workflow.yaml --config config.yaml --input input.yaml
+arcaflow --context arcaflow-workflows/basic-examples/basic/ \
+--workflow workflow.yaml --config config.yaml --input input.yaml
 ```
 
 Arcaflow will display logs, depending upon the configured verbosity, and then will return the machine-readable output of the workflow in YAML format:
@@ -49,13 +49,13 @@ input:
     RootObject:
       id: RootObject
       properties:
-        nickname:   <<== Input key name
+        nickname:   #<<== Input key name
           display:
             description: Just a name
             name: Name
           required: true
           type:
-            type_id: string   <<== Input value type
+            type_id: string   #<<== Input value type
 ...
 ```
 
@@ -64,20 +64,20 @@ Next we will define the steps of the workflow. The steps are to be deployed as c
 ```yaml title="workflow.yaml (excerpt)"
 ...
 steps:
-  uuidgen:   <<== Step name
+  uuidgen:   #<<== Step name
     plugin:
       deployment_type: image
-      src: quay.io/arcalot/arcaflow-plugin-utilities:0.6.0   <<== Container image tag
-    step: uuid   <<== Specific plugin step
-    input: {}   <<== Step does not require input
-  example:   <<== Step name
+      src: quay.io/arcalot/arcaflow-plugin-utilities:0.6.0   #<<== Container image tag
+    step: uuid   #<<== Specific plugin step
+    input: {}   #<<== Step does not require input
+  example:   #<<== Step name
     plugin:
       deployment_type: image
-      src: quay.io/arcalot/arcaflow-plugin-example:0.5.0   <<== Container image tag
+      src: quay.io/arcalot/arcaflow-plugin-example:0.5.0   #<<== Container image tag
     input:
       name:
-        _type: nickname   <<== Statically-defined input
-        nick: !expr $.input.nickname   <<== Referenced workflow input
+        _type: nickname   #<<== Statically-defined input
+        nick: !expr $.input.nickname   #<<== Referenced workflow input
 ...
 ```
 
@@ -193,10 +193,267 @@ output_id: success
         ```
 
 
-## Writing Plugins
-Workflow steps are run via plugins, which are delivered as containers. The Arcalot community maintains an ever-growing list of [official plugins](https://github.com/orgs/arcalot/repositories?q=%22arcaflow-plugin-%22), which are version-controlled and hosted in our [Quay.io repository](https://quay.io/arcalot). But of course you may have specific needs and want to author your own plugins. To aid with this, we provide [SDKs](/arcaflow/plugins/) in popular languages.
+## Running Plugins
+Workflow steps are run via plugins, which are delivered as containers. The Arcalot community maintains an ever-growing list of [official plugins](https://github.com/orgs/arcalot/repositories?q=%22arcaflow-plugin-%22), which are version-controlled and hosted in our [Quay.io repository](https://quay.io/arcalot).
 
-Let's create a simple hello-world plugin using the Python SDK. We'll publish the code here, you can find the details in the [Python plugin guide](plugins/python/first.md).
+Plugins are designed to run independently of an Arcaflow workflow. All plugins have schema definitions for their inputs and outputs, and they perform data validation against those schemas when run. Plugins also have one or more steps, and when there are multiple steps we always need to specify which step we want to run.
+
+!!! tip
+    Plugin **steps** are the fundamental building blocks for workflows.
+
+Let's take a look at the schema for the example plugin. Passing the `--schema` parameter to the plugin will return the complete schema in YAML format.
+
+=== "Podman"
+    ```bash
+    podman run --rm quay.io/arcalot/arcaflow-plugin-example --schema
+    ```
+=== "Docker"
+    ```bash 
+    docker run --rm quay.io/arcalot/arcaflow-plugin-example --schema
+    ```
+
+Here we see the example plugin has one step called `hello-world`, which has schemas for both its inputs and outputs.
+
+```yaml title="example plugin schema YAML"
+steps:
+  hello-world:
+    display:
+      description: Says hello :)
+      name: Hello world!
+    id: hello-world
+    input:
+      objects:
+        FullName:
+          id: FullName
+          properties:
+            first_name:
+              display:
+                name: First name
+              examples:
+              - '"Arca"'
+              required: true
+              type:
+                min: 1
+                pattern: ^[a-zA-Z]+$
+                type_id: string
+            last_name:
+              display:
+                name: Last name
+              examples:
+              - '"Lot"'
+              required: true
+              type:
+                min: 1
+                pattern: ^[a-zA-Z]+$
+                type_id: string
+        InputParams:
+          id: InputParams
+          properties:
+            name:
+              display:
+                description: Who do we say hello to?
+                name: Name
+              examples:
+              - '{"_type": "fullname", "first_name": "Arca", "last_name": "Lot"}'
+              - '{"_type": "nickname", "nick": "Arcalot"}'
+              required: true
+              type:
+                discriminator_field_name: _type
+                type_id: one_of_string
+                types:
+                  fullname:
+                    display:
+                      name: Full name
+                    id: FullName
+                    type_id: ref
+                  nickname:
+                    display:
+                      name: Nick
+                    id: Nickname
+                    type_id: ref
+        Nickname:
+          id: Nickname
+          properties:
+            nick:
+              display:
+                name: Nickname
+              examples:
+              - '"Arcalot"'
+              required: true
+              type:
+                min: 1
+                pattern: ^[a-zA-Z]+$
+                type_id: string
+      root: InputParams
+    outputs:
+      error:
+        error: false
+        schema:
+          objects:
+            ErrorOutput:
+              id: ErrorOutput
+              properties:
+                error:
+                  display: {}
+                  required: true
+                  type:
+                    type_id: string
+          root: ErrorOutput
+      success:
+        error: false
+        schema:
+          objects:
+            SuccessOutput:
+              id: SuccessOutput
+              properties:
+                message:
+                  display: {}
+                  required: true
+                  type:
+                    type_id: string
+          root: SuccessOutput
+```
+
+The plugin schema can also be returned in JSON format, in which case you must specify wheter to return either the `input` or `output` schema.
+
+=== "Podman"
+    ```bash
+    podman run --rm quay.io/arcalot/arcaflow-plugin-example --json-schema output
+    ```
+=== "Docker"
+    ```bash
+    docker run --rm quay.io/arcalot/arcaflow-plugin-example --json-schema output
+    ```
+
+```json title="example plugin output schema JSON"
+{
+  "$id": "hello-world",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Hello world! outputs",
+  "description": "Says hello :)",
+  "oneof": [
+    {
+      "output_id": {
+        "type": "string",
+        "const": "success"
+      },
+      "output_data": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "additionalProperties": false,
+        "dependentRequired": {}
+      }
+    },
+    {
+      "output_id": {
+        "type": "string",
+        "const": "error"
+      },
+      "output_data": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "additionalProperties": false,
+        "dependentRequired": {}
+      }
+    }
+  ],
+  "$defs": {
+    "SuccessOutput": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {}
+    },
+    "ErrorOutput": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {}
+    }
+  }
+}
+```
+
+A plugin takes its input as a file, but because it runs as a container, it looks for the input file in the context of the container. This means you either need to bind-mount the input file to the container, or as in this example pipe the input value to the plugin's file input.
+
+```yaml title="input.yaml"
+name:
+  _type: nickname
+  nick: Arcalot
+```
+
+!!! tip
+    In order to pipe the input to the container, you must pass the `-i, --interactive` parameter.
+
+=== "Podman"
+    ```bash
+    cat input.yaml | podman run -i --rm quay.io/arcalot/arcaflow-plugin-example -f -
+    ```
+=== "Docker"
+    ```bash
+    cat input.yaml | docker run -i --rm quay.io/arcalot/arcaflow-plugin-example -f -
+    ```
+
+```yaml title="example plugin return YAML"
+output_id: success
+output_data:
+  message: Hello, Arcalot!
+debug_logs: ''
+```
+
+Now let's generate a UUID with the utilities plugin. This plugin has multiple steps, so we need to specify which step to run. The step also requires no input, so we pass it an empty object.
+
+!!! note
+    An input object is always required, even if a plugin step does not require input parameters.
+
+=== "Podman"
+    ```bash
+    echo '{}' | podman run -i --rm quay.io/arcalot/arcaflow-plugin-utilities -s uuid -f -
+    ```
+=== "Docker"
+    ```bash
+    echo '{}' | docker run -i --rm quay.io/arcalot/arcaflow-plugin-utilities -s uuid -f -
+    ```
+
+```yaml title="utilities plugin UUID step return YAML"
+output_id: success
+output_data:
+  uuid: bb08484f-6263-4317-9162-be2ae846b438
+debug_logs: ''
+```
+
+[Learn more about plugin schemas &raquo;](/arcaflow/plugins/python/data-model/){ .md-button }
+
+## Writing Plugins
+ Of course you may have specific needs and want to author your own plugins. To aid with this, we provide [SDKs](/arcaflow/plugins/) in popular languages. Let's create a simple hello-world plugin using the Python SDK. We'll publish the code here, you can find the details in the [Python plugin guide](plugins/python/first.md).
 
 ```python title="plugin.py"
 #!/usr/local/bin/python3
@@ -237,7 +494,6 @@ if __name__ == "__main__":
 
 [Learn more about writing Python plugins &raquo;](/arcaflow/plugins/python/first.md){ .md-button }
 
-[Learn more about plugin schemas &raquo;](/arcaflow/plugins/python/data-model/){ .md-button }
 
 Next, let's create a `Dockerfile` and build a container image:
 
@@ -256,7 +512,6 @@ You can now build the plugin container.
     ```bash
     podman build -t example-plugin .
     ```
-
 === "Docker"
     ```bash
     docker build -t example-plugin .
@@ -272,7 +527,6 @@ You can now build the plugin container.
         ```bash
         echo "name: Arca Lot" | podman run -i --rm example-plugin -f -
         ```
-
     === "Docker"
         ```bash
         echo "name: Arca Lot" | docker run -i --rm example-plugin -f -
