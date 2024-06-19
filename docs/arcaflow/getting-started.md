@@ -34,7 +34,7 @@ output_id: success
 
 ![animation of a Linux text console showing the contents of the workflow YAML files and then the execution of the workflow](https://raw.githubusercontent.com/arcalot/arcaflow-engine/main/arcaflow-basic-demo.gif)
 
-It's that simple! And the basics of running a workflow are the same, whether it's this single-step hello-world example or a much more complex workflow like this [stress-ng plus PCP data collection](https://github.com/arcalot/arcaflow-workflows/tree/new-workflows/advanced-examples/system-performance/stressng-pcp) example:
+It's that simple! And the basics of running a workflow are the same, whether it's this single-step hello-world example or a much more complex workflow like this [stress-ng plus PCP data collection](https://github.com/arcalot/arcaflow-workflows/tree/main/advanced-examples/system-performance/stressng-pcp) example:
 
 ```mermaid
 %% Mermaid markdown workflow
@@ -128,7 +128,7 @@ input:
 ...
 ```
 
-Next we will define the steps of the workflow. The steps are to be deployed as container images using the `src` paths for the image files. The `arcaflow-plugin-utilities` plugin has multiple steps available, so we indicate with the `step: uuid` parameter which step we want to run. The `arcaflow-plugin-example` plugin has only one step, so the parameter is not required. The `uuidgen` step requires no input, so we pass a blank object `{}` to it. The `example` plugin requires an input structure of `name` with `_type` and `nick` sub-parameters. We statically define `_type: nickname` as part of the step, and then we use the [Arcaflow expression language](/arcaflow/workflows/expressions/) to reference the workflow input value for `nickname` as the input to the plugin's `nick` parameter.
+Next we will define the steps of the workflow. The steps are to be deployed as container images using the `src` tags for the image files. The `arcaflow-plugin-utilities` plugin has multiple steps available, so we indicate with the `step: uuid` parameter which step we want to run. The `arcaflow-plugin-example` plugin has only one step, so the `step` parameter is not required. The `uuidgen` step requires no input, so we pass a blank object `{}` to it. The `example` plugin requires an input structure of `name` with `_type` and `nick` sub-parameters. We statically define `_type: nickname` as part of the step, and then we use the [Arcaflow expression language](/arcaflow/workflows/expressions/) to reference the workflow input value for `nickname` as the input to the plugin's `nick` parameter.
 
 ```yaml title="workflow.yaml (excerpt)"
 ...
@@ -150,7 +150,7 @@ steps:
 ...
 ```
 
-Finally we define the outputs that we expect when the workflow succeeds. In order to satisfy the `success` state for the workflow, all of the defined output items must be available. Again we use the Arcaflow expression language, this time to reference the outputs of the individual steps as the output for the workflow.
+Finally we define the outputs that we expect when the workflow succeeds. In order to satisfy the `success` state for the workflow, all of the defined output items must be available. Again we use the Arcaflow expression language, this time to reference the `success` outputs of the individual steps as the output for the workflow.
 
 ```yaml title="workflow.yaml (excerpt)"
 ...
@@ -217,8 +217,6 @@ logged_outputs:
 deployers:
   image:
     deployer_name: podman
-    deployment:
-      imagePullPolicy: IfNotPresent
 ```
 
 And now we can run our new workflow:
@@ -227,7 +225,10 @@ And now we can run our new workflow:
     The default workflow file is `workflow.yaml` so we don't need to specifiy it here explicitly.
 
 ```bash
-$ arcaflow --config config.yaml --input input.yaml
+arcaflow --config config.yaml --input input.yaml
+```
+
+```yaml title="example workflow output YAML"
 output_data:
     example: Hello, Arcalot!
     uuid: b98909c2-4a25-4cc1-8222-3290b0621129
@@ -241,24 +242,62 @@ output_id: success
 [See more example workflows &raquo;](https://github.com/arcalot/arcaflow-workflows){ .md-button }
 
 !!! tip "Did you know?"
-    Arcaflow provides [Mermaid](https://mermaid.js.org/) markdown in the workflow debug output that allows you to quickly visualize the workflow in a graphic format. You can grab the Mermaid graph you see in the output and put it into [the Mermaid editor](https://mermaid.live/edit#pako:eNpdjz0OwjAMha8SeaY5QAem3gDGLCZxf6TGiRJHCFW9OxYwtEy2v_ee9LyBT4Ggh3FNTz9jEXMfHNf2mArm2Sycmzj-DMsYyTFxOIKuu1ahXO1UiNR6OM6STU00VG1t3lOtJ-u_qNEvgQtEKhGXoCU3x8Y4kJm0CPS6BhqxreLA8a5WbJJuL_bQj7hWukDLAYWGBfWd-KP7Gz-1Wos).
+    Arcaflow provides [Mermaid](https://mermaid.js.org/) markdown in the workflow debug output that allows you to quickly visualize the workflow in a graphic format. You can grab the Mermaid graph you see in the output and put it into a [Mermaid editor](https://mermaid.live/edit#pako:eNqdVLFugzAQ_ZXoZoIIBAIMnTq2S7tVLK59SZCMjbDdJo3y73UTiBojiySe7Ht-707vzj4AlQyhhDWX33RLOj17eavErF9KY6tCY2q2QRGiIJ-8Fpv5_OkaUNoSLXA3kdXKIsjuJg5A2KGS_MuvII1ujVYjgT4eKkMpKuXScUealmNIiaDIbYUXgQHpBXxER9_SvRlrYeMj_SlPB-u8nvYlTBhzS4HXhY0Su4An8XCtM0L8b-mNho5GwQW8ozCp4LN6kugbX1fYm_G8eUCgN9HbI2y53N8_U9e0qeftdM7XUd9ADfLjN-bMqI_oTtKNtJGpLuDryqRAXxAE0GDXkJrZj_Xwp1KB3mKDFZR2y3BNDNcVVOJorxKj5fteUCjXhCsMwLSMaHyuyaYjzSWKrNayez3_1qdPO4CWiA8p7R3dGTwdoTzADspVmKdZushXSZJGSV4EsIcyjhIbXmZxHC3zpCiKYwA_J_oijM5rka3SZZxm2fEXU_Uc4g).
 
     === "Mermaid markdown"
         ```
         flowchart LR
-        input.name
-        input.name-->steps.greet
-        steps.greet-->steps.greet.outputs.success
-        steps.greet.outputs.success-->output
+        steps.uuidgen.enabling-->steps.uuidgen.starting
+        steps.uuidgen.enabling-->steps.uuidgen.disabled
+        steps.uuidgen.enabling-->steps.uuidgen.enabling.resolved
+        steps.uuidgen.outputs-->steps.uuidgen.outputs.success
+        steps.example.cancelled-->steps.example.outputs
+        steps.example.outputs.success-->outputs.success
+        input-->steps.example.starting
+        steps.uuidgen.disabled-->steps.uuidgen.disabled.output
+        steps.uuidgen.outputs.success-->outputs.success
+        steps.example.disabled-->steps.example.disabled.output
+        steps.example.running-->steps.example.outputs
+        steps.example.enabling-->steps.example.enabling.resolved
+        steps.example.enabling-->steps.example.starting
+        steps.example.enabling-->steps.example.disabled
+        steps.example.starting-->steps.example.starting.started
+        steps.example.starting-->steps.example.running
+        steps.example.deploy-->steps.example.starting
+        steps.uuidgen.deploy-->steps.uuidgen.starting
+        steps.example.outputs-->steps.example.outputs.success
+        steps.uuidgen.cancelled-->steps.uuidgen.outputs
+        steps.uuidgen.running-->steps.uuidgen.outputs
+        steps.uuidgen.starting-->steps.uuidgen.starting.started
+        steps.uuidgen.starting-->steps.uuidgen.running
         ```
 
     === "Mermaid rendered flowchart"
         ```mermaid
         flowchart LR
-        input.name
-        input.name-->steps.greet
-        steps.greet-->steps.greet.outputs.success
-        steps.greet.outputs.success-->output
+        steps.uuidgen.enabling-->steps.uuidgen.starting
+        steps.uuidgen.enabling-->steps.uuidgen.disabled
+        steps.uuidgen.enabling-->steps.uuidgen.enabling.resolved
+        steps.uuidgen.outputs-->steps.uuidgen.outputs.success
+        steps.example.cancelled-->steps.example.outputs
+        steps.example.outputs.success-->outputs.success
+        input-->steps.example.starting
+        steps.uuidgen.disabled-->steps.uuidgen.disabled.output
+        steps.uuidgen.outputs.success-->outputs.success
+        steps.example.disabled-->steps.example.disabled.output
+        steps.example.running-->steps.example.outputs
+        steps.example.enabling-->steps.example.enabling.resolved
+        steps.example.enabling-->steps.example.starting
+        steps.example.enabling-->steps.example.disabled
+        steps.example.starting-->steps.example.starting.started
+        steps.example.starting-->steps.example.running
+        steps.example.deploy-->steps.example.starting
+        steps.uuidgen.deploy-->steps.uuidgen.starting
+        steps.example.outputs-->steps.example.outputs.success
+        steps.uuidgen.cancelled-->steps.uuidgen.outputs
+        steps.uuidgen.running-->steps.uuidgen.outputs
+        steps.uuidgen.starting-->steps.uuidgen.starting.started
+        steps.uuidgen.starting-->steps.uuidgen.running
         ```
 
 
@@ -471,7 +510,7 @@ The plugin schema can also be returned in JSON format, in which case you must sp
 }
 ```
 
-A plugin takes its input as a file, but because it runs as a container, it looks for the input file in the context of the container. This means you either need to bind-mount the input file to the container, or as in this example pipe the input value to the plugin's file input.
+A plugin takes its input as a file, but because it runs as a container, it looks for the input file in the context of the container. This means you either need to bind-mount the input file to the container, or, as in this example, pipe the input value to the plugin's file input.
 
 ```yaml title="input.yaml"
 name:
@@ -479,7 +518,7 @@ name:
   nick: Arcalot
 ```
 
-!!! tip
+!!! note
     In order to pipe the input to the container, you must pass the `-i, --interactive` parameter.
 
 === "Podman"
@@ -522,7 +561,7 @@ debug_logs: ''
 [Learn more about plugin schemas &raquo;](/arcaflow/plugins/python/data-model/){ .md-button }
 
 ## Writing Plugins
- Of course you may have specific needs and want to author your own plugins. To aid with this, we provide [SDKs](/arcaflow/plugins/) in popular languages. Let's create a simple hello-world plugin using the Python SDK. We'll publish the code here, you can find the details in the [Python plugin guide](plugins/python/first.md).
+ Of course you may have specific needs and want to author your own plugins. To aid with this, we provide [SDKs](/arcaflow/plugins/) in popular languages. Let's create a simple hello-world plugin using the Python SDK. We'll publish the code here, and you can find the details in the [Python plugin guide](plugins/python/first.md).
 
 ```python title="plugin.py"
 #!/usr/local/bin/python3
@@ -575,7 +614,7 @@ RUN python -m pip install arcaflow_plugin_sdk
 ENTRYPOINT ["python", "/plugin.py"]
 CMD []
 ```
-You can now build the plugin container.
+We can now build the plugin container.
 
 === "Podman"
     ```bash
@@ -586,20 +625,25 @@ You can now build the plugin container.
     docker build -t example-plugin .
     ```
 
+And finally we can run our new plugin.
+
+=== "Podman"
+    ```bash
+    echo "name: Arca Lot" | podman run -i --rm example-plugin -f -
+    ```
+=== "Docker"
+    ```bash
+    echo "name: Arca Lot" | docker run -i --rm example-plugin -f -
+    ```
+
+```yaml title="example plugin output YAML"
+output_id: success
+output_data:
+  message: Hello, Arca Lot
+debug_logs: ''
+```
 
 [Learn more about Packaging plugins](/arcaflow/plugins/packaging.md){ .md-button }
-
-!!! tip "Did you know?"
-    While Arcaflow is a workflow engine, plugins can be run independently via the command line. Try running your containerized hello-world plugin directly.
-    
-    === "Podman"
-        ```bash
-        echo "name: Arca Lot" | podman run -i --rm example-plugin -f -
-        ```
-    === "Docker"
-        ```bash
-        echo "name: Arca Lot" | docker run -i --rm example-plugin -f -
-        ```
 
 ## Next steps
 
