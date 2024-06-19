@@ -25,11 +25,80 @@ arcaflow --context arcaflow-workflows/basic-examples/basic/ \
 
 Arcaflow will display logs, depending upon the configured verbosity, and then will return the machine-readable output of the workflow in YAML format:
 
-```bash
+```yaml title="basic workflow output YAML"
 output_data:
     example:
         message: Hello, Arcalot!
 output_id: success
+```
+
+![animation of a Linux text console showing the contents of the workflow YAML files and then the execution of the workflow](https://raw.githubusercontent.com/arcalot/arcaflow-engine/main/arcaflow-basic-demo.gif)
+
+It's that simple! And the basics of running a workflow are the same, whether it's this single-step hello-world example or a much more complex workflow like this [stress-ng plus PCP data collection](https://github.com/arcalot/arcaflow-workflows/tree/new-workflows/advanced-examples/system-performance/stressng-pcp) example:
+
+```mermaid
+%% Mermaid markdown workflow
+flowchart LR
+%% Success path
+steps.pcp.enabling-->steps.pcp.disabled
+steps.pcp.enabling-->steps.pcp.enabling.resolved
+steps.pcp.enabling-->steps.pcp.starting
+steps.stressng.disabled-->steps.stressng.disabled.output
+steps.stressng.cancelled-->steps.stressng.outputs
+steps.pre_wait.cancelled-->steps.pre_wait.outputs
+steps.pcp.outputs.success-->outputs.success
+steps.pcp.disabled-->steps.pcp.disabled.output
+steps.uuidgen.outputs.success-->outputs.success
+steps.uuidgen.outputs-->steps.uuidgen.outputs.success
+steps.pre_wait.running-->steps.pre_wait.outputs
+steps.pcp.starting-->steps.pcp.starting.started
+steps.pcp.starting-->steps.pcp.running
+steps.pcp.starting.started-->steps.pre_wait.starting
+steps.pcp.running-->steps.pcp.outputs
+steps.uuidgen.starting-->steps.uuidgen.starting.started
+steps.uuidgen.starting-->steps.uuidgen.running
+steps.pre_wait.disabled-->steps.pre_wait.disabled.output
+steps.stressng.deploy-->steps.stressng.starting
+steps.pcp.outputs-->steps.pcp.outputs.success
+steps.stressng.outputs-->steps.stressng.outputs.success
+steps.stressng.outputs-->steps.post_wait.starting
+steps.post_wait.cancelled-->steps.post_wait.outputs
+steps.stressng.outputs.success-->outputs.success
+steps.pre_wait.enabling-->steps.pre_wait.enabling.resolved
+steps.pre_wait.enabling-->steps.pre_wait.starting
+steps.pre_wait.enabling-->steps.pre_wait.disabled
+steps.post_wait.outputs-->steps.post_wait.outputs.success
+steps.post_wait.outputs-->steps.pcp.cancelled
+steps.uuidgen.disabled-->steps.uuidgen.disabled.output
+steps.uuidgen.cancelled-->steps.uuidgen.outputs
+steps.pcp.cancelled-->steps.pcp.outputs
+steps.stressng.enabling-->steps.stressng.starting
+steps.stressng.enabling-->steps.stressng.disabled
+steps.stressng.enabling-->steps.stressng.enabling.resolved
+steps.stressng.running-->steps.stressng.outputs
+steps.post_wait.starting-->steps.post_wait.starting.started
+steps.post_wait.starting-->steps.post_wait.running
+steps.uuidgen.deploy-->steps.uuidgen.starting
+steps.uuidgen.running-->steps.uuidgen.outputs
+steps.post_wait.deploy-->steps.post_wait.starting
+steps.stressng.starting-->steps.stressng.starting.started
+steps.stressng.starting-->steps.stressng.running
+steps.pcp.deploy-->steps.pcp.starting
+steps.post_wait.disabled-->steps.post_wait.disabled.output
+steps.post_wait.running-->steps.post_wait.outputs
+steps.pre_wait.outputs-->steps.pre_wait.outputs.success
+steps.pre_wait.outputs-->steps.stressng.starting
+steps.uuidgen.enabling-->steps.uuidgen.enabling.resolved
+steps.uuidgen.enabling-->steps.uuidgen.starting
+steps.uuidgen.enabling-->steps.uuidgen.disabled
+steps.pre_wait.starting-->steps.pre_wait.starting.started
+steps.pre_wait.starting-->steps.pre_wait.running
+steps.post_wait.enabling-->steps.post_wait.enabling.resolved
+steps.post_wait.enabling-->steps.post_wait.starting
+steps.post_wait.enabling-->steps.post_wait.disabled
+steps.pre_wait.deploy-->steps.pre_wait.starting
+input-->steps.stressng.starting
+input-->steps.pcp.starting
 ```
 
 [Learn more about running workflows &raquo;](/arcaflow/running/){ .md-button }
