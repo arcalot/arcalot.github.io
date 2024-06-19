@@ -3,20 +3,20 @@
 ## Running Workflows
 An Arcaflow workflow is a definition of steps structured together to perform complex actions. Workflows are defined as machine-readable YAML and therefore can be version-controlled and shared easily to run in different environments. A workflow is a way of encapsulating and sharing expertise and ensuring reproducible results.
 
-Running a workflow only requires having the [Arcaflow engine binary](https://github.com/arcalot/arcaflow-engine/releases), the workflow definition file, and in most cases an input file. A config file is also optional and in some cases needed, depending on the target of the workflow. All of these files are typically defined in YAML. Additionally, the target of the workflow needs a compatible container platform, such as Podman, Docker, or Kubernetes.
+Running a workflow only requires having the [Arcaflow engine binary](https://github.com/arcalot/arcaflow-engine/releases), the workflow definition file, and in most cases an input file. An optional config file also allows for setting workflow defaults, such as log levels. All of these files are typically defined in YAML. Additionally, the target of the workflow needs a compatible container platform, such as Podman, Docker, or Kubernetes.
 
 !!! note
     The default container platform for the Arcaflow engine is Podman. To use another platform, a [configuration file](/arcaflow/running/setup/#configuration) is required.
 
 A repository of [example workflows](https://github.com/arcalot/arcaflow-workflows) is available for reference and practice. Let's try running the [basic example](https://github.com/arcalot/arcaflow-workflows/basic-examples/basic).
 
-First we will clone the example workflows repository and set our working directory:
+First we will clone the example workflows repository:
 
 ```bash
 git clone https://github.com/arcalot/arcaflow-workflows.git
 ```
 
-Then we will run the workflow, setting the working directory as the context, and defining the workflow, configuration, and input files to use:
+Then we will run the workflow, setting the workflow directory as the context, and defining the workflow, configuration, and input files to use:
 
 ```bash
 arcaflow --context arcaflow-workflows/basic-examples/basic/ \
@@ -37,7 +37,7 @@ output_id: success
 ## Writing Workflows
 As a workflow author, you determine the steps of the workflow, how data will pass between the steps, what input is required from the workflow user, and what output will be returned. It is possible to build very complex workflows with data translations, sub-workflows, parallelisim and serialization, and multiple output paths.
 
-Let's start with something simple. Our workflow will collect a `nickname` input from the user and will pass that input to an example "Hello world!" step. The workflow will also run a UUID generateion step in parallel to the example step, and it will return both the UUID and a greeting.
+Let's start with something simple. Our workflow will collect a `nickname` input from the user and will pass that input to an example "Hello world!" step. The workflow will also run a UUID generation step in parallel to the example step, and it will return both the UUID and a greeting.
 
 In the first part of the `workflow.yaml` file we will define the workflow compatibility version and the input schema for the workflow. In the input schema, we are expecting only a single input called `nickname` with a type of `string`.
 
@@ -196,7 +196,7 @@ output_id: success
 ## Running Plugins
 Workflow steps are run via plugins, which are delivered as containers. The Arcalot community maintains an ever-growing list of [official plugins](https://github.com/orgs/arcalot/repositories?q=%22arcaflow-plugin-%22), which are version-controlled and hosted in our [Quay.io repository](https://quay.io/arcalot).
 
-Plugins are designed to run independently of an Arcaflow workflow. All plugins have schema definitions for their inputs and outputs, and they perform data validation against those schemas when run. Plugins also have one or more steps, and when there are multiple steps we always need to specify which step we want to run.
+Plugins are designed to run independent of an Arcaflow workflow. All plugins have schema definitions for their inputs and outputs, and they perform data validation against those schemas when run. Plugins also have one or more steps, and when there are multiple steps we always need to specify which step we want to run.
 
 !!! tip
     Plugin **steps** are the fundamental building blocks for workflows.
