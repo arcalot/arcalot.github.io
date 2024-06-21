@@ -6,12 +6,13 @@ actions. Workflows are defined as machine-readable YAML and therefore can be
 version-controlled and shared easily to run in different environments. A workflow is a
 way of encapsulating and sharing expertise and ensuring reproducible results.
 
-Running a workflow only requires having the
-[Arcaflow engine binary](https://github.com/arcalot/arcaflow-engine/releases), the
-workflow definition file, and in most cases an input file. An optional config file also
-allows for setting workflow defaults, such as log levels. All of these files are
-typically defined in YAML. Additionally, the target of the workflow needs a compatible
-container platform, such as Podman, Docker, or Kubernetes.
+The requirements for running a workflow are simple. You just need the
+[Arcaflow engine binary](https://github.com/arcalot/arcaflow-engine/releases),
+a workflow definition file, and, typically, an input file. You can also provide a config
+file, which allows for setting workflow defaults, such as log levels. The contents of
+the input and configuration files, like the workflow file, are YAML. Finally, you need
+an appropriate container platform, such as Podman, Docker, or Kubernetes, as the target
+of the workflow execution.
 
 !!! note
     The default container platform for the Arcaflow engine is Podman. To use another
@@ -36,8 +37,8 @@ arcaflow --context arcaflow-workflows/basic-examples/basic/ \
 --workflow workflow.yaml --config config.yaml --input input.yaml
 ```
 
-Arcaflow will display logs, depending upon the configured verbosity, and then will
-return the machine-readable output of the workflow in YAML format:
+Arcaflow will display logs, the detail of which determined by the configuration file,
+and then will return the machine-readable output of the workflow in YAML format:
 
 ```yaml title="basic workflow output YAML"
 output_data:
@@ -173,15 +174,15 @@ input:
 ```
 
 Next we will define the steps of the workflow. The steps are to be deployed as container
-images using the `src` tags for the image files. The `arcaflow-plugin-utilities` plugin
-has multiple steps available, so we indicate with the `step: uuid` parameter which step
-we want to run. The `arcaflow-plugin-example` plugin has only one step, so the `step`
-parameter is not required. The `uuidgen` step requires no input, so we pass a blank
-object `{}` to it. The `example` plugin requires an input structure of `name` with
-`_type` and `nick` sub-parameters. We statically define `_type: nickname` as part of the
-step, and then we use the
+images, where the `src` field defines the image and tag. The `arcaflow-plugin-utilities`
+plugin has multiple steps available, so we indicate with the `step: uuid` field which
+step we want to run. The `arcaflow-plugin-example` plugin has only one step, so the
+`step` field is not required. The `uuidgen` step requires no input, so we pass an empty
+object `{}` to it. The `example` plugin requires an input object of `name` with
+`_type` and `nick` fields. We statically set the value of the `_type` field in the
+input object of the step, and then we use the
 [Arcaflow expression language](/arcaflow/workflows/expressions/) to reference the
-workflow input value for `nickname` as the input to the plugin's `nick` parameter.
+workflow input value for `nickname` as the input to the plugin's `nick` field.
 
 ```yaml title="workflow.yaml (excerpt)"
 ...
@@ -189,13 +190,13 @@ steps:
   uuidgen:   #<<== Step name
     plugin:
       deployment_type: image
-      src: quay.io/arcalot/arcaflow-plugin-utilities:0.6.0   #<<== Container image tag
+      src: quay.io/arcalot/arcaflow-plugin-utilities:0.6.0   #<<== Container image
     step: uuid   #<<== Specific plugin step
     input: {}   #<<== Step does not require input
   example:   #<<== Step name
     plugin:
       deployment_type: image
-      src: quay.io/arcalot/arcaflow-plugin-example:0.5.0   #<<== Container image tag
+      src: quay.io/arcalot/arcaflow-plugin-example:0.5.0   #<<== Container image
     input:
       name:
         _type: nickname   #<<== Statically-defined input
@@ -203,10 +204,18 @@ steps:
 ...
 ```
 
-Finally we define the outputs that we expect when the workflow succeeds. In order to
-satisfy the `success` state for the workflow, all of the defined output items must be
-available. Again we use the Arcaflow expression language, this time to reference the
-`success` outputs of the individual steps as the output for the workflow.
+Finally we define the outputs that we expect when the workflow succeeds. The workflow
+will run until all of the items referenced in the `success` sub-object become available
+or until a step that one of the items depends on fails. Once all of the items referenced
+in the `success` sub-object become available, the engine will terminate any steps which
+have not yet completed, and it will return the `success` sub-object. If a required step
+fails, then the workflow will fail.
+
+!!! tip
+    It is possible to define multiple sub-objects for `outputs` with different
+    dependencies. In this case, the output sub-oject that has its dependencies satisfied
+    first will be the one that returns and ends the workflow. See the
+    [documentation](/arcaflow/workflows/output) for more info.
 
 ```yaml title="workflow.yaml (excerpt)"
 ...
@@ -493,7 +502,7 @@ steps:
 ```
 
 The plugin schema can also be returned in JSON format, in which case you must specify
-wheter to return either the `input` or `output` schema.
+whether to return the `input` or `output` schema.
 
 === "Podman"
     ```bash
@@ -593,16 +602,24 @@ name:
 ```
 
 !!! note
-    In order to pipe the input to the container, you must pass the `-i, --interactive`
-    parameter.
+    In order to pass the input to the container via redirection or pipe, you must pass
+    the `-i, --interactive` parameter.
 
-=== "Podman"
+=== "Podman with pipe"
     ```bash
     cat input.yaml | podman run -i --rm quay.io/arcalot/arcaflow-plugin-example -f -
     ```
-=== "Docker"
+=== "Podman with bind mount"
+    ```bash
+    podman run --rm -v ${PWD}/input.yaml:/input.yaml:z quay.io/arcalot/arcaflow-plugin-example -f /input.yaml
+    ```
+=== "Docker with pipe"
     ```bash
     cat input.yaml | docker run -i --rm quay.io/arcalot/arcaflow-plugin-example -f -
+    ```
+=== "Docker with bind mount"
+    ```bash
+    docker run --rm -v ${PWD}/input.yaml:/input.yaml:z quay.io/arcalot/arcaflow-plugin-example -f /input.yaml
     ```
 
 ```yaml title="example plugin return YAML"
@@ -645,40 +662,7 @@ debug_logs: ''
  the details in the [Python plugin guide](plugins/python/first.md).
 
 ```python title="plugin.py"
-#!/usr/local/bin/python3
-from dataclasses import dataclass
-import sys
-from arcaflow_plugin_sdk import plugin
-
-
-@dataclass
-class InputParams:
-    name: str
-    
-    
-@dataclass
-class SuccessOutput:
-    message: str
-
-
-@plugin.step(
-    id="hello-world",
-    name="Hello world!",
-    description="Says hello :)",
-    outputs={"success": SuccessOutput},
-)
-def hello_world(params: InputParams):
-    return "success", SuccessOutput(f"Hello, {params.name}")
-
-
-if __name__ == "__main__":
-    sys.exit(
-        plugin.run(
-            plugin.build_schema(
-                hello_world,
-            )
-        )
-    )
+{! https://raw.githubusercontent.com/arcalot/arcaflow-plugin-getting-started-example/main/arcaflow_plugin_getting_started_example/getting_started_example_plugin.py !}
 ```
 
 [Learn more about writing Python plugins &raquo;](/arcaflow/plugins/python/first.md){ .md-button }
@@ -687,13 +671,7 @@ if __name__ == "__main__":
 Next, let's create a `Dockerfile` and build a container image:
 
 ```Dockerfile title="Dockerfile"
-FROM quay.io/arcalot/arcaflow-plugin-baseimage-python-osbase
-
-ADD plugin.py /
-RUN python -m pip install arcaflow_plugin_sdk
-
-ENTRYPOINT ["python", "/plugin.py"]
-CMD []
+{! https://raw.githubusercontent.com/arcalot/arcaflow-plugin-getting-started-example/main/Dockerfile !}
 ```
 We can now build the plugin container.
 
