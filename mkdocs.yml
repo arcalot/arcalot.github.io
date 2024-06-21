@@ -1,7 +1,7 @@
 site_name: Arcalot
 site_url: https://arcalot.io/
-repo_url: https://github.com/arcalot/arcalot.github.io
-repo_name: arcalot/arcalot.github.io
+repo_url: https://github.com/arcalot/arcaflow-engine
+repo_name: arcalot/arcaflow-engine
 edit_uri: edit/main/docs/
 nav:
   - Home: index.md
@@ -43,6 +43,7 @@ nav:
           - arcaflow/workflows/index.md
           - Overview: arcaflow/workflows/index.md
           - Versioning: arcaflow/workflows/versioning.md
+          - Workflow schemas: arcaflow/workflows/schemas.md
           - Creating your input schema: arcaflow/workflows/input.md
           - Setting up a step: arcaflow/workflows/step.md
           - Expressions: arcaflow/workflows/expressions.md
