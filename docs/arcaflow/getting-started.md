@@ -1,14 +1,26 @@
 # Arcaflow Getting Started Guide
 
 ## Running Workflows
-An Arcaflow workflow is a definition of steps structured together to perform complex actions. Workflows are defined as machine-readable YAML and therefore can be version-controlled and shared easily to run in different environments. A workflow is a way of encapsulating and sharing expertise and ensuring reproducible results.
+An Arcaflow workflow is a definition of steps structured together to perform complex
+actions. Workflows are defined as machine-readable YAML and therefore can be
+version-controlled and shared easily to run in different environments. A workflow is a
+way of encapsulating and sharing expertise and ensuring reproducible results.
 
-Running a workflow only requires having the [Arcaflow engine binary](https://github.com/arcalot/arcaflow-engine/releases), the workflow definition file, and in most cases an input file. An optional config file also allows for setting workflow defaults, such as log levels. All of these files are typically defined in YAML. Additionally, the target of the workflow needs a compatible container platform, such as Podman, Docker, or Kubernetes.
+Running a workflow only requires having the
+[Arcaflow engine binary](https://github.com/arcalot/arcaflow-engine/releases), the
+workflow definition file, and in most cases an input file. An optional config file also
+allows for setting workflow defaults, such as log levels. All of these files are
+typically defined in YAML. Additionally, the target of the workflow needs a compatible
+container platform, such as Podman, Docker, or Kubernetes.
 
 !!! note
-    The default container platform for the Arcaflow engine is Podman. To use another platform, a [configuration file](/arcaflow/running/setup/#configuration) is required.
+    The default container platform for the Arcaflow engine is Podman. To use another
+    platform, a [configuration file](/arcaflow/running/setup/#configuration) is
+    required.
 
-A repository of [example workflows](https://github.com/arcalot/arcaflow-workflows) is available for reference and practice. Let's try running the [basic example](https://github.com/arcalot/arcaflow-workflows/basic-examples/basic).
+A repository of [example workflows](https://github.com/arcalot/arcaflow-workflows) is
+available for reference and practice. Let's try running the
+[basic example](https://github.com/arcalot/arcaflow-workflows/basic-examples/basic).
 
 First we will clone the example workflows repository:
 
@@ -16,14 +28,16 @@ First we will clone the example workflows repository:
 git clone https://github.com/arcalot/arcaflow-workflows.git
 ```
 
-Then we will run the workflow, setting the workflow directory as the context, and defining the workflow, configuration, and input files to use:
+Then we will run the workflow, setting the workflow directory as the context, and
+defining the workflow, configuration, and input files to use:
 
 ```bash
 arcaflow --context arcaflow-workflows/basic-examples/basic/ \
 --workflow workflow.yaml --config config.yaml --input input.yaml
 ```
 
-Arcaflow will display logs, depending upon the configured verbosity, and then will return the machine-readable output of the workflow in YAML format:
+Arcaflow will display logs, depending upon the configured verbosity, and then will
+return the machine-readable output of the workflow in YAML format:
 
 ```yaml title="basic workflow output YAML"
 output_data:
@@ -34,7 +48,8 @@ output_id: success
 
 ![animation of a Linux text console showing the contents of the workflow YAML files and then the execution of the workflow](https://raw.githubusercontent.com/arcalot/arcaflow-engine/main/arcaflow-basic-demo.gif)
 
-It's that simple! And the basics of running a workflow are the same, whether it's this single-step hello-world example:
+It's that simple! And the basics of running a workflow are the same, whether it's this
+single-step hello-world example:
 
 ```mermaid
 flowchart LR
@@ -53,7 +68,9 @@ input-->steps.example.starting
 steps.example.cancelled-->steps.example.outputs
 ```
 
-... or a much more complex workflow like this [stress-ng plus PCP data collection](https://github.com/arcalot/arcaflow-workflows/tree/main/advanced-examples/system-performance/stressng-pcp) example:
+... or a much more complex workflow like this
+[stress-ng plus PCP data collection](https://github.com/arcalot/arcaflow-workflows/tree/main/advanced-examples/system-performance/stressng-pcp)
+example:
 
 ```mermaid
 %% Mermaid markdown workflow
@@ -123,11 +140,19 @@ input-->steps.pcp.starting
 [Learn more about running workflows &raquo;](/arcaflow/running/){ .md-button }
 
 ## Writing Workflows
-As a workflow author, you determine the steps of the workflow, how data will pass between the steps, what input is required from the workflow user, and what output will be returned. It is possible to build very complex workflows with data translations, sub-workflows, parallelisim and serialization, and multiple output paths.
+As a workflow author, you determine the steps of the workflow, how data will pass
+between the steps, what input is required from the workflow user, and what output will
+be returned. It is possible to build very complex workflows with data translations,
+sub-workflows, parallelisim and serialization, and multiple output paths.
 
-Let's start with something simple. Our workflow will collect a `nickname` input from the user and will pass that input to an example "Hello world!" step. The workflow will also run a UUID generation step in parallel to the example step, and it will return both the UUID and a greeting.
+Let's start with something simple. Our workflow will collect a `nickname` input from the
+user and will pass that input to an example "Hello world!" step. The workflow will also
+run a UUID generation step in parallel to the example step, and it will return both the
+UUID and a greeting.
 
-In the first part of the `workflow.yaml` file we will define the workflow compatibility version and the input schema for the workflow. In the input schema, we are expecting only a single input called `nickname` with a type of `string`.
+In the first part of the `workflow.yaml` file we will define the workflow compatibility
+version and the input schema for the workflow. In the input schema, we are expecting
+only a single input called `nickname` with a type of `string`.
 
 ```yaml title="workflow.yaml (excerpt)"
 version: v0.2.0
@@ -147,7 +172,16 @@ input:
 ...
 ```
 
-Next we will define the steps of the workflow. The steps are to be deployed as container images using the `src` tags for the image files. The `arcaflow-plugin-utilities` plugin has multiple steps available, so we indicate with the `step: uuid` parameter which step we want to run. The `arcaflow-plugin-example` plugin has only one step, so the `step` parameter is not required. The `uuidgen` step requires no input, so we pass a blank object `{}` to it. The `example` plugin requires an input structure of `name` with `_type` and `nick` sub-parameters. We statically define `_type: nickname` as part of the step, and then we use the [Arcaflow expression language](/arcaflow/workflows/expressions/) to reference the workflow input value for `nickname` as the input to the plugin's `nick` parameter.
+Next we will define the steps of the workflow. The steps are to be deployed as container
+images using the `src` tags for the image files. The `arcaflow-plugin-utilities` plugin
+has multiple steps available, so we indicate with the `step: uuid` parameter which step
+we want to run. The `arcaflow-plugin-example` plugin has only one step, so the `step`
+parameter is not required. The `uuidgen` step requires no input, so we pass a blank
+object `{}` to it. The `example` plugin requires an input structure of `name` with
+`_type` and `nick` sub-parameters. We statically define `_type: nickname` as part of the
+step, and then we use the
+[Arcaflow expression language](/arcaflow/workflows/expressions/) to reference the
+workflow input value for `nickname` as the input to the plugin's `nick` parameter.
 
 ```yaml title="workflow.yaml (excerpt)"
 ...
@@ -169,7 +203,10 @@ steps:
 ...
 ```
 
-Finally we define the outputs that we expect when the workflow succeeds. In order to satisfy the `success` state for the workflow, all of the defined output items must be available. Again we use the Arcaflow expression language, this time to reference the `success` outputs of the individual steps as the output for the workflow.
+Finally we define the outputs that we expect when the workflow succeeds. In order to
+satisfy the `success` state for the workflow, all of the defined output items must be
+available. Again we use the Arcaflow expression language, this time to reference the
+`success` outputs of the individual steps as the output for the workflow.
 
 ```yaml title="workflow.yaml (excerpt)"
 ...
@@ -225,7 +262,8 @@ We will create an input file to satisfy the input schema of the workflow:
 nickname: Arcalot
 ```
 
-We will also create a configuration file, setting the container deployer to Podman and the log levels to `error`:
+We will also create a configuration file, setting the container deployer to Podman and
+the log levels to `error`:
 
 ```yaml title="config.yaml"
 log:
@@ -241,7 +279,8 @@ deployers:
 And now we can run our new workflow:
 
 !!! tip
-    The default workflow file is `workflow.yaml` so we don't need to specifiy it here explicitly.
+    The default workflow file is `workflow.yaml` so we don't need to specifiy it here
+    explicitly.
 
 ```bash
 arcaflow --config config.yaml --input input.yaml
@@ -261,7 +300,10 @@ output_id: success
 [See more example workflows &raquo;](https://github.com/arcalot/arcaflow-workflows){ .md-button }
 
 !!! tip "Did you know?"
-    Arcaflow provides [Mermaid](https://mermaid.js.org/) markdown in the workflow debug output that allows you to quickly visualize the workflow in a graphic format. You can grab the Mermaid graph you see in the output and put it into a [Mermaid editor](https://mermaid.live/edit#pako:eNqdVLFugzAQ_ZXoZoIIBAIMnTq2S7tVLK59SZCMjbDdJo3y73UTiBojiySe7Ht-707vzj4AlQyhhDWX33RLOj17eavErF9KY6tCY2q2QRGiIJ-8Fpv5_OkaUNoSLXA3kdXKIsjuJg5A2KGS_MuvII1ujVYjgT4eKkMpKuXScUealmNIiaDIbYUXgQHpBXxER9_SvRlrYeMj_SlPB-u8nvYlTBhzS4HXhY0Su4An8XCtM0L8b-mNho5GwQW8ozCp4LN6kugbX1fYm_G8eUCgN9HbI2y53N8_U9e0qeftdM7XUd9ADfLjN-bMqI_oTtKNtJGpLuDryqRAXxAE0GDXkJrZj_Xwp1KB3mKDFZR2y3BNDNcVVOJorxKj5fteUCjXhCsMwLSMaHyuyaYjzSWKrNayez3_1qdPO4CWiA8p7R3dGTwdoTzADspVmKdZushXSZJGSV4EsIcyjhIbXmZxHC3zpCiKYwA_J_oijM5rka3SZZxm2fEXU_Uc4g).
+    Arcaflow provides [Mermaid](https://mermaid.js.org/) markdown in the workflow debug
+    output that allows you to quickly visualize the workflow in a graphic format. You
+    can grab the Mermaid graph you see in the output and put it into a
+    [Mermaid editor](https://mermaid.live/edit#pako:eNqdVLFugzAQ_ZXoZoIIBAIMnTq2S7tVLK59SZCMjbDdJo3y73UTiBojiySe7Ht-707vzj4AlQyhhDWX33RLOj17eavErF9KY6tCY2q2QRGiIJ-8Fpv5_OkaUNoSLXA3kdXKIsjuJg5A2KGS_MuvII1ujVYjgT4eKkMpKuXScUealmNIiaDIbYUXgQHpBXxER9_SvRlrYeMj_SlPB-u8nvYlTBhzS4HXhY0Su4An8XCtM0L8b-mNho5GwQW8ozCp4LN6kugbX1fYm_G8eUCgN9HbI2y53N8_U9e0qeftdM7XUd9ADfLjN-bMqI_oTtKNtJGpLuDryqRAXxAE0GDXkJrZj_Xwp1KB3mKDFZR2y3BNDNcVVOJorxKj5fteUCjXhCsMwLSMaHyuyaYjzSWKrNayez3_1qdPO4CWiA8p7R3dGTwdoTzADspVmKdZushXSZJGSV4EsIcyjhIbXmZxHC3zpCiKYwA_J_oijM5rka3SZZxm2fEXU_Uc4g).
 
     === "Mermaid markdown"
         ```
@@ -321,14 +363,22 @@ output_id: success
 
 
 ## Running Plugins
-Workflow steps are run via plugins, which are delivered as containers. The Arcalot community maintains an ever-growing list of [official plugins](https://github.com/orgs/arcalot/repositories?q=%22arcaflow-plugin-%22), which are version-controlled and hosted in our [Quay.io repository](https://quay.io/arcalot).
+Workflow steps are run via plugins, which are delivered as containers. The Arcalot
+community maintains an ever-growing list of
+[official plugins](https://github.com/orgs/arcalot/repositories?q=%22arcaflow-plugin-%22),
+which are version-controlled and hosted in our
+[Quay.io repository](https://quay.io/arcalot).
 
-Plugins are designed to run independent of an Arcaflow workflow. All plugins have schema definitions for their inputs and outputs, and they perform data validation against those schemas when run. Plugins also have one or more steps, and when there are multiple steps we always need to specify which step we want to run.
+Plugins are designed to run independent of an Arcaflow workflow. All plugins have schema
+definitions for their inputs and outputs, and they perform data validation against those
+schemas when run. Plugins also have one or more steps, and when there are multiple steps
+we always need to specify which step we want to run.
 
 !!! tip
     Plugin **steps** are the fundamental building blocks for workflows.
 
-Let's take a look at the schema for the example plugin. Passing the `--schema` parameter to the plugin will return the complete schema in YAML format.
+Let's take a look at the schema for the example plugin. Passing the `--schema` parameter
+to the plugin will return the complete schema in YAML format.
 
 === "Podman"
     ```bash
@@ -339,7 +389,8 @@ Let's take a look at the schema for the example plugin. Passing the `--schema` p
     docker run --rm quay.io/arcalot/arcaflow-plugin-example --schema
     ```
 
-Here we see the example plugin has one step called `hello-world`, which has schemas for both its inputs and outputs.
+Here we see the example plugin has one step called `hello-world`, which has schemas for
+both its inputs and outputs.
 
 ```yaml title="example plugin schema YAML"
 steps:
@@ -441,7 +492,8 @@ steps:
           root: SuccessOutput
 ```
 
-The plugin schema can also be returned in JSON format, in which case you must specify wheter to return either the `input` or `output` schema.
+The plugin schema can also be returned in JSON format, in which case you must specify
+wheter to return either the `input` or `output` schema.
 
 === "Podman"
     ```bash
@@ -529,7 +581,10 @@ The plugin schema can also be returned in JSON format, in which case you must sp
 }
 ```
 
-A plugin takes its input as a file, but because it runs as a container, it looks for the input file in the context of the container. This means you either need to bind-mount the input file to the container, or, as in this example, pipe the input value to the plugin's file input.
+A plugin takes its input as a file, but because it runs as a container, it looks for the
+input file in the context of the container. This means you either need to bind-mount the
+input file to the container, or, as in this example, pipe the input value to the
+plugin's file input.
 
 ```yaml title="input.yaml"
 name:
@@ -538,7 +593,8 @@ name:
 ```
 
 !!! note
-    In order to pipe the input to the container, you must pass the `-i, --interactive` parameter.
+    In order to pipe the input to the container, you must pass the `-i, --interactive`
+    parameter.
 
 === "Podman"
     ```bash
@@ -556,10 +612,13 @@ output_data:
 debug_logs: ''
 ```
 
-Now let's generate a UUID with the utilities plugin. This plugin has multiple steps, so we need to specify which step to run. The step also requires no input, so we pass it an empty object.
+Now let's generate a UUID with the utilities plugin. This plugin has multiple steps, so
+we need to specify which step to run. The step also requires no input, so we pass it an
+empty object.
 
 !!! note
-    An input object is always required, even if a plugin step does not require input parameters.
+    An input object is always required, even if a plugin step does not require input
+    parameters.
 
 === "Podman"
     ```bash
@@ -580,7 +639,10 @@ debug_logs: ''
 [Learn more about plugin schemas &raquo;](/arcaflow/plugins/python/data-model/){ .md-button }
 
 ## Writing Plugins
- Of course you may have specific needs and want to author your own plugins. To aid with this, we provide [SDKs](/arcaflow/plugins/) in popular languages. Let's create a simple hello-world plugin using the Python SDK. We'll publish the code here, and you can find the details in the [Python plugin guide](plugins/python/first.md).
+ Of course you may have specific needs and want to author your own plugins. To aid with
+ this, we provide [SDKs](/arcaflow/plugins/) in popular languages. Let's create a simple
+ hello-world plugin using the Python SDK. We'll publish the code here, and you can find
+ the details in the [Python plugin guide](plugins/python/first.md).
 
 ```python title="plugin.py"
 #!/usr/local/bin/python3
@@ -666,7 +728,8 @@ debug_logs: ''
 
 ## Next steps
 
-Congratulations, you are now an Arcaflow user! Here are some things you can do next to start working with plugins and workflows:
+Congratulations, you are now an Arcaflow user! Here are some things you can do next to
+start working with plugins and workflows:
 
 - [See our repositories of community-supported plugins &raquo;](https://github.com/orgs/arcalot/repositories?q=%22arcaflow-plugin-%22)
 - [Get our latest plugin container builds from quay.io &raquo;](https://quay.io/arcalot)
