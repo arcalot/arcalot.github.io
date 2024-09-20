@@ -107,7 +107,7 @@ The oneof tag is a method of creating a schema `one_of_string` type from values 
 
 The syntax of `!oneof` is:
 - Following the tag `!oneof`, create a new YAML section (map) by starting an indented new line. That section should contain two properties:
-  - discriminator: A string that specifies what the oneof discriminator should be. The discriminator specifies which option was outputted.
+  - discriminator: A string that specifies what the oneof discriminator should be. The discriminator specifies which option was emitted.
   - options: A YAML section (map) that contains all options. The keys are the discriminator values, and the values should be valid expressions.
 
 Example:
