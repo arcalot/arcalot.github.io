@@ -39,11 +39,17 @@ outputs:
 ```
 
 But oh no! The workflow fails with the error `all outputs marked as unresolvable` when the step is disabled.
-Why is this? It's simple. The step did not run, as instructed, and therefore the output `workflow_success` cannot get the information it needs. See the next section for methods of handling this situation.
+This happens because the workflow instructed the step not to run, and therefore the output `workflow_success`
+cannot get the information it needs. See the next section for methods of handling this situation.
 
 #### Graceful handling of disabled steps
 
-When steps are disabled, they no longer emit their step output. To work around this, the workflow output (or a following step) must have an OR dependency on either the step's disable output or on another step that has opposite enable logic.
+When steps are disabled, they no longer emit their step output. To handle this, the workflow output (or a
+following step) must have an OR dependency on both the step's disable output and on another step that has
+opposite enable logic.
+An OR dependency means that the step will resolve when any of the nodes it depends on resolve, unlike the
+default AND logic that waits for all dependencies to resolve.
+
 
 Here is a visual demonstrating two steps that have opposite logic:
 ```mermaid
@@ -80,7 +86,8 @@ stateDiagram-v2
   or_disabled --> [*]
 ```
 
-The way this works is that either of the two paths can create a valid output, allowing the workflow to continue past the disabled steps.
+The way this works is that either of the two paths can create a valid output, allowing the workflow to continue past
+the disabled steps.
 
 ##### How to do this in a workflow
 
@@ -93,13 +100,14 @@ There are two tags that create the described OR dependency.
 
 ##### How to use `!oneof`
 
-To use `!oneof` for graceful handling of disabled steps, the oneof should depend on either ONE OF the success output or the disabled output.
+To use `!oneof` for graceful handling of disabled steps, the oneof should depend on ONE OF the success output and
+the disabled output, which will output either the success output or the disabled output.
 
 The oneof tag is a method of creating a schema `one_of_string` type from values present in the workflow.
 
 The syntax of `!oneof` is:
-- Following the tag `!oneof`, create a new YAML section (map) by moving to a new line. That section should contain two properties:
-  - discriminator: A string that specifies what the oneof discriminator should be.
+- Following the tag `!oneof`, create a new YAML section (map) by starting an indented new line. That section should contain two properties:
+  - discriminator: A string that specifies what the oneof discriminator should be. The discriminator specifies which option was outputted.
   - options: A YAML section (map) that contains all options. The keys are the discriminator values, and the values should be valid expressions.
 
 Example:
@@ -136,7 +144,20 @@ outputs:
 
 ##### How to use `!ordisabled`
 
-Since arcaflow needed a simple way to disable a step easily, there is a method that is as simple as changing the expression tag from `!expr` to `!ordisabled`
+Arcaflow provides workflow developers an easy way to handle disabled steps that is as simple as changing the
+expression tag from `!expr` to `!ordisabled`.
+
+This is a special case of `!oneof` with the discriminator set to `result`, and the options set to `enabled` and
+`disabled`. The enabled output is the expression provided, and the disabled output is automatically generated from
+the expression provided.
+
+The input must be in one of the following formats:
+- `$.steps.step_name.outputs`
+- `steps.step_name.outputs`
+- `$.steps.step_name.outputs.output_name`
+- `steps.step_name.outputs.output_name`
+- `$.steps.step_name.outputs.output_name.output_field`
+- `steps.step_name.outputs.output_name.output_field`
 
 Using `!ordisabled`, the following example is otherwise equivalent to the prior example:
 ```yaml title="workflow.yaml"
@@ -168,9 +189,14 @@ outputs:
 
 #### Alternative methods
 
-For handling disabled steps, `!oneof` and `!ordisabled` are the recommended methods because they cause output failure when the step fails. However, if it is acceptable for the workflow to succeed when a step crashes, the optional tags could be the right feature for your workflow.
+For handling disabled steps, `!oneof` and `!ordisabled` are the recommended methods because they cause output failure
+when the step fails. However, if it is acceptable for the workflow to succeed when a step crashes, the optional tags
+could be the right feature for your workflow.
 
-The alterative methods are the optional tags. The `oneof` tags instructed the workflow to build a `oneof_string` type with OR dependencies, requiring one of the options to have an output for the oneof to resolve. Meanwhile, the `optional` tags can resolve without an output by utilizing optional fields.
+The alterative methods are the "optional" family of expression tags. The `oneof` tags instructed the workflow to
+build a `oneof_string` type with OR dependencies, requiring one of the options to have an output for the oneof to
+resolve. Meanwhile, the "optional" family of tags can resolve without an output by utilizing optional object property
+fields.
 
 | Tag              | Description                                      |
 |------------------|--------------------------------------------------|
@@ -206,16 +232,21 @@ outputs:
     plugin_output: !wait-optional $.steps.my_step.outputs.success
 ```
 
-If `my_step` is enabled and has an output, it will be present in the `plugin_output` field of the `workflow_success` output. Otherwise, the `workflow_success` output will not include the `plugin_output` field. The output will wait for the plugin to finish, if enabled.
+If `my_step` is enabled and has an output, it will be present in the `plugin_output` field of the `workflow_success`
+output. Otherwise, the `workflow_success` output will not include the `plugin_output` field. The output will wait
+for the plugin to finish, if enabled.
 
 ##### How to use `!soft-optional`
 
 !!! warning
     This feature is not recommended for most use cases.
 
-The `!soft-optional` tag creates the loosest type of dependency. The output will __not__ wait for the step to finish or fail. This feature is only intended for fields that you want to get the output for if they succeed, but you are okay with it not being present if it doesn't finish.
+The `!soft-optional` tag creates the loosest type of dependency. The output will __not__ wait for the step to finish
+or fail. In the event that the step referenced with the `!soft-optional` tag does not finish by the time the other
+dependencies resolve, or if it crashes or is disabled, the field will be left out of the output.
 
-The example used in `!wait-optional` would not work with `!soft-optional` because the output would immediately resolve without the `plugin_output` field. A second dependency is required to ensure the output resolves at a reasonable time.
+The example used in `!wait-optional` would not work with `!soft-optional` because the output would immediately
+resolve without the `plugin_output` field. A second dependency is required to ensure the output does not resolve immediately.
 
 ```yaml title="workflow.yaml"
 version: v0.2.0
