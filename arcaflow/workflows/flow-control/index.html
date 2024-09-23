@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.36">
     
     
       
@@ -26,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.06209087.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -1357,6 +1357,96 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#conditional-step-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conditional Step Execution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conditional Step Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#graceful-handling-of-disabled-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graceful handling of disabled steps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Graceful handling of disabled steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-do-this-in-a-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to do this in a workflow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-oneof" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to use !oneof
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-ordisabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to use !ordisabled
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alternative methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternative methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-wait-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to use !wait-optional
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-soft-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to use !soft-optional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#foreach-loops" class="md-nav__link">
     <span class="md-ellipsis">
       Foreach Loops
@@ -1652,6 +1742,273 @@
 
 <h1 id="using-flow-control-mechanics">Using Flow Control Mechanics</h1>
 <p>Flow control allows the workflow author to build a workflow with a decision tree based on supported flow logic. These flow control operations are not implemented by plugins, but are part of the workflow engine itself.</p>
+<h2 id="conditional-step-execution">Conditional Step Execution</h2>
+<p>Conditional step execution can be achieved with the <code>enabled</code> input.</p>
+<p>The value passed into the <code>enabled</code> field should be an expression that resolves as a boolean. So it should either reference a path to a boolean value, or it should be a binary comparison.</p>
+<p>A situation that would benefit from conditional step execution includes a step that uploads the result to a remote server. For development runs you may not want to upload the results, so you can create a <code>bool</code> field in the input to toggle the upload, then you can reference that field in the <code>enabled</code> field of the upload step.</p>
+<p>Example:
+<div class="highlight"><span class="filename">workflow.yaml</span><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.2.0</span>
+<span class="nt">input</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
+<span class="w">  </span><span class="nt">objects</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">RootObject</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
+<span class="w">      </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">step_1_enabled</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bool</span>
+<span class="w">        </span><span class="nt">step_1_input</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="nt">steps</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">my_step</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">deployment_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image</span>
+<span class="w">      </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path/to/my_plugin:1</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">param_1</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.step_1_input</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.step_1_enabled</span>
+<span class="nt">outputs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">workflow_success</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin_output</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.my_step.outputs.success</span>
+</code></pre></div></p>
+<p>But oh no! The workflow fails with the error <code>all outputs marked as unresolvable</code> when the step is disabled.
+This happens because the workflow instructed the step not to run, and therefore the output <code>workflow_success</code>
+cannot get the information it needs. See the next section for methods of handling this situation.</p>
+<h4 id="graceful-handling-of-disabled-steps">Graceful handling of disabled steps</h4>
+<p>When steps are disabled, they no longer emit their step output. To handle this, the workflow output (or a
+following step) must have an OR dependency on both the step&rsquo;s disable output and on another step that has
+opposite enable logic.
+An OR dependency means that the step will resolve when any of the nodes it depends on resolve, unlike the
+default AND logic that waits for all dependencies to resolve.</p>
+<p>Here is a visual demonstrating two steps that have opposite logic:
+<pre class="mermaid"><code>stateDiagram-v2
+  classDef tag font-style:italic;
+  classDef step font-weight:bold;
+
+  state if_state &lt;&lt;choice&gt;&gt;
+  Step1:::step: Step 1
+  [*] --&gt; Step1
+  Step1 --&gt; if_state
+  Step2:::step: Step 2
+  Step3:::step: Step 3
+  if_state --&gt; Step2: !expr $.step1.output_1 == true
+  if_state --&gt; Step3: !expr $.step1.output_1 == false
+  oneof:::tag: !oneof
+  Step2 --&gt; oneof
+  Step3 --&gt; oneof
+  oneof --&gt; [*]</code></pre></p>
+<p>Here is a visual demonstrating utilizing the disabled output:
+<pre class="mermaid"><code>stateDiagram-v2
+  classDef tag font-style:italic;
+  classDef step font-weight:bold;
+
+  input
+  [*] --&gt; Step1:::step
+  input --&gt; Step1: !expr $.input.enabled
+  or_disabled:::tag: !ordisabled
+  Step1 --&gt; or_disabled: success
+  Step1 --&gt; or_disabled: Disabled
+  or_disabled --&gt; [*]</code></pre></p>
+<p>The way this works is that either of the two paths can create a valid output, allowing the workflow to continue past
+the disabled steps.</p>
+<h5 id="how-to-do-this-in-a-workflow">How to do this in a workflow</h5>
+<p>There are two tags that create the described OR dependency.</p>
+<table>
+<thead>
+<tr>
+<th>Tag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>!oneof</code></td>
+<td>A general use tag to depend on any of the inputs</td>
+</tr>
+<tr>
+<td><code>!ordisabled</code></td>
+<td>A special case of <code>!oneof</code> that automatically handles the disabled case</td>
+</tr>
+</tbody>
+</table>
+<h5 id="how-to-use-oneof">How to use <code>!oneof</code></h5>
+<p>To use <code>!oneof</code> for graceful handling of disabled steps, the oneof should depend on ONE OF the success output and
+the disabled output, which will output either the success output or the disabled output.</p>
+<p>The oneof tag is a method of creating a schema <code>one_of_string</code> type from values present in the workflow.</p>
+<p>The syntax of <code>!oneof</code> is:
+- Following the tag <code>!oneof</code>, create a new YAML section (map) by starting an indented new line. That section should contain two properties:
+  - discriminator: A string that specifies what the oneof discriminator should be. The discriminator specifies which option was emitted.
+  - options: A YAML section (map) that contains all options. The keys are the discriminator values, and the values should be valid expressions.</p>
+<p>Example:
+<div class="highlight"><span class="filename">workflow.yaml</span><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.2.0</span>
+<span class="nt">input</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
+<span class="w">  </span><span class="nt">objects</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">RootObject</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
+<span class="w">      </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">step_1_enabled</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bool</span>
+<span class="w">        </span><span class="nt">step_1_input</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="nt">steps</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">my_step</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">deployment_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image</span>
+<span class="w">      </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path/to/my_plugin:1</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">param_1</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.step_1_input</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.step_1_enabled</span>
+<span class="nt">outputs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">workflow_success</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin_output</span><span class="p">:</span><span class="w"> </span><span class="kt">!oneof</span>
+<span class="w">      </span><span class="nt">discriminator</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">result</span>
+<span class="w">      </span><span class="nt">options</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.my_step.outputs.success</span>
+<span class="w">        </span><span class="nt">disabled</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.my_step.disabled.output</span>
+</code></pre></div></p>
+<h5 id="how-to-use-ordisabled">How to use <code>!ordisabled</code></h5>
+<p>Arcaflow provides workflow developers an easy way to handle disabled steps that is as simple as changing the
+expression tag from <code>!expr</code> to <code>!ordisabled</code>.</p>
+<p>This is a special case of <code>!oneof</code> with the discriminator set to <code>result</code>, and the options set to <code>enabled</code> and
+<code>disabled</code>. The enabled output is the expression provided, and the disabled output is automatically generated from
+the expression provided.</p>
+<p>The input must be in one of the following formats:
+- <code>$.steps.step_name.outputs</code>
+- <code>steps.step_name.outputs</code>
+- <code>$.steps.step_name.outputs.output_name</code>
+- <code>steps.step_name.outputs.output_name</code>
+- <code>$.steps.step_name.outputs.output_name.output_field</code>
+- <code>steps.step_name.outputs.output_name.output_field</code></p>
+<p>Using <code>!ordisabled</code>, the following example is otherwise equivalent to the prior example:
+<div class="highlight"><span class="filename">workflow.yaml</span><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.2.0</span>
+<span class="nt">input</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
+<span class="w">  </span><span class="nt">objects</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">RootObject</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
+<span class="w">      </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">step_1_enabled</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bool</span>
+<span class="w">        </span><span class="nt">step_1_input</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="nt">steps</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">my_step</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">deployment_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image</span>
+<span class="w">      </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path/to/my_plugin:1</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">param_1</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.step_1_input</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.step_1_enabled</span>
+<span class="nt">outputs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">workflow_success</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin_output</span><span class="p">:</span><span class="w"> </span><span class="kt">!ordisabled</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.my_step.outputs.success</span>
+</code></pre></div></p>
+<h4 id="alternative-methods">Alternative methods</h4>
+<p>For handling disabled steps, <code>!oneof</code> and <code>!ordisabled</code> are the recommended methods because they cause output failure
+when the step fails. However, if it is acceptable for the workflow to succeed when a step crashes, the optional tags
+could be the right feature for your workflow.</p>
+<p>The alterative methods are the &ldquo;optional&rdquo; family of expression tags. The <code>oneof</code> tags instructed the workflow to
+build a <code>oneof_string</code> type with OR dependencies, requiring one of the options to have an output for the oneof to
+resolve. Meanwhile, the &ldquo;optional&rdquo; family of tags can resolve without an output by utilizing optional object property
+fields.</p>
+<table>
+<thead>
+<tr>
+<th>Tag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>!wait-optional</code></td>
+<td>The typical one that should be used. It will resolve either when the value becomes present, or when it is known that the value will not resolve.</td>
+</tr>
+<tr>
+<td><code>!soft-optional</code></td>
+<td>Not recommended for most use cases. It will not wait for the value to be ready. If the value is present, it will set the field. If it isn&rsquo;t, it will exclude it.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="how-to-use-wait-optional">How to use <code>!wait-optional</code></h5>
+<div class="highlight"><span class="filename">workflow.yaml</span><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.2.0</span>
+<span class="nt">input</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
+<span class="w">  </span><span class="nt">objects</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">RootObject</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
+<span class="w">      </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">step_1_enabled</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bool</span>
+<span class="w">        </span><span class="nt">step_1_input</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="nt">steps</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">my_step</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">deployment_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image</span>
+<span class="w">      </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path/to/my_plugin:1</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">param_1</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.step_1_input</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.step_1_enabled</span>
+<span class="nt">outputs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">workflow_success</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin_output</span><span class="p">:</span><span class="w"> </span><span class="kt">!wait-optional</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.my_step.outputs.success</span>
+</code></pre></div>
+<p>If <code>my_step</code> is enabled and has an output, it will be present in the <code>plugin_output</code> field of the <code>workflow_success</code>
+output. Otherwise, the <code>workflow_success</code> output will not include the <code>plugin_output</code> field. The output will wait
+for the plugin to finish, if enabled.</p>
+<h5 id="how-to-use-soft-optional">How to use <code>!soft-optional</code></h5>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This feature is not recommended for most use cases.</p>
+</div>
+<p>The <code>!soft-optional</code> tag creates the loosest type of dependency. The output will <strong>not</strong> wait for the step to finish
+or fail. In the event that the step referenced with the <code>!soft-optional</code> tag does not finish by the time the other
+dependencies resolve, or if it crashes or is disabled, the field will be left out of the output.</p>
+<p>The example used in <code>!wait-optional</code> would not work with <code>!soft-optional</code> because the output would immediately
+resolve without the <code>plugin_output</code> field. A second dependency is required to ensure the output does not resolve immediately.</p>
+<div class="highlight"><span class="filename">workflow.yaml</span><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.2.0</span>
+<span class="nt">input</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
+<span class="w">  </span><span class="nt">objects</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">RootObject</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
+<span class="w">      </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">background_step_enabled</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bool</span>
+<span class="w">        </span><span class="nt">background_step_input</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="w">        </span><span class="nt">step_1_input</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="nt">steps</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">background_step</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">deployment_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image</span>
+<span class="w">      </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path/to/my_background_plugin:1</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">param_1</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.background_step_input</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.background_step_enabled</span>
+<span class="w">  </span><span class="nt">my_step</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">deployment_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image</span>
+<span class="w">      </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path/to/my_plugin:1</span>
+<span class="w">    </span><span class="nt">input</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">param_1</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.step_1_input</span>
+<span class="nt">outputs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">workflow_success</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">background_output</span><span class="p">:</span><span class="w"> </span><span class="kt">!soft-optional</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.background_step.outputs.success</span>
+<span class="w">    </span><span class="nt">plugin_output</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.my_step.outputs.success</span>
+</code></pre></div>
 <h2 id="foreach-loops">Foreach Loops</h2>
 <p>Foreach loops allow for running a sub-workflow with iterative inputs from a parent workflow. A sub-workflow is a complete Arcaflow workflow file with its own input and output schemas as described in this section. The inputs for the sub-workflow are provided as a list, where each list item is an object that matches the sub-workflow input schema.</p>
 <div class="admonition tip">
@@ -1728,13 +2085,13 @@
 <span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="nt">steps</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">my_plugin</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">deployment_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image</span>
 <span class="w">      </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path/to/my_plugin:1</span>
 <span class="w">    </span><span class="nt">input</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">param_1</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.input.param_1</span>
 <span class="w">  </span><span class="nt">my_other_plugin</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">deployment_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image</span>
 <span class="w">      </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path/to/my_other_plugin:1</span>
 <span class="w">    </span><span class="nt">input</span><span class="p">:</span>
@@ -1746,11 +2103,11 @@
 <span class="w">    </span><span class="nt">my_other_plugin</span><span class="p">:</span><span class="w"> </span><span class="kt">!expr</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$.steps.my_other_plugin.outputs.success</span>
 </code></pre></div>
 <h3 id="reduce-repetition-with-bindconstants">Reduce Repetition with <code>bindConstants()</code></h3>
-<p>The builtin function <a href="../expressions/#functions"><code>bindConstants()</code></a> allows you to 
-avoid repeating input variables for a <code>foreach</code> subworkflow. In the example 
-below, the input variable <code>name</code>&rsquo;s value is repeated across each iteration in 
-this input. This results in a more repetitive input and schema definition. This 
-section will show you how to simplify it. </p>
+<p>The builtin function <a href="../expressions/#functions"><code>bindConstants()</code></a> allows you to
+avoid repeating input variables for a <code>foreach</code> subworkflow. In the example
+below, the input variable <code>name</code>&rsquo;s value is repeated across each iteration in
+this input. This results in a more repetitive input and schema definition. This
+section will show you how to simplify it.</p>
 <h4 id="workflow-and-input-before-bindconstants">Workflow and Input Before <code>bindConstants()</code></h4>
 <div class="highlight"><span class="filename">input-repeated.yaml</span><pre><span></span><code><span class="nt">iterations</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">loop_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
@@ -1818,7 +2175,7 @@ section will show you how to simplify it. </p>
 <span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">        </span><span class="nt">ratio</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">type</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float</span><span class="w">            </span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float</span>
 
 <span class="nt">steps</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">example</span><span class="p">:</span>
@@ -1929,7 +2286,7 @@ reference the schema of the list items returned by <code>bindConstants()</code>,
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../../assets/javascripts/bundle.56dfad97.min.js"></script>

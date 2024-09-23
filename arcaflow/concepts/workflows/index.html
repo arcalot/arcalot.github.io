@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.36">
     
     
       
@@ -26,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.06209087.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -661,6 +661,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Condition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#abort" class="md-nav__link">
     <span class="md-ellipsis">
       Abort
@@ -673,15 +682,6 @@
   <a href="#do-while" class="md-nav__link">
     <span class="md-ellipsis">
       Do-while
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#condition" class="md-nav__link">
-    <span class="md-ellipsis">
-      Condition
     </span>
   </a>
   
@@ -1766,7 +1766,7 @@
   Step1: Step 1
   Step2: Step 2
   [*] --&gt; Step1
-  Step1 --&gt; Step2: input_1 = $.steps.step1.outputs.success
+  Step1 --&gt; Step2: input_1 = !expr $.steps.step1.outputs.success
   Step2 --&gt; [*]</code></pre>
 <p>The data type of the input on Step 2 in this case must match the result of the expression. If the data type does not match, the workflow will not be executed.</p>
 <h2 id="undefined-inputs">Undefined inputs</h2>
@@ -1775,18 +1775,18 @@
   Step1: Step 1
   Step2: Step 2
   [*] --&gt; Step1
-  [*] --&gt; Step2: input_1 = $.input.option_1
-  Step1 --&gt; Step2: input_2 = $.steps.step1.outputs.success
+  [*] --&gt; Step2: input_1 = !expr $.input.option_1
+  Step1 --&gt; Step2: input_2 = !expr $.steps.step1.outputs.success
   Step2 --&gt; [*]</code></pre>
 <p>This is typically the case when credentials, such as database access, etc. are required.</p>
 <h2 id="outputs">Outputs</h2>
 <p>The output for each step is preserved for later inspection. However, the workflow can explicitly declare outputs. These outputs are usable in scripted environments as a direct output of the workflow:</p>
 <pre class="mermaid"><code>stateDiagram-v2
   [*] --&gt; Step
-  Step --&gt; [*]: output_1 = $.steps.step1.outputs.success</code></pre>
+  Step --&gt; [*]: output_1 = !expr $.steps.step1.outputs.success</code></pre>
 <div class="admonition tip">
 <p class="admonition-title">Background processes</p>
-<p>Each plugin will only be invoked once, allowing plugins to run background processes, such as server applications. The plugins must handle SIGINT and SIGTERM events properly.</p>
+<p>To allow background processes idiomatically, plugins can implement the cancellation signal to be stopped by the workflow.</p>
 </div>
 <h2 id="flow-control-wip">Flow control (WIP)</h2>
 <p>The workflow contains several flow control operations. These flow control operations are not implemented by plugins, but are part of the workflow engine itself.</p>
@@ -1805,11 +1805,41 @@
     sub_workflow --&gt; [*]: Sub Output
   }
   ForEach --&gt; [*]: Output</code></pre>
+<p>This feature can be configured for parallel or sequential execution.</p>
+<h3 id="condition">Condition</h3>
+<p>A condition is a flow control operation that controls whether or not a step can run. You can also create multiple branches with opposing logic to create a switch-case effect.</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  classDef tag font-style:italic;
+  classDef step font-weight:bold;
+
+  input
+  [*] --&gt; Step1:::step
+  input --&gt; Step1: !expr $.input.enabled
+  or_disabled:::tag: !ordisabled
+  Step1 --&gt; or_disabled: success
+  Step1 --&gt; or_disabled: Disabled
+  or_disabled --&gt; [*]</code></pre>
+<pre class="mermaid"><code>stateDiagram-v2
+  classDef tag font-style:italic;
+  classDef step font-weight:bold;
+
+  state if_state &lt;&lt;choice&gt;&gt;
+  Step1:::step: Step 1
+  [*] --&gt; Step1
+  Step1 --&gt; if_state
+  Step2:::step: Step 2
+  Step3:::step: Step 3
+  if_state --&gt; Step2: !expr $.step1.output_1 == true
+  if_state --&gt; Step3: !expr $.step1.output_1 == false
+  oneof:::tag: !oneof
+  Step2 --&gt; oneof
+  Step3 --&gt; oneof
+  oneof --&gt; [*]</code></pre>
+<h3 id="abort">Abort</h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The features below are in-development and not yet implemented in the released codebase.</p>
+<p>This feature is not yet implemented.</p>
 </div>
-<h3 id="abort">Abort</h3>
 <p>The abort flow control is a quick way to exit out of a workflow. This is useful when entering a terminal error state and the workflow output data would be useless anyway.</p>
 <pre class="mermaid"><code>stateDiagram-v2
   [*] --&gt; Step1
@@ -1818,12 +1848,16 @@
   Step2 --&gt; [*]</code></pre>
 <p>However, this is only required if you want to abort the workflow immediately. If you want an error case to result in the workflow failing, but whatever steps can be finished being finished, you can leave error outputs unconnected.</p>
 <h3 id="do-while">Do-while</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This feature is not yet implemented.</p>
+</div>
 <p>A do-while block will execute the steps in it as long as a certain condition is met. The condition is derived from the output of the step or steps executed inside the loop:</p>
 <pre class="mermaid"><code>stateDiagram-v2
   [*] --&gt; DoWhile
   state DoWhile {
     [*] --&gt; Step1
-    Step1 --&gt; [*]: output_1_condition=$.step1.output_1.finished == false   
+    Step1 --&gt; [*]: output_1_condition= !expr $.step1.output_1.finished == false
   }
   DoWhile --&gt; [*]</code></pre>
 <p>If the step declares multiple outputs, multiple conditions are possible. The do-while block will also have multiple outputs:</p>
@@ -1832,7 +1866,7 @@
   state DoWhile {
     [*] --&gt; Step1
     Step1 --&gt; [*]: Output 1 condition
-    Step1 --&gt; [*]: Output 2 condition   
+    Step1 --&gt; [*]: Output 2 condition
   }
   DoWhile --&gt; [*]: Output 1
   DoWhile --&gt; [*]: Output 2</code></pre>
@@ -1845,18 +1879,11 @@
     Step1 --&gt; [*]: Output 2
   }
   DoWhile --&gt; [*]: Output 1</code></pre>
-<h3 id="condition">Condition</h3>
-<p>A condition is a flow control operation that redirects the flow one way or another based on an expression. You can also create multiple branches to create a switch-case effect.</p>
-<pre class="mermaid"><code>stateDiagram-v2
-  state if_state &lt;&lt;choice&gt;&gt;
-  Step1: Step 1
-  [*] --&gt; Step1
-  Step1 --&gt; if_state
-  Step2: Step 2
-  Step3: Step 3
-  if_state --&gt; Step2: $.step1.output_1 == true
-  if_state --&gt; Step3: $.step1.output_1 == false</code></pre>
 <h3 id="multiply">Multiply</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This feature is not yet implemented.</p>
+</div>
 <p>The multiply flow control operation is useful when you need to dynamically execute sub-workflows in parallel based on an input condition. You can, for example, use this to run a workflow step on multiple or all Kubernetes nodes.</p>
 <pre class="mermaid"><code>stateDiagram-v2
   Lookup: Lookup Kubernetes hosts
@@ -1870,9 +1897,13 @@
 <p>The output of a Multiply operation will be a map, keyed with a string that is configured from the input.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>You can think of a Multiply step like a for-each loop, but the steps being executed in parallel.</p>
+<p>You can think of a Multiply step like a variation of a for-each loop geared towards specific parallelization cases.</p>
 </div>
 <h3 id="synchronize">Synchronize</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This feature is not yet implemented.</p>
+</div>
 <p>The synchronize step attempts to synchronize the execution of subsequent steps for a specified key. The key must be a constant and cannot be obtained from an input expression.</p>
 <pre class="mermaid"><code>stateDiagram-v2
   [*] --&gt; Step1
@@ -1946,7 +1977,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../../assets/javascripts/bundle.56dfad97.min.js"></script>
