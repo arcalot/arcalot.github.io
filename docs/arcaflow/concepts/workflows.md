@@ -67,7 +67,7 @@ stateDiagram-v2
   Step3 --> [*]
 ```
 
-## Passing data between steps 
+## Passing data between steps
 
 When two steps are connected, you have the ability to pass data between them. Emblematically described:
 
@@ -76,7 +76,7 @@ stateDiagram-v2
   Step1: Step 1
   Step2: Step 2
   [*] --> Step1
-  Step1 --> Step2: input_1 = $.steps.step1.outputs.success
+  Step1 --> Step2: input_1 = !expr $.steps.step1.outputs.success
   Step2 --> [*]
 ```
 
@@ -91,8 +91,8 @@ stateDiagram-v2
   Step1: Step 1
   Step2: Step 2
   [*] --> Step1
-  [*] --> Step2: input_1 = $.input.option_1
-  Step1 --> Step2: input_2 = $.steps.step1.outputs.success
+  [*] --> Step2: input_1 = !expr $.input.option_1
+  Step1 --> Step2: input_2 = !expr $.steps.step1.outputs.success
   Step2 --> [*]
 ```
 
@@ -105,11 +105,11 @@ The output for each step is preserved for later inspection. However, the workflo
 ```mermaid
 stateDiagram-v2
   [*] --> Step
-  Step --> [*]: output_1 = $.steps.step1.outputs.success
+  Step --> [*]: output_1 = !expr $.steps.step1.outputs.success
 ```
 
 !!! tip "Background processes"
-    Each plugin will only be invoked once, allowing plugins to run background processes, such as server applications. The plugins must handle SIGINT and SIGTERM events properly.
+    To allow background processes idiomatically, plugins can implement the cancellation signal to be stopped by the workflow.
 
 ## Flow control (WIP)
 
@@ -135,10 +135,49 @@ stateDiagram-v2
   ForEach --> [*]: Output
 ```
 
-!!! warning
-    The features below are in-development and not yet implemented in the released codebase.
+This feature can be configured for parallel or sequential execution.
+
+### Condition
+
+A condition is a flow control operation that controls whether or not a step can run. You can also create multiple branches with opposing logic to create a switch-case effect.
+
+```mermaid
+stateDiagram-v2
+  classDef tag font-style:italic;
+  classDef step font-weight:bold;
+
+  input
+  [*] --> Step1:::step
+  input --> Step1: !expr $.input.enabled
+  or_disabled:::tag: !ordisabled
+  Step1 --> or_disabled: success
+  Step1 --> or_disabled: Disabled
+  or_disabled --> [*]
+```
+
+```mermaid
+stateDiagram-v2
+  classDef tag font-style:italic;
+  classDef step font-weight:bold;
+
+  state if_state <<choice>>
+  Step1:::step: Step 1
+  [*] --> Step1
+  Step1 --> if_state
+  Step2:::step: Step 2
+  Step3:::step: Step 3
+  if_state --> Step2: !expr $.step1.output_1 == true
+  if_state --> Step3: !expr $.step1.output_1 == false
+  oneof:::tag: !oneof
+  Step2 --> oneof
+  Step3 --> oneof
+  oneof --> [*]
+```
 
 ### Abort
+
+!!! warning
+    This feature is not yet implemented.
 
 The abort flow control is a quick way to exit out of a workflow. This is useful when entering a terminal error state and the workflow output data would be useless anyway.
 
@@ -154,6 +193,9 @@ However, this is only required if you want to abort the workflow immediately. If
 
 ### Do-while
 
+!!! warning
+    This feature is not yet implemented.
+
 A do-while block will execute the steps in it as long as a certain condition is met. The condition is derived from the output of the step or steps executed inside the loop:
 
 ```mermaid
@@ -161,7 +203,7 @@ stateDiagram-v2
   [*] --> DoWhile
   state DoWhile {
     [*] --> Step1
-    Step1 --> [*]: output_1_condition=$.step1.output_1.finished == false   
+    Step1 --> [*]: output_1_condition= !expr $.step1.output_1.finished == false
   }
   DoWhile --> [*]
 ```
@@ -174,7 +216,7 @@ stateDiagram-v2
   state DoWhile {
     [*] --> Step1
     Step1 --> [*]: Output 1 condition
-    Step1 --> [*]: Output 2 condition   
+    Step1 --> [*]: Output 2 condition
   }
   DoWhile --> [*]: Output 1
   DoWhile --> [*]: Output 2
@@ -193,23 +235,10 @@ stateDiagram-v2
   DoWhile --> [*]: Output 1
 ```
 
-### Condition
-
-A condition is a flow control operation that redirects the flow one way or another based on an expression. You can also create multiple branches to create a switch-case effect.
-
-```mermaid
-stateDiagram-v2
-  state if_state <<choice>>
-  Step1: Step 1
-  [*] --> Step1
-  Step1 --> if_state
-  Step2: Step 2
-  Step3: Step 3
-  if_state --> Step2: $.step1.output_1 == true
-  if_state --> Step3: $.step1.output_1 == false
-```
-
 ### Multiply
+
+!!! warning
+    This feature is not yet implemented.
 
 The multiply flow control operation is useful when you need to dynamically execute sub-workflows in parallel based on an input condition. You can, for example, use this to run a workflow step on multiple or all Kubernetes nodes.
 
@@ -228,9 +257,12 @@ stateDiagram-v2
 The output of a Multiply operation will be a map, keyed with a string that is configured from the input.
 
 !!! tip
-    You can think of a Multiply step like a for-each loop, but the steps being executed in parallel.
+    You can think of a Multiply step like a variation of a for-each loop geared towards specific parallelization cases.
 
 ### Synchronize
+
+!!! warning
+    This feature is not yet implemented.
 
 The synchronize step attempts to synchronize the execution of subsequent steps for a specified key. The key must be a constant and cannot be obtained from an input expression.
 

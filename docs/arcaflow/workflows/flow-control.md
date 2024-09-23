@@ -2,6 +2,289 @@
 
 Flow control allows the workflow author to build a workflow with a decision tree based on supported flow logic. These flow control operations are not implemented by plugins, but are part of the workflow engine itself.
 
+## Conditional Step Execution
+
+Conditional step execution can be achieved with the `enabled` input.
+
+The value passed into the `enabled` field should be an expression that resolves as a boolean. So it should either reference a path to a boolean value, or it should be a binary comparison.
+
+A situation that would benefit from conditional step execution includes a step that uploads the result to a remote server. For development runs you may not want to upload the results, so you can create a `bool` field in the input to toggle the upload, then you can reference that field in the `enabled` field of the upload step.
+
+Example:
+```yaml title="workflow.yaml"
+version: v0.2.0
+input:
+  root: RootObject
+  objects:
+    RootObject:
+      id: RootObject
+      properties:
+        step_1_enabled:
+          type:
+            type_id: bool
+        step_1_input:
+          type:
+            type_id: integer
+steps:
+  my_step:
+    plugin:
+      deployment_type: image
+      src: path/to/my_plugin:1
+    input:
+      param_1: !expr $.input.step_1_input
+    enabled: !expr $.input.step_1_enabled
+outputs:
+  workflow_success:
+    plugin_output: !expr $.steps.my_step.outputs.success
+```
+
+But oh no! The workflow fails with the error `all outputs marked as unresolvable` when the step is disabled.
+This happens because the workflow instructed the step not to run, and therefore the output `workflow_success`
+cannot get the information it needs. See the next section for methods of handling this situation.
+
+#### Graceful handling of disabled steps
+
+When steps are disabled, they no longer emit their step output. To handle this, the workflow output (or a
+following step) must have an OR dependency on both the step's disable output and on another step that has
+opposite enable logic.
+An OR dependency means that the step will resolve when any of the nodes it depends on resolve, unlike the
+default AND logic that waits for all dependencies to resolve.
+
+
+Here is a visual demonstrating two steps that have opposite logic:
+```mermaid
+stateDiagram-v2
+  classDef tag font-style:italic;
+  classDef step font-weight:bold;
+
+  state if_state <<choice>>
+  Step1:::step: Step 1
+  [*] --> Step1
+  Step1 --> if_state
+  Step2:::step: Step 2
+  Step3:::step: Step 3
+  if_state --> Step2: !expr $.step1.output_1 == true
+  if_state --> Step3: !expr $.step1.output_1 == false
+  oneof:::tag: !oneof
+  Step2 --> oneof
+  Step3 --> oneof
+  oneof --> [*]
+```
+
+Here is a visual demonstrating utilizing the disabled output:
+```mermaid
+stateDiagram-v2
+  classDef tag font-style:italic;
+  classDef step font-weight:bold;
+
+  input
+  [*] --> Step1:::step
+  input --> Step1: !expr $.input.enabled
+  or_disabled:::tag: !ordisabled
+  Step1 --> or_disabled: success
+  Step1 --> or_disabled: Disabled
+  or_disabled --> [*]
+```
+
+The way this works is that either of the two paths can create a valid output, allowing the workflow to continue past
+the disabled steps.
+
+##### How to do this in a workflow
+
+There are two tags that create the described OR dependency.
+
+| Tag           | Description                                      |
+|---------------|--------------------------------------------------|
+| `!oneof`      | A general use tag to depend on any of the inputs |
+| `!ordisabled` | A special case of `!oneof` that automatically handles the disabled case |
+
+##### How to use `!oneof`
+
+To use `!oneof` for graceful handling of disabled steps, the oneof should depend on ONE OF the success output and
+the disabled output, which will output either the success output or the disabled output.
+
+The oneof tag is a method of creating a schema `one_of_string` type from values present in the workflow.
+
+The syntax of `!oneof` is:
+- Following the tag `!oneof`, create a new YAML section (map) by starting an indented new line. That section should contain two properties:
+  - discriminator: A string that specifies what the oneof discriminator should be. The discriminator specifies which option was emitted.
+  - options: A YAML section (map) that contains all options. The keys are the discriminator values, and the values should be valid expressions.
+
+Example:
+```yaml title="workflow.yaml"
+version: v0.2.0
+input:
+  root: RootObject
+  objects:
+    RootObject:
+      id: RootObject
+      properties:
+        step_1_enabled:
+          type:
+            type_id: bool
+        step_1_input:
+          type:
+            type_id: integer
+steps:
+  my_step:
+    plugin:
+      deployment_type: image
+      src: path/to/my_plugin:1
+    input:
+      param_1: !expr $.input.step_1_input
+    enabled: !expr $.input.step_1_enabled
+outputs:
+  workflow_success:
+    plugin_output: !oneof
+      discriminator: result
+      options:
+        enabled: !expr $.steps.my_step.outputs.success
+        disabled: !expr $.steps.my_step.disabled.output
+```
+
+##### How to use `!ordisabled`
+
+Arcaflow provides workflow developers an easy way to handle disabled steps that is as simple as changing the
+expression tag from `!expr` to `!ordisabled`.
+
+This is a special case of `!oneof` with the discriminator set to `result`, and the options set to `enabled` and
+`disabled`. The enabled output is the expression provided, and the disabled output is automatically generated from
+the expression provided.
+
+The input must be in one of the following formats:
+- `$.steps.step_name.outputs`
+- `steps.step_name.outputs`
+- `$.steps.step_name.outputs.output_name`
+- `steps.step_name.outputs.output_name`
+- `$.steps.step_name.outputs.output_name.output_field`
+- `steps.step_name.outputs.output_name.output_field`
+
+Using `!ordisabled`, the following example is otherwise equivalent to the prior example:
+```yaml title="workflow.yaml"
+version: v0.2.0
+input:
+  root: RootObject
+  objects:
+    RootObject:
+      id: RootObject
+      properties:
+        step_1_enabled:
+          type:
+            type_id: bool
+        step_1_input:
+          type:
+            type_id: integer
+steps:
+  my_step:
+    plugin:
+      deployment_type: image
+      src: path/to/my_plugin:1
+    input:
+      param_1: !expr $.input.step_1_input
+    enabled: !expr $.input.step_1_enabled
+outputs:
+  workflow_success:
+    plugin_output: !ordisabled $.steps.my_step.outputs.success
+```
+
+#### Alternative methods
+
+For handling disabled steps, `!oneof` and `!ordisabled` are the recommended methods because they cause output failure
+when the step fails. However, if it is acceptable for the workflow to succeed when a step crashes, the optional tags
+could be the right feature for your workflow.
+
+The alterative methods are the "optional" family of expression tags. The `oneof` tags instructed the workflow to
+build a `oneof_string` type with OR dependencies, requiring one of the options to have an output for the oneof to
+resolve. Meanwhile, the "optional" family of tags can resolve without an output by utilizing optional object property
+fields.
+
+| Tag              | Description                                      |
+|------------------|--------------------------------------------------|
+| `!wait-optional` | The typical one that should be used. It will resolve either when the value becomes present, or when it is known that the value will not resolve. |
+| `!soft-optional` | Not recommended for most use cases. It will not wait for the value to be ready. If the value is present, it will set the field. If it isn't, it will exclude it. |
+
+##### How to use `!wait-optional`
+
+```yaml title="workflow.yaml"
+version: v0.2.0
+input:
+  root: RootObject
+  objects:
+    RootObject:
+      id: RootObject
+      properties:
+        step_1_enabled:
+          type:
+            type_id: bool
+        step_1_input:
+          type:
+            type_id: integer
+steps:
+  my_step:
+    plugin:
+      deployment_type: image
+      src: path/to/my_plugin:1
+    input:
+      param_1: !expr $.input.step_1_input
+    enabled: !expr $.input.step_1_enabled
+outputs:
+  workflow_success:
+    plugin_output: !wait-optional $.steps.my_step.outputs.success
+```
+
+If `my_step` is enabled and has an output, it will be present in the `plugin_output` field of the `workflow_success`
+output. Otherwise, the `workflow_success` output will not include the `plugin_output` field. The output will wait
+for the plugin to finish, if enabled.
+
+##### How to use `!soft-optional`
+
+!!! warning
+    This feature is not recommended for most use cases.
+
+The `!soft-optional` tag creates the loosest type of dependency. The output will __not__ wait for the step to finish
+or fail. In the event that the step referenced with the `!soft-optional` tag does not finish by the time the other
+dependencies resolve, or if it crashes or is disabled, the field will be left out of the output.
+
+The example used in `!wait-optional` would not work with `!soft-optional` because the output would immediately
+resolve without the `plugin_output` field. A second dependency is required to ensure the output does not resolve immediately.
+
+```yaml title="workflow.yaml"
+version: v0.2.0
+input:
+  root: RootObject
+  objects:
+    RootObject:
+      id: RootObject
+      properties:
+        background_step_enabled:
+          type:
+            type_id: bool
+        background_step_input:
+          type:
+            type_id: integer
+        step_1_input:
+          type:
+            type_id: integer
+steps:
+  background_step:
+    plugin:
+      deployment_type: image
+      src: path/to/my_background_plugin:1
+    input:
+      param_1: !expr $.input.background_step_input
+    enabled: !expr $.input.background_step_enabled
+  my_step:
+    plugin:
+      deployment_type: image
+      src: path/to/my_plugin:1
+    input:
+      param_1: !expr $.input.step_1_input
+outputs:
+  workflow_success:
+    background_output: !soft-optional $.steps.background_step.outputs.success
+    plugin_output: $.steps.my_step.outputs.success
+```
+
 ## Foreach Loops
 
 Foreach loops allow for running a sub-workflow with iterative inputs from a parent workflow. A sub-workflow is a complete Arcaflow workflow file with its own input and output schemas as described in this section. The inputs for the sub-workflow are provided as a list, where each list item is an object that matches the sub-workflow input schema.
@@ -90,13 +373,13 @@ input:
             type_id: string
 steps:
   my_plugin:
-    plugin: 
+    plugin:
       deployment_type: image
       src: path/to/my_plugin:1
     input:
       param_1: !expr $.input.param_1
   my_other_plugin:
-    plugin: 
+    plugin:
       deployment_type: image
       src: path/to/my_other_plugin:1
     input:
@@ -110,11 +393,11 @@ outputs:
 
 ### Reduce Repetition with `bindConstants()`
 
-The builtin function [`bindConstants()`](expressions.md#functions) allows you to 
-avoid repeating input variables for a `foreach` subworkflow. In the example 
-below, the input variable `name`'s value is repeated across each iteration in 
-this input. This results in a more repetitive input and schema definition. This 
-section will show you how to simplify it. 
+The builtin function [`bindConstants()`](expressions.md#functions) allows you to
+avoid repeating input variables for a `foreach` subworkflow. In the example
+below, the input variable `name`'s value is repeated across each iteration in
+this input. This results in a more repetitive input and schema definition. This
+section will show you how to simplify it.
 
 #### Workflow and Input Before `bindConstants()`
 
@@ -153,7 +436,7 @@ input:
               id: SubRootObject
               type_id: ref
               namespace: $.steps.foreach_loop.execute.inputs.items
-            
+           
 steps:
   foreach_loop:
     kind: foreach
@@ -189,7 +472,7 @@ input:
             type_id: string
         ratio:
           type:
-            type_id: float            
+            type_id: float
 
 steps:
   example:
