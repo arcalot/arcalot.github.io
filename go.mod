@@ -6,7 +6,7 @@ require (
 	go.flow.arcalot.io/dockerdeployer v0.7.3
 	go.flow.arcalot.io/kubernetesdeployer v0.9.3
 	go.flow.arcalot.io/pluginsdk v0.13.0
-	go.flow.arcalot.io/podmandeployer v0.11.3
+	go.flow.arcalot.io/podmandeployer v0.11.4
 )
 
 require (
@@ -62,7 +62,7 @@ require (
 	golang.org/x/term v0.24.0 // indirect
 	golang.org/x/text v0.18.0 // indirect
 	golang.org/x/time v0.6.0 // indirect
-	google.golang.org/grpc v1.67.0 // indirect
+	google.golang.org/grpc v1.67.1 // indirect
 	google.golang.org/protobuf v1.34.2 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
