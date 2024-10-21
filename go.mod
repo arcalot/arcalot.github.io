@@ -50,7 +50,7 @@ require (
 	go.arcalot.io/lang v1.1.0 // indirect
 	go.arcalot.io/log/v2 v2.2.0 // indirect
 	go.flow.arcalot.io/deployer v0.6.1 // indirect
-	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.55.0 // indirect
+	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.56.0 // indirect
 	go.opentelemetry.io/otel v1.31.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.31.0 // indirect
 	go.opentelemetry.io/otel/metric v1.31.0 // indirect
