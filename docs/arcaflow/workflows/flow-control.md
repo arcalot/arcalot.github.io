@@ -188,51 +188,6 @@ outputs:
     plugin_output: !ordisabled $.steps.my_step.outputs.success
 ```
 
-It is also possible to use `!ordisabled` as part of the `wait_for` flow control. An
-explicit relationshp between steps in a workflow in this case becomes a oneof condition
-for either the requiested step output or otherwise the disabled state of the step.
-```yaml title="workflow.yaml"
-version: v0.2.0
-input:
-  root: RootObject
-  objects:
-    RootObject:
-      id: RootObject
-      properties:
-        step_1_enabled:
-          type:
-            type_id: bool
-        step_1_input:
-          type:
-            type_id: integer
-        step_2_enabled:
-          type:
-            type_id: bool
-        step_2_input:
-          type:
-            type_id: integer
-steps:
-  my_first_step:
-    plugin:
-      deployment_type: image
-      src: path/to/my_plugin:1
-    input:
-      param_1: !expr $.input.step_1_input
-    enabled: !expr $.input.step_1_enabled
-  my_second_step:
-    plugin:
-      deployment_type: image
-      src: path/to/my_plugin:1
-    input:
-      param_1: !expr $.input.step_2_input
-    enabled: !expr $.input.step_2_enabled
-    wait_for: !ordisabled $.steps.my_first_step.outputs
-outputs:
-  workflow_success:
-    first_step_output: !ordisabled $.steps.my_first_step.outputs.success
-    second_step_output: !ordisabled $.steps.my_second_step.outputs.success
-```
-
 #### Alternative methods
 
 For handling disabled steps, `!oneof` and `!ordisabled` are the recommended methods because they cause output failure
@@ -329,6 +284,55 @@ outputs:
   workflow_success:
     background_output: !soft-optional $.steps.background_step.outputs.success
     plugin_output: $.steps.my_step.outputs.success
+```
+
+### Oneof methods with step flow control
+
+It is also possible to use oneof conditions as part of the `wait_for` flow control. An
+explicit relationshp between steps in a workflow in this case becomes a oneof condition
+for either the requested step output or otherwise the disabled state of the step.
+
+An example using `!ordisabled`:
+```yaml title="workflow.yaml"
+version: v0.2.0
+input:
+  root: RootObject
+  objects:
+    RootObject:
+      id: RootObject
+      properties:
+        step_1_enabled:
+          type:
+            type_id: bool
+        step_1_input:
+          type:
+            type_id: integer
+        step_2_enabled:
+          type:
+            type_id: bool
+        step_2_input:
+          type:
+            type_id: integer
+steps:
+  my_first_step:
+    plugin:
+      deployment_type: image
+      src: path/to/my_plugin:1
+    input:
+      param_1: !expr $.input.step_1_input
+    enabled: !expr $.input.step_1_enabled
+  my_second_step:
+    plugin:
+      deployment_type: image
+      src: path/to/my_plugin:1
+    input:
+      param_1: !expr $.input.step_2_input
+    enabled: !expr $.input.step_2_enabled
+    wait_for: !ordisabled $.steps.my_first_step.outputs
+outputs:
+  workflow_success:
+    first_step_output: !ordisabled $.steps.my_first_step.outputs.success
+    second_step_output: !ordisabled $.steps.my_second_step.outputs.success
 ```
 
 ## Foreach Loops
