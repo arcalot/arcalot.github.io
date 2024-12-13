@@ -2,6 +2,59 @@
 
 Flow control allows the workflow author to build a workflow with a decision tree based on supported flow logic. These flow control operations are not implemented by plugins, but are part of the workflow engine itself.
 
+## Implicit Step Relationships
+
+Any time the input of a step relies on the output of another step via an [Arcaflow
+expression](http://127.0.0.1:8000/arcaflow/workflows/expressions/), an implicit step
+relationship is established. In this case, the Arcaflow engine holds the execution of the dependent step until the output from the supplier step is available.
+
+```yaml title="workflow.yaml"
+version: v0.2.0
+steps:
+  step_a:
+    plugin: 
+      deployment_type: image
+      src: quay.io/some/container/image
+    input:
+      some:
+        key: !expr $.input.some_value
+  step_b:
+    plugin: 
+      deployment_type: image
+      src: quay.io/some/container/image
+    input:
+      some:
+        key: !expr $.steps.step_a.outputs.success.some_value
+```
+
+## Explicit Step Relationships
+
+Sometimes it is important to serialize workflow steps even if they do not have a data
+passing relationship. An example may be running a series of benchmarks where you want to
+ensure that you get valid results without one step interfereing with another. In this
+case, you can use the `wait_for` option of the step to provide an expression or a oneof
+condition.
+
+```yaml title="workflow.yaml"
+version: v0.2.0
+steps:
+  step_a:
+    plugin: 
+      deployment_type: image
+      src: quay.io/some/container/image
+    input:
+      some:
+        key: !expr $.input.some_value
+  step_b:
+    plugin: 
+      deployment_type: image
+      src: quay.io/some/container/image
+    input:
+      some:
+        key: !expr $.input.some_other_value
+    wait_for: !expr $.steps.step_a.outputs
+```
+
 ## Conditional Step Execution
 
 Conditional step execution can be achieved with the `enabled` input.
