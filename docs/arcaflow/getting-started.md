@@ -138,6 +138,8 @@ input-->steps.stressng.starting
 input-->steps.pcp.starting
 ```
 
+[Try some other basic example workflows &raquo;](https://github.com/arcalot/arcaflow-workflows/tree/main/basic-examples){ .md-button }
+
 [Learn more about running workflows &raquo;](/arcaflow/running/){ .md-button }
 
 ## Writing Workflows
@@ -709,9 +711,9 @@ debug_logs: ''
 Congratulations, you are now an Arcaflow user! Here are some things you can do next to
 start working with plugins and workflows:
 
-- [See our repositories of community-supported plugins &raquo;](https://github.com/orgs/arcalot/repositories?q=%22arcaflow-plugin-%22)
+- [See our catalog of community-supported plugins &raquo;](https://github.com/arcalot/arcaflow-plugin-catalog)
 - [Get our latest plugin container builds from quay.io &raquo;](https://quay.io/arcalot)
-- [Experiment with more advanced example workflows &raquo;](https://github.com/arcalot/arcaflow-workflows/advanced-examples/)
+- [Experiment with more advanced example workflows &raquo;](https://github.com/arcalot/arcaflow-workflows/tree/main/advanced-examples)
 
 ## Keep learning
 
