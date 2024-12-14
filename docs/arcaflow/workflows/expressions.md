@@ -160,6 +160,53 @@ Supported formats include:
 
 Negative values are constructed by applying the [negation operator (`-`)](#negation) to a literal numeric value.
 
+### Scalar units
+
+Integer and floating point numbers can be customized with "Units" to express different quantities (e.g. duration `5m30s`, bytes `4GB`, etc.)
+
+Units have to be declared before being used in workflows. Example of workflow input object definition for a `job_memory` to express an amount of bytes:
+
+```yaml
+input:
+  root: RootObject
+  objects:
+    RootObject:
+      id: RootObject
+      properties:
+        job_memory:
+          required: true
+          type:
+            type_id: integer
+            units:
+              base_unit:
+                name_short_singular: B
+                name_short_plural: B
+                name_long_singular: byte
+                name_long_plural: bytes
+              multipliers:
+                1024:
+                  name_short_singular: kb
+                  name_short_plural: kb
+                  name_long_singular: kilobyte
+                  name_long_plural: kilobytes
+                1048576:
+                  name_short_singular: MB
+                  name_short_plural: MB
+                  name_long_singular: megabyte
+                  name_long_plural: megabytes
+                1073741824:
+                  name_short_singular: GB
+                  name_short_plural: GB
+                  name_long_singular: gigabyte
+                  name_long_plural: gigabytes
+```
+
+The input object for this workflow can then use shorthand notation:
+
+```yaml
+job_memory: 4GB
+```
+
 ### Boolean values
 
 Boolean literals have two valid values:
