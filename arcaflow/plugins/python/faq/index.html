@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
     
     
       
@@ -1635,7 +1635,7 @@
 <h2 id="how-can-i-add-a-field-with-dashes-such-as-my-field">How can I add a field with dashes, such as <code>my-field</code>?</h2>
 <p>Dataclasses don&rsquo;t support dashes in parameters. You can work around this by defining the <code>id</code> annotation:</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
-<span class="k">class</span> <span class="nc">MyData</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MyData</span><span class="p">:</span>
     <span class="n">my_field</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Annotated</span><span class="p">[</span>
         <span class="nb">str</span><span class="p">,</span>
         <span class="n">schema</span><span class="o">.</span><span class="n">id</span><span class="p">(</span><span class="s2">&quot;my-field&quot;</span><span class="p">),</span>
@@ -1646,7 +1646,7 @@
 <div class="highlight"><pre><span></span><code><span class="n">my_object_schema</span> <span class="o">=</span> <span class="n">plugin</span><span class="o">.</span><span class="n">build_object_schema</span><span class="p">(</span><span class="n">MyDataclass</span><span class="p">)</span>
 </code></pre></div>
 <p>Inside your step function you can then dump the data from your input</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">my_step</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">MyParams</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">my_step</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">MyParams</span><span class="p">):</span>
     <span class="n">yaml_contents</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">my_object_schema</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">some_param</span><span class="p">))</span>
 </code></pre></div>
 <h2 id="how-can-i-easily-load-a-list-from-a-yaml-or-json-into-a-list-of-dataclasses">How can I easily load a list from a YAML or JSON into a list of dataclasses?</h2>
@@ -1723,7 +1723,7 @@
     <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
       
     
   </body>

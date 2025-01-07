@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
     
     
       
@@ -1657,8 +1657,8 @@
 </div>
 <h2 id="writing-a-serialization-test">Writing a serialization test</h2>
 <p>You can use any test framework you like for your serialization test, we&rsquo;ll demonstrate with <a href="https://docs.python.org/3/library/unittest.html">unittest</a> as it is included directly in Python. The key to this test is to call <code>plugin.test_object_serialization()</code> with an instance of your dataclass that you want to test:</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExamplePluginTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_serialization</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ExamplePluginTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_serialization</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">plugin</span><span class="o">.</span><span class="n">test_object_serialization</span><span class="p">(</span>
             <span class="n">example_plugin</span><span class="o">.</span><span class="n">PodScenarioResults</span><span class="p">(</span>
                 <span class="p">[</span>
@@ -1672,8 +1672,8 @@
 </code></pre></div>
 <p>Remember, you need to call this function with an <strong>instance</strong> containing actual data, not just the class name.</p>
 <p>The test function will first serialize, then unserialize your data and check if it&rsquo;s the same. If you want to use a manually created schema, you can do so, too:</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExamplePluginTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_serialization</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ExamplePluginTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_serialization</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">plugin</span><span class="o">.</span><span class="n">test_object_serialization</span><span class="p">(</span>
             <span class="n">example_plugin</span><span class="o">.</span><span class="n">PodScenarioResults</span><span class="p">(</span>
                 <span class="c1">#...</span>
@@ -1685,8 +1685,8 @@
 </code></pre></div>
 <h2 id="functional-tests">Functional tests</h2>
 <p>Functional tests don&rsquo;t have anything special about them. You can directly call your code with your dataclasses as parameters, and check the return. This works best on auto-generated schemas with the <code>@plugin.step</code> decorator. See below for manually created schemas.</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExamplePluginTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_functional</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ExamplePluginTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_functional</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">input</span> <span class="o">=</span> <span class="n">example_plugin</span><span class="o">.</span><span class="n">PodScenarioParams</span><span class="p">()</span>
 
         <span class="n">output_id</span><span class="p">,</span> <span class="n">output_data</span> <span class="o">=</span> <span class="n">example_plugin</span><span class="o">.</span><span class="n">pod_scenario</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
@@ -1701,8 +1701,8 @@
         <span class="p">)</span>
 </code></pre></div>
 <p>If you created your schema manually, the best way to write your tests is to include the schema in your test. This will automatically validate both the input and the output, making sure they conform to your schema. For example:</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExamplePluginTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_functional</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ExamplePluginTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_functional</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">step_schema</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">StepSchema</span><span class="p">(</span>
             <span class="c1">#...</span>
             <span class="n">handler</span> <span class="o">=</span> <span class="n">example_plugin</span><span class="o">.</span><span class="n">pod_scenario</span><span class="p">,</span>
@@ -1784,7 +1784,7 @@
     <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
       
     
   </body>

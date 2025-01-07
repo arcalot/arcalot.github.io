@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
     
     
       
@@ -1739,37 +1739,37 @@ which python
 <p>Now you are ready to start hacking away at your plugin! You can open the <code>example_plugin.py</code> file and follow along, or you can create a new Python file and write the code.</p>
 <h2 id="step-2-creating-an-input-and-output-data-model">Step 2: Creating an input and output data model</h2>
 <p>Plugins in Arcaflow must explain how they want their input data and what kind of output they produce. Let&rsquo;s start with the input data model. In our case, we want to ask the user for a name. Normally, you would write this in Python:</p>
-<div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="k">def</span> <span class="nf">hello_world</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hello_world</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
 </code></pre></div>
 <p>However, <strong>that&rsquo;s not how the Arcaflow SDK works</strong>. You must always specify the <em>data type</em> of any variable. Additionally, every function can only have <strong>one input</strong>, and it must be a <strong>dataclass</strong>.</p>
 <p>So, let&rsquo;s change the code a little:</p>
-<div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">dataclasses</span>
+<div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">dataclasses</span>
 
 
 <span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
-<span class="k">class</span> <span class="nc">InputParams</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">InputParams</span><span class="p">:</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
 
-<span class="k">def</span> <span class="nf">hello_world</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">InputParams</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hello_world</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">InputParams</span><span class="p">):</span>
     <span class="c1"># ...</span>
 </code></pre></div>
 <p>So far so good, but we are not done yet. The output also has special rules. One plugin function can have more than one possible output, so you need to say which output it is, and you need to also return a dataclass.</p>
 <p>For example:</p>
-<div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">dataclasses</span>
+<div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">dataclasses</span>
 
 
 <span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
-<span class="k">class</span> <span class="nc">InputParams</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">InputParams</span><span class="p">:</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
 
 
 <span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
-<span class="k">class</span> <span class="nc">SuccessOutput</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SuccessOutput</span><span class="p">:</span>
     <span class="n">message</span><span class="p">:</span> <span class="nb">str</span>
 
 
-<span class="k">def</span> <span class="nf">hello_world</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">InputParams</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hello_world</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">InputParams</span><span class="p">):</span>
     <span class="k">return</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="n">SuccessOutput</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">params</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition tip">
@@ -1778,7 +1778,7 @@ which python
 </div>
 <h2 id="step-3-decorating-your-step-function">Step 3: Decorating your step function</h2>
 <p>Of course, Arcaflow doesn&rsquo;t know what to do with this code yet. You will need to add a decorator to the <code>hello_world</code> function in order to give Arcaflow the necessary information:</p>
-<div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">arcaflow_plugin_sdk</span> <span class="kn">import</span> <span class="n">plugin</span>
+<div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">arcaflow_plugin_sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">plugin</span>
 
 
 <span class="nd">@plugin</span><span class="o">.</span><span class="n">step</span><span class="p">(</span>
@@ -1787,7 +1787,7 @@ which python
     <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Says hello :)&quot;</span><span class="p">,</span>
     <span class="n">outputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">SuccessOutput</span><span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">hello_world</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">InputParams</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hello_world</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">InputParams</span><span class="p">):</span>
     <span class="c1"># ...</span>
 </code></pre></div>
 <p>Let&rsquo;s go through the parameters:</p>
@@ -1800,14 +1800,14 @@ which python
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you want, you can specify the function return type like this, but Arcaflow won&rsquo;t use it:
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">hello_world</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">InputParams</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hello_world</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">InputParams</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
 </code></pre></div>
 Unfortunately, Python doesn&rsquo;t give us a good way to extract this information, so it&rsquo;s safe to skip.</p>
 </div>
 <h2 id="step-4-running-the-plugin">Step 4: Running the plugin</h2>
 <p>There is one more piece missing to run a plugin: the calling code. Add the following to your file:</p>
-<div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">arcaflow_plugin_sdk</span> <span class="kn">import</span> <span class="n">plugin</span>
+<div class="highlight"><span class="filename">plugin.py</span><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">arcaflow_plugin_sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">plugin</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -1909,7 +1909,7 @@ Unfortunately, Python doesn&rsquo;t give us a good way to extract this informati
     <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
       
     
   </body>

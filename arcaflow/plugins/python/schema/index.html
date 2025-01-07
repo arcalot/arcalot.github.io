@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../../arcalot.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
     
     
       
@@ -1728,8 +1728,8 @@
 <p>This process is complicated, requires providing redundant information and should be avoided if at all possible. We recommend creating a data model using dataclasses, decorators and annotations.</p>
 </div>
 <p>We start by defining a schema:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">arcaflow_plugin_sdk</span> <span class="kn">import</span> <span class="n">schema</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">arcaflow_plugin_sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">schema</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="n">steps</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">schema</span><span class="o">.</span><span class="n">StepSchema</span><span class="p">]</span>
 
@@ -1738,7 +1738,7 @@
 <span class="p">)</span>
 </code></pre></div>
 <p>The <code>steps</code> parameter here must be a dict, where the key is the step ID and the value is the step schema. So, let&rsquo;s create a step schema:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">arcaflow_plugin_sdk</span> <span class="kn">import</span> <span class="n">schema</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">arcaflow_plugin_sdk</span><span class="w"> </span><span class="kn">import</span> <span class="n">schema</span>
 
 <span class="n">step_schema</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">StepSchema</span><span class="p">(</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;pod&quot;</span><span class="p">,</span>
@@ -1787,11 +1787,11 @@
 <p>Currently, the Python implementation passes the scope to the ref type directly, but the important rule is that ref types <strong>always</strong> reference their nearest scope up the tree. Do not create references that aim at scopes not directly above the ref!</p>
 <p>For example:</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
-<span class="k">class</span> <span class="nc">OneOfData1</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OneOfData1</span><span class="p">:</span>
     <span class="n">a</span><span class="p">:</span> <span class="nb">str</span>
 
 <span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
-<span class="k">class</span> <span class="nc">OneOfData2</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OneOfData2</span><span class="p">:</span>
     <span class="n">b</span><span class="p">:</span> <span class="n">OneOfData1</span>
 
 <span class="n">scope</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">ScopeType</span><span class="p">(</span>
@@ -1824,12 +1824,12 @@
 <p>This discriminator field may be present in the underlying type. If it is, the type must match the declaration in the AnyOfType.</p>
 <p>For example:</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
-<span class="k">class</span> <span class="nc">OneOfData1</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OneOfData1</span><span class="p">:</span>
     <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">a</span><span class="p">:</span> <span class="nb">str</span>
 
 <span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
-<span class="k">class</span> <span class="nc">OneOfData2</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OneOfData2</span><span class="p">:</span>
     <span class="n">b</span><span class="p">:</span> <span class="nb">int</span>
 
 <span class="n">scope</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">ScopeType</span><span class="p">(</span>
@@ -1923,7 +1923,7 @@
 <p>The bool type indicates that the underlying value is a boolean. When unserializing, this type also supports string and integer values of <code>true</code>, <code>yes</code>, <code>on</code>, <code>enable</code>, <code>enabled</code>, <code>1</code>, <code>false</code>, <code>no</code>, <code>off</code>, <code>disable</code>, <code>disabled</code> or <code>0</code>.</p>
 <h3 id="enumtype">EnumType</h3>
 <p>The enum type creates a type from an existing enum:</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyEnum</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MyEnum</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="n">A</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span>
     <span class="n">B</span> <span class="o">=</span> <span class="s2">&quot;b&quot;</span>
 
@@ -2027,7 +2027,7 @@
     <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
       
     
   </body>
