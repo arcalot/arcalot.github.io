@@ -2033,20 +2033,43 @@
 <span class="w">  </span><span class="no">&lt;svg ...&gt;&lt;/svg&gt; # SVG icon, 64x64 pixels, without doctype and external references.</span>
 </code></pre></div>
 <h2 id="units">Units</h2>
-<p>Units make it easier to parse and display numeric values. For example, if you have an integer representing nanoseconds, you may want to parse strings like <code>5m30s</code>.</p>
-<p>Units have two parameters: a base unit description and multipliers. For example:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">base_unit</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name_short_singular</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">B</span>
-<span class="w">  </span><span class="nt">name_short_plural</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">B</span>
-<span class="w">  </span><span class="nt">name_long_singular</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">byte</span>
-<span class="w">  </span><span class="nt">name_long_plural</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bytes</span>
-<span class="nt">multipliers</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">1024</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name_short_singular</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kB</span>
-<span class="w">    </span><span class="nt">name_short_plural</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kB</span>
-<span class="w">    </span><span class="nt">name_long_singular</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kilobyte</span>
-<span class="w">    </span><span class="nt">name_long_plural</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kilobytes</span>
-<span class="w">  </span><span class="c1"># ...</span>
+<p>Units make it easier to parse and display numeric values. For example, if you have an integer representing a duration, you may want to parse strings like <code>5m30s</code>.</p>
+<p>Units have to be declared before being used in workflows. Units have two parameters: a base unit description and multipliers. Example of workflow input object definition for a <code>job_memory</code> to express an amount of bytes:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">input</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">root</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
+<span class="w">  </span><span class="nt">objects</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">RootObject</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RootObject</span>
+<span class="w">      </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">job_memory</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="w">            </span><span class="nt">units</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">base_unit</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">name_short_singular</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">B</span>
+<span class="w">                </span><span class="nt">name_short_plural</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">B</span>
+<span class="w">                </span><span class="nt">name_long_singular</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">byte</span>
+<span class="w">                </span><span class="nt">name_long_plural</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bytes</span>
+<span class="w">              </span><span class="nt">multipliers</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">1024</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">name_short_singular</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kb</span>
+<span class="w">                  </span><span class="nt">name_short_plural</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kb</span>
+<span class="w">                  </span><span class="nt">name_long_singular</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kilobyte</span>
+<span class="w">                  </span><span class="nt">name_long_plural</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kilobytes</span>
+<span class="w">                </span><span class="nt">1048576</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">name_short_singular</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MB</span>
+<span class="w">                  </span><span class="nt">name_short_plural</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MB</span>
+<span class="w">                  </span><span class="nt">name_long_singular</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">megabyte</span>
+<span class="w">                  </span><span class="nt">name_long_plural</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">megabytes</span>
+<span class="w">                </span><span class="nt">1073741824</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">name_short_singular</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GB</span>
+<span class="w">                  </span><span class="nt">name_short_plural</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GB</span>
+<span class="w">                  </span><span class="nt">name_long_singular</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gigabyte</span>
+<span class="w">                  </span><span class="nt">name_long_plural</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gigabytes</span>
+</code></pre></div>
+<p>The input object for this workflow can then use shorthand notation:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">job_memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4GB</span>
 </code></pre></div>
 
 
