@@ -324,21 +324,47 @@ icon: |
 
 ## Units
 
-Units make it easier to parse and display numeric values. For example, if you have an integer representing nanoseconds, you may want to parse strings like `5m30s`.
+Units make it easier to parse and display numeric values. For example, if you have an integer representing a duration, you may want to parse strings like `5m30s`.
 
-Units have two parameters: a base unit description and multipliers. For example:
+Units have to be declared before being used in workflows. Units have two parameters: a base unit description and multipliers. Example of workflow input object definition for a `job_memory` to express an amount of bytes:
 
 ```yaml
-base_unit:
-  name_short_singular: B
-  name_short_plural: B
-  name_long_singular: byte
-  name_long_plural: bytes
-multipliers:
-  1024:
-    name_short_singular: kB
-    name_short_plural: kB
-    name_long_singular: kilobyte
-    name_long_plural: kilobytes
-  # ...
+input:
+  root: RootObject
+  objects:
+    RootObject:
+      id: RootObject
+      properties:
+        job_memory:
+          required: true
+          type:
+            type_id: integer
+            units:
+              base_unit:
+                name_short_singular: B
+                name_short_plural: B
+                name_long_singular: byte
+                name_long_plural: bytes
+              multipliers:
+                1024:
+                  name_short_singular: kb
+                  name_short_plural: kb
+                  name_long_singular: kilobyte
+                  name_long_plural: kilobytes
+                1048576:
+                  name_short_singular: MB
+                  name_short_plural: MB
+                  name_long_singular: megabyte
+                  name_long_plural: megabytes
+                1073741824:
+                  name_short_singular: GB
+                  name_short_plural: GB
+                  name_long_singular: gigabyte
+                  name_long_plural: gigabytes
+```
+
+The input object for this workflow can then use shorthand notation:
+
+```yaml
+job_memory: 4GB
 ```
