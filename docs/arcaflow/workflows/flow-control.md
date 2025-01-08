@@ -7,9 +7,9 @@ but are part of the workflow engine itself.
 ## Implicit Step Relationships
 
 Any time the input of a step relies on the output of another step via an [Arcaflow
-expression](/arcaflow/workflows/expressions/), an implicit step relationship is
-established. In this case, the Arcaflow engine holds the execution of the dependent step
-until the output from the supplier step is available.
+expression](expressions.md), an implicit step relationship is established. In this case,
+the Arcaflow engine holds the execution of the dependent step until the output from the
+supplier step is available.
 
 ```yaml title="workflow.yaml"
 version: v0.2.0
@@ -664,4 +664,4 @@ the schema of the list items returned by `bindConstants()`, see [Generated Schem
 Names](schemas.md#generated-combined-schema-names).
 
 See the [full
-workflow](https://github.com/arcalot/arcaflow-workflows/blob/492e30ffbea6ce902e6e7ec050c4d1be307b6d73/basic-examples/bind-constants/workflow.yaml#L28).
+workflow](https://github.com/arcalot/arcaflow-workflows/blob/main/basic-examples/bind-constants/workflow.yaml).
