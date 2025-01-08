@@ -5,8 +5,9 @@ Flow control allows the workflow author to build a workflow with a decision tree
 ## Implicit Step Relationships
 
 Any time the input of a step relies on the output of another step via an [Arcaflow
-expression](http://127.0.0.1:8000/arcaflow/workflows/expressions/), an implicit step
-relationship is established. In this case, the Arcaflow engine holds the execution of the dependent step until the output from the supplier step is available.
+expression](/arcaflow/workflows/expressions/), an implicit step relationship is
+established. In this case, the Arcaflow engine holds the execution of the dependent step
+until the output from the supplier step is available.
 
 ```yaml title="workflow.yaml"
 version: v0.2.0
@@ -31,9 +32,9 @@ steps:
 
 Sometimes it is important to serialize workflow steps even if they do not have a data
 passing relationship. An example may be running a series of benchmarks where you want to
-ensure that you get valid results without one step interfereing with another. In this
-case, you can use the `wait_for` option of the step to provide an expression or a oneof
-condition.
+ensure that you get valid results without one step interfering with another. In this
+case, you can use the `wait_for` option of the step to provide an expression or a [oneof
+condition](#conditional-step-execution).
 
 ```yaml title="workflow.yaml"
 version: v0.2.0
@@ -341,9 +342,10 @@ outputs:
 
 ### Oneof methods with step flow control
 
-It is also possible to use oneof conditions as part of the `wait_for` flow control. An
-explicit relationshp between steps in a workflow in this case becomes a oneof condition
-for either the requested step output or otherwise the disabled state of the step.
+It is also possible to use [oneof conditions](#conditional-step-execution) as part of
+the `wait_for` flow control. An explicit relationship between steps in a workflow in
+this case becomes a oneof condition, creating an OR relationship that allows the step to
+run when either the requested step output is reached OR the step is disabled.
 
 An example using `!ordisabled`:
 ```yaml title="workflow.yaml"
