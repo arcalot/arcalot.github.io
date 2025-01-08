@@ -1836,10 +1836,14 @@ the disabled steps.</p>
 <p>To use <code>!oneof</code> for graceful handling of disabled steps, the oneof should depend on ONE OF the success output and
 the disabled output, which will output either the success output or the disabled output.</p>
 <p>The oneof tag is a method of creating a schema <code>one_of_string</code> type from values present in the workflow.</p>
-<p>The syntax of <code>!oneof</code> is:
-- Following the tag <code>!oneof</code>, create a new YAML section (map) by starting an indented new line. That section should contain two properties:
-  - discriminator: A string that specifies what the oneof discriminator should be. The discriminator specifies which option was emitted.
-  - options: A YAML section (map) that contains all options. The keys are the discriminator values, and the values should be valid expressions.</p>
+<p>The syntax of <code>!oneof</code> is:</p>
+<ul>
+<li>Following the tag <code>!oneof</code>, create a new YAML section (map) by starting an indented new line. That section should contain two properties:<ul>
+<li>discriminator: A string that specifies what the oneof discriminator should be. The discriminator specifies which option was emitted.</li>
+<li>options: A YAML section (map) that contains all options. The keys are the discriminator values, and the values should be valid expressions.</li>
+</ul>
+</li>
+</ul>
 <p>Example:
 <div class="highlight"><span class="filename">workflow.yaml</span><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.2.0</span>
 <span class="nt">input</span><span class="p">:</span>
