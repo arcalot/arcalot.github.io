@@ -6,8 +6,8 @@ toolchain go1.23.4
 
 require (
 	go.flow.arcalot.io/dockerdeployer v0.7.3
-	go.flow.arcalot.io/kubernetesdeployer v0.10.0
-	go.flow.arcalot.io/pluginsdk v0.14.1
+	go.flow.arcalot.io/kubernetesdeployer v0.10.1
+	go.flow.arcalot.io/pluginsdk v0.14.2
 	go.flow.arcalot.io/podmandeployer v0.11.4
 )
 
