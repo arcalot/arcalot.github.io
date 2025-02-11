@@ -2,7 +2,7 @@ module docsgen
 
 go 1.23.0
 
-toolchain go1.24.0
+toolchain go1.23.5
 
 require (
 	go.flow.arcalot.io/dockerdeployer v0.7.3
