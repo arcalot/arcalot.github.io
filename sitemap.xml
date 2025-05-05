@@ -2,158 +2,158 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://arcalot.io/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/getting-started/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/concepts/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/concepts/architecture/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/concepts/plugins/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/concepts/typing/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/concepts/workflows/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/contributing/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/contributing/deployers/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/contributing/engine/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/contributing/expressions/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/contributing/plugin-protocol/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/contributing/typing/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/plugins/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/plugins/packaging/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/plugins/go/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/plugins/go/first/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/plugins/go/schema/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/plugins/python/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/plugins/python/data-model/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/plugins/python/embedding/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/plugins/python/faq/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/plugins/python/first/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/plugins/python/official/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/plugins/python/schema/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/plugins/python/testing/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/running/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/running/running/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/running/setup/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/workflows/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/workflows/expressions/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/workflows/flow-control/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/workflows/input/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/workflows/output/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/workflows/schemas/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/workflows/step/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcaflow/workflows/versioning/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
          <loc>https://arcalot.io/arcalog/</loc>
-         <lastmod>2025-04-21</lastmod>
+         <lastmod>2025-05-05</lastmod>
     </url>
 </urlset>
