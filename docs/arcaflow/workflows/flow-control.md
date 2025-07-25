@@ -8,8 +8,9 @@ but are part of the workflow engine itself.
 
 Any time the input of a step relies on the output of another step via an [Arcaflow
 expression](expressions.md), an implicit step relationship is established. In this case,
-the Arcaflow engine holds the execution of the dependent step until the output from the
-supplier step is available.
+the Arcaflow engine holds the execution of the consumer `step_b` until the output from
+the supplier `step_a` is available.
+
 
 ```yaml title="workflow.yaml"
 version: v0.2.0
@@ -32,11 +33,11 @@ steps:
 
 ## Explicit Step Relationships
 
-Sometimes it is important to serialize workflow steps even if they do not have a data
-passing relationship. An example may be running a series of benchmarks where you want to
-ensure that you get valid results without one step interfering with another. In this
-case, you can use the `wait_for` option of the step to provide an expression or a [oneof
-condition](#conditional-step-execution).
+Sometimes it is important to serialize the order of the workflow steps even if they do
+not have a data passing relationship. An example may be running a series of benchmarks
+where you want to ensure that you get valid results without one step interfering with
+another. In this case, you can use the `wait_for` option of the step to provide an
+expression or a [oneof condition](#conditional-step-execution).
 
 ```yaml title="workflow.yaml"
 version: v0.2.0
@@ -162,18 +163,18 @@ There are two tags that create the described OR dependency.
 
 ##### How to use `!oneof`
 
-To use `!oneof` for graceful handling of disabled steps, the oneof should depend on ONE
+To use `!oneof` for graceful handling of disabled steps, the `oneof` should depend on ONE
 OF the success output and the disabled output, which will output either the success
 output or the disabled output.
 
-The oneof tag is a method of creating a schema `one_of_string` type from values present
+The `oneof` tag is a method of creating a schema `one_of_string` type from values present
 in the workflow.
 
 The syntax of `!oneof` is:
 
 - Following the tag `!oneof`, create a new YAML section (map) by starting an indented
   new line. That section should contain two properties:
-    - discriminator: A string that specifies what the oneof discriminator should be. The
+    - discriminator: A string that specifies what the `oneof` discriminator should be. The
       discriminator specifies which option was emitted.
     - options: A YAML section (map) that contains all options. The keys are the
       discriminator values, and the values should be valid expressions.
@@ -259,14 +260,13 @@ outputs:
 
 For handling disabled steps, `!oneof` and `!ordisabled` are the recommended methods
 because they cause output failure when the step fails. However, if it is acceptable for
-the workflow to succeed when a step crashes, the optional tags could be the right
-feature for your workflow.
+the workflow to succeed when a step crashes, the "optional" family of expression tags
+could be the right feature for your workflow.
 
-The alterative methods are the "optional" family of expression tags. The `oneof` tags
-instructed the workflow to build a `oneof_string` type with OR dependencies, requiring
-one of the options to have an output for the oneof to resolve. Meanwhile, the "optional"
-family of tags can resolve without an output by utilizing optional object property
-fields.
+The `oneof` tags instructed the workflow to build a `oneof_string` type with OR
+dependencies, requiring one of the options to have an output for the `oneof` to resolve.
+Meanwhile, the "optional" family of tags can resolve without an output by utilizing
+optional object property fields.
 
 | Tag              | Description                                      |
 |------------------|--------------------------------------------------|
@@ -362,7 +362,7 @@ outputs:
 
 It is also possible to use [oneof conditions](#conditional-step-execution) as part of
 the `wait_for` flow control. An explicit relationship between steps in a workflow in
-this case becomes a oneof condition, creating an OR relationship that allows the step to
+this case becomes a `oneof` condition, creating an OR relationship that allows the step to
 run when either the requested step output is reached OR the step is disabled.
 
 An example using `!ordisabled`:
