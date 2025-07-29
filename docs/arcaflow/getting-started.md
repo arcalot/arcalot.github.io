@@ -138,6 +138,8 @@ input-->steps.stressng.starting
 input-->steps.pcp.starting
 ```
 
+[Try some other basic example workflows &raquo;](https://github.com/arcalot/arcaflow-workflows/tree/main/basic-examples){ .md-button }
+
 [Learn more about running workflows &raquo;](/arcaflow/running/){ .md-button }
 
 ## Writing Workflows
@@ -174,15 +176,18 @@ input:
 ```
 
 Next we will define the steps of the workflow. The steps are to be deployed as container
-images, where the `src` field defines the image and tag. The `arcaflow-plugin-utilities`
-plugin has multiple steps available, so we indicate with the `step: uuid` field which
-step we want to run. The `arcaflow-plugin-example` plugin has only one step, so the
-`step` field is not required. The `uuidgen` step requires no input, so we pass an empty
-object `{}` to it. The `example` plugin requires an input object of `name` with
-`_type` and `nick` fields. We statically set the value of the `_type` field in the
-input object of the step, and then we use the
-[Arcaflow expression language](/arcaflow/workflows/expressions/) to reference the
-workflow input value for `nickname` as the input to the plugin's `nick` field.
+images, where the `src` field defines the image and tag.
+
+For the `uuidgen` step, the `arcaflow-plugin-utilities` plugin has multiple *steps*
+available, so we indicate with the `step: uuid` field which step we want to run. The
+`uuidgen` step requires no input, so we pass an empty object `{}` to it.
+
+The `arcaflow-plugin-example` plugin has only one step, so the `step` field is not
+required. This plugin requires an input object of `name` with `_type` and `nick` fields.
+We statically set the value of the `_type` field in the input object of the step, and
+then we use the [Arcaflow expression language](/arcaflow/workflows/expressions/) to
+reference the workflow input value for `nickname` as the input to the plugin's `nick`
+field.
 
 ```yaml title="workflow.yaml (excerpt)"
 ...
@@ -225,7 +230,7 @@ outputs:
    example: !expr $.steps.example.outputs.success
 ```
 
-Our final workflow looks like this:
+Our final complete workflow looks like this:
 
 ```yaml title="workflow.yaml"
 version: v0.2.0
@@ -265,13 +270,13 @@ outputs:
    example: !expr $.steps.example.outputs.success.message
 ```
 
-We will create an input file to satisfy the input schema of the workflow:
+We will then create an input file to satisfy the input schema of the workflow:
 
 ```yaml title="input.yaml"
 nickname: Arcalot
 ```
 
-We will also create a configuration file, setting the container deployer to Podman and
+And we will also create a configuration file, setting the container deployer to Podman and
 the log levels to `error`:
 
 ```yaml title="config.yaml"
@@ -287,13 +292,14 @@ deployers:
 
 And now we can run our new workflow:
 
-!!! tip
-    The default workflow file is `workflow.yaml` so we don't need to specifiy it here
-    explicitly.
-
 ```bash
 arcaflow --config config.yaml --input input.yaml
 ```
+
+!!! tip
+
+    The default workflow file is `workflow.yaml` so we don't need to specifiy 
+    `--workflow workflow.yaml` here explicitly.
 
 ```yaml title="example workflow output YAML"
 output_data:
@@ -372,18 +378,18 @@ output_id: success
 
 
 ## Running Plugins
+
 Workflow steps are run via plugins, which are delivered as containers. The Arcalot
-community maintains an ever-growing list of
-[official plugins](https://github.com/orgs/arcalot/repositories?q=%22arcaflow-plugin-%22),
-which are version-controlled and hosted in our
-[Quay.io repository](https://quay.io/arcalot).
+community maintains an ever-growing list of [official
+plugins](https://github.com/arcalot/arcaflow-plugin-catalog), which are
+version-controlled and hosted in our [Quay.io repository](https://quay.io/arcalot).
 
 Plugins are designed to run independent of an Arcaflow workflow. All plugins have schema
 definitions for their inputs and outputs, and they perform data validation against those
 schemas when run. Plugins also have one or more steps, and when there are multiple steps
 we always need to specify which step we want to run.
 
-!!! tip
+!!! tip "Did you know?"
     Plugin **steps** are the fundamental building blocks for workflows.
 
 Let's take a look at the schema for the example plugin. Passing the `--schema` parameter
@@ -665,10 +671,13 @@ debug_logs: ''
 {! https://raw.githubusercontent.com/arcalot/arcaflow-plugin-getting-started-example/main/arcaflow_plugin_getting_started_example/getting_started_example_plugin.py !}
 ```
 
-[Learn more about writing Python plugins &raquo;](/arcaflow/plugins/python/first.md){ .md-button }
+[Learn more about writing Python plugins &raquo;](/arcaflow/plugins/python/first){ .md-button }
 
 
-Next, let's create a `Dockerfile` and build a container image:
+Next, let's create a `Dockerfile` and build a container image. This example uses a
+container base image that is maintaned by the Arcalot community, which installs
+dependencies like python. It copies in our python plugin code and installs its
+dependencies, and the container entrypoint is set to the plugin python script.
 
 ```Dockerfile title="Dockerfile"
 {! https://raw.githubusercontent.com/arcalot/arcaflow-plugin-getting-started-example/main/Dockerfile !}
@@ -702,16 +711,16 @@ output_data:
 debug_logs: ''
 ```
 
-[Learn more about Packaging plugins](/arcaflow/plugins/packaging.md){ .md-button }
+[Learn more about Packaging plugins](/arcaflow/plugins/packaging){ .md-button }
 
 ## Next steps
 
 Congratulations, you are now an Arcaflow user! Here are some things you can do next to
 start working with plugins and workflows:
 
-- [See our repositories of community-supported plugins &raquo;](https://github.com/orgs/arcalot/repositories?q=%22arcaflow-plugin-%22)
+- [See our catalog of community-supported plugins &raquo;](https://github.com/arcalot/arcaflow-plugin-catalog)
 - [Get our latest plugin container builds from quay.io &raquo;](https://quay.io/arcalot)
-- [Experiment with more advanced example workflows &raquo;](https://github.com/arcalot/arcaflow-workflows/advanced-examples/)
+- [Experiment with more advanced example workflows &raquo;](https://github.com/arcalot/arcaflow-workflows/tree/main/advanced-examples)
 
 ## Keep learning
 
