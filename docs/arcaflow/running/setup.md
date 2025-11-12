@@ -12,14 +12,15 @@ If you wish to customize Arcaflow, you can pass a YAML configuration file to Arc
 
 ### Local deployer
 
-The Arcaflow Engine needs a local container deployer to temporarily run plugins and read their schema. We recommend either Docker (default) or Podman for this purpose. You can use a Kubernetes cluster for this purpose too, but a local container engine is the better choice for performance reasons.
+The Arcaflow Engine needs a local container deployer to temporarily run plugins and read their schema. The recommended way to run most plugins is with an image deployer. We recommend either Docker (default) or Podman for this purpose. You can use a Kubernetes cluster for this purpose too, but a local container engine is the better choice for performance reasons.
 
 You can then change the deployer type like this:
 
 ```yaml title="config.yaml"
-deployer:
-  type: podman
-  # Deployer-specific options 
+deployers:
+  image:
+    deployer_name: podman
+    # Deployer-specific options go here
 ```
 
 === "Docker"
@@ -27,32 +28,33 @@ deployer:
     Docker is the default local deployer. You can configure it like this:
     
     ```yaml title="config.yaml"
-    deployer:
-      type: docker
-      connection:
-        # Change this to point to a TCP-based Docker socket
-        host: host-to-docker 
-        # Add a certificates here. This is usually needed in TCP mode.
-        cacert: |
-          Add your CA cert PEM here
-        cert: |
-          Add your client cert PEM here.
-        key: |
-          Add your client key PEM here.
-      deployment:
-        # For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate
-        container:
-          # Add your container config here.
-        host:
-          # Add your host config here.
-        network:
-          # Add your network config here
-        platform:
-          # Add your platform config here
-        imagePullPolicy: Always|IfNotPresent|Never
-      timeouts:
-        # HTTP timeout
-        http: 5s
+    deployers:
+      image:
+        deployer_name: docker
+        connection:
+          # Change this to point to a TCP-based Docker socket
+          host: host-to-docker 
+          # Add a certificates here. This is usually needed in TCP mode.
+          cacert: |
+            Add your CA cert PEM here
+          cert: |
+            Add your client cert PEM here.
+          key: |
+            Add your client key PEM here.
+        deployment:
+          # For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate
+          container:
+            # Add your container config here.
+          host:
+            # Add your host config here.
+          network:
+            # Add your network config here
+          platform:
+            # Add your platform config here
+          imagePullPolicy: Always|IfNotPresent|Never
+        timeouts:
+          # HTTP timeout
+          http: 5s
     ```
     
     ??? "All options for the Docker deployer"
@@ -551,23 +553,24 @@ deployer:
     If you want to use Podman as your local deployer instead of Docker, you can do so like this:
     
     ```yaml title="config.yaml"
-    deployer:
-      type: podman
-      podman:
-        # Change where Podman is. (You can use this to point to a shell script
-        path: /path/to/your/podman
-        # Change the network mode
-        networkMode: host
-      deployment:
-        # For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate
-        container:
-          # Add your container config here.
-        host:
-          # Add your host config here.
-        imagePullPolicy: Always|IfNotPresent|Never
-      timeouts:
-        # HTTP timeout
-        http: 5s
+    deployers:
+      image:
+        deployer_name: podman
+        podman:
+          # Change where Podman is. (You can use this to point to a shell script)
+          path: /path/to/your/podman
+          # Change the network mode
+          NetworkMode: host
+        deployment:
+          # For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate
+          container:
+            # Add your container config here.
+          host:
+            # Add your host config here.
+          imagePullPolicy: Always|IfNotPresent|Never
+        timeouts:
+          # HTTP timeout
+          http: 5s
     ```
     
     ??? "All options for the Podman deployer"
@@ -997,16 +1000,17 @@ deployer:
     Kubernetes can be used as the "local" deployer, but this is typically not recommended for performance reasons. You can set up the Kubernetes deployer like this:
     
     ```yaml title="config.yaml"
-    deployer:
-      type: kubernetes
-      connection:
-        host: localhost:6443
-        cert: |
-          Add your client cert in PEM format here.
-        key: |
-          Add your client key in PEM format here.
-        cacert: |
-          Add the server CA cert in PEM format here.
+    deployers:
+      image:
+        deployer_name: kubernetes
+        connection:
+          host: localhost:6443
+          cert: |
+            Add your client cert in PEM format here.
+          key: |
+            Add your client key in PEM format here.
+          cacert: |
+            Add the server CA cert in PEM format here.
     ```
     
     ??? "All options for the Kubernetes deployer"
