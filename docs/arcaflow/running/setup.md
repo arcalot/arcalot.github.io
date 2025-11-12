@@ -557,10 +557,10 @@ deployers:
       image:
         deployer_name: podman
         podman:
-          # Change where Podman is. (You can use this to point to a shell script
+          # Change where Podman is. (You can use this to point to a shell script)
           path: /path/to/your/podman
           # Change the network mode
-          networkMode: host
+          NetworkMode: host
         deployment:
           # For more options here see: https://docs.docker.com/engine/api/v1.42/#tag/Container/operation/ContainerCreate
           container:
